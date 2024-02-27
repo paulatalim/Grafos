@@ -1,18 +1,32 @@
-## Getting Started
+![header](https://capsule-render.vercel.app/api?type=waving&color=d736ff&fontColor=ffffff&height=200&section=header&text=Grafos&fontSize=45&animation=fadeIn&fontAlignY=38)
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
-## Folder Structure
+## Orientações
 
-The workspace contains two folders by default, where:
+Para rodar o projeto siga as seguintes instruções
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+### 1. Clonar projeto
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+Para clonar o projeto abra seu prompt comando e coloque os seguintes comando
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+```
+git clone https://github.com/paulatalim/Grafos-Trabalho.git
+```
 
-## Dependency Management
+```
+cd Grafos-Trabalho
+```
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Créditos
+
+### Integrantes do grupo
+
+- [Gabriel Cecconello](https://www.linkedin.com/in/gabriel-cecconello/)
+- [Paula Talim](https://www.linkedin.com/in/paulatalim/)
+- [Rafael Vicente](https://www.linkedin.com/in/rafael-vicente-8726a6204/)
+
+### Professor Orientador
+
+- [Walisson Ferreira](https://www.linkedin.com/in/walisson-ferreira-4b580a36/)
+
+![footer](https://capsule-render.vercel.app/api?type=waving&color=d736ff&height=200&section=footer&animation=fadeIn)
