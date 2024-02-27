@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=00FFFF&fontColor=ffffff&height=220&section=header&text=Grafos&fontSize=45&animation=fadeIn&fontAlignY=38)
+![header](https://capsule-render.vercel.app/api?type=waving&color=d736ff&fontColor=ffffff&height=200&section=header&text=Grafos&fontSize=45&animation=fadeIn&fontAlignY=38)
 
 
 ## Orientações
@@ -29,4 +29,4 @@ cd Grafos-Trabalho
 
 - [Walisson Ferreira](https://www.linkedin.com/in/walisson-ferreira-4b580a36/)
 
-![footer](https://capsule-render.vercel.app/api?type=waving&color=00FFFF&height=200&section=footer&animation=fadeIn)
+![footer](https://capsule-render.vercel.app/api?type=waving&color=d736ff&height=200&section=footer&animation=fadeIn)
