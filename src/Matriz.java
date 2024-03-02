@@ -7,7 +7,7 @@ public class Matriz {
 
     public Matriz(int vertices, boolean direcionado) {
         for (int i = 0; i < vertices; i++) {
-            // grafoMatriz.add(new int[] {});
+            grafoMatriz.add(new int[] {});
         }
         this.direcionado = direcionado;
     }
