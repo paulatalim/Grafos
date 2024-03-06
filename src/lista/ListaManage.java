@@ -7,6 +7,14 @@ public class ListaManage {
     private ListaDirecionada ld;
     private ListaNaoDirecionada lnd;
 
+    public boolean isGrafosEmpty() {
+        if(direcionado) {
+            return ld.isGrafosEmpty();
+        }
+        
+        return lnd.isGrafosEmpty();
+    }
+
     public boolean verificar_vertice(char id) {
         if(direcionado) {
             return ld.verificar_vertice(id);

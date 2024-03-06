@@ -10,6 +10,13 @@ public class ListaNaoDirecionada {
         grafo = new ArrayList<No>();
     }
 
+    public boolean isGrafosEmpty() {
+        if(grafo.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
     public boolean verificar_vertice(char id) {
         // Encontra o vertice no grafo
         for(int i = 0; i < grafo.size(); i++) {
