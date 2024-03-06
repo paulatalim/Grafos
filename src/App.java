@@ -79,6 +79,7 @@ public class App {
             switch (opcao) {
                 case 1:
                     // exibir o grafo em forma de lista
+                    UI.print("\n\t\t\t\t\t*** LISTA DE ADJACÊNCIA ***\n\n\n");
                     grafoLista.exibir_lista();
                     break;
                 case 2:
@@ -86,14 +87,15 @@ public class App {
                     break;
                 case 3:
                     // Informa como deve ser feita a entrada de dados para o usuario
-                    UI.println("Informe letras para indentificar os vértices\n"
-                            + "Digite \"0\" para interromper a leitura\n");
+                    UI.println("\n\t\t\t\t\t*** ADICIONANDO VÉRTICES ***\n\n\n"
+                            + "\tInforme letras para indentificar os vértices\n"
+                            + "\tDigite \"0\" para interromper a leitura\n");
                     
                     cont = 1;
 
                     do {
                         // Leitura do vértice
-                        UI.print("Vértice " + cont + ": ");
+                        UI.print("\tVértice " + cont + ": ");
                         resposta = scanner.next().charAt(0);
                         UI.println("");
                         
@@ -111,16 +113,17 @@ public class App {
                     break;
                 case 4:
                     // Informa como deve ser feita a entrada de dados para o usuario
-                    UI.println("Informe os vértices adjacente\n"
-                                + "Exemplo: AB, CD, EF\n\n"
-                                + "Digite \"0\" para interromper a leitura\n");
+                    UI.println("\n\t\t\t\t\t*** ADCIONANDO ARESTA ***\n\n\n"
+                                +"\tInforme os vértices adjacentes da aresta\n"
+                                + "\tExemplo: AB, CD, EF\n\n"
+                                + "\tDigite \"0\" para interromper a leitura\n");
 
                     cont = 1;
                     String aresta;
 
                     do {
                         // Leitura da aresta
-                        UI.print("Aresta " + cont + ": ");
+                        UI.print("\tAresta " + cont + ": ");
                         aresta = scanner.next();
                         UI.println("");
                         
@@ -141,14 +144,15 @@ public class App {
                     // Remove uma aresta
 
                     // Informa como deve ser feita a entrada de dados para o usuario
-                    UI.println("Informe os vértices adjacentes da aresta que deseja retirar\n"
-                                + "Exemplo: AB, CD, EF\n\n");
+                    UI.println("\n\t\t\t\t\t*** DELETAR ARESTA ***\n\n\n"
+                                +"\tInforme os vértices adjacentes da aresta que deseja retirar\n"
+                                + "\tExemplo: AB, CD, EF\n\n");
                     
                     opcao_invalida = true;
 
                     do {
                         // Leitura da aresta
-                        UI.print("Aresta: ");
+                        UI.print("\tAresta: ");
                         aresta = scanner.next();
                         UI.println("");
                         
@@ -163,7 +167,7 @@ public class App {
                             UI.println("\t" + "Um dos vértices não foi encontrado. Tente novavemente." + "\n");
                             UI.exibir_fim_tela();
                         } else {
-                            UI.println("Aresta removida com sucesso !!!");
+                            UI.println("\tAresta removida com sucesso !!!");
                         }
                     } while (opcao_invalida);
                     break;
@@ -175,9 +179,11 @@ public class App {
                         // Identifica sucessores e predecessores de um vértice
                         
                         // Entrada do vértice
-                        UI.println("Insira o vértice que deseja saber seus predecessores e sucessores");
                         do {
-                            UI.print("vértice: ");
+                            UI.println("\n\t\t\t\t\t*** SUCESORES E PREDECESSORES ***\n\n\n"
+                                    +"\tInsira o vértice que deseja saber seus predecessores e sucessores\n");
+
+                            UI.print("\tVértice: ");
                             resposta = scanner.next().charAt(0);
                             UI.println("");
 
@@ -185,7 +191,7 @@ public class App {
                             if(grafoLista.verificar_vertice(resposta)) {
                                 opcao_invalida = false;
                             } else {
-                                UI.println("\t" + "Opcao invalida. Tente novavemente." + "\n");
+                                UI.println("\t" + "Vértice inválido. Tente novavemente." + "\n");
                                 UI.exibir_fim_tela();
                             }
 
@@ -197,9 +203,11 @@ public class App {
                         // Identifica vizinhaça de um vértice
 
                         // Entrada do vértice
-                        UI.println("Insira o vértice que deseja saber sua vizinhaça");
                         do {
-                            UI.print("vértice: ");
+                            UI.println("\n\t\t\t\t\t*** VIZINHAÇA DO VÉRTICE ***\n\n\n"
+                                    +"\tInsira o vértice que deseja saber sua vizinhaça\n");
+
+                            UI.print("\tVértice: ");
                             resposta = scanner.next().charAt(0);
                             UI.println("");
 
@@ -207,7 +215,7 @@ public class App {
                             if(grafoLista.verificar_vertice(resposta)) {
                                 opcao_invalida = false;
                             } else {
-                                UI.println("\t" + "Opcao invalida. Tente novavemente." + "\n");
+                                UI.println("\t" + "Vértice inválido. Tente novavemente." + "\n");
                                 UI.exibir_fim_tela();
                             }
                         } while (opcao_invalida);
@@ -220,9 +228,10 @@ public class App {
                     //Identifica grau de um vértice
 
                     // Entrada do vértice
-                    UI.println("Insira o vértice que deseja saber o grau");
+                    UI.println("\n\t\t\t\t\t*** GRAU DO VÉRTICE ***\n\n\n"
+                                +"\tInsira o vértice que deseja saber o grau");
                     do {
-                        UI.print("Vértice: ");
+                        UI.print("\tVértice: ");
                         resposta = scanner.next().charAt(0);
                         UI.println("");
 
@@ -230,7 +239,7 @@ public class App {
                         if(grafoLista.verificar_vertice(resposta)) {
                             opcao_invalida = false;
                         } else {
-                            UI.println("\t" + "Vértice invalido. Tente novavemente." + "\n");
+                            UI.println("\t" + "Vértice inválido. Tente novavemente." + "\n");
                             UI.exibir_fim_tela();
                         }
                     } while(opcao_invalida);
@@ -251,7 +260,8 @@ public class App {
 
                     do {
                         // Pergunta se o grafo é ou não direcionado
-                        UI.print("\tO novo grafo é direcionado? (s/n)\n\n\tResposta: ");
+                        UI.print("\n\t\t\t\t\t*** CRIANDO NOVO GRAFO ***\n\n\n"
+                                    + "\tO novo grafo é direcionado? (s/n)\n\n\tResposta: ");
                         resposta = scanner.next().charAt(0);
             
                         if (resposta == 's') {
