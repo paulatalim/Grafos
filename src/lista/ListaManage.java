@@ -7,6 +7,14 @@ public class ListaManage {
     private ListaDirecionada ld;
     private ListaNaoDirecionada lnd;
 
+    public boolean verificar_vertice(char id) {
+        if(direcionado) {
+            return ld.verificar_vertice(id);
+        }
+        
+        return lnd.verificar_vertice(id);
+    }
+
     public void inserir_vertice (char id_vertice) {
         if(direcionado) {
             ld.inserir_vertice(id_vertice);
@@ -26,6 +34,14 @@ public class ListaManage {
         }
         
         return lnd.inserir_aresta(aresta);
+    }
+
+    public boolean remover_aresta(String aresta) {
+        if(direcionado) {
+            return ld.remover_aresta(aresta);
+        }
+
+        return lnd.remover_aresta(aresta);
     }
 
     public void exibir_lista () {
