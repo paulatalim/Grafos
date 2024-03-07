@@ -96,13 +96,10 @@ public class ListaDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean remover_aresta(String aresta) {
-        // encontra a aresta
-        for(int i = 0; i < grafo.size(); i++) {
-            if(grafo.get(i).getId() == aresta.charAt(0)) {
-                // Remove a aresta
-                grafo.get(i).remover_aresta(aresta.charAt(1));
-                return true;
-            }
+        int aux1 = buscar_vertice(aresta.charAt(0));
+
+        if (aux1 >= 0) {
+            return grafo.get(aux1).remover_aresta(aresta.charAt(1));
         }
 
         // Caso nao encontrar a aresta
