@@ -80,7 +80,14 @@ public class App {
                 case 1:
                     // exibir o grafo em forma de lista
                     UI.print("\n\t\t\t\t\t*** LISTA DE ADJACÊNCIA ***\n\n\n");
-                    grafoLista.exibir_lista();
+
+                    if(!grafoLista.isGrafosEmpty()) {
+                        // Exibe o grafo
+                        grafoLista.exibir_lista();
+                    } else {
+                        // Caso o grafo estiver vazio
+                        UI.print("\tO grafo está vazio, adicione vértices e arestas");
+                    }
                     break;
                 case 2:
                     // exibe o grafo em forma de matriz
@@ -113,8 +120,8 @@ public class App {
                     break;
                 case 4:
                     // Informa como deve ser feita a entrada de dados para o usuario
-                    UI.println("\n\t\t\t\t\t*** ADCIONANDO ARESTA ***\n\n\n"
-                                +"\tInforme os vértices adjacentes da aresta\n"
+                    UI.println("\n\t\t\t\t\t*** ADICIONANDO ARESTAS ***\n\n\n"
+                                + "\tInforme os vértices adjacentes da aresta\n"
                                 + "\tExemplo: AB, CD, EF\n\n"
                                 + "\tDigite \"0\" para interromper a leitura\n");
 
@@ -144,44 +151,57 @@ public class App {
                     // Remove uma aresta
 
                     // Informa como deve ser feita a entrada de dados para o usuario
-                    UI.println("\n\t\t\t\t\t*** DELETAR ARESTA ***\n\n\n"
-                                +"\tInforme os vértices adjacentes da aresta que deseja retirar\n"
-                                + "\tExemplo: AB, CD, EF\n\n");
+                    UI.print("\n\t\t\t\t\t*** DELETAR ARESTA ***\n\n\n");
+
+                    if (!grafoLista.isGrafosEmpty() && grafoLista.temAresta()) {
+
+                        UI.println("\tInforme os vértices adjacentes da aresta que deseja retirar\n"
+                                    + "\tExemplo: AB, CD, EF\n\n");
+                        
+                        opcao_invalida = true;
+
+                        do {
+                            // Leitura da aresta
+                            UI.print("\tAresta: ");
+                            aresta = scanner.next();
+                            UI.println("");
+                            
+                            
+                            // Remove aresta na lista
+                            opcao_invalida = !grafoLista.remover_aresta(aresta);
                     
-                    opcao_invalida = true;
+                            // TODO Adiociona aresta na matriz
 
-                    do {
-                        // Leitura da aresta
-                        UI.print("\tAresta: ");
-                        aresta = scanner.next();
-                        UI.println("");
-                        
-                        
-                        // Remove aresta na lista
-                        opcao_invalida = !grafoLista.remover_aresta(aresta);
-                
-                        // TODO Adiociona aresta na matriz
+                            // Valida o vértice
+                            if(opcao_invalida) {
+                                UI.println("\t" + "Um dos vértices não foi encontrado. Tente novavemente." + "\n");
+                                UI.exibir_fim_tela();
+                            } else {
+                                UI.println("\tAresta removida com sucesso !!!");
+                            }
+                        } while (opcao_invalida);
 
-                        // Valida o vértice
-                        if(opcao_invalida) {
-                            UI.println("\t" + "Um dos vértices não foi encontrado. Tente novavemente." + "\n");
-                            UI.exibir_fim_tela();
-                        } else {
-                            UI.println("\tAresta removida com sucesso !!!");
-                        }
-                    } while (opcao_invalida);
+                    } else if(!grafoLista.temAresta()) {
+                        // Caso o grafo nao possua aresta
+                        UI.println("\tSeu grafo não tem aresta, adicione arestas para habilitar está função");
+                    
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.println("\tSeu grafo está vazio, adicione vértices e arestas para habilitar está função");
+                    }
                     break;
                 case 6:
                     // Entrada do vértice
                     opcao_invalida = true;
+                    UI.println("\n\t\t\t\t\t*** SUCESORES E PREDECESSORES ***\n\n");
 
-                    if(grafoLista.isDirecionado()) {
+                    if(grafoLista.isDirecionado() && !grafoLista.isGrafosEmpty()) {
                         // Identifica sucessores e predecessores de um vértice
                         
                         // Entrada do vértice
                         do {
-                            UI.println("\n\t\t\t\t\t*** SUCESORES E PREDECESSORES ***\n\n\n"
-                                    +"\tInsira o vértice que deseja saber seus predecessores e sucessores\n");
+                            
+                            UI.println("\tInsira o vértice que deseja saber seus predecessores e sucessores\n");
 
                             UI.print("\tVértice: ");
                             resposta = scanner.next().charAt(0);
@@ -199,7 +219,7 @@ public class App {
 
                         // Busca os predecessores e sucessores
 
-                    } else {
+                    } else if(!grafoLista.isGrafosEmpty()) {
                         // Identifica vizinhaça de um vértice
 
                         // Entrada do vértice
@@ -220,7 +240,10 @@ public class App {
                             }
                         } while (opcao_invalida);
 
-                        // Busca a vizinhaça do vértice
+                        // TODO Busca a vizinhaça do vértice
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }
 
                     break;
@@ -228,23 +251,30 @@ public class App {
                     //Identifica grau de um vértice
 
                     // Entrada do vértice
-                    UI.println("\n\t\t\t\t\t*** GRAU DO VÉRTICE ***\n\n\n"
-                                +"\tInsira o vértice que deseja saber o grau");
-                    do {
-                        UI.print("\tVértice: ");
-                        resposta = scanner.next().charAt(0);
-                        UI.println("");
+                    UI.println("\n\t\t\t\t\t*** GRAU DO VÉRTICE ***\n\n\n");
 
-                        // Valida o vértice
-                        if(grafoLista.verificar_vertice(resposta)) {
-                            opcao_invalida = false;
-                        } else {
-                            UI.println("\t" + "Vértice inválido. Tente novavemente." + "\n");
-                            UI.exibir_fim_tela();
-                        }
-                    } while(opcao_invalida);
+                    if(!grafoLista.isGrafosEmpty()) {
+                        UI.println("\tInsira o vértice que deseja saber o grau");
 
-                    // Calcula o grau do vértice
+                        do {
+                            UI.print("\tVértice: ");
+                            resposta = scanner.next().charAt(0);
+                            UI.println("");
+
+                            // Valida o vértice
+                            if(grafoLista.verificar_vertice(resposta)) {
+                                opcao_invalida = false;
+                            } else {
+                                UI.println("\t" + "Vértice inválido. Tente novavemente." + "\n");
+                                UI.exibir_fim_tela();
+                            }
+                        } while(opcao_invalida);
+
+                        // Calcula o grau do vértice
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                    }
 
                     break;
                 case 8:
@@ -260,7 +290,7 @@ public class App {
 
                     do {
                         // Pergunta se o grafo é ou não direcionado
-                        UI.print("\n\t\t\t\t\t*** CRIANDO NOVO GRAFO ***\n\n\n"
+                        UI.print("\n\t\t\t\t\t*** NOVO GRAFO ***\n\n\n"
                                     + "\tO novo grafo é direcionado? (s/n)\n\n\tResposta: ");
                         resposta = scanner.next().charAt(0);
             
