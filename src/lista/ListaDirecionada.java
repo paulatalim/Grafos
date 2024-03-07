@@ -11,6 +11,20 @@ public class ListaDirecionada {
     }
 
     /**
+     * Encontra um vertice no grafo
+     * @param id do vertice a ser procurado
+     * @return indice na lista no grafo
+     */
+    private int buscar_vertice(char id) {
+        for(int i = 0; i < grafo.size(); i++) {
+            if (grafo.get(i).getId() == id) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * Verifica se o grafo está vazio
      * @return true, se estiver vazio, false, caso contrario
      */
@@ -42,12 +56,10 @@ public class ListaDirecionada {
      */
     public boolean verificar_vertice(char id) {
         // Encontra o vertice no grafo
-        for(int i = 0; i < grafo.size(); i++) {
-            if(grafo.get(i).getId() == id) {
-                return true;
-            }
+        if(buscar_vertice(id) >= 0) {
+            return true;
         }
-
+        
         return false;
     }
 
@@ -67,15 +79,12 @@ public class ListaDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean inserir_aresta(String aresta) {
-        char id = aresta.charAt(0);
+        int aux = buscar_vertice(aresta.charAt(0));
 
-        // Encontra o vertice no grafo
-        for(int i = 0; i < grafo.size(); i++) {
-            if(grafo.get(i).getId() == id) {
-                // Adiciona uma nova aresta
-                grafo.get(i).inserir_aresta(aresta.charAt(1));
-                return true;
-            }
+        if(aux >=0) {
+            // Adiciona uma nova aresta
+            grafo.get(aux).inserir_aresta(aresta.charAt(1));
+            return true;
         }
 
         return false;
