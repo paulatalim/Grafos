@@ -16,8 +16,14 @@ public class No {
         arestas.add(vertice_adjacente);
     }
 
-    public void remover_aresta(char vertice_adjacente) {
-        arestas.remove(arestas.indexOf(vertice_adjacente));
+    public boolean remover_aresta(char vertice_adjacente) {
+        for(int i = 0; i < arestas.size(); i++) {
+            if(arestas.get(i) == vertice_adjacente) {
+                arestas.remove(arestas.indexOf(vertice_adjacente));
+                return true;
+            }
+        }
+        return false;
     }
 
     public char getAresta (int id) {

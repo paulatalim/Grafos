@@ -7,6 +7,10 @@ public class ListaManage {
     private ListaDirecionada ld;
     private ListaNaoDirecionada lnd;
 
+    /**
+     * Verifica se o grafo está vazio
+     * @return true, se estiver vazio, false, caso contrario
+     */
     public boolean isGrafosEmpty() {
         if(direcionado) {
             return ld.isGrafosEmpty();
@@ -15,6 +19,24 @@ public class ListaManage {
         return lnd.isGrafosEmpty();
     }
 
+    /**
+     * Verifica se o grafo possui aresta
+     * @return true, se tiver aresta, false caso contrario
+     */
+    public boolean temAresta() {
+        if(direcionado) {
+            return ld.temAresta();
+        }
+        
+        return lnd.temAresta();
+    }
+
+    /**
+     * Verifica se um vertice existe
+     * 
+     * @param id do vertice a ser verificado
+     * @return true, se o vertice existir, false, caso contrario
+     */
     public boolean verificar_vertice(char id) {
         if(direcionado) {
             return ld.verificar_vertice(id);

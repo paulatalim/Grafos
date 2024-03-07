@@ -10,6 +10,10 @@ public class ListaDirecionada {
         grafo = new ArrayList<No>();
     }
 
+    /**
+     * Verifica se o grafo está vazio
+     * @return true, se estiver vazio, false, caso contrario
+     */
     public boolean isGrafosEmpty() {
         if(grafo.isEmpty()){
             return true;
@@ -17,6 +21,25 @@ public class ListaDirecionada {
         return false;
     }
 
+    /**
+     * Verifica se o grafo possui aresta
+     * @return true, se tiver aresta, false caso contrario
+     */
+    public boolean temAresta() {
+        for(int i = 0; i < grafo.size(); i++) {
+            if(grafo.get(i).qnt_aresta() != 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verifica se um vertice existe
+     * 
+     * @param id do vertice a ser verificado
+     * @return true, se o vertice existir, false, caso contrario
+     */
     public boolean verificar_vertice(char id) {
         // Encontra o vertice no grafo
         for(int i = 0; i < grafo.size(); i++) {
