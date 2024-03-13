@@ -73,8 +73,6 @@ public class ListaNaoDirecionada {
         grafo.add(new_vertice);
     }
 
-    
-
     /**
      * Adiciona uma aresta do grafo
      * @param aresta a ser inserida (String), indicada com seus vertices adjacentes

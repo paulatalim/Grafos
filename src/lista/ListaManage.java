@@ -45,6 +45,11 @@ public class ListaManage {
         return lnd.verificar_vertice(id);
     }
 
+    /**
+     * Adiciona um vertice no grafo
+     * 
+     * @param id_vertice a ser inserido
+     */
     public void inserir_vertice (char id_vertice) {
         if(direcionado) {
             ld.inserir_vertice(id_vertice);
@@ -66,6 +71,12 @@ public class ListaManage {
         return lnd.inserir_aresta(aresta);
     }
 
+    /**
+     * Remove uma aresta do grafo
+     * 
+     * @param aresta - informada pelo id dos vertices adjacentes
+     * @return true, se foi possivel remover, false, se a aresta for invalida
+     */
     public boolean remover_aresta(String aresta) {
         if(direcionado) {
             return ld.remover_aresta(aresta);
@@ -74,6 +85,9 @@ public class ListaManage {
         return lnd.remover_aresta(aresta);
     }
 
+    /**
+     * Imprime o grafo em forma de lista
+     */
     public void exibir_lista () {
         if(direcionado) {
             ld.exibir_lista();
@@ -90,6 +104,10 @@ public class ListaManage {
         return direcionado;
     }
 
+    /**
+     * Se o grafo eh ou nao direcionado
+     * @param isDirecionado
+     */
     public void setIsDirecionado(boolean isDirecionado) {
         this.direcionado = isDirecionado;
 
@@ -110,5 +128,4 @@ public class ListaManage {
 
         return lnd.getGrafo();
     }
-
 }
