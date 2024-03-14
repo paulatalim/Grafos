@@ -212,7 +212,7 @@ public class App {
                             UI.println("");
 
                             // Valida o vértice
-                            if(grafoLista.verificar_vertice(resposta)) {
+                            if(grafoLista.isVerticeExist(resposta)) {
                                 opcao_invalida = false;
                             } else {
                                 UI.println("\t" + "Vértice inválido. Tente novavemente." + "\n");
@@ -236,7 +236,7 @@ public class App {
                             UI.println("");
 
                             // Valida o vértice
-                            if(grafoLista.verificar_vertice(resposta)) {
+                            if(grafoLista.isVerticeExist(resposta)) {
                                 opcao_invalida = false;
                             } else {
                                 UI.println("\t" + "Vértice inválido. Tente novavemente." + "\n");
@@ -266,7 +266,7 @@ public class App {
                             UI.println("");
 
                             // Valida o vértice
-                            if(grafoLista.verificar_vertice(resposta)) {
+                            if(grafoLista.isVerticeExist(resposta)) {
                                 opcao_invalida = false;
                             } else {
                                 UI.println("\t" + "Vértice inválido. Tente novavemente." + "\n");

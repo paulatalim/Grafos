@@ -37,12 +37,12 @@ public class ListaManage {
      * @param id do vertice a ser verificado
      * @return true, se o vertice existir, false, caso contrario
      */
-    public boolean verificar_vertice(char id) {
+    public boolean isVerticeExist(char id) {
         if(direcionado) {
-            return ld.verificar_vertice(id);
+            return ld.isNoExist(id);
         }
         
-        return lnd.verificar_vertice(id);
+        return lnd.isNoExist(id);
     }
 
     /**

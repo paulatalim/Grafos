@@ -54,7 +54,7 @@ public class ListaDirecionada {
      * @param id do vertice a ser verificado
      * @return true, se o vertice existir, false, caso contrario
      */
-    public boolean verificar_vertice(char id) {
+    public boolean isNoExist(char id) {
         // Encontra o vertice no grafo
         if(buscar_vertice(id) >= 0) {
             return true;
@@ -69,7 +69,7 @@ public class ListaDirecionada {
      */
     public void inserir_vertice (char id_vertice) {
         // Verifica se o vertice ja existe
-        if(!verificar_vertice(id_vertice)) {
+        if(!isNoExist(id_vertice)) {
             // Cria o novo vertice
             No new_vertice = new No(id_vertice);
 
