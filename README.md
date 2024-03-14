@@ -40,7 +40,11 @@ cd Grafos-Trabalho
 
 ### 3. Rodar o programa
 
-Abra o projeto em seu VS Code e rode-o
+a. Abra o projeto em seu VS Code;
+
+b. Abra o arquivo `App.java`, localizado na pasta `src`;
+
+c. Selecione a opção `Run Java`, localizado no canto superior direito do VS code.
 
 ## Créditos
 
