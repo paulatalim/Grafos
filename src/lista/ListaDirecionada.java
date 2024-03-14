@@ -68,9 +68,14 @@ public class ListaDirecionada {
      * @param id_vertice
      */
     public void inserir_vertice (char id_vertice) {
-        No new_vertice = new No(id_vertice);
+        // Verifica se o vertice ja existe
+        if(!verificar_vertice(id_vertice)) {
+            // Cria o novo vertice
+            No new_vertice = new No(id_vertice);
 
-        grafo.add(new_vertice);
+            // Adiciona o vertice a lista
+            grafo.add(new_vertice);
+        }
     }
     
     /**
