@@ -15,7 +15,11 @@ public class App {
         // Valida a resposta do usuario
         do {
             // Pergunta se o grafo é ou não direcionado
-            UI.print("O grafo eh direcionado? (s/n)\n\nresposta: ");
+            UI.println("\n\t\t\t\t\t*** GRAFOS ***\n"
+                        + "\t\t\t\t\tSeja bem vindo!\n\n\n"
+                        + "\tVamos iniciar criando um grafo ...\n\n"
+                        + "\tEsse grafo é direcionado? (s/n)\n\n"
+                        + "\tResposta: ");
             resposta = scanner.next().charAt(0);
 
             UI.limpar_console();
