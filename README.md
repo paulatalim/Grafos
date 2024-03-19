@@ -1,6 +1,5 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=d736ff&fontColor=ffffff&height=200&section=header&text=Grafos&fontSize=45&animation=fadeIn&fontAlignY=38)
 
-
 ## Orientações
 
 Para rodar o projeto siga as seguintes instruções

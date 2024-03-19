@@ -15,7 +15,7 @@ public class App {
         // Valida a resposta do usuario
         do {
             // Pergunta se o grafo é ou não direcionado
-            UI.println("\n\t\t\t\t\t*** GRAFOS ***\n"
+            UI.print("\n\t\t\t\t\t*** GRAFOS ***\n"
                         + "\t\t\t\t\tSeja bem vindo!\n\n\n"
                         + "\tVamos iniciar criando um grafo ...\n\n"
                         + "\tEsse grafo é direcionado? (s/n)\n\n"
@@ -163,27 +163,25 @@ public class App {
                                     + "\tExemplo: AB, CD, EF\n\n");
                         
                         opcao_invalida = true;
+                        
+                        // Leitura da aresta
+                        UI.print("\tAresta: ");
+                        aresta = scanner.next();
+                        UI.println("");
+                        
+                        // Remove aresta na lista
+                        opcao_invalida = !grafoLista.remover_aresta(aresta);
+                
+                        // TODO Remover aresta na matriz
 
-                        do {
-                            // Leitura da aresta
-                            UI.print("\tAresta: ");
-                            aresta = scanner.next();
-                            UI.println("");
+                        // Valida o vértice
+                        if(opcao_invalida) {
+                            UI.println("\t" + "Um dos vértices não foi encontrado." + "\n");
                             
-                            
-                            // Remove aresta na lista
-                            opcao_invalida = !grafoLista.remover_aresta(aresta);
-                    
-                            // TODO Adiociona aresta na matriz
-
-                            // Valida o vértice
-                            if(opcao_invalida) {
-                                UI.println("\t" + "Um dos vértices não foi encontrado. Tente novavemente." + "\n");
-                                UI.exibir_fim_tela();
-                            } else {
-                                UI.println("\tAresta removida com sucesso !!!");
-                            }
-                        } while (opcao_invalida);
+                        } else {
+                            UI.println("\tAresta removida com sucesso !!!");
+                        }
+                        
 
                     } else if(!grafoLista.temAresta()) {
                         // Caso o grafo nao possua aresta
