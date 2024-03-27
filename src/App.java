@@ -1,11 +1,13 @@
 import java.util.Scanner;
 
 import lista.ListaManage;
+import matriz.MatrizManage;
 
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner (System.in);
         ListaManage grafoLista = new ListaManage();
+        MatrizManage grafoMatriz = new MatrizManage();
 
         boolean opcao_invalida;
         String aresta;
@@ -26,10 +28,12 @@ public class App {
             UI.limpar_console();
 
             if (resposta == 's') {
-                grafoLista.setIsDirecionado(true);;
+                grafoLista.setIsDirecionado(true);
+                grafoMatriz.setIsDirecionado(true);
                 opcao_invalida = false;
             } else if (resposta == 'n') {
                 grafoLista.setIsDirecionado(false);
+                grafoMatriz.setIsDirecionado(false);
                 opcao_invalida = false;
             } else {
                 opcao_invalida = true;
@@ -96,6 +100,15 @@ public class App {
                     break;
                 case 2:
                     // exibe o grafo em forma de matriz
+                    UI.print("\n\t\t\t\t\t*** MATRIZ DE ADJACÊNCIA ***\n\n\n");
+
+                    if(!grafoMatriz.isGrafosEmpty()) {
+                        // Exibe o grafo
+                        grafoMatriz.exibir_matriz();
+                    } else {
+                        // Caso o grafo estiver vazio
+                        UI.print("\tO grafo está vazio, adicione vértices e arestas");
+                    }
                     break;
                 case 3:
                     // Informa como deve ser feita a entrada de dados para o usuario
@@ -116,9 +129,10 @@ public class App {
                             if(resposta != '0') {
                                 // Adiciona vértice na lista
                                 grafoLista.inserir_vertice(resposta);
-
-                                // TODO Adiciona vértice na matriz
+                            
                             }
+                            
+                            grafoMatriz.inserir_vertice(resposta);
 
                             // Atualiza contador
                             cont ++;
@@ -143,12 +157,11 @@ public class App {
                             UI.print("\tAresta " + cont + ": ");
                             aresta = scanner.next();
                             UI.println("");
-                            
-                            if(!aresta.equals("0")) {
-                                // Adiciona aresta na lista
-                                grafoLista.inserir_aresta(aresta);
                         
-                                // TODO Adiciona aresta na matriz
+                            if(!aresta.equals("0")) {
+                                // Adiciona aresta na lista e na matriz
+                                grafoLista.inserir_aresta(aresta);
+                                grafoMatriz.inserir_aresta(aresta);
                             }
 
                             // Atualiza contador
@@ -177,20 +190,16 @@ public class App {
                         aresta = scanner.next();
                         UI.println("");
                         
-                        // Remove aresta na lista
-                        opcao_invalida = !grafoLista.remover_aresta(aresta);
-                
-                        // TODO Remover aresta na matriz
+                        // Remove aresta na lista e na matriz
+                        opcao_invalida = !grafoLista.remover_aresta(aresta) || !grafoMatriz.remover_aresta(aresta);
 
                         // Valida o vértice
                         if(opcao_invalida) {
-                            UI.println("\t" + "Um dos vértices não foi encontrado." + "\n");
-                            
+                            UI.println("\t" + "Um dos vértices não foi encontrado. Tente novavemente." + "\n");
+                            UI.exibir_fim_tela();
                         } else {
                             UI.println("\tAresta removida com sucesso !!!");
                         }
-                        
-
                     } else if(!grafoLista.temAresta()) {
                         // Caso o grafo nao possua aresta
                         UI.println("\tSeu grafo não tem aresta, adicione arestas para habilitar está função");
