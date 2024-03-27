@@ -277,9 +277,14 @@ public class App {
                         UI.println("");
 
                         // Valida o vértice
-                        if(grafoLista.isVerticeExist(resposta)) {
-
-                            // TODO Calcula o grau do vértice
+                        if(grafoLista.isVerticeExist(resposta) && grafoMatriz.isVerticeExist(resposta)) {
+                            int[] graus = grafoMatriz.grau_vertice(resposta);
+                            if(grafoLista.isDirecionado() && grafoMatriz.isDirecionado()) {
+                                UI.println("\t" + "Grau de Saída: " + graus[0]);
+                                UI.println("\t" + "Grau de Entrada: " + graus[1] + "\n");
+                            } else {
+                                UI.println("\t" + "Grau: " + graus[0] + "\n");
+                            }
 
                         } else {
                             UI.println("\t" + "Vértice inválido." + "\n");
@@ -313,10 +318,12 @@ public class App {
                         resposta = scanner.next().charAt(0);
             
                         if (resposta == 's') {
-                            grafoLista.setIsDirecionado(true);;
+                            grafoLista.setIsDirecionado(true);
+                            grafoMatriz.setIsDirecionado(true);
                             opcao_invalida = false;
                         } else if (resposta == 'n') {
                             grafoLista.setIsDirecionado(false);
+                            grafoMatriz.setIsDirecionado(false);
                             opcao_invalida = false;
                         }  else {
                             UI.println("\t" + "Resposta inválida. Tente novavemente." + "\n");

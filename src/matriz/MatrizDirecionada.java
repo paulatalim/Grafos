@@ -34,6 +34,27 @@ public class MatrizDirecionada {
         }
         return -1;
     }
+
+    /**
+     * Recebe o ID de um vértice e calcula os seus graus
+     * @param id_vertice
+     * @return vetor de inteiros representando os graus de saída e de entrada do vértice
+     */
+    public int[] grau_vertice (char id_vertice) {
+        int[] graus = new int[2];
+        int indexNo = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i++) {
+            if(grafo[indexNo][i]) {
+                graus[0] += 1;
+            }
+            if(grafo[i][indexNo]) {
+                graus[1] += 1;
+            }
+        }
+
+        return graus;
+    }
     
     /**
      * Adiciona um novo vertice ao grafo

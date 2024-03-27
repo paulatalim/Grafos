@@ -45,6 +45,19 @@ public class MatrizManage {
     }
 
     /**
+     * Recebe o ID de um vértice e calcula os possíveis graus
+     * @param id_vertice
+     * @return vetor de inteiros contendo o grau ou os graus do vértice
+     */
+    public int[] grau_vertice (char id_vertice) {
+        if(direcionado) {
+            return md.grau_vertice(id_vertice);
+        } else {
+            return mnd.grau_vertice(id_vertice);
+        }
+    }
+
+    /**
      * Verifica se o grafo possui aresta
      * @return true, se tiver aresta, false caso contrario
      */
@@ -95,6 +108,14 @@ public class MatrizManage {
         } else {
             mnd = new MatrizNaoDirecionada();
         }
+    }
+
+    /**
+     * Se o grafo é ou não direcionado
+     * @return boolean return the direcionado
+     */
+    public boolean isDirecionado() {
+        return direcionado;
     }
 
     /**

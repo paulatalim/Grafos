@@ -49,6 +49,29 @@ public class MatrizNaoDirecionada {
     }
 
     /**
+     * Recebe o ID de um vértice e calcula o seu grau
+     * @param id_vertice
+     * @return vetor de inteiro representando o grau do vértice
+     */
+    public int[] grau_vertice (char id_vertice) {
+        int[] grau = new int[1];
+        grau[0] = 0;
+        int indexNo = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i++) {
+            if(grafo[indexNo][i]) {
+                if(indexNo == i) {
+                    grau[0] += 2;
+                } else {
+                    grau[0] += 1;
+                }
+            }
+        }
+
+        return grau;
+    }
+
+    /**
      * Adiciona uma aresta do grafo
      * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
