@@ -124,6 +124,7 @@ public class ListaNaoDirecionada {
         boolean[] isVerificado = new boolean[grafo.size()];
         byte color = 0;
         byte result;
+        boolean hasComponent = false;
 
         // Inicializa o mapeamento
         for(int i = 0; i < grafo.size(); i++) {
@@ -133,7 +134,7 @@ public class ListaNaoDirecionada {
 
         mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
             
-        while(mapeamento.containsValue((byte) -1)) {
+        while(mapeamento.containsValue((byte) -1) && !hasComponent) {
             
             // Encontra o proximo vertice a ser vericado
             for(int i = 0; i < grafo.size(); i++) {
@@ -159,6 +160,20 @@ public class ListaNaoDirecionada {
 
                     break;
                 }
+            }
+
+            hasComponent = true;
+
+            // Verifica se ha componente no grafo
+            for(int i = 0; i < grafo.size(); i++) {
+                if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) != -1 && !isVerificado[i]) {
+                    hasComponent = false;
+                    break;
+                }
+            }
+
+            if(hasComponent) {
+                return false;
             }
         }
         return true;
