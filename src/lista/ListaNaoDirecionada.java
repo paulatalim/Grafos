@@ -119,6 +119,30 @@ public class ListaNaoDirecionada {
         return false;
     }
 
+    public List<Character> vizinhaca(char vertice) {
+        List<Character> vizinhos = new ArrayList<Character>();
+
+        for(int i = 0; i < grafo.size(); i++) {
+            if(grafo.get(i).getId() == vertice) {
+                for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                    vizinhos.add(grafo.get(i).getAresta(j));
+                }
+            }
+        }
+
+        return vizinhos;
+    }
+
+    public int calcular_grau(char vertice) {
+        for(int i = 0; i < grafo.size(); i++) {
+            if(grafo.get(i).getId() == vertice) {
+                return grafo.get(i).qnt_aresta();
+            }
+        }
+
+        return -1;
+    }
+
     /**
      * Verifica se o grafo eh bipartido
      * 

@@ -115,6 +115,46 @@ public class ListaDirecionada {
         return false;
     }
 
+    public List<Character> encontrarPredecessores(char vertice) {
+        List<Character> predecessor = new ArrayList<Character>();
+
+        for (int i = 0; i < grafo.size(); i++) {
+            for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                if(grafo.get(i).getAresta(j) == vertice) {
+                    predecessor.add(Character.valueOf(grafo.get(i).getId()));
+                }
+            }
+        }
+
+        return predecessor;
+    }
+
+    public List<Character> encontrarSucessores(char vertice) {
+        List<Character> sucessores = new ArrayList<Character>();
+
+        for (int i = 0; i < grafo.size(); i++) {
+            if(grafo.get(i).getId() == vertice) {
+                for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                    sucessores.add(grafo.get(i).getAresta(j));
+                }
+            }
+        }
+
+        return sucessores;
+    }
+
+    public int grauEntrada(char vertice) {
+        return encontrarPredecessores(vertice).size();
+    }
+
+    public int grauSaida(char vertice) {
+        return encontrarSucessores(vertice).size();
+    }
+
+    public int grafo(char vertice) {
+        return grauEntrada(vertice) + grauSaida(vertice);
+    }
+
     /**
      * Adiciona cor aos vertices adjacentes ao vértice inserido
      * @param x vértice inserido

@@ -300,11 +300,9 @@ public class App {
                     // Exibe cabecalho da pagina
                     UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
 
-                    UI.println("\tSeu grafo é:\n");
-
                     // (dizer se o grafo eh simples, regular, completo ou bipartido)
                     if(!grafoLista.isGrafosEmpty()) {
-                        UI.print(UI.YELLOW + "\t - Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "sim" : "não"));
+                        UI.print(UI.YELLOW + "\t - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "sim" : "não"));
                     }   
                     break;
                 case 9:
