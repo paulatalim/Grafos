@@ -319,10 +319,12 @@ public class App {
                         resposta = scanner.next().charAt(0);
             
                         if (resposta == 's') {
-                            grafoLista.setIsDirecionado(true);;
+                            grafoLista.setIsDirecionado(true);
+                            grafoMatriz.setIsDirecionado(true);
                             opcao_invalida = false;
                         } else if (resposta == 'n') {
                             grafoLista.setIsDirecionado(false);
+                            grafoMatriz.setIsDirecionado(false);
                             opcao_invalida = false;
                         }  else {
                             UI.println("\t" + "Resposta inválida. Tente novavemente." + "\n");
