@@ -298,7 +298,13 @@ public class App {
                     UI.print("\n\t\t\t\t\t*** CLASSIFICAÇÃO DO GRAFO ***\n\n\n");
 
                     // (dizer se o grafo eh simples, regular, completo ou bipartido)
-
+                    if(!grafoLista.isGrafosEmpty()) {
+                        if(grafoLista.isBipartido()) {
+                            UI.print("e bipartido");
+                        } else {
+                            UI.print("nao eh bipartido");
+                        }
+                    }   
                     break;
                 case 9:
                     // Cria novo grafo

@@ -85,6 +85,12 @@ public class ListaManage {
         return lnd.remover_aresta(aresta);
     }
 
+    public boolean isBipartido () {
+        if(direcionado) {
+            return ld.isBipartido();
+        }
+        return lnd.isBipartido();
+    }
     /**
      * Imprime o grafo em forma de lista
      */
