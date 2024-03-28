@@ -134,6 +134,54 @@ public class MatrizNaoDirecionada {
     }
 
     /**
+     * Confere se o grafo é simples ou não
+     * @return true se for simples, caso contrário, false
+     */
+    public boolean isGrafosSimples() {
+        for(int i = 0; i < vertices.size(); i++) {
+            if(grafo[i][i]) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Confere se o grafo é regular ou não
+     * @return true se for, caso contrário, false
+     */
+    public boolean isGrafosRegular() {
+        int grau = grau_vertice(vertices.get(0))[0];
+        int aux = 0;
+
+        for (int i = 1; i < vertices.size(); i++) { 
+            aux = grau_vertice(vertices.get(i))[0];
+            if (aux != grau) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Confere se o grafo é completo ou não
+     * @return true se for, caso contrário, false
+     */
+    public boolean isGrafosCompleto() {
+        if(isGrafosSimples()) {
+            for(int i = 0; i < vertices.size(); i++) {
+                for(int j = 0; j < vertices.size(); j++) {
+                    if(!grafo[i][j] && i != j) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
      * Verifica se o grafo possui aresta
      * @return true, se tiver aresta, false caso contrario
      */

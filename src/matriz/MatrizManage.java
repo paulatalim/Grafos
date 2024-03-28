@@ -18,6 +18,40 @@ public class MatrizManage {
     }
 
     /**
+     * Confere se o grafo é simples ou não
+     * @return true se for, caso contrário, false
+     */
+    public boolean isGrafosSimples() {
+        if(direcionado) {
+            return md.isGrafosSimples();
+        }
+        return mnd.isGrafosSimples();
+
+    }
+
+    /**
+     * Confere se o grafo é regular ou não
+     * @return true se for, caso contrário, false
+     */
+    public boolean isGrafosRegular() {
+        if(direcionado) {
+            return md.isGrafosRegular();
+        }
+        return mnd.isGrafosRegular();
+    }
+
+    /**
+     * Confere se o grafo é completo ou não
+     * @return true se for, caso contrário, false
+     */
+    public boolean isGrafosCompleto() {
+        if(direcionado) {
+            return false;
+        }
+        return mnd.isGrafosCompleto();
+    }
+
+    /**
      * Verifica se um vertice existe
      * 
      * @param id do vertice a ser verificado
@@ -52,9 +86,8 @@ public class MatrizManage {
     public int[] grau_vertice (char id_vertice) {
         if(direcionado) {
             return md.grau_vertice(id_vertice);
-        } else {
-            return mnd.grau_vertice(id_vertice);
         }
+        return mnd.grau_vertice(id_vertice);
     }
 
     /**

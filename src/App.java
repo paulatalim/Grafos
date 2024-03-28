@@ -265,7 +265,7 @@ public class App {
                 case 7:
                     //Identifica grau de um vértice
 
-                    if(!grafoLista.isGrafosEmpty()) {
+                    if(!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         
                         // Exibe o cabecalho da pagina
                         UI.print("\n\t\t\t\t\t*** GRAU DO VÉRTICE ***\n\n\n");
@@ -299,10 +299,23 @@ public class App {
                 case 8:
                     // Analisa e classifica o grafo
 
-                    // Exibe cabecalho da pagina
-                    UI.print("\n\t\t\t\t\t*** CLASSIFICAÇÃO DO GRAFO ***\n\n\n");
+                    if(!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
 
-                    // (dizer se o grafo eh simples, regular, completo ou bipartido)
+                        // Exibe cabecalho da pagina
+                        UI.print("\n\t\t\t\t\t*** CLASSIFICAÇÃO DO GRAFO ***\n\n\n");
+
+                        boolean simples = grafoMatriz.isGrafosSimples();
+                        boolean regular = grafoMatriz.isGrafosRegular();
+                        boolean completo = grafoMatriz.isGrafosCompleto();
+
+                        UI.println("\t" + "Grafo Simples? " + (simples ? "Sim" : "Não"));
+                        UI.println("\t" + "Grafo Regular? " + (regular ? "Sim" : "Não"));
+                        UI.println("\t" + "Grafo Completo? " + (completo ? "Sim" : "Não") + "\n");
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.print("\n\t\t\t\t\t*** CLASSIFICAÇÃO DO GRAFO ***\n\n\n");
+                        UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                    }
 
                     break;
                 case 9:

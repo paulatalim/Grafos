@@ -130,6 +130,44 @@ public class MatrizDirecionada {
     }
 
     /**
+     * Confere se o grafo é simples ou não
+     * @return true se for simples, caso contrário, false
+     */
+    public boolean isGrafosSimples() {
+        for(int i = 0; i < vertices.size(); i++) {
+            if(grafo[i][i]) return false;
+        }
+        return true;
+    }
+
+   /**
+     * Confere se o grafo é regular ou não
+     * @return true se for, caso contrário, false
+     */
+    public boolean isGrafosRegular() {
+        int graus[] = new int[2];
+        graus = grau_vertice(vertices.get(0));
+        int grauSaida = graus[0];
+        int grauEntrada = graus[1];
+
+        int[] grausAuxiliares;
+        int auxSaida = 0;
+        int auxEntrada = 0;
+
+        for (int i = 1; i < vertices.size(); i++) { 
+            grausAuxiliares = new int[2];
+            grausAuxiliares = grau_vertice(vertices.get(i));
+            auxSaida = grausAuxiliares[0];
+            auxEntrada = grausAuxiliares[1];
+            if (auxSaida != grauSaida || auxEntrada != grauEntrada) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Verifica se o grafo possui aresta
      * @return true, se tiver aresta, false caso contrario
      */
