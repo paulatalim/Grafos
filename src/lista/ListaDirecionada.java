@@ -2,8 +2,10 @@ package lista;
 
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Queue;
 
 public class ListaDirecionada {
     private List<No> grafo;
@@ -113,43 +115,32 @@ public class ListaDirecionada {
         return false;
     }
 
-    public boolean isBipartido () {
-        Map<Character, Byte> mapeamento = new HashMap<Character, Byte>();
-        boolean mapZerado = true;
-
-        // Inicializa o mapeamento
-        for(int i = 0; i < grafo.size(); i++) {
-            mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) -1);
-        }
-
-        // char id;
-        byte color = 0;
-        // int cont = 0;
-        // int index;
-        byte result;
-
-        mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
-            
-        while(mapeamento.containsValue((byte) -1)) {
-            
-            // Encontra o proximo vertice a ser vericado
-            for(int i = 0; i < grafo.size(); i++) {
-                if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) != (byte) -1) {
-                    color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
-
-                    if(color == 0) {
-                        color ++;
-                    } else {
-                        color = 0;
-                    }
-
-                    for (int j = 0; j < grafo.size(); j++) {
-                        result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
+    /**
+     * 
+     * @param x vértice inicial a ser colorido colorindo.
+     * @param cor vetor com o registro das cores dos vertices
+     */
+    private void colorirVerticesAjacentes(char x, Map<Character, Integer> color) {
+        // Adicao do vertice a fila
+        Queue<Character> fila = new PriorityQueue<Character>();
+        fila.add(Character.valueOf(x));
         
-                        if(result == -1) {
-                            mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
-                        } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
-                            return false;
+        int pos = 0;
+        
+        while(pos < fila.size()) {
+            
+            char atual = (char) fila.remove();
+            pos++;
+
+            for(int i = 0; i < grafo.size(); i ++) {
+                if(grafo.get(i).getId() == atual) {
+            
+                    for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                        char v = grafo.get(i).getAresta(j);
+                        
+                        if(color.get(Character.valueOf(v)) == -1) {
+                            color.put(Character.valueOf(v), 1-color.get(atual));			
+                            fila.add(Character.valueOf(v));
                         }
                     }
 
@@ -157,8 +148,89 @@ public class ListaDirecionada {
                 }
             }
         }
+    }
 
+    private void colorirVertice(char x, Map<Character, Integer> color) {
+        // Caso a busca 
+        if(!color.containsValue(0) && !color.containsValue(1)) {
+            color.put(Character.valueOf(x), 0);
+        } else {
+            for(int i = 0; i <grafo.size(); i++) {
+                if(grafo.get(i).getId() == x) {
+                    for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                        if(color.get(grafo.get(i).getAresta(j)) == 0) {
+                            color.put(grafo.get(i).getId(), 1);
+                            break;
+                        
+                        } else if (color.get(grafo.get(i).getAresta(j)) == 1) {
+                            color.put(grafo.get(i).getId(), 0);
+                            break;
+                        }
+                        
+                    } break;
+                }
+            }
+        }
+
+        // Busca pelos predecessores de x
+        if(color.get(Character.valueOf(x)) == -1) {
+            for(int i = 0; i < grafo.size(); i++) {
+                for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                    if(grafo.get(i).getAresta(j) == x){
+                        if(color.get(grafo.get(i).getId()) == 0) {
+                            color.put(grafo.get(i).getAresta(j), 1);
+                            break;
+                        } else if (color.get(grafo.get(i).getId()) == 1) {
+                            color.put(grafo.get(i).getAresta(j), 0);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Caso o vertice não tenha sucessor e predecessor
+        if(color.get(Character.valueOf(x)) == -1) {
+            color.put(Character.valueOf(x), -2);
+        }
+
+        colorirVerticesAjacentes(x, color);
+    }
+
+    private boolean isBipartido(Map<Character, Integer> color) {
+        for(int i = 0; i < grafo.size(); i++){
+            if(color.get(Character.valueOf(grafo.get(i).getId())) == -1){
+                colorirVertice(grafo.get(i).getId(), color);
+            }
+        }
+
+        // Verifica se há vertice isolado
+        if(color.containsValue(-2)) {
+            return false;
+        }
+        
+        // Verifica se existem dois vértices vizinhos com a mesma cor
+        for(int i = 0; i < grafo.size(); i++){
+            for(int j = 0; j < grafo.get(i).qnt_aresta(); j++){
+                char v = grafo.get(i).getAresta(j);
+                // se os dois vizinhos possuem a mesma cor, o grafo não é bipartido
+                if(color.get(grafo.get(i).getId()) == color.get(Character.valueOf(v))) return false;
+            }
+        }
+        
         return true;
+    }
+
+    public boolean isBipartido() {
+        Map<Character, Integer> color = new HashMap<Character, Integer>();
+
+        // Inicializa o mapeamento
+            for(int i = 0; i < grafo.size(); i++) {
+                color.put(Character.valueOf(grafo.get(i).getId()), -1);
+            }
+
+        return isBipartido(color);
+
     }
 
     /**

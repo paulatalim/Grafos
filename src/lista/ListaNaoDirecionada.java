@@ -122,19 +122,14 @@ public class ListaNaoDirecionada {
     public boolean isBipartido () {
         Map<Character, Byte> mapeamento = new HashMap<Character, Byte>();
         boolean[] isVerificado = new boolean[grafo.size()];
-        boolean mapZerado = true;
+        byte color = 0;
+        byte result;
 
         // Inicializa o mapeamento
         for(int i = 0; i < grafo.size(); i++) {
             mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) -1);
             isVerificado[i] = false;
         }
-
-        // char id;
-        byte color = 0;
-        // int cont = 0;
-        // int index;
-        byte result;
 
         mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
             
@@ -166,8 +161,6 @@ public class ListaNaoDirecionada {
                 }
             }
         }
-
-
         return true;
     }
 
