@@ -85,6 +85,11 @@ public class ListaManage {
         return lnd.remover_aresta(aresta);
     }
 
+    /**
+     * Verifica se o grafo eh bipartido
+     * 
+     * @return true, se for bipartido, false, caso contrar
+     */
     public boolean isBipartido () {
         if(direcionado) {
             return ld.isBipartido();

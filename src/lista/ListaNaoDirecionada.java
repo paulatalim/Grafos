@@ -119,6 +119,11 @@ public class ListaNaoDirecionada {
         return false;
     }
 
+    /**
+     * Verifica se o grafo eh bipartido
+     * 
+     * @return true, se for bipartido, false, caso contrar
+     */
     public boolean isBipartido () {
         Map<Character, Byte> mapeamento = new HashMap<Character, Byte>();
         boolean[] isVerificado = new boolean[grafo.size()];

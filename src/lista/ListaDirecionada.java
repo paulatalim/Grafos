@@ -116,9 +116,9 @@ public class ListaDirecionada {
     }
 
     /**
-     * 
-     * @param x vértice inicial a ser colorido colorindo.
-     * @param cor vetor com o registro das cores dos vertices
+     * Adiciona cor aos vertices adjacentes ao vértice inserido
+     * @param x vértice inserido
+     * @param color vetor com o registro das cores dos vertices
      */
     private void colorirVerticesAjacentes(char x, Map<Character, Integer> color) {
         // Adicao do vertice a fila
@@ -150,6 +150,11 @@ public class ListaDirecionada {
         }
     }
 
+    /**
+     * Adiciona cor aos vertices
+     * @param x vértice a ser verificado
+     * @param color vetor com o registro das cores dos vertices
+     */
     private void colorirVertice(char x, Map<Character, Integer> color) {
         // Caso a busca 
         if(!color.containsValue(0) && !color.containsValue(1)) {
@@ -197,6 +202,11 @@ public class ListaDirecionada {
         colorirVerticesAjacentes(x, color);
     }
 
+    /**
+     * Verifica se o grafo é bipartido apartir das cores dos vertices
+     * @param color dos vertices
+     * @return true, se for bipartido, false, caso contrario
+     */
     private boolean isBipartido(Map<Character, Integer> color) {
         for(int i = 0; i < grafo.size(); i++){
             if(color.get(Character.valueOf(grafo.get(i).getId())) == -1){
@@ -221,6 +231,11 @@ public class ListaDirecionada {
         return true;
     }
 
+    /**
+     * Verifica se o grafo eh bipartido
+     * 
+     * @return true, se for bipartido, false, caso contrario
+     */
     public boolean isBipartido() {
         Map<Character, Integer> color = new HashMap<Character, Integer>();
 
