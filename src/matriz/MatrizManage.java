@@ -46,7 +46,7 @@ public class MatrizManage {
      */
     public boolean isGrafosCompleto() {
         if(direcionado) {
-            return false;
+            return md.isGrafosCompleto();
         }
         return mnd.isGrafosCompleto();
     }
