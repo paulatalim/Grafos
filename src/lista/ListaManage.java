@@ -139,7 +139,15 @@ public class ListaManage {
 
         return lnd.isSimples();
     }
-    
+
+    public boolean isRegular() {
+        if(direcionado) {
+            return ld.isRegular();
+        }
+
+        return lnd.isRegular();
+    }
+
     /**
      * Verifica se o grafo eh bipartido
      * 

@@ -163,6 +163,22 @@ public class ListaNaoDirecionada {
         return true;
     }
 
+    public boolean isRegular() {
+        if(isGrafosEmpty()) {
+            return false;
+        }
+
+        int grauAtual = calcularGrau(grafo.get(0).getId());
+
+        for(int i = 1; i < grafo.size(); i++) {
+            if(calcularGrau(grafo.get(i).getId()) != grauAtual) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Verifica se o grafo eh bipartido
      * 
