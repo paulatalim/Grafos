@@ -192,7 +192,7 @@ public class MatrizNaoDirecionada {
         if(isGrafosSimples()) {
             for(int i = 0; i < vertices.size(); i++) {
                 for(int j = 0; j < vertices.size(); j++) {
-                    if(!(grafo[i][j] != 0) && i != j) {
+                    if(grafo[i][j] == 0 && i != j) {
                         return false;
                     }
                 }
