@@ -132,6 +132,14 @@ public class ListaManage {
         return lnd.calcularGrau(vertice);
     }
 
+    public boolean isSimples() {
+        if(direcionado) {
+            return ld.isSimples();
+        }
+
+        return lnd.isSimples();
+    }
+    
     /**
      * Verifica se o grafo eh bipartido
      * 

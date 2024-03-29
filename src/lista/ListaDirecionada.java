@@ -155,6 +155,26 @@ public class ListaDirecionada {
         return calcularGrauEntrada(vertice) + calcularGrauSaida(vertice);
     }
 
+    public boolean isSimples() {
+        for(int i = 0; i < grafo.size(); i++) {
+            for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                // Verifica se ha laco
+                if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                    return false;
+                }
+
+                // Verifica se há aresta paralela
+                for(int k = grafo.get(i).qnt_aresta() - 1; k > j; k--) {
+                    if(k != j && grafo.get(i).getAresta(j) == grafo.get(i).getAresta(k)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+    
     /**
      * Adiciona cor aos vertices adjacentes ao vértice inserido
      * @param x vértice inserido
