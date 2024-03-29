@@ -85,6 +85,53 @@ public class ListaManage {
         return lnd.remover_aresta(aresta);
     }
 
+    public List<Character> encontrarPredecessores(char vertice) {
+        if(direcionado) {
+            return ld.encontrarPredecessores(vertice);
+        }
+
+        return null;
+    }
+
+    public List<Character> encontrarSucessores(char vertice) {
+        if(direcionado) {
+            return ld.encontrarSucessores(vertice);
+        }
+
+        return null;
+    }
+
+    public int calcularGrauEntrada(char vertice) {
+        if(direcionado) {
+            ld.calcularGrauEntrada(vertice);
+        }
+
+        return -1;
+    }
+    
+    public int calcularGrauSaida(char vertice) {
+        if(direcionado) {
+            ld.calcularGrauSaida(vertice);
+        }
+
+        return -1;
+    }
+
+    public List<Character> vizinhaca(char vertice) {
+        if(!direcionado) {
+            return lnd.vizinhaca(vertice);
+        }
+
+        return null;
+    }
+
+    public int calcularGrau(char vertice) {
+        if(direcionado) {
+            return ld.calcularGrau(vertice);
+        }
+        return lnd.calcularGrau(vertice);
+    }
+
     /**
      * Verifica se o grafo eh bipartido
      * 
@@ -96,6 +143,7 @@ public class ListaManage {
         }
         return lnd.isBipartido();
     }
+    
     /**
      * Imprime o grafo em forma de lista
      */

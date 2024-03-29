@@ -143,16 +143,16 @@ public class ListaDirecionada {
         return sucessores;
     }
 
-    public int grauEntrada(char vertice) {
+    public int calcularGrauEntrada(char vertice) {
         return encontrarPredecessores(vertice).size();
     }
 
-    public int grauSaida(char vertice) {
+    public int calcularGrauSaida(char vertice) {
         return encontrarSucessores(vertice).size();
     }
 
-    public int grafo(char vertice) {
-        return grauEntrada(vertice) + grauSaida(vertice);
+    public int calcularGrau(char vertice) {
+        return calcularGrauEntrada(vertice) + calcularGrauSaida(vertice);
     }
 
     /**

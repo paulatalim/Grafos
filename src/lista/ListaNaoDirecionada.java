@@ -133,7 +133,7 @@ public class ListaNaoDirecionada {
         return vizinhos;
     }
 
-    public int calcular_grau(char vertice) {
+    public int calcularGrau(char vertice) {
         for(int i = 0; i < grafo.size(); i++) {
             if(grafo.get(i).getId() == vertice) {
                 return grafo.get(i).qnt_aresta();
