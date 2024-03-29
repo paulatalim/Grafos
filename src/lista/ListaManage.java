@@ -86,6 +86,17 @@ public class ListaManage {
     }
 
     /**
+     * Verifica se o grafo eh bipartido
+     * 
+     * @return true, se for bipartido, false, caso contrar
+     */
+    public boolean isBipartido () {
+        if(direcionado) {
+            return ld.isBipartido();
+        }
+        return lnd.isBipartido();
+    }
+    /**
      * Imprime o grafo em forma de lista
      */
     public void exibir_lista () {

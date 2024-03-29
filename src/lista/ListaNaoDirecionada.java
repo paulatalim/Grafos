@@ -1,7 +1,9 @@
 package lista;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ListaNaoDirecionada {
     private List<No> grafo;
@@ -117,20 +119,109 @@ public class ListaNaoDirecionada {
         return false;
     }
 
+    public List<Character> vizinhaca(char vertice) {
+        List<Character> vizinhos = new ArrayList<Character>();
+
+        for(int i = 0; i < grafo.size(); i++) {
+            if(grafo.get(i).getId() == vertice) {
+                for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                    vizinhos.add(grafo.get(i).getAresta(j));
+                }
+            }
+        }
+
+        return vizinhos;
+    }
+
+    public int calcular_grau(char vertice) {
+        for(int i = 0; i < grafo.size(); i++) {
+            if(grafo.get(i).getId() == vertice) {
+                return grafo.get(i).qnt_aresta();
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Verifica se o grafo eh bipartido
+     * 
+     * @return true, se for bipartido, false, caso contrar
+     */
+    public boolean isBipartido () {
+        Map<Character, Byte> mapeamento = new HashMap<Character, Byte>();
+        boolean[] isVerificado = new boolean[grafo.size()];
+        byte color = 0;
+        byte result;
+        boolean hasComponent = false;
+
+        // Inicializa o mapeamento
+        for(int i = 0; i < grafo.size(); i++) {
+            mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) -1);
+            isVerificado[i] = false;
+        }
+
+        mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
+            
+        while(mapeamento.containsValue((byte) -1) && !hasComponent) {
+            
+            // Encontra o proximo vertice a ser vericado
+            for(int i = 0; i < grafo.size(); i++) {
+                if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) != (byte) -1 && !isVerificado[i]) {
+                    color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
+                    isVerificado[i] = true;
+
+                    if(color == 0) {
+                        color ++;
+                    } else {
+                        color = 0;
+                    }
+
+                    for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                        result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
+        
+                        if(result == (byte) -1) {
+                            mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
+                        } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
+                            return false;
+                        }
+                    }
+
+                    break;
+                }
+            }
+
+            hasComponent = true;
+
+            // Verifica se ha componente no grafo
+            for(int i = 0; i < grafo.size(); i++) {
+                if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) != -1 && !isVerificado[i]) {
+                    hasComponent = false;
+                    break;
+                }
+            }
+
+            if(hasComponent) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Imprime a lista de adjacencia no console
      */
     public void exibir_lista () {
         for (int i = 0; i < grafo.size(); i++) {
             No no = grafo.get(i);
-            System.out.print(no.getId() + ": [ ");
+            System.out.print("\t" + no.getId() + ": [ ");
 
             if (no.qnt_aresta() > 0) {
                 System.out.print(no.getAresta(0));
             }
 
             for (int j = 1; j < no.qnt_aresta(); j++) {
-                System.out.print("," + no.getAresta(j));
+                System.out.print(", " + no.getAresta(j));
             }
 
             System.out.println(" ]");
