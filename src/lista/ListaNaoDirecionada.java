@@ -119,7 +119,22 @@ public class ListaNaoDirecionada {
         return false;
     }
 
-    public List<Character> vizinhaca(char vertice) {
+    /**
+     * Converte uma List<Character> para um vertor de char
+     * @param list - lista a ser convertida
+     * @return Array de caracteres
+     */
+    private char[] toArrayChar(List<Character> list) {
+        char[] vetor = new char[list.size()];
+        
+        for(int i = 0; i < list.size(); i++) {
+            vetor[i] = Character.valueOf(list.get(i));
+        }
+
+        return vetor;
+    }
+
+    public char[] vizinhaca(char vertice) {
         List<Character> vizinhos = new ArrayList<Character>();
 
         for(int i = 0; i < grafo.size(); i++) {
@@ -130,7 +145,7 @@ public class ListaNaoDirecionada {
             }
         }
 
-        return vizinhos;
+        return toArrayChar(vizinhos);
     }
 
     public int calcularGrau(char vertice) {
@@ -174,6 +189,20 @@ public class ListaNaoDirecionada {
             if(calcularGrau(grafo.get(i).getId()) != grauAtual) {
                 return false;
             }
+        }
+
+        return true;
+    }
+
+    public boolean isCompleto() {
+        if(isSimples()) {
+            for(int i = 0; i < grafo.size(); i++) {
+                if(grafo.get(i).qnt_aresta() != grafo.size() - 1) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
         }
 
         return true;

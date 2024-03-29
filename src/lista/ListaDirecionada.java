@@ -115,7 +115,22 @@ public class ListaDirecionada {
         return false;
     }
 
-    public List<Character> encontrarPredecessores(char vertice) {
+    /**
+     * Converte uma List<Character> para um vertor de char
+     * @param list - lista a ser convertida
+     * @return Array de caracteres
+     */
+    private char[] toArrayChar(List<Character> list) {
+        char[] vetor = new char[list.size()];
+        
+        for(int i = 0; i < list.size(); i++) {
+            vetor[i] = Character.valueOf(list.get(i));
+        }
+
+        return vetor;
+    }
+
+    public char[] encontrarPredecessores(char vertice) {
         List<Character> predecessor = new ArrayList<Character>();
 
         for (int i = 0; i < grafo.size(); i++) {
@@ -126,10 +141,10 @@ public class ListaDirecionada {
             }
         }
 
-        return predecessor;
+        return toArrayChar(predecessor);
     }
 
-    public List<Character> encontrarSucessores(char vertice) {
+    public char[] encontrarSucessores(char vertice) {
         List<Character> sucessores = new ArrayList<Character>();
 
         for (int i = 0; i < grafo.size(); i++) {
@@ -140,15 +155,15 @@ public class ListaDirecionada {
             }
         }
 
-        return sucessores;
+        return toArrayChar(sucessores);
     }
 
     public int calcularGrauEntrada(char vertice) {
-        return encontrarPredecessores(vertice).size();
+        return encontrarPredecessores(vertice).length;
     }
 
     public int calcularGrauSaida(char vertice) {
-        return encontrarSucessores(vertice).size();
+        return encontrarSucessores(vertice).length;
     }
 
     public int calcularGrau(char vertice) {

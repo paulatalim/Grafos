@@ -85,7 +85,7 @@ public class ListaManage {
         return lnd.remover_aresta(aresta);
     }
 
-    public List<Character> encontrarPredecessores(char vertice) {
+    public char[] encontrarPredecessores(char vertice) {
         if(direcionado) {
             return ld.encontrarPredecessores(vertice);
         }
@@ -93,7 +93,7 @@ public class ListaManage {
         return null;
     }
 
-    public List<Character> encontrarSucessores(char vertice) {
+    public char[] encontrarSucessores(char vertice) {
         if(direcionado) {
             return ld.encontrarSucessores(vertice);
         }
@@ -117,7 +117,7 @@ public class ListaManage {
         return -1;
     }
 
-    public List<Character> vizinhaca(char vertice) {
+    public char[] vizinhaca(char vertice) {
         if(!direcionado) {
             return lnd.vizinhaca(vertice);
         }

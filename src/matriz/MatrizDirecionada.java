@@ -226,6 +226,21 @@ public class MatrizDirecionada {
         return grafo;
     }
 
+    /**
+     * Converte uma List<Character> para um vertor de char
+     * @param list - lista a ser convertida
+     * @return Array de caracteres
+     */
+    private char[] toArrayChar(List<Character> list) {
+        char[] vetor = new char[list.size()];
+        
+        for(int i = 0; i < list.size(); i++) {
+            vetor[i] = Character.valueOf(list.get(i));
+        }
+
+        return vetor;
+    }
+
     public char[] verifica_sucessores(char id_vertice){
         List<Character> listaSucessores = new ArrayList<>();
 
@@ -237,12 +252,7 @@ public class MatrizDirecionada {
             }
         }
 
-        char[] vetorSucessores = new char[listaSucessores.size()];
-        for(int i = 0; i < listaSucessores.size(); i++) {
-            vetorSucessores[i] = Character.valueOf(listaSucessores.get(i));
-        }
-        return vetorSucessores;
-        
+        return toArrayChar(listaSucessores);
     }
 
     public char[] verifica_predecessores(char id_vertice){
@@ -256,10 +266,6 @@ public class MatrizDirecionada {
             }
         }
 
-        char[] vetorPrecessores = new char[listaPredecessores.size()];
-        for(int i = 0; i < listaPredecessores.size(); i++){
-            vetorPrecessores[i] = Character.valueOf(listaPredecessores.get(i));
-        }
-        return vetorPrecessores;
+        return  toArrayChar(listaPredecessores);
     }
 }   
