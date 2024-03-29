@@ -1,5 +1,8 @@
 package matriz;
 
+
+//import java.util.List;
+
 public class MatrizManage {
     private boolean direcionado;
     private MatrizDirecionada md;
@@ -105,6 +108,32 @@ public class MatrizManage {
             md.exibir_matriz();
         } else {
             mnd.exibir_matriz();
+        }
+    }
+
+    public char[] verfica_vizinhos (char id_vertice) {
+        if(direcionado){
+           return new char[0];
+        } else {
+            return mnd.verifica_vizinhanca(id_vertice);   
+        }
+    }
+
+    public char[] verifica_sucessores (char id_vertice){
+        if(direcionado){
+            return new char[0];
+        } else {
+            char[] arraySucessores = md.verifica_sucessores(id_vertice);
+            return arraySucessores;
+        }
+    }
+
+    public char[] verifica_predecessores (char id_vertice){
+        if(direcionado){
+            char[] arrayPredecessores = md.verifica_predecessores(id_vertice);
+            return arrayPredecessores;
+        } else { 
+            return new char[0];
         }
     }
 }

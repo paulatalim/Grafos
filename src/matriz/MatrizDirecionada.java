@@ -1,6 +1,7 @@
 package matriz;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MatrizDirecionada {
     private boolean[][] grafo;
@@ -149,5 +150,42 @@ public class MatrizDirecionada {
      */
     public boolean[][] getGrafo() {
         return grafo;
+    }
+
+    public char[] verifica_sucessores(char id_vertice){
+        List<Character> listaSucessores = new ArrayList<>();
+
+        int index_vertice = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i++){
+            if(grafo[index_vertice][i]){
+                listaSucessores.add(vertices.get(i));
+            }
+        }
+
+        char[] vetorSucessores = new char[listaSucessores.size()];
+        for(int i = 0; i < listaSucessores.size(); i++) {
+            vetorSucessores[i] = Character.valueOf(listaSucessores.get(i));
+        }
+        return vetorSucessores;
+        
+    }
+
+    public char[] verifica_predecessores(char id_vertice){
+        List<Character> listaPredecessores = new ArrayList<>();
+
+        int index_vertice = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i++){
+            if(grafo[i][index_vertice]){
+                listaPredecessores.add(vertices.get(i));
+            }
+        }
+
+        char[] vetorPrecessores = new char[listaPredecessores.size()];
+        for(int i = 0; i < listaPredecessores.size(); i++){
+            vetorPrecessores[i] = Character.valueOf(listaPredecessores.get(i));
+        }
+        return vetorPrecessores;
     }
 }   

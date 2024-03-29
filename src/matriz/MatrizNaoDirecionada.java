@@ -1,6 +1,7 @@
 package matriz;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MatrizNaoDirecionada {
     private boolean[][] grafo;
@@ -65,6 +66,25 @@ public class MatrizNaoDirecionada {
         }
 
         return false;
+    }
+
+    public char[] verifica_vizinhanca(char id_vertice){
+
+        List<Character> listaVizinhos = new ArrayList<>();
+
+        int index_vertice = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i ++){
+            if(grafo[index_vertice][i]){
+                listaVizinhos.add(vertices.get(i));
+            }
+        }
+        
+        char[] vetorVizinhos = new char[listaVizinhos.size()];
+        for(int i = 0; i < listaVizinhos.size(); i++) {
+            vetorVizinhos[i] = Character.valueOf(listaVizinhos.get(i));
+        }
+        return vetorVizinhos;
     }
 
     /**
