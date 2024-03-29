@@ -14,6 +14,7 @@ public class App {
         int opcao;
         char resposta;
         int cont;
+        // boolean useAnaliseMatriz;
 
         // Valida a resposta do usuario
         do {
@@ -21,12 +22,9 @@ public class App {
             UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** " + "grafos".toUpperCase() + " ***  ");
             UI.print(UI.BLACK_BACKGROUND + UI.PURPLE + "\t\t\t\t\t  Seja bem vindo!\n\n\n");
             UI.print(UI.YELLOW + UI.BLACK_BACKGROUND + "\tVamos iniciar criando um grafo ...\n\n"
-                            + "\tEsse grafo é direcionado?");
-            UI.print(UI.YELLOW + " (s/n)\n\n");
+                            + "\tEsse grafo é direcionado? (s/n)\n\n");
             UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
             resposta = scanner.next().toLowerCase().charAt(0);
-
-            UI.limpar_console();
 
             if (resposta == 's') {
                 grafoLista.setIsDirecionado(true);
@@ -37,9 +35,50 @@ public class App {
                 grafoMatriz.setIsDirecionado(false);
                 opcao_invalida = false;
             } else {
+                UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
                 opcao_invalida = true;
+                UI.exibir_fim_tela();
             }
         } while (opcao_invalida);
+
+        // UI.limpar_console();
+
+        // Selecao do metodo de analise
+        // do {
+        //     UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** " + "grafos".toUpperCase() + " ***  ");
+        //     UI.print(UI.BLACK_BACKGROUND + UI.PURPLE + "\t\t\t\t\t  Seja bem vindo!\n\n\n");
+
+        //     UI.println(UI.GREEN + "\tInformações do grafo:");
+
+        //     if(grafoLista.isDirecionado()) {
+        //         UI.print("\t - Grafo Direcionado");
+        //     } else {
+        //         UI.print("\t - Grafo Não Direcionado");
+        //     }
+
+        //     UI.println("\n\n");
+
+        //     UI.print(UI.YELLOW + "\tPara a análise do grafo, você deseja utilizar os métodos de qual classe?\n\n");
+        //     UI.print("\t1 - Matriz de Adjacência\n"
+        //             + "\t2 - Lista de Adjacência\n\n");
+
+        //     UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
+        //     resposta = scanner.next().toLowerCase().charAt(0);
+
+        //     if (resposta == '1') {
+        //         useAnaliseMatriz = true;
+        //         opcao_invalida = false;
+        //     } else if (resposta == '2') {
+        //         useAnaliseMatriz = false;
+        //         opcao_invalida = false;
+        //     } else {
+        //         UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
+        //         opcao_invalida = true;
+        //         UI.exibir_fim_tela();
+        //     }
+        // } while (opcao_invalida);
+
+        UI.exibir_fim_tela();
 
         // Repete o programa
         do {
@@ -51,7 +90,7 @@ public class App {
             do {
                 //Exibe o menu das opcoes
                 UI.print(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t" + "  *** GRAFOS ***  " + "\n\n\n");
-                UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "O que deseja no seu grafo" + "\n\n");
+                UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "O que deseja fazer no grafo" + "\n\n");
                 
                 UI.print(UI.RED_BACKGROUND + UI.WHITE + "\t" + " REPRESENTAÇÕES   " + "\n");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "1 - Exibir em forma de lista de adjacência" + "\n"
@@ -198,7 +237,7 @@ public class App {
                         if(aresta.length() > 1) {
                             opcao_invalida = !grafoLista.remover_aresta(aresta) || !grafoMatriz.remover_aresta(aresta);
                         }
-                        
+
                         // Valida o vértice
                         if(opcao_invalida) {
                             UI.println(UI.RED + "\t" + "Aresta inválida" + "\n");
@@ -318,6 +357,26 @@ public class App {
                                 UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + "\n");
                             }
 
+                            // if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
+                            //     if(grafoMatriz.isDirecionado()) {
+                            //         int[] graus = grafoMatriz.grau_vertice(resposta);
+                            //         UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + graus[0]);
+                            //         UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + graus[1]);
+                            //         UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + graus[1]);
+                            //     } else {
+                            //         UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + "\n");
+                            //     }
+
+                            // } else if(grafoLista.isVerticeExist(resposta)) {
+                            //     if(grafoLista.isDirecionado()) {
+                            //         UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + grafoLista.calcularGrauSaida(resposta));
+                            //         UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + grafoLista.calcularGrauEntrada(resposta));
+                            //         UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta));
+                            //     } else {
+                            //         UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta) + "\n");
+                            //     }
+                            // }
+
                         } else {
                             UI.println(UI.RED + "\t" + "Vértice inválido." + "\n");
                         }
@@ -343,12 +402,24 @@ public class App {
                         UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (simples ? "Sim" : "Não"));
                         UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
                         UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
-                        UI.println(UI.YELLOW + "\t - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
+                        UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
 
-                        UI.println("\n\nLista simples: " + (grafoLista.isSimples() ? "Sim" : "Não"));
-                        UI.println("Lista regular: " + (grafoLista.isRegular() ? "Sim" : "Não"));
-                        UI.println("Lista completo: " + (grafoLista.isCompleto() ? "Sim" : "Não"));
+                        // if(useAnaliseMatriz) {
+                        //     boolean simples = grafoMatriz.isGrafosSimples();
+                        //     boolean regular = grafoMatriz.isGrafosRegular();
+                        //     boolean completo = grafoMatriz.isGrafosCompleto();
 
+                        //     UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (simples ? "Sim" : "Não"));
+                        //     UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
+                        //     UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
+
+                        //     // TODO colocar analise se eh bipartido
+                        // } else {
+                        //     UI.println(UI.YELLOW + "\t" + " - Grafo simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
+                        //     UI.println(UI.YELLOW + "\t" + " - Grafo regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
+                        //     UI.println(UI.YELLOW + "\t" + " - Grafo completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
+                        //     UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
+                        // }
                     } else {
                         // Caso o grafo esteja vazio
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t*** CLASSIFICAÇÃO DO GRAFO ***\n\n\n");
@@ -360,7 +431,6 @@ public class App {
                     // Cria novo grafo
 
                     opcao_invalida = true;
-                    grafoLista = new ListaManage();
 
                     do {
                         // Pergunta se o grafo é ou não direcionado
@@ -381,6 +451,40 @@ public class App {
                             UI.exibir_fim_tela();
                         }
                     } while (opcao_invalida);
+
+                    // UI.limpar_console();
+
+                    // do {
+                    //     UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** NOVO GRAFO ***  ");
+                    //     UI.println(UI.BLACK_BACKGROUND + UI.GREEN + "\tInformações do grafo:");
+            
+                    //     if(grafoLista.isDirecionado()) {
+                    //         UI.print("\t - Grafo Direcionado");
+                    //     } else {
+                    //         UI.print("\t - Grafo Não Direcionado");
+                    //     }
+            
+                    //     UI.println("\n\n");
+            
+                    //     UI.print(UI.YELLOW + "\tPara a análise do grafo, você deseja utilizar os métodos de qual classe?\n\n");
+                    //     UI.print("\t1 - Matriz de Adjacência\n"
+                    //             + "\t2 - Lista de Adjacência\n\n");
+            
+                    //     UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
+                    //     resposta = scanner.next().toLowerCase().charAt(0);
+            
+                    //     if (resposta == '1') {
+                    //         useAnaliseMatriz = true;
+                    //         opcao_invalida = false;
+                    //     } else if (resposta == '2') {
+                    //         useAnaliseMatriz = false;
+                    //         opcao_invalida = false;
+                    //     } else {
+                    //         UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
+                    //         opcao_invalida = true;
+                    //         UI.exibir_fim_tela();
+                    //     }
+                    // } while (opcao_invalida);
                     break;
                 case 0:
                     UI.println(UI.YELLOW + "Desligando sistema ...\n\n\n"

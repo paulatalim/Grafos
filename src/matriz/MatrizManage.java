@@ -164,7 +164,7 @@ public class MatrizManage {
 
     public char[] verfica_vizinhos (char id_vertice) {
         if(direcionado){
-           return new char[0];
+           return null;
         } else {
             return mnd.verifica_vizinhanca(id_vertice);   
         }
@@ -176,7 +176,7 @@ public class MatrizManage {
             return arraySucessores;
             
         } else {
-            return new char[0];
+            return null;
         }
     }
 
@@ -185,7 +185,7 @@ public class MatrizManage {
             char[] arrayPredecessores = md.verifica_predecessores(id_vertice);
             return arrayPredecessores;
         } else { 
-            return new char[0];
+            return null;
         }
     }
 }
