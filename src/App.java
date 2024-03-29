@@ -328,13 +328,24 @@ public class App {
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
 
-                    // Exibe cabecalho da pagina
+                        // Exibe cabecalho da pagina
                     UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
 
-                    // (dizer se o grafo eh simples, regular, completo ou bipartido)
-                    if(!grafoLista.isGrafosEmpty()) {
-                        UI.print(UI.YELLOW + "\t - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "sim" : "não"));
-                    }   
+
+                        boolean simples = grafoMatriz.isGrafosSimples();
+                        boolean regular = grafoMatriz.isGrafosRegular();
+                        boolean completo = grafoMatriz.isGrafosCompleto();
+
+                        UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (simples ? "Sim" : "Não"));
+                        UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
+                        UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não") + "\n");
+                        UI.print(UI.YELLOW + "\t - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.print("\n\t\t\t\t\t*** CLASSIFICAÇÃO DO GRAFO ***\n\n\n");
+                        UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                    }
+
                     break;
                 case 9:
                     // Cria novo grafo
