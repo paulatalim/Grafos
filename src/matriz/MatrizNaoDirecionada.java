@@ -3,7 +3,7 @@ package matriz;
 import java.util.ArrayList;
 
 public class MatrizNaoDirecionada {
-    private boolean[][] grafo;
+    private int[][] grafo;
     private ArrayList<Character> vertices = new ArrayList<Character>();
 
     /**
@@ -49,6 +49,29 @@ public class MatrizNaoDirecionada {
     }
 
     /**
+     * Recebe o ID de um vértice e calcula o seu grau
+     * @param id_vertice
+     * @return vetor de inteiro representando o grau do vértice
+     */
+    public int[] grau_vertice (char id_vertice) {
+        int[] grau = new int[1];
+        grau[0] = 0;
+        int indexNo = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i++) {
+            if(grafo[indexNo][i] != 0) {
+                if(indexNo == i) {
+                    grau[0] += 2 * grafo[indexNo][i];
+                } else {
+                    grau[0] += grafo[indexNo][i];
+                }
+            }
+        }
+
+        return grau;
+    }
+
+    /**
      * Adiciona uma aresta do grafo
      * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
@@ -59,8 +82,8 @@ public class MatrizNaoDirecionada {
 
         if(i >=0 && j >= 0) {
             // Adiciona uma nova aresta
-            grafo[i][j] = true;
-            grafo[j][i] = true;
+            grafo[i][j] += 1;
+            grafo[j][i] += 1;
             return true;
         }
 
@@ -76,10 +99,10 @@ public class MatrizNaoDirecionada {
         int i = buscar_vertice(aresta.charAt(0));
         int j = buscar_vertice(aresta.charAt(1));
 
-        if(i >=0 && j >= 0) {
+        if(i >=0 && j >= 0 && grafo[i][j] != 0 && grafo[i][j] != 0) {
             // Adiciona uma nova aresta
-            grafo[i][j] = false;
-            grafo[j][i] = false;
+            grafo[i][j] -= 1;
+            grafo[j][i] -= 1;
             return true;
         }
 
@@ -91,10 +114,10 @@ public class MatrizNaoDirecionada {
      */
     private void criar_matriz () {
         int tamanho = vertices.size();
-        this.grafo = new boolean[tamanho][tamanho];
+        this.grafo = new int[tamanho][tamanho];
         for(int i = 0; i < tamanho; i++) {
             for(int j = 0; j < tamanho; j++) {
-                this.grafo[i][j] = false;
+                this.grafo[i][j] = 0;
             }
         }
     }
@@ -111,13 +134,63 @@ public class MatrizNaoDirecionada {
     }
 
     /**
+     * Confere se o grafo é simples ou não
+     * @return true se for simples, caso contrário, false
+     */
+    public boolean isGrafosSimples() {
+        for(int i = 0; i < vertices.size(); i++) {
+            for(int j = 0; j < vertices.size(); j++) {
+                if(grafo[i][j] != 0 && i == j || grafo[i][j] > 1) return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Confere se o grafo é regular ou não
+     * @return true se for, caso contrário, false
+     */
+    public boolean isGrafosRegular() {
+        int grau = grau_vertice(vertices.get(0))[0];
+        int aux = 0;
+
+        for (int i = 1; i < vertices.size(); i++) { 
+            aux = grau_vertice(vertices.get(i))[0];
+            if (aux != grau) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Confere se o grafo é completo ou não
+     * @return true se for, caso contrário, false
+     */
+    public boolean isGrafosCompleto() {
+        if(isGrafosSimples()) {
+            for(int i = 0; i < vertices.size(); i++) {
+                for(int j = 0; j < vertices.size(); j++) {
+                    if(!(grafo[i][j] != 0) && i != j) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
      * Verifica se o grafo possui aresta
      * @return true, se tiver aresta, false caso contrario
      */
     public boolean temAresta() {
         for(int i = 0; i < vertices.size(); i++) {
             for(int j = 0; j < vertices.size(); j++) {
-                if(grafo[i][j]) return true;
+                if(grafo[i][j] != 0) return true;
             }
         }
         return false;
@@ -135,21 +208,16 @@ public class MatrizNaoDirecionada {
         for (int i = 0; i < vertices.size(); i++) {
             System.out.print("\t" + vertices.get(i) + "| ");
             for (int j = 0; j < vertices.size(); j++) {
-                if(grafo[i][j]) {
-                    System.out.print("1 ");
-                }
-                else {
-                    System.out.print("0 ");
-                }
+                System.out.print(grafo[i][j] + " ");
             }
             System.out.println("|");
         }
     }
 
     /**
-     * @return boolean[][] return the grafo
+     * @return int[][] return do grafo
      */
-    public boolean[][] getGrafo() {
+    public int[][] getGrafo() {
         return grafo;
     }
 }
