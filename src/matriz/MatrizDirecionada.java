@@ -162,7 +162,7 @@ public class MatrizDirecionada {
             grausAuxiliares = grau_vertice(vertices.get(i));
             auxSaida = grausAuxiliares[0];
             auxEntrada = grausAuxiliares[1];
-            if (auxSaida != grauSaida || auxEntrada != grauEntrada) {
+            if (auxEntrada + auxSaida != grauEntrada + grauSaida) {
                 return false;
             }
         }
@@ -178,7 +178,7 @@ public class MatrizDirecionada {
         if(isGrafosSimples()) {
             for(int i = 0; i < vertices.size(); i++) {
                 for(int j = 0; j < vertices.size(); j++) {
-                    if(grafo[i][j] == grafo[j][i] && i != j && (grafo[i][j] > 1 || grafo[j][i] > 1)) {
+                    if(!(grafo[i][j] != 0) && i != j) {
                         return false;
                     }
                 }
