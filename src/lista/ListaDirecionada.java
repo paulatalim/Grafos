@@ -206,6 +206,32 @@ public class ListaDirecionada {
         return true;
     }
 
+    public boolean isCompleto() {
+        if(isSimples()) {
+            char vertice;
+            for(int i = 0; i < grafo.size(); i++) {
+                vertice = grafo.get(i).getId();
+
+                // Verifica se o grau do vertice esta correto
+                if(calcularGrauEntrada(vertice) != calcularGrauSaida(vertice)) {
+                    return false;
+                }
+
+                // Verifica se há aresta anti-paralela
+                for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                    for(int k = grafo.get(i).qnt_aresta() - 1; k > j; k--) {
+                        if(grafo.get(i).getAresta(j) == grafo.get(i).getAresta(k)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Adiciona cor aos vertices adjacentes ao vértice inserido
      * @param x vértice inserido

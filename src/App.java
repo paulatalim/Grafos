@@ -163,7 +163,7 @@ public class App {
                             aresta = scanner.next();
                             UI.println("");
 
-                            if (!aresta.equals("0")) {
+                            if (!aresta.equals("0") && aresta.length() > 1) {
                                 // Adiciona aresta na lista e na matriz
                                 grafoLista.inserir_aresta(aresta);
                                 grafoMatriz.inserir_aresta(aresta);
@@ -195,8 +195,10 @@ public class App {
                         UI.println("");
 
                         // Remove aresta na lista e na matriz
-                        opcao_invalida = !grafoLista.remover_aresta(aresta) || !grafoMatriz.remover_aresta(aresta);
-
+                        if(aresta.length() > 1) {
+                            opcao_invalida = !grafoLista.remover_aresta(aresta) || !grafoMatriz.remover_aresta(aresta);
+                        }
+                        
                         // Valida o vértice
                         if(opcao_invalida) {
                             UI.println(UI.RED + "\t" + "Aresta inválida" + "\n");
@@ -342,6 +344,11 @@ public class App {
                         UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
                         UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
                         UI.println(UI.YELLOW + "\t - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
+
+                        UI.println("\n\nLista simples: " + (grafoLista.isSimples() ? "Sim" : "Não"));
+                        UI.println("Lista regular: " + (grafoLista.isRegular() ? "Sim" : "Não"));
+                        UI.println("Lista completo: " + (grafoLista.isCompleto() ? "Sim" : "Não"));
+
                     } else {
                         // Caso o grafo esteja vazio
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t*** CLASSIFICAÇÃO DO GRAFO ***\n\n\n");

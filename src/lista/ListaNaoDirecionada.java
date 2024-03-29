@@ -201,11 +201,10 @@ public class ListaNaoDirecionada {
                     return false;
                 }
             }
-        } else {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -219,6 +218,7 @@ public class ListaNaoDirecionada {
         byte color = 0;
         byte result;
         boolean hasComponent = false;
+        boolean allIsVerificado = false;
 
         // Inicializa o mapeamento
         for(int i = 0; i < grafo.size(); i++) {
@@ -228,7 +228,7 @@ public class ListaNaoDirecionada {
 
         mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
             
-        while(mapeamento.containsValue((byte) -1) && !hasComponent) {
+        while(!hasComponent && !allIsVerificado) {
             
             // Encontra o proximo vertice a ser vericado
             for(int i = 0; i < grafo.size(); i++) {
@@ -268,6 +268,15 @@ public class ListaNaoDirecionada {
 
             if(hasComponent) {
                 return false;
+            }
+
+            allIsVerificado = true;
+
+            for(int i = isVerificado.length - 1; i >= 0; i--) {
+                if(!isVerificado[i]) {
+                    allIsVerificado = false;
+                    break;
+                }
             }
         }
         return true;

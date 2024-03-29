@@ -148,6 +148,14 @@ public class ListaManage {
         return lnd.isRegular();
     }
 
+    public boolean isCompleto() {
+        if(direcionado) {
+            return ld.isCompleto();
+        }
+
+        return lnd.isCompleto();
+    }
+
     /**
      * Verifica se o grafo eh bipartido
      * 
