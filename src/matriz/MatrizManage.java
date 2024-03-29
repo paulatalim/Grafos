@@ -1,8 +1,5 @@
 package matriz;
 
-
-//import java.util.List;
-
 public class MatrizManage {
     private boolean direcionado;
     private MatrizDirecionada md;
