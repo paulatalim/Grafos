@@ -216,7 +216,7 @@ public class App {
                         // Identifica sucessores e predecessores de um vértice
 
                         // Exibe o cabecalho da pagina
-                        UI.println("\n\t\t\t\t\t*** SUCESORES E PREDECESSORES ***\n\n");
+                        UI.println("\n\t\t\t\t\t*** SUCESSORES E PREDECESSORES ***\n\n");
                         UI.println("\tInsira o vértice que deseja saber seus predecessores e sucessores\n");
 
                         // Entrada do vértice
@@ -252,7 +252,7 @@ public class App {
                     } else if (!grafoLista.isGrafosEmpty()) {
                         // Identifica vizinhaça de um vértice
                         // Exibe o cabecalho da pagina
-                        UI.println("\n\t\t\t\t\t*** VIZINHAÇA DO VÉRTICE ***\n\n\n"
+                        UI.println("\n\t\t\t\t\t*** VIZINHANÇA DO VÉRTICE ***\n\n\n"
                                 + "\tInsira o vértice que deseja saber sua vizinhaça\n");
 
                         // Entrada do vértice
@@ -277,9 +277,9 @@ public class App {
                         }
                     } else {
                         if (grafoLista.isDirecionado()) {
-                            UI.println("\n\t\t\t\t\t*** SUCESORES E PREDECESSORES ***\n\n");
+                            UI.println("\n\t\t\t\t\t*** SUCESSORES E PREDECESSORES ***\n\n");
                         } else {
-                            UI.print("\n\t\t\t\t\t*** VIZINHAÇA DO VÉRTICE ***\n\n\n");
+                            UI.print("\n\t\t\t\t\t*** VIZINHANÇA DO VÉRTICE ***\n\n\n");
                         }
                         // Caso o grafo esteja vazio
                         UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
