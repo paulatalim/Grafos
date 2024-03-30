@@ -5,7 +5,7 @@ import matriz.MatrizManage;
 
 /**
  * PONTÍFICIA UNIVERSIDADE CATÓLICA DE MINAS GERAIS
- * Trabalho acadêmico da Algoritmos em Grafos
+ * Trabalho acadêmico de Algoritmos em Grafos
  * 
  * @author Gabriel Luís Pinto Cecconello
  * @author Paula Cristina Talim Gonçalves
