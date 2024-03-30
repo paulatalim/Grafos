@@ -180,10 +180,11 @@ public class App {
                             resposta = scanner.next().charAt(0);
                             UI.println("");
 
-                            if (resposta != '0') {
+                            Character.isDigit(resposta);
+
+                            if (resposta != '0' && (Character.isDigit(resposta) || Character.isLetter(resposta))) {
                                 // Adiciona vértice na lista
                                 grafoLista.inserir_vertice(resposta);
-
                             }
 
                             grafoMatriz.inserir_vertice(resposta);
@@ -278,6 +279,54 @@ public class App {
                         resposta = scanner.next().charAt(0);
                         UI.println("");
 
+                        // String separacao = "";
+                        // char[] array;
+
+                        // if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
+                        //     array = grafoMatriz.verifica_sucessores(resposta);
+
+                        //     UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                        //     for (int i = 0; i < array.length; i++) {
+                        //         UI.print(separacao);
+                        //         UI.print(String.valueOf(array[i]));
+                        //         separacao = ", ";
+                        //     }
+                        //     UI.print(" ]\n\n");
+
+                        //     separacao = "";
+                        //     array = grafoMatriz.verifica_predecessores(resposta);
+
+                        //     UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                        //     for (int i = 0; i < array.length; i++) {
+                        //         UI.print(separacao);
+                        //         UI.print(String.valueOf(array[i]));
+                        //         separacao = ", ";
+                        //     }
+                        //     UI.print(" ]");
+                        
+                        // } else if (grafoLista.isVerticeExist(resposta)) {
+                        //     array = grafoLista.encontrarSucessores(resposta);
+
+                        //     UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                        //     for (int i = 0; i < array.length; i++) {
+                        //         UI.print(separacao);
+                        //         UI.print(String.valueOf(array[i]));
+                        //         separacao = ", ";
+                        //     }
+                        //     UI.print(" ]\n\n");
+
+                        //     separacao = "";
+                        //     array = grafoLista.encontrarPredecessores(resposta);
+
+                        //     UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                        //     for (int i = 0; i < array.length; i++) {
+                        //         UI.print(separacao);
+                        //         UI.print(String.valueOf(array[i]));
+                        //         separacao = ", ";
+                        //     }
+                        //     UI.print(" ]");
+                        // }
+
                         // Valida o vértice
                         if (grafoLista.isVerticeExist(resposta)) {
                             String separacao = "";
@@ -316,6 +365,35 @@ public class App {
                         resposta = scanner.next().charAt(0);
                         UI.println("");
 
+                        // String separacao;
+                        // char[] arrayVizinhos;
+
+                        // if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
+                        //     separacao = "";
+                        //     arrayVizinhos = grafoMatriz.verfica_vizinhos(resposta);
+                        //     UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN + "\n\t[ ");
+                        //     for (int i = 0; i < arrayVizinhos.length; i++) {
+                        //         UI.print(separacao);
+                        //         UI.print(String.valueOf(arrayVizinhos[i]));
+                        //         separacao = ", ";
+                        //     }
+                        //     UI.print(" ]");
+                        
+                        // } else if (grafoLista.isVerticeExist(resposta)) {
+                        //     separacao = "";
+                        //     arrayVizinhos = grafoLista.vizinhaca(resposta);
+                        //     UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN + "\n\t[ ");
+                        //     for (int i = 0; i < arrayVizinhos.length; i++) {
+                        //         UI.print(separacao);
+                        //         UI.print(String.valueOf(arrayVizinhos[i]));
+                        //         separacao = ", ";
+                        //     }
+                        //     UI.print(" ]");
+
+                        // } else {
+                        //     UI.println(UI.RED + "\t" + "Vértice inválido." + "\n");
+                        // }
+
                         // Valida o vértice
                         if (grafoLista.isVerticeExist(resposta)) {
                             String separacao = "";
@@ -332,7 +410,7 @@ public class App {
                             UI.println(UI.RED + "\t" + "Vértice inválido." + "\n");
                         }
                     } else {
-                        if (grafoLista.isDirecionado()) {
+                        if (grafoLista.isDirecionado() && grafoMatriz.isDirecionado()) {
                             UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** SUCESSORES E PREDECESSORES ***   \n\n");
                         } else {
                             UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t  *** VIZINHANÇA DO VÉRTICE ***   \n\n\n");
@@ -349,7 +427,7 @@ public class App {
 
                         // Exibe o cabecalho da pagina
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** GRAU DO VÉRTICE ***   \n\n\n");
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o vértice que deseja saber o grau");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o vértice que deseja saber o grau\n");
                         
                         // Entrada do vértice
                         UI.print(UI.CYAN + "\tVértice: " + UI.WHITE);
