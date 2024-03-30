@@ -277,6 +277,11 @@ public class MatrizDirecionada {
         return vetor;
     }
 
+    /**
+     * Verifica os sucessores de um vertice
+     * @param id_vertice a ser analisado
+     * @return vetor de char (vertices sucessores)
+     */
     public char[] verifica_sucessores(char id_vertice){
         List<Character> listaSucessores = new ArrayList<>();
 
@@ -291,6 +296,11 @@ public class MatrizDirecionada {
         return toArrayChar(listaSucessores);
     }
 
+    /**
+     * Verifica os predecessores de um vertice
+     * @param id_vertice a ser analisado
+     * @return vetor de char (vertices predecessores)
+     */
     public char[] verifica_predecessores(char id_vertice){
         List<Character> listaPredecessores = new ArrayList<>();
 

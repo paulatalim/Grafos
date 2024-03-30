@@ -91,6 +91,11 @@ public class MatrizNaoDirecionada {
         return false;
     }
 
+    /**
+     * Verifica a vizinhaca do vertice
+     * @param id_vertice a ser analisado
+     * @return vetor de char (vertices adjacentes ao analisado)
+     */
     public char[] verifica_vizinhanca(char id_vertice){
 
         List<Character> listaVizinhos = new ArrayList<>();
@@ -201,7 +206,6 @@ public class MatrizNaoDirecionada {
         }
         return false;
     }
-
 
     /**
      * Confere se o grafo é bipartido ou não

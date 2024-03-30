@@ -134,6 +134,11 @@ public class ListaNaoDirecionada {
         return vetor;
     }
 
+    /**
+     * Verifica a vizinhaca do vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices adjacentes ao analisado)
+     */
     public char[] vizinhaca(char vertice) {
         List<Character> vizinhos = new ArrayList<Character>();
 
@@ -148,6 +153,11 @@ public class ListaNaoDirecionada {
         return toArrayChar(vizinhos);
     }
 
+    /**
+     * Calcula o grau de um vertice
+     * @param vertice a ser analisado
+     * @return int (grau do vertice)
+     */
     public int calcularGrau(char vertice) {
         for(int i = 0; i < grafo.size(); i++) {
             if(grafo.get(i).getId() == vertice) {
@@ -158,6 +168,10 @@ public class ListaNaoDirecionada {
         return -1;
     }
 
+    /**
+     * Verifica se o grafo eh simples
+     * @return true, se for simples, false, caso contrario
+     */
     public boolean isSimples() {
         for(int i = 0; i < grafo.size(); i++) {
             for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
@@ -178,6 +192,10 @@ public class ListaNaoDirecionada {
         return true;
     }
 
+    /**
+     * Verifica se o grafo eh regular
+     * @return true, se for regular, false, caso contrario
+     */
     public boolean isRegular() {
         if(isGrafosEmpty()) {
             return false;
@@ -194,6 +212,10 @@ public class ListaNaoDirecionada {
         return true;
     }
 
+    /**
+     * Verifica se o grafo eh completo
+     * @return true, se for completo, false, caso contrario
+     */
     public boolean isCompleto() {
         if(isSimples()) {
             for(int i = 0; i < grafo.size(); i++) {

@@ -17,7 +17,7 @@ public class ListaDirecionada {
     /**
      * Encontra um vertice no grafo
      * @param id do vertice a ser procurado
-     * @return indice na lista no grafo
+     * @return indice na lista no grafo ou -1, se o vertice não existir
      */
     private int buscar_vertice(char id) {
         for(int i = 0; i < grafo.size(); i++) {
@@ -90,7 +90,7 @@ public class ListaDirecionada {
     public boolean inserir_aresta(String aresta) {
         int aux = buscar_vertice(aresta.charAt(0));
 
-        if(aux >=0) {
+        if(aux >= 0 && buscar_vertice(aresta.charAt(1)) >= 0) {
             // Adiciona uma nova aresta
             grafo.get(aux).inserir_aresta(aresta.charAt(1));
             return true;
@@ -130,6 +130,11 @@ public class ListaDirecionada {
         return vetor;
     }
 
+    /**
+     * Verifica os predecessores de um vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices predecessores)
+     */
     public char[] encontrarPredecessores(char vertice) {
         List<Character> predecessor = new ArrayList<Character>();
 
@@ -144,6 +149,11 @@ public class ListaDirecionada {
         return toArrayChar(predecessor);
     }
 
+    /**
+     * Verifica os sucessores de um vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices sucessores)
+     */
     public char[] encontrarSucessores(char vertice) {
         List<Character> sucessores = new ArrayList<Character>();
 
@@ -158,18 +168,37 @@ public class ListaDirecionada {
         return toArrayChar(sucessores);
     }
 
+    /**
+     * Calcula o grau de entrada de um vertice
+     * @param vertice a ser analisado
+     * @return int (grau de entrada do vertice)
+     */
     public int calcularGrauEntrada(char vertice) {
         return encontrarPredecessores(vertice).length;
     }
 
+     /**
+     * Calcula o grau de saida de um vertice
+     * @param vertice a ser analisado
+     * @return int (grau de saida do vertice)
+     */
     public int calcularGrauSaida(char vertice) {
         return encontrarSucessores(vertice).length;
     }
 
+    /**
+     * Calcula o grau de um vertice
+     * @param vertice a ser analisado
+     * @return int (grau do vertice)
+     */
     public int calcularGrau(char vertice) {
         return calcularGrauEntrada(vertice) + calcularGrauSaida(vertice);
     }
 
+    /**
+     * Verifica se o grafo eh simples
+     * @return true, se for simples, false, caso contrario
+     */
     public boolean isSimples() {
         for(int i = 0; i < grafo.size(); i++) {
             for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
@@ -190,6 +219,10 @@ public class ListaDirecionada {
         return true;
     }
 
+    /**
+     * Verifica se o grafo eh regular
+     * @return true, se for regular, false, caso contrario
+     */
     public boolean isRegular() {
         if(isGrafosEmpty()) {
             return false;
@@ -206,6 +239,10 @@ public class ListaDirecionada {
         return true;
     }
 
+    /**
+     * Verifica se o grafo eh completo
+     * @return true, se for completo, false, caso contrario
+     */
     public boolean isCompleto() {
         if(isSimples()) {
             char vertice;
