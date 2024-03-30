@@ -85,6 +85,11 @@ public class ListaManage {
         return lnd.remover_aresta(aresta);
     }
 
+    /**
+     * Verifica os predecessores de um vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices predecessores) ou null (caso o grafo nao ser direcionado)
+     */
     public char[] encontrarPredecessores(char vertice) {
         if(direcionado) {
             return ld.encontrarPredecessores(vertice);
@@ -93,6 +98,11 @@ public class ListaManage {
         return null;
     }
 
+    /**
+     * Verifica os sucessores de um vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices sucessores) ou null (caso o grafo nao ser direcionado)
+     */
     public char[] encontrarSucessores(char vertice) {
         if(direcionado) {
             return ld.encontrarSucessores(vertice);
@@ -101,6 +111,11 @@ public class ListaManage {
         return null;
     }
 
+    /**
+     * Calcula o grau de entrada de um vertice
+     * @param vertice a ser analisado
+     * @return int (grau de entrada do vertice) ou -1 (caso o grafo nao ser direcionado)
+     */
     public int calcularGrauEntrada(char vertice) {
         if(direcionado) {
             ld.calcularGrauEntrada(vertice);
@@ -109,6 +124,11 @@ public class ListaManage {
         return -1;
     }
     
+    /**
+     * Calcula o grau de saida de um vertice
+     * @param vertice a ser analisado
+     * @return int (grau de saida do vertice) ou -1 (caso o grafo nao ser direcionado)
+     */
     public int calcularGrauSaida(char vertice) {
         if(direcionado) {
             ld.calcularGrauSaida(vertice);
@@ -117,6 +137,11 @@ public class ListaManage {
         return -1;
     }
 
+    /**
+     * Verifica a vizinhaca do vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices adjacentes ao analisado) ou null (caso o grafo ser direcionado)
+     */
     public char[] vizinhaca(char vertice) {
         if(!direcionado) {
             return lnd.vizinhaca(vertice);
@@ -125,6 +150,11 @@ public class ListaManage {
         return null;
     }
 
+    /**
+     * Calcula o grau de um vertice
+     * @param vertice a ser analisado
+     * @return int (grau do vertice)
+     */
     public int calcularGrau(char vertice) {
         if(direcionado) {
             return ld.calcularGrau(vertice);
@@ -132,6 +162,10 @@ public class ListaManage {
         return lnd.calcularGrau(vertice);
     }
 
+    /**
+     * Verifica se o grafo eh simples
+     * @return true, se for simples, false, caso contrario
+     */
     public boolean isSimples() {
         if(direcionado) {
             return ld.isSimples();
@@ -140,6 +174,10 @@ public class ListaManage {
         return lnd.isSimples();
     }
 
+    /**
+     * Verifica se o grafo eh regular
+     * @return true, se for regular, false, caso contrario
+     */
     public boolean isRegular() {
         if(direcionado) {
             return ld.isRegular();
@@ -148,6 +186,10 @@ public class ListaManage {
         return lnd.isRegular();
     }
 
+    /**
+     * Verifica se o grafo eh completo
+     * @return true, se for completo, false, caso contrario
+     */
     public boolean isCompleto() {
         if(direcionado) {
             return ld.isCompleto();

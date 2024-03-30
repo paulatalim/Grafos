@@ -162,6 +162,11 @@ public class MatrizManage {
         }
     }
 
+    /**
+     * Verifica a vizinhaca do vertice
+     * @param id_vertice a ser analisado
+     * @return vetor de char (vertices adjacentes ao analisado) ou null (caso o grafo ser direcionado)
+     */
     public char[] verfica_vizinhos (char id_vertice) {
         if(direcionado){
            return null;
@@ -170,22 +175,30 @@ public class MatrizManage {
         }
     }
 
+    /**
+     * Verifica os sucessores de um vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices sucessores) ou null (caso o grafo nao ser direcionado)
+     */
     public char[] verifica_sucessores (char id_vertice){
         if(direcionado){
             char[] arraySucessores = md.verifica_sucessores(id_vertice);
             return arraySucessores;
-            
-        } else {
-            return null;
         }
+        return null;
     }
 
+    /**
+     * Verifica os predecessores de um vertice
+     * @param id_vertice a ser analisado
+     * @return vetor de char (vertices predecessores) ou null (caso o grafo nao ser direcionado)
+     */
     public char[] verifica_predecessores (char id_vertice){
         if(direcionado){
             char[] arrayPredecessores = md.verifica_predecessores(id_vertice);
             return arrayPredecessores;
-        } else { 
-            return null;
         }
+
+        return null;
     }
 }

@@ -37,9 +37,9 @@ public class No {
         return false;
     }
 
-    public boolean containsAresta(char id) {
-        return arestas.contains(id);
-    }
+    // public boolean containsAresta(char id) {
+    //     return arestas.contains(id);
+    // }
 
     /**
      * Encontra o id do vertice adjacente com o id dele na lista de arestas do vertice
