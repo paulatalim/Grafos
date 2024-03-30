@@ -52,6 +52,18 @@ public class MatrizManage {
     }
 
     /**
+     * Verifica se o grafo eh bipartido
+     * 
+     * @return true, se for bipartido, false, caso contrar
+     */
+    public boolean isBipartido () {
+        if(direcionado) {
+            return md.isGrafosBipartido();
+        }
+        return mnd.isGrafosBipartido();
+    }
+
+    /**
      * Verifica se um vertice existe
      * 
      * @param id do vertice a ser verificado
