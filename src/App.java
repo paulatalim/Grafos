@@ -3,6 +3,16 @@ import java.util.Scanner;
 import lista.ListaManage;
 import matriz.MatrizManage;
 
+/**
+ * PONTÍFICIA UNIVERSIDADE CATÓLICA DE MINAS GERAIS
+ * Trabalho acadêmico da Algoritmos em Grafos
+ * 
+ * @author Gabriel Luís Pinto Cecconello
+ * @author Paula Cristina Talim Gonçalves
+ * @author Rafael Vicente Souza E Paula
+ * 
+ * DATA DE CRIAÇÃO: 27 de fev. de 2024
+ */
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
