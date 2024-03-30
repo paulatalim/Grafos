@@ -28,11 +28,11 @@ Para uma melhor experiência com o programa, abra as configurações do VS Code 
 Para clonar o projeto abra seu prompt comando e coloque os seguintes comando
 
 ```
-git clone https://github.com/paulatalim/Grafos-Trabalho.git
+git clone https://github.com/paulatalim/Grafos.git
 ```
 
 ```
-cd Grafos-Trabalho
+cd Grafos
 ```
 
 > Obs: instale o [git](https://git-scm.com/) para rodar os comandos acima
