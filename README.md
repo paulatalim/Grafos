@@ -45,7 +45,7 @@ b. Abra o arquivo `App.java`, localizado na pasta `src`;
 
 c. Selecione a opção `Run Java`, localizado no canto superior direito do VS code.
 
-### Possíveis Erros
+## Possíveis Erros
 
 Ao tentar compilar o código, pode ocorrer um erro de compatibilidade com o `jdk`
 
