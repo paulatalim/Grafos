@@ -195,17 +195,13 @@ public class ListaDirecionada {
      * @return int (grau de saida do vertice)
      */
     public int calcularGrauSaida(char vertice) {
-        int grau = 0;
-        
         for (int i = 0; i < grafo.size(); i++) {
             if(grafo.get(i).getId() == vertice) {
-                for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                    grau ++;
-                }
+                return grafo.get(i).qnt_aresta();
             }
         }
 
-        return grau;
+        return -1;
     }
 
     /**
