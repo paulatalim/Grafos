@@ -400,7 +400,7 @@ public class App {
                                 graus = grafoMatriz.grau_vertice(resposta);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + graus[0]);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + graus[1]);
-                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + graus[1]);
+                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + (graus[0] + graus[1]));
                             } else {
                                 UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + "\n");
                             }
@@ -433,7 +433,7 @@ public class App {
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                         if(useAnaliseMatriz) {
-                            boolean simples = grafoMatriz.isGrafosSimples();
+                            boolean simples = grafoMatriz.isGrafosSimples(); 
                             boolean regular = grafoMatriz.isGrafosRegular();
                             boolean completo = grafoMatriz.isGrafosCompleto();
 
@@ -442,9 +442,9 @@ public class App {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isBipartido() ? "Sim" : "Não"));
                         } else {
-                            UI.println(UI.YELLOW + "\t" + " - Grafo simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
                         }
                     } else {
