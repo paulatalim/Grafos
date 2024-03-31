@@ -130,9 +130,15 @@ public class MatrizNaoDirecionada {
         int j = buscar_vertice(aresta.charAt(1));
 
         if(i >=0 && j >= 0 && grafo[i][j] != 0 && grafo[i][j] != 0) {
-            // Adiciona uma nova aresta
-            grafo[i][j] -= 1;
-            grafo[j][i] -= 1;
+            if(i != j) {
+                // Remove uma nova aresta
+                grafo[i][j] -= 1;
+                grafo[j][i] -= 1;
+            } else {
+                // Remove um laco
+                grafo[i][j] --;
+            }
+
             return true;
         }
 

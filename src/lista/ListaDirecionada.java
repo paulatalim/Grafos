@@ -140,7 +140,7 @@ public class ListaDirecionada {
 
         for (int i = 0; i < grafo.size(); i++) {
             for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                if(grafo.get(i).getAresta(j) == vertice) {
+                if(grafo.get(i).getAresta(j) == vertice && !predecessor.contains(grafo.get(i).getId())) {
                     predecessor.add(Character.valueOf(grafo.get(i).getId()));
                 }
             }
@@ -160,7 +160,9 @@ public class ListaDirecionada {
         for (int i = 0; i < grafo.size(); i++) {
             if(grafo.get(i).getId() == vertice) {
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                    sucessores.add(grafo.get(i).getAresta(j));
+                    if(!sucessores.contains(grafo.get(i).getAresta(j))) {
+                        sucessores.add(grafo.get(i).getAresta(j));
+                    }
                 }
             }
         }
