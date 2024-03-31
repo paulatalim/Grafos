@@ -8,6 +8,19 @@ public class MatrizDirecionada {
     private ArrayList<Character> vertices = new ArrayList<Character>();
 
     /**
+     * Cria a matriz a partir da lista de vértices.
+     */
+    private void initMatriz () {
+        int tamanho = vertices.size();
+        this.grafo = new int[tamanho][tamanho];
+        for(int i = 0; i < tamanho; i++) {
+            for(int j = 0; j < tamanho; j++) {
+                this.grafo[i][j] = 0;
+            }
+        }
+    }
+
+    /**
      * Verifica se um vertice existe
      * 
      * @param id do vertice a ser verificado
@@ -66,7 +79,7 @@ public class MatrizDirecionada {
         if(!isNoExist(id_vertice)) {
            // Adiciona o vertice a lista
            if(id_vertice != '0') vertices.add(id_vertice);
-           else criar_matriz();
+           else initMatriz();
         }
     }
 
@@ -104,19 +117,6 @@ public class MatrizDirecionada {
         }
 
         return false;
-    }
-
-    /**
-     * Cria a matriz a partir da lista de vértices.
-     */
-    private void criar_matriz () {
-        int tamanho = vertices.size();
-        this.grafo = new int[tamanho][tamanho];
-        for(int i = 0; i < tamanho; i++) {
-            for(int j = 0; j < tamanho; j++) {
-                this.grafo[i][j] = 0;
-            }
-        }
     }
 
     /**
@@ -186,6 +186,58 @@ public class MatrizDirecionada {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Confere se o grafo é bipartido ou não
+     * @return true se for, caso contrário, false
+     */
+    public boolean isGrafosBipartido() {
+        if(isGrafosEmpty()) {
+            return false;
+        }
+
+        // inicia um vetor do tamanho dos vértices existentes
+        int[] cores = new int[vertices.size()];
+
+        // associa "nenhuma cor" para cada vértice no vetor
+        for (int i = 1; i < cores.length; i++) {
+            cores[i] = -1;
+        }
+        
+        cores[0] = 1; // inicia o primeiro vértice com uma das duas cores
+
+        for (int i = 0; i < vertices.size(); i++) {
+            for (int j = 0; j < vertices.size(); j++) {
+                // Verifica se eh um laco
+                if(i == j && grafo[i][j] != 0) {
+                    return false;
+                }
+                // confere se há vinhanca
+                else if((grafo[i][j] != 0 || grafo[j][i] != 0) && i != j) {
+                    // tenta colorir o vértice vizinho com uma cor oposta a sua
+                    if(cores[i] == 0 && (cores[j] == -1 || cores[j] == 1)) {
+                        cores[j] = 1;
+                    }
+                    else if(cores[i] == 1 && (cores[j] == -1 || cores[j] == 0)) {
+                        cores[j] = 0;
+                    }
+                    // caso não consiga, já determina que o grafo não é bipartido
+                    else {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // Verifica se ha mais de uma componente no grafo
+        for(int i = 0; i < cores.length; i++) {
+            if(cores[i] == -1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

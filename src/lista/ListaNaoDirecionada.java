@@ -239,68 +239,51 @@ public class ListaNaoDirecionada {
         boolean[] isVerificado = new boolean[grafo.size()];
         byte color = 0;
         byte result;
-        boolean hasComponent = false;
-        boolean allIsVerificado = false;
 
         // Inicializa o mapeamento
-        for(int i = 0; i < grafo.size(); i++) {
+        for(int i = 1; i < grafo.size(); i++) {
             mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) -1);
             isVerificado[i] = false;
         }
 
         mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
             
-        while(!hasComponent && !allIsVerificado) {
-            
-            // Encontra o proximo vertice a ser vericado
-            for(int i = 0; i < grafo.size(); i++) {
-                if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) != (byte) -1 && !isVerificado[i]) {
-                    color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
-                    isVerificado[i] = true;
+        // Encontra o proximo vertice a ser vericado
+        for(int i = 0; i < grafo.size(); i++) {
+            color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
 
-                    if(color == 0) {
-                        color ++;
-                    } else {
-                        color = 0;
-                    }
+            if(color == 0) {
+                color ++;
+            } else if (color == 1) {
+                color = 0;
+            }
 
-                    for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                        result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
-        
-                        if(result == (byte) -1) {
-                            mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
-                        } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
-                            return false;
-                        }
-                    }
+            // verifica a vizinhanca
+            for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
 
-                    break;
+                // Verifica se ha laco
+                if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                    return false;
                 }
-            }
+                // Inicializa cor
+                else if(result == (byte) -1) {
+                    mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
 
-            hasComponent = true;
-
-            // Verifica se ha componente no grafo
-            for(int i = 0; i < grafo.size(); i++) {
-                if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) != -1 && !isVerificado[i]) {
-                    hasComponent = false;
-                    break;
-                }
-            }
-
-            if(hasComponent) {
-                return false;
-            }
-
-            allIsVerificado = true;
-
-            for(int i = isVerificado.length - 1; i >= 0; i--) {
-                if(!isVerificado[i]) {
-                    allIsVerificado = false;
-                    break;
+                // Caso a cor ser invalida
+                } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
+                    return false;
                 }
             }
         }
+
+        // Verifica se ha mais de uma componente no grafo
+        for (int i = 0; i < mapeamento.size(); i++) {
+            if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) == -1) {
+                return false;
+            }
+        }
+
         return true;
     }
 
