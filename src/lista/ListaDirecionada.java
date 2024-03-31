@@ -176,7 +176,17 @@ public class ListaDirecionada {
      * @return int (grau de entrada do vertice)
      */
     public int calcularGrauEntrada(char vertice) {
-        return encontrarPredecessores(vertice).length;
+        int grau = 0;
+
+        for (int i = 0; i < grafo.size(); i++) {
+            for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                if(grafo.get(i).getAresta(j) == vertice) {
+                    grau ++;
+                }
+            }
+        }
+
+        return grau;
     }
 
      /**
@@ -185,7 +195,17 @@ public class ListaDirecionada {
      * @return int (grau de saida do vertice)
      */
     public int calcularGrauSaida(char vertice) {
-        return encontrarSucessores(vertice).length;
+        int grau = 0;
+        
+        for (int i = 0; i < grafo.size(); i++) {
+            if(grafo.get(i).getId() == vertice) {
+                for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                    grau ++;
+                }
+            }
+        }
+
+        return grau;
     }
 
     /**
