@@ -91,8 +91,13 @@ public class ListaNaoDirecionada {
         int aux2 = buscar_vertice(aresta.charAt(1));
 
         if (aux1 >= 0 && aux2 >= 0) {
-            grafo.get(aux1).inserir_aresta(aresta.charAt(1));
-            grafo.get(aux2).inserir_aresta(aresta.charAt(0));
+            if(aux1 != aux2) {
+                grafo.get(aux1).inserir_aresta(aresta.charAt(1));
+                grafo.get(aux2).inserir_aresta(aresta.charAt(0));
+            } else {
+                // Adiciona uma laco
+                grafo.get(aux1).inserir_aresta(aresta.charAt(1));
+            }
             return true;
         }
 
@@ -161,6 +166,14 @@ public class ListaNaoDirecionada {
     public int calcularGrau(char vertice) {
         for(int i = 0; i < grafo.size(); i++) {
             if(grafo.get(i).getId() == vertice) {
+                
+                // Verifica se ha laco
+                for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                    if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                        return grafo.get(i).qnt_aresta() + 1;
+                    }
+                }
+
                 return grafo.get(i).qnt_aresta();
             }
         }
