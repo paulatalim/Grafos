@@ -246,20 +246,35 @@ public class ListaDirecionada {
     public boolean isCompleto() {
         if(isSimples()) {
             char vertice;
+            Boolean exist;
+
             for(int i = 0; i < grafo.size(); i++) {
                 vertice = grafo.get(i).getId();
+
+                // Verifica se o vertice possui aresta
+                if(calcularGrau(vertice) == 0) {
+                    return false;
+                }
 
                 // Verifica se o grau do vertice esta correto
                 if(calcularGrauEntrada(vertice) != calcularGrauSaida(vertice)) {
                     return false;
                 }
 
-                // Verifica se há aresta anti-paralela
+                
+
+                // Verifica os sucessores do vertices
                 for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                    for(int k = grafo.get(i).qnt_aresta() - 1; k > j; k--) {
-                        if(grafo.get(i).getAresta(j) == grafo.get(i).getAresta(k)) {
-                            return false;
+                    exist = false;
+
+                    for(int k = 0; k < grafo.size(); k++) {
+                        if(grafo.get(i).getAresta(j) == grafo.get(k).getId() && grafo.get(k).getId() != grafo.get(i).getId()) {
+                            exist = true;
                         }
+                    }
+
+                    if(!exist) {
+                        return false;
                     }
                 }
             }

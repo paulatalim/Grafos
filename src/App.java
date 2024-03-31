@@ -442,9 +442,9 @@ public class App {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isBipartido() ? "Sim" : "Não"));
                         } else {
-                            UI.println(UI.YELLOW + "\t" + " - Grafo simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
                         }
                     } else {
