@@ -115,8 +115,12 @@ public class ListaNaoDirecionada {
         int aux2 = buscar_vertice(aresta.charAt(1));
 
         if (aux1 >= 0 && aux2 >= 0) {
-            grafo.get(aux1).remover_aresta(aresta.charAt(1));
-            grafo.get(aux2).remover_aresta(aresta.charAt(0));
+            if(aux1 != aux2) {
+                grafo.get(aux1).remover_aresta(aresta.charAt(1));
+                grafo.get(aux2).remover_aresta(aresta.charAt(0));
+            } else {
+                grafo.get(aux2).remover_aresta(aresta.charAt(0));
+            }
             return true;
         }
 
