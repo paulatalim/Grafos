@@ -150,7 +150,9 @@ public class ListaNaoDirecionada {
         for(int i = 0; i < grafo.size(); i++) {
             if(grafo.get(i).getId() == vertice) {
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                    vizinhos.add(grafo.get(i).getAresta(j));
+                    if(!vizinhos.contains(grafo.get(i).getAresta(j))) {
+                        vizinhos.add(grafo.get(i).getAresta(j));
+                    }
                 }
             }
         }
