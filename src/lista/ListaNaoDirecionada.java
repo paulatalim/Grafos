@@ -164,17 +164,21 @@ public class ListaNaoDirecionada {
      * @return int (grau do vertice)
      */
     public int calcularGrau(char vertice) {
+        int grau = 0;
+
         for(int i = 0; i < grafo.size(); i++) {
             if(grafo.get(i).getId() == vertice) {
                 
                 // Verifica se ha laco
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
                     if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
-                        return grafo.get(i).qnt_aresta() + 1;
+                        grau += 2;
+                    } else {
+                        grau ++;
                     }
                 }
 
-                return grafo.get(i).qnt_aresta();
+                return grau;
             }
         }
 
