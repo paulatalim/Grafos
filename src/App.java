@@ -24,7 +24,7 @@ public class App {
         int opcao;
         char resposta;
         int cont;
-        // boolean useAnaliseMatriz;
+        boolean useAnaliseMatriz = true;;
 
         // Valida a resposta do usuario
         do {
@@ -51,42 +51,42 @@ public class App {
             }
         } while (opcao_invalida);
 
-        // UI.limpar_console();
+        UI.limpar_console();
 
         // Selecao do metodo de analise
-        // do {
-        //     UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** " + "grafos".toUpperCase() + " ***  ");
-        //     UI.print(UI.BLACK_BACKGROUND + UI.PURPLE + "\t\t\t\t\t  Seja bem vindo!\n\n\n");
+        do {
+            UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** " + "grafos".toUpperCase() + " ***  ");
+            UI.print(UI.BLACK_BACKGROUND + UI.PURPLE + "\t\t\t\t\t  Seja bem vindo!\n\n\n");
 
-        //     UI.println(UI.GREEN + "\tInformações do grafo:");
+            UI.println(UI.GREEN + "\tInformações do grafo:");
 
-        //     if(grafoLista.isDirecionado()) {
-        //         UI.print("\t - Grafo Direcionado");
-        //     } else {
-        //         UI.print("\t - Grafo Não Direcionado");
-        //     }
+            if(grafoLista.isDirecionado()) {
+                UI.print("\t - Grafo Direcionado");
+            } else {
+                UI.print("\t - Grafo Não Direcionado");
+            }
 
-        //     UI.println("\n\n");
+            UI.println("\n\n");
 
-        //     UI.print(UI.YELLOW + "\tPara a análise do grafo, você deseja utilizar os métodos de qual classe?\n\n");
-        //     UI.print("\t1 - Matriz de Adjacência\n"
-        //             + "\t2 - Lista de Adjacência\n\n");
+            UI.print(UI.YELLOW + "\tPara a análise do grafo, você deseja utilizar os métodos de qual classe?\n\n");
+            UI.print("\t1 - Matriz de Adjacência\n"
+                    + "\t2 - Lista de Adjacência\n\n");
 
-        //     UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
-        //     resposta = scanner.next().toLowerCase().charAt(0);
+            UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
+            resposta = scanner.next().toLowerCase().charAt(0);
 
-        //     if (resposta == '1') {
-        //         useAnaliseMatriz = true;
-        //         opcao_invalida = false;
-        //     } else if (resposta == '2') {
-        //         useAnaliseMatriz = false;
-        //         opcao_invalida = false;
-        //     } else {
-        //         UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
-        //         opcao_invalida = true;
-        //         UI.exibir_fim_tela();
-        //     }
-        // } while (opcao_invalida);
+            if (resposta == '1') {
+                useAnaliseMatriz = true;
+                opcao_invalida = false;
+            } else if (resposta == '2') {
+                useAnaliseMatriz = false;
+                opcao_invalida = false;
+            } else {
+                UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
+                opcao_invalida = true;
+                UI.exibir_fim_tela();
+            }
+        } while (opcao_invalida);
 
         UI.exibir_fim_tela();
 
@@ -279,75 +279,50 @@ public class App {
                         resposta = scanner.next().charAt(0);
                         UI.println("");
 
-                        // String separacao = "";
-                        // char[] array;
+                        String separacao = "";
+                        char[] array;
 
-                        // if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
-                        //     array = grafoMatriz.verifica_sucessores(resposta);
-
-                        //     UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
-                        //     for (int i = 0; i < array.length; i++) {
-                        //         UI.print(separacao);
-                        //         UI.print(String.valueOf(array[i]));
-                        //         separacao = ", ";
-                        //     }
-                        //     UI.print(" ]\n\n");
-
-                        //     separacao = "";
-                        //     array = grafoMatriz.verifica_predecessores(resposta);
-
-                        //     UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
-                        //     for (int i = 0; i < array.length; i++) {
-                        //         UI.print(separacao);
-                        //         UI.print(String.valueOf(array[i]));
-                        //         separacao = ", ";
-                        //     }
-                        //     UI.print(" ]");
-                        
-                        // } else if (grafoLista.isVerticeExist(resposta)) {
-                        //     array = grafoLista.encontrarSucessores(resposta);
-
-                        //     UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
-                        //     for (int i = 0; i < array.length; i++) {
-                        //         UI.print(separacao);
-                        //         UI.print(String.valueOf(array[i]));
-                        //         separacao = ", ";
-                        //     }
-                        //     UI.print(" ]\n\n");
-
-                        //     separacao = "";
-                        //     array = grafoLista.encontrarPredecessores(resposta);
-
-                        //     UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
-                        //     for (int i = 0; i < array.length; i++) {
-                        //         UI.print(separacao);
-                        //         UI.print(String.valueOf(array[i]));
-                        //         separacao = ", ";
-                        //     }
-                        //     UI.print(" ]");
-                        // }
-
-                        // Valida o vértice
-                        if (grafoLista.isVerticeExist(resposta)) {
-                            String separacao = "";
-                            char[] arraySucessores = grafoMatriz.verifica_sucessores(resposta);
+                        if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
+                            array = grafoMatriz.verifica_sucessores(resposta);
 
                             UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
-                            for (int i = 0; i < arraySucessores.length; i++) {
+                            for (int i = 0; i < array.length; i++) {
                                 UI.print(separacao);
-                                UI.print(String.valueOf(arraySucessores[i]));
+                                UI.print(String.valueOf(array[i]));
                                 separacao = ", ";
                             }
                             UI.print(" ]\n\n");
 
-                            String separacaoPredecessores = "";
-                            char[] arrayPredecessores = grafoMatriz.verifica_predecessores(resposta);
+                            separacao = "";
+                            array = grafoMatriz.verifica_predecessores(resposta);
 
                             UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
-                            for (int i = 0; i < arrayPredecessores.length; i++) {
-                                UI.print(separacaoPredecessores);
-                                UI.print(String.valueOf(arrayPredecessores[i]));
-                                separacaoPredecessores = ", ";
+                            for (int i = 0; i < array.length; i++) {
+                                UI.print(separacao);
+                                UI.print(String.valueOf(array[i]));
+                                separacao = ", ";
+                            }
+                            UI.print(" ]");
+                        
+                        } else if (grafoLista.isVerticeExist(resposta)) {
+                            array = grafoLista.encontrarSucessores(resposta);
+
+                            UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                            for (int i = 0; i < array.length; i++) {
+                                UI.print(separacao);
+                                UI.print(String.valueOf(array[i]));
+                                separacao = ", ";
+                            }
+                            UI.print(" ]\n\n");
+
+                            separacao = "";
+                            array = grafoLista.encontrarPredecessores(resposta);
+
+                            UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                            for (int i = 0; i < array.length; i++) {
+                                UI.print(separacao);
+                                UI.print(String.valueOf(array[i]));
+                                separacao = ", ";
                             }
                             UI.print(" ]");
 
@@ -365,39 +340,23 @@ public class App {
                         resposta = scanner.next().charAt(0);
                         UI.println("");
 
-                        // String separacao;
-                        // char[] arrayVizinhos;
+                        String separacao;
+                        char[] arrayVizinhos;
 
-                        // if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
-                        //     separacao = "";
-                        //     arrayVizinhos = grafoMatriz.verfica_vizinhos(resposta);
-                        //     UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN + "\n\t[ ");
-                        //     for (int i = 0; i < arrayVizinhos.length; i++) {
-                        //         UI.print(separacao);
-                        //         UI.print(String.valueOf(arrayVizinhos[i]));
-                        //         separacao = ", ";
-                        //     }
-                        //     UI.print(" ]");
+                        if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
+                            separacao = "";
+                            arrayVizinhos = grafoMatriz.verfica_vizinhos(resposta);
+                            UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN + "\n\t[ ");
+                            for (int i = 0; i < arrayVizinhos.length; i++) {
+                                UI.print(separacao);
+                                UI.print(String.valueOf(arrayVizinhos[i]));
+                                separacao = ", ";
+                            }
+                            UI.print(" ]");
                         
-                        // } else if (grafoLista.isVerticeExist(resposta)) {
-                        //     separacao = "";
-                        //     arrayVizinhos = grafoLista.vizinhaca(resposta);
-                        //     UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN + "\n\t[ ");
-                        //     for (int i = 0; i < arrayVizinhos.length; i++) {
-                        //         UI.print(separacao);
-                        //         UI.print(String.valueOf(arrayVizinhos[i]));
-                        //         separacao = ", ";
-                        //     }
-                        //     UI.print(" ]");
-
-                        // } else {
-                        //     UI.println(UI.RED + "\t" + "Vértice inválido." + "\n");
-                        // }
-
-                        // Valida o vértice
-                        if (grafoLista.isVerticeExist(resposta)) {
-                            String separacao = "";
-                            char[] arrayVizinhos = grafoMatriz.verfica_vizinhos(resposta);
+                        } else if (grafoLista.isVerticeExist(resposta)) {
+                            separacao = "";
+                            arrayVizinhos = grafoLista.vizinhaca(resposta);
                             UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN + "\n\t[ ");
                             for (int i = 0; i < arrayVizinhos.length; i++) {
                                 UI.print(separacao);
@@ -434,10 +393,11 @@ public class App {
                         resposta = scanner.next().charAt(0);
                         UI.println("");
 
-                        // Valida o vértice
-                        if (grafoLista.isVerticeExist(resposta) && grafoMatriz.isVerticeExist(resposta)) {
+                        if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
                             int[] graus = grafoMatriz.grau_vertice(resposta);
-                            if (grafoLista.isDirecionado() && grafoMatriz.isDirecionado()) {
+
+                            if(grafoMatriz.isDirecionado()) {
+                                graus = grafoMatriz.grau_vertice(resposta);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + graus[0]);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + graus[1]);
                                 UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + graus[1]);
@@ -445,25 +405,14 @@ public class App {
                                 UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + "\n");
                             }
 
-                            // if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
-                            //     if(grafoMatriz.isDirecionado()) {
-                            //         int[] graus = grafoMatriz.grau_vertice(resposta);
-                            //         UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + graus[0]);
-                            //         UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + graus[1]);
-                            //         UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + graus[1]);
-                            //     } else {
-                            //         UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + "\n");
-                            //     }
-
-                            // } else if(grafoLista.isVerticeExist(resposta)) {
-                            //     if(grafoLista.isDirecionado()) {
-                            //         UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + grafoLista.calcularGrauSaida(resposta));
-                            //         UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + grafoLista.calcularGrauEntrada(resposta));
-                            //         UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta));
-                            //     } else {
-                            //         UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta) + "\n");
-                            //     }
-                            // }
+                        } else if(grafoLista.isVerticeExist(resposta)) {
+                            if(grafoLista.isDirecionado()) {
+                                UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + grafoLista.calcularGrauSaida(resposta));
+                                UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + grafoLista.calcularGrauEntrada(resposta));
+                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta));
+                            } else {
+                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta) + "\n");
+                            }
 
                         } else {
                             UI.println(UI.RED + "\t" + "Vértice inválido." + "\n");
@@ -483,32 +432,21 @@ public class App {
                         // Exibe cabecalho da pagina
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
 
-                        boolean simples = grafoMatriz.isGrafosSimples();
-                        boolean regular = grafoMatriz.isGrafosRegular();
-                        boolean completo = grafoMatriz.isGrafosCompleto();
+                        if(useAnaliseMatriz) {
+                            boolean simples = grafoMatriz.isGrafosSimples();
+                            boolean regular = grafoMatriz.isGrafosRegular();
+                            boolean completo = grafoMatriz.isGrafosCompleto();
 
-                        UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (simples ? "Sim" : "Não"));
-                        UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
-                        UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
-                        UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isBipartido() ? "Sim" : "Não"));
-                        UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
-
-                        // if(useAnaliseMatriz) {
-                        //     boolean simples = grafoMatriz.isGrafosSimples();
-                        //     boolean regular = grafoMatriz.isGrafosRegular();
-                        //     boolean completo = grafoMatriz.isGrafosCompleto();
-
-                        //     UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (simples ? "Sim" : "Não"));
-                        //     UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
-                        //     UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
-
-                        //     // TODO colocar analise se eh bipartido
-                        // } else {
-                        //     UI.println(UI.YELLOW + "\t" + " - Grafo simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
-                        //     UI.println(UI.YELLOW + "\t" + " - Grafo regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
-                        //     UI.println(UI.YELLOW + "\t" + " - Grafo completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
-                        //     UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
-                        // }
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (simples ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isBipartido() ? "Sim" : "Não"));
+                        } else {
+                            UI.println(UI.YELLOW + "\t" + " - Grafo simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
+                        }
                     } else {
                         // Caso o grafo esteja vazio
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t*** CLASSIFICAÇÃO DO GRAFO ***\n\n\n");
@@ -523,7 +461,7 @@ public class App {
 
                     do {
                         // Pergunta se o grafo é ou não direcionado
-                        UI.print(UI.BLUE_BACKGROUND + UI.BLACK +"\n\t\t\t\t\t*** NOVO GRAFO ***\n\n\n"
+                        UI.print(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** NOVO GRAFO ***   \n\n\n"
                                 + UI.BLACK_BACKGROUND + UI.YELLOW + "\tO novo grafo é direcionado? (s/n)" + UI.CYAN +"\n\n\tResposta: " + UI.WHITE);
                         resposta = scanner.next().toLowerCase().charAt(0);
             
@@ -541,39 +479,39 @@ public class App {
                         }
                     } while (opcao_invalida);
 
-                    // UI.limpar_console();
+                    UI.limpar_console();
 
-                    // do {
-                    //     UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** NOVO GRAFO ***  ");
-                    //     UI.println(UI.BLACK_BACKGROUND + UI.GREEN + "\tInformações do grafo:");
+                    do {
+                        UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** NOVO GRAFO ***  ");
+                        UI.println(UI.BLACK_BACKGROUND + UI.GREEN + "\tInformações do grafo:");
             
-                    //     if(grafoLista.isDirecionado()) {
-                    //         UI.print("\t - Grafo Direcionado");
-                    //     } else {
-                    //         UI.print("\t - Grafo Não Direcionado");
-                    //     }
+                        if(grafoLista.isDirecionado()) {
+                            UI.print("\t - Grafo Direcionado");
+                        } else {
+                            UI.print("\t - Grafo Não Direcionado");
+                        }
             
-                    //     UI.println("\n\n");
+                        UI.println("\n\n");
             
-                    //     UI.print(UI.YELLOW + "\tPara a análise do grafo, você deseja utilizar os métodos de qual classe?\n\n");
-                    //     UI.print("\t1 - Matriz de Adjacência\n"
-                    //             + "\t2 - Lista de Adjacência\n\n");
+                        UI.print(UI.YELLOW + "\tPara a análise do grafo, você deseja utilizar os métodos de qual classe?\n\n");
+                        UI.print("\t1 - Matriz de Adjacência\n"
+                                + "\t2 - Lista de Adjacência\n\n");
             
-                    //     UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
-                    //     resposta = scanner.next().toLowerCase().charAt(0);
+                        UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
+                        resposta = scanner.next().toLowerCase().charAt(0);
             
-                    //     if (resposta == '1') {
-                    //         useAnaliseMatriz = true;
-                    //         opcao_invalida = false;
-                    //     } else if (resposta == '2') {
-                    //         useAnaliseMatriz = false;
-                    //         opcao_invalida = false;
-                    //     } else {
-                    //         UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
-                    //         opcao_invalida = true;
-                    //         UI.exibir_fim_tela();
-                    //     }
-                    // } while (opcao_invalida);
+                        if (resposta == '1') {
+                            useAnaliseMatriz = true;
+                            opcao_invalida = false;
+                        } else if (resposta == '2') {
+                            useAnaliseMatriz = false;
+                            opcao_invalida = false;
+                        } else {
+                            UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
+                            opcao_invalida = true;
+                            UI.exibir_fim_tela();
+                        }
+                    } while (opcao_invalida);
                     break;
                 case 0:
                     UI.println(UI.YELLOW + "Desligando sistema ...\n\n\n"
