@@ -228,10 +228,15 @@ public class ListaDirecionada {
             return false;
         }
 
-        int grauAtual = calcularGrau(grafo.get(0).getId());
-
+        char verticeAux;
+        char vertice = grafo.get(0).getId();
+        int grauEntrada = calcularGrauEntrada(vertice);
+        int grauSaida = calcularGrauSaida(vertice);
+        
         for(int i = 1; i < grafo.size(); i++) {
-            if(calcularGrau(grafo.get(i).getId()) != grauAtual) {
+            verticeAux = grafo.get(i).getId();
+
+            if(grauEntrada != calcularGrauEntrada(verticeAux) || grauSaida != calcularGrauSaida(verticeAux)) {
                 return false;
             }
         }
@@ -246,8 +251,7 @@ public class ListaDirecionada {
     public boolean isCompleto() {
         if(isSimples()) {
             char vertice;
-            Boolean exist;
-
+            boolean exist;
             for(int i = 0; i < grafo.size(); i++) {
                 vertice = grafo.get(i).getId();
 
@@ -261,9 +265,8 @@ public class ListaDirecionada {
                     return false;
                 }
 
-                
-
-                // Verifica os sucessores do vertices
+                exist = true;
+                // Verifica se há aresta
                 for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
                     exist = false;
 

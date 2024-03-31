@@ -118,7 +118,7 @@ public class ListaManage {
      */
     public int calcularGrauEntrada(char vertice) {
         if(direcionado) {
-            ld.calcularGrauEntrada(vertice);
+            return ld.calcularGrauEntrada(vertice);
         }
 
         return -1;
@@ -131,7 +131,7 @@ public class ListaManage {
      */
     public int calcularGrauSaida(char vertice) {
         if(direcionado) {
-            ld.calcularGrauSaida(vertice);
+            return ld.calcularGrauSaida(vertice);
         }
 
         return -1;
