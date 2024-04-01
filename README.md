@@ -41,13 +41,14 @@ cd Grafos
 
 Para evitar erros de versões no `jdk`, compile o código. Para isso, siga as orientações:
 
-a. Abra a pasta do projeto no `command prompt`
+a. Abra a pasta do projeto no `command prompt`;
 
 b. Insira os seguintes comandos no terminal:
 
     ```
     cd src
     ```
+    
     ```
     javac App.java -d ../bin
     ```
@@ -59,25 +60,6 @@ a. Abra o projeto em seu VS Code;
 b. Abra o arquivo `App.java`, localizado na pasta `src`;
 
 c. Selecione a opção `Run Java`, localizado no canto superior direito do VS code.
-
-## Possíveis Erros
-
-Ao tentar compilar o código, pode ocorrer um erro de compatibilidade com o `jdk`
-
-Para resolver esse problema siga as seguintes instruções:
-
-1. Abra a pasta do projeto no `command prompt`
-
-2. Insira os seguintes comandos no terminal:
-
-    ```
-    cd src
-    ```
-    ```
-    javac App.java -d ../bin
-    ```
-
-3. Volte para o VS Code e refaça o [Passo 3](#3-rodar-o-programa)
 
 ## Créditos
 
