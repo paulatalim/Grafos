@@ -9,6 +9,7 @@ import java.util.Queue;
 
 public class ListaDirecionada {
     private List<No> grafo;
+    private boolean ponderado;
 
     ListaDirecionada () {
         grafo = new ArrayList<No>();
@@ -100,6 +101,24 @@ public class ListaDirecionada {
     }
 
     /**
+     * Adiciona uma aresta do grafo
+     * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
+     * @param peso da aresta
+     * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
+     */
+    public boolean inserir_aresta(String aresta, int peso) {
+        int aux = buscar_vertice(aresta.charAt(0));
+
+        if(aux >= 0 && buscar_vertice(aresta.charAt(1)) >= 0) {
+            // Adiciona uma nova aresta
+            grafo.get(aux).inserir_aresta(aresta.charAt(1), peso);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Remove uma aresta do grafo
      * @param aresta a ser retirada (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
@@ -112,6 +131,20 @@ public class ListaDirecionada {
         }
 
         // Caso nao encontrar a aresta
+        return false;
+    }
+
+    /**
+     * Atualiza o Peso de uma aresta
+     * 
+     * @param aresta que o peso vai ser atualizado
+     * @param newPeso o novo peso da aresta
+     * @return true (caso a atualizacao ocorrer com sucesso) ou false (caso ocorrer algum erro)
+     */
+    public boolean atualizarPeso(String aresta, int newPeso) {
+        if(ponderado) {
+            return grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso);
+        }
         return false;
     }
 
@@ -456,6 +489,23 @@ public class ListaDirecionada {
 
             System.out.println(" ]");
         }
+    }
+
+    /**
+     * Se o Grafo eh poderado
+     * @param isPonderado
+     */
+    public void setIsPonderado(boolean isPonderado) {
+        this.ponderado = isPonderado;
+    }
+
+    /**
+     * Se o grafo eh poderado
+     * 
+     * @return true ou false
+     */
+    public boolean isPonderado() {
+        return ponderado;
     }
 
     /**

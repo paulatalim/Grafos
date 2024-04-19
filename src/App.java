@@ -53,6 +53,44 @@ public class App {
 
         UI.limpar_console();
 
+        // Configura se o grafo eh ponderado
+        do {
+            // Pergunta se o grafo é ou não direcionado
+            UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** " + "grafos".toUpperCase() + " ***  ");
+            UI.print(UI.BLACK_BACKGROUND + UI.PURPLE + "\t\t\t\t\t  Seja bem vindo!\n\n\n");
+            
+            UI.println(UI.GREEN + "\tInformações do grafo:");
+
+            if(grafoLista.isDirecionado()) {
+                UI.print("\t - Grafo Direcionado");
+            } else {
+                UI.print("\t - Grafo Não Direcionado");
+            }
+
+            UI.println("\n\n");
+
+            UI.print(UI.YELLOW + UI.BLACK_BACKGROUND + "\tO grafo é ponderado? (s/n)\n\n");
+            UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
+            resposta = scanner.next().toLowerCase().charAt(0);
+
+            if (resposta == 's') {
+                grafoLista.setIsPonderado(true);
+                // grafoMatriz.setIsDirecionado(true);
+                opcao_invalida = false;
+            } else if (resposta == 'n') {
+                grafoLista.setIsPonderado(false);
+                //TODO setar grafo ponderado
+                // grafoMatriz.setIsDirecionado(false);
+                opcao_invalida = false;
+            } else {
+                UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
+                opcao_invalida = true;
+                UI.exibir_fim_tela();
+            }
+        } while (opcao_invalida);
+
+        UI.limpar_console();
+
         // Selecao do metodo de analise
         do {
             UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** " + "grafos".toUpperCase() + " ***  ");
@@ -60,10 +98,16 @@ public class App {
 
             UI.println(UI.GREEN + "\tInformações do grafo:");
 
-            if(grafoLista.isDirecionado()) {
-                UI.print("\t - Grafo Direcionado");
+            if (grafoLista.isDirecionado()) {
+                UI.println("\t - Grafo Direcionado");
             } else {
-                UI.print("\t - Grafo Não Direcionado");
+                UI.println("\t - Grafo Não Direcionado");
+            }
+
+            if (grafoLista.isPonderado()) {
+                UI.print("\t - Grafo ponderado");
+            } else {
+                UI.print("\t - Grafo não ponderado");
             }
 
             UI.println("\n\n");
@@ -111,7 +155,7 @@ public class App {
                             + "\t" + "4 - Adicionar arestas" + "\n"
                             + "\t" + "5 - Remover aresta" + "\n\n");
 
-                UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\t" + " ANÁLISE   " + "\n");
+                UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\t" + " ANÁLISE   ");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
 
                 if (grafoLista.isDirecionado()) {
@@ -120,11 +164,21 @@ public class App {
                     UI.print("\t" + "6 - Identificar vizinhaça de um vértice\n");
                 }
 
-                UI.print("\t" + "7 - Identificar grau de um vértice" + "\n"
-                            + "\t" + "8 - Analisar e classificar grafo" + "\n\n");
+                UI.print("\t" + "7 - Identificar grau de um vértice" + "\n");
+                UI.print("\t" + "8 - Calcular distancia entre dois vértices" + "\n");
+                UI.print("\t" + "9 - Analisar e classificar grafo" + "\n\n");
+                
+                UI.println(UI.BLUE_BACKGROUND + UI.BLACK + "\t" + " ALGORITMOS DE BUSCA E ÁRVORE   ");
+                UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
+                UI.println("\t" + "10 - Realizar Busca em Largura");
+                UI.print("\t" + "11 - Realizar Busca em Profundidade");
+                
+                if(grafoLista.isPonderado()) {
+                    UI.print("\n\t" + "12 - Gerar Árvore Geradora Mínima");
+                }
 
-                UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\t" + " OUTROS   " + "\n");
-                UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "9 - Criar novo grafo" + "\n"
+                UI.print(UI.PURPLE_BACKGROUND + UI.BLACK + "\n\n\t" + " OUTROS   " + "\n");
+                UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "13 - Criar novo grafo" + "\n"
                                     + "\t" + "0 - SAIR" + "\n");
                 
                 if (opcao_invalida) {
@@ -137,7 +191,7 @@ public class App {
                 opcao_invalida = true;
 
                 // Valida a resposta do usuario
-            } while (opcao < 0 || opcao > 9);
+            } while (opcao < 0 || opcao > 13 || (!grafoLista.isPonderado() && opcao == 12));
 
             switch (opcao) {
                 case 1:
@@ -424,7 +478,12 @@ public class App {
                     }
 
                     break;
+                   
                 case 8:
+                    // Calcular distancia entre dois vértices 
+                    break;
+
+                case 9:
                     // Analisa e classifica o grafo
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
@@ -441,11 +500,13 @@ public class App {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isBipartido() ? "Sim" : "Não"));
+                            // TODO testar se o grafo eh conexo
                         } else {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
+                            // TODO testar se o grafo eh conexo
                         }
                     } else {
                         // Caso o grafo esteja vazio
@@ -454,7 +515,20 @@ public class App {
                     }
 
                     break;
-                case 9:
+
+                case 10:
+                    // Busca em Largura
+                    break;
+                
+                case 11:
+                    // Busca em Profundidade
+                    break;
+                
+                case 12:
+                    // AGM
+                    break;
+                
+                case 13:
                     // Cria novo grafo
 
                     opcao_invalida = true;
@@ -481,6 +555,42 @@ public class App {
 
                     UI.limpar_console();
 
+                    // Configura se o grafo eh ponderado
+                    do {
+                        // Pergunta se o grafo é ou não direcionado
+                        UI.print(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** NOVO GRAFO ***   \n\n\n");
+                        UI.println(UI.BLACK_BACKGROUND + UI.GREEN + "\tInformações do grafo:");
+
+                        if(grafoLista.isDirecionado()) {
+                            UI.print("\t - Grafo Direcionado");
+                        } else {
+                            UI.print("\t - Grafo Não Direcionado");
+                        }
+
+                        UI.println("\n\n");
+
+                        UI.print(UI.YELLOW + UI.BLACK_BACKGROUND + "\tO grafo é ponderado? (s/n)\n\n");
+                        UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
+                        resposta = scanner.next().toLowerCase().charAt(0);
+
+                        if (resposta == 's') {
+                            grafoLista.setIsPonderado(true);
+                            // grafoMatriz.setIsDirecionado(true);
+                            opcao_invalida = false;
+                        } else if (resposta == 'n') {
+                            grafoLista.setIsPonderado(false);
+                            //TODO setar grafo ponderado
+                            // grafoMatriz.setIsDirecionado(false);
+                            opcao_invalida = false;
+                        } else {
+                            UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
+                            opcao_invalida = true;
+                            UI.exibir_fim_tela();
+                        }
+                    } while (opcao_invalida);
+
+                    UI.limpar_console();
+
                     do {
                         UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** NOVO GRAFO ***  ");
                         UI.println(UI.BLACK_BACKGROUND + UI.GREEN + "\tInformações do grafo:");
@@ -489,6 +599,12 @@ public class App {
                             UI.print("\t - Grafo Direcionado");
                         } else {
                             UI.print("\t - Grafo Não Direcionado");
+                        }
+
+                        if (grafoLista.isPonderado()) {
+                            UI.print("\t - Grafo ponderado");
+                        } else {
+                            UI.print("\t - Grafo não ponderado");
                         }
             
                         UI.println("\n\n");

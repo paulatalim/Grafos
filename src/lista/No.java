@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class No {
     private char id;
     private List<Character> arestas;
+    private List<Integer> pesos;
 
     public No (char id) {
         this.id = id;
-        arestas = new ArrayList<Character>();;
+        arestas = new ArrayList<Character>();
+        pesos = new ArrayList<Integer>();
     }
 
     /**
@@ -19,6 +21,18 @@ public class No {
      */
     public void inserir_aresta(char vertice_adjacente) {
         arestas.add(vertice_adjacente);
+        pesos.add(1);
+    }
+
+    /**
+     * Adiciona nova aresta ao vertice
+     * 
+     * @param vertice_adjacente que deseja criar uma aresta
+     * @param peso da aresta
+     */
+    public void inserir_aresta(char vertice_adjacente, int peso) {
+        arestas.add(vertice_adjacente);
+        pesos.add(peso);
     }
 
     /**
@@ -31,6 +45,7 @@ public class No {
         for(int i = 0; i < arestas.size(); i++) {
             if(arestas.get(i) == vertice_adjacente) {
                 arestas.remove(arestas.indexOf(vertice_adjacente));
+                pesos.remove(arestas.indexOf(vertice_adjacente));
                 return true;
             }
         }
@@ -45,6 +60,32 @@ public class No {
      */
     public char getAresta (int id) {
         return arestas.get(id);
+    }
+
+    /**
+     * Encontra o peso da aresta do vertice adjacente
+     * 
+     * @param id do vertice adjacente na lista
+     * @return peso da aresta
+     */
+    public int getPeso (int id) {
+        return pesos.get(id);
+    }
+
+    /**
+     * Atualiza o peso de uma aresta
+     * 
+     * @param id do vertice adjacente
+     * @param newPeso novo peso da aresta
+     * @return true (se foi atualizado com sucesso) ou false (ocorreu algum erro)
+     */
+    public boolean updatePeso(char id, int newPeso) {
+        if(newPeso > 0) {
+            pesos.set(arestas.indexOf(id), newPeso);
+            return true;
+        }
+
+        return false;
     }
 
     /**

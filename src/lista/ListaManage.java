@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ListaManage {
     private boolean direcionado;
+    private boolean ponderado;
     private ListaDirecionada ld;
     private ListaNaoDirecionada lnd;
 
@@ -219,6 +220,29 @@ public class ListaManage {
         } else {
             lnd.exibir_lista();
         }
+    }
+
+    /**
+     * Se o Grafo eh poderado
+     * @param isPonderado
+     */
+    public void setIsPonderado(boolean isPonderado) {
+        this.ponderado = isPonderado;
+
+        if(direcionado) {
+            ld.setIsPonderado(isPonderado);
+        } else {
+            lnd.setIsPonderado(isPonderado);
+        }
+    }
+
+    /**
+     * Se o grafo eh poderado
+     * 
+     * @return true ou false
+     */
+    public boolean isPonderado() {
+        return ponderado;
     }
 
     /**
