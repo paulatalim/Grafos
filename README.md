@@ -45,13 +45,13 @@ a. Abra a pasta do projeto no `command prompt`;
 
 b. Insira os seguintes comandos no terminal:
 
-    ```
-    cd src
-    ```
-    
-    ```
-    javac App.java -d ../bin
-    ```
+```
+cd src
+```
+
+```
+javac App.java -d ../bin
+```
 
 ### 4. Rodar o programa
 
