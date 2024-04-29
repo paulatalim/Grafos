@@ -21,21 +21,6 @@ public class MatrizDirecionada {
     }
 
     /**
-     * Verifica se um vertice existe
-     * 
-     * @param id do vertice a ser verificado
-     * @return true, se o vertice existir, false, caso contrario
-     */
-    public boolean isNoExist(char id) {
-        // Encontra o vertice no grafo
-        if(vertices.contains(id)) {
-            return true;
-        }
-        
-        return false;
-    }
-
-    /**
      * Encontra um vertice no grafo
      * @param id do vertice a ser procurado
      * @return indice na lista no grafo
@@ -48,28 +33,22 @@ public class MatrizDirecionada {
         }
         return -1;
     }
-
+    
     /**
-     * Recebe o ID de um vértice e calcula os seus graus
-     * @param id_vertice
-     * @return vetor de inteiros representando os graus de saída e de entrada do vértice
+     * Converte uma List<Character> para um vertor de char
+     * @param list - lista a ser convertida
+     * @return Array de caracteres
      */
-    public int[] grau_vertice (char id_vertice) {
-        int[] graus = new int[2];
-        int indexNo = buscar_vertice(id_vertice);
-
-        for(int i = 0; i < vertices.size(); i++) {
-            if(grafo[indexNo][i] != 0) {
-                graus[0] += grafo[indexNo][i];
-            }
-            if(grafo[i][indexNo] != 0) {
-                graus[1] += grafo[i][indexNo];
-            }
+    private char[] toArrayChar(List<Character> list) {
+        char[] vetor = new char[list.size()];
+        
+        for(int i = 0; i < list.size(); i++) {
+            vetor[i] = Character.valueOf(list.get(i));
         }
 
-        return graus;
+        return vetor;
     }
-    
+
     /**
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
@@ -117,6 +96,80 @@ public class MatrizDirecionada {
         }
 
         return false;
+    }
+
+    /**
+     * Verifica se um vertice existe
+     * 
+     * @param id do vertice a ser verificado
+     * @return true, se o vertice existir, false, caso contrario
+     */
+    public boolean isNoExist(char id) {
+        // Encontra o vertice no grafo
+        if(vertices.contains(id)) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
+     * Recebe o ID de um vértice e calcula os seus graus
+     * @param id_vertice
+     * @return vetor de inteiros representando os graus de saída e de entrada do vértice
+     */
+    public int[] grau_vertice (char id_vertice) {
+        int[] graus = new int[2];
+        int indexNo = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i++) {
+            if(grafo[indexNo][i] != 0) {
+                graus[0] += grafo[indexNo][i];
+            }
+            if(grafo[i][indexNo] != 0) {
+                graus[1] += grafo[i][indexNo];
+            }
+        }
+
+        return graus;
+    }
+
+    /**
+     * Verifica os sucessores de um vertice
+     * @param id_vertice a ser analisado
+     * @return vetor de char (vertices sucessores)
+     */
+    public char[] verifica_sucessores(char id_vertice){
+        List<Character> listaSucessores = new ArrayList<>();
+
+        int index_vertice = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i++){
+            if(grafo[index_vertice][i] != 0){
+                listaSucessores.add(vertices.get(i));
+            }
+        }
+
+        return toArrayChar(listaSucessores);
+    }
+
+    /**
+     * Verifica os predecessores de um vertice
+     * @param id_vertice a ser analisado
+     * @return vetor de char (vertices predecessores)
+     */
+    public char[] verifica_predecessores(char id_vertice){
+        List<Character> listaPredecessores = new ArrayList<>();
+
+        int index_vertice = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i++){
+            if(grafo[i][index_vertice] != 0){
+                listaPredecessores.add(vertices.get(i));
+            }
+        }
+
+        return  toArrayChar(listaPredecessores);
     }
 
     /**
@@ -277,57 +330,4 @@ public class MatrizDirecionada {
     public int[][] getGrafo() {
         return grafo;
     }
-
-    /**
-     * Converte uma List<Character> para um vertor de char
-     * @param list - lista a ser convertida
-     * @return Array de caracteres
-     */
-    private char[] toArrayChar(List<Character> list) {
-        char[] vetor = new char[list.size()];
-        
-        for(int i = 0; i < list.size(); i++) {
-            vetor[i] = Character.valueOf(list.get(i));
-        }
-
-        return vetor;
-    }
-
-    /**
-     * Verifica os sucessores de um vertice
-     * @param id_vertice a ser analisado
-     * @return vetor de char (vertices sucessores)
-     */
-    public char[] verifica_sucessores(char id_vertice){
-        List<Character> listaSucessores = new ArrayList<>();
-
-        int index_vertice = buscar_vertice(id_vertice);
-
-        for(int i = 0; i < vertices.size(); i++){
-            if(grafo[index_vertice][i] != 0){
-                listaSucessores.add(vertices.get(i));
-            }
-        }
-
-        return toArrayChar(listaSucessores);
-    }
-
-    /**
-     * Verifica os predecessores de um vertice
-     * @param id_vertice a ser analisado
-     * @return vetor de char (vertices predecessores)
-     */
-    public char[] verifica_predecessores(char id_vertice){
-        List<Character> listaPredecessores = new ArrayList<>();
-
-        int index_vertice = buscar_vertice(id_vertice);
-
-        for(int i = 0; i < vertices.size(); i++){
-            if(grafo[i][index_vertice] != 0){
-                listaPredecessores.add(vertices.get(i));
-            }
-        }
-
-        return  toArrayChar(listaPredecessores);
-    }
-}   
+}
