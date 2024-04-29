@@ -453,7 +453,6 @@ public class App {
                                 graus = grafoMatriz.grau_vertice(resposta);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + graus[0]);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + graus[1]);
-                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + (graus[0] + graus[1]));
                             } else {
                                 UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + "\n");
                             }
@@ -462,7 +461,6 @@ public class App {
                             if(grafoLista.isDirecionado()) {
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + grafoLista.calcularGrauSaida(resposta));
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + grafoLista.calcularGrauEntrada(resposta));
-                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta));
                             } else {
                                 UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta) + "\n");
                             }
@@ -479,7 +477,7 @@ public class App {
                     break;
                    
                 case 8:
-                    // Calcular distancia entre dois vértices 
+                    // TODO Calcular distancia entre dois vértices 
                     break;
 
                 case 9:
@@ -516,15 +514,15 @@ public class App {
                     break;
 
                 case 10:
-                    // Busca em Largura
+                    // TODO Busca em Largura
                     break;
                 
                 case 11:
-                    // Busca em Profundidade
+                    // TODO Busca em Profundidade
                     break;
                 
                 case 12:
-                    // AGM
+                    // TODO AGM
                     break;
                 
                 case 13:
