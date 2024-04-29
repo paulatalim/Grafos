@@ -131,7 +131,7 @@ public class ListaNaoDirecionada {
             
             return false;
         }
-        
+
         return false;
     }
     
@@ -348,6 +348,7 @@ public class ListaNaoDirecionada {
             }
         }
 
+        // TODO Retirar verificacao se eh desconexo no grafo bipartido
         // Verifica se ha mais de uma componente no grafo
         for (int i = 0; i < mapeamento.size(); i++) {
             if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) == -1) {

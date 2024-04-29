@@ -186,7 +186,7 @@ public class ListaManage {
      */
     public int calcularGrau(char vertice) {
         if(direcionado) {
-            return ld.calcularGrau(vertice);
+            return -1;
         }
         return lnd.calcularGrau(vertice);
     }

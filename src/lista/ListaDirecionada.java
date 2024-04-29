@@ -238,15 +238,6 @@ public class ListaDirecionada {
     }
 
     /**
-     * Calcula o grau de um vertice
-     * @param vertice a ser analisado
-     * @return int (grau do vertice)
-     */
-    public int calcularGrau(char vertice) {
-        return calcularGrauEntrada(vertice) + calcularGrauSaida(vertice);
-    }
-
-    /**
      * Verifica se o grafo eh simples
      * @return true, se for simples, false, caso contrario
      */
@@ -306,13 +297,11 @@ public class ListaDirecionada {
             for(int i = 0; i < grafo.size(); i++) {
                 vertice = grafo.get(i).getId();
 
-                // Verifica se o vertice possui aresta
-                if(calcularGrau(vertice) == 0) {
-                    return false;
-                }
+                int ge = calcularGrauEntrada(vertice);
+                int gs = calcularGrauSaida(vertice);
 
-                // Verifica se o grau do vertice esta correto
-                if(calcularGrauEntrada(vertice) != calcularGrauSaida(vertice)) {
+                // Verifica se o vertice possui aresta e se grau esta correto
+                if(ge + gs == 0 || ge != gs) {
                     return false;
                 }
 

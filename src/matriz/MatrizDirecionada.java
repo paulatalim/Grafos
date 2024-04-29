@@ -330,6 +330,7 @@ public class MatrizDirecionada {
             }
         }
 
+        // TODO Retirar verificacao se eh desconexo no grafo bipartido
         // Verifica se ha mais de uma componente no grafo
         for(int i = 0; i < cores.length; i++) {
             if(cores[i] == -1) {
