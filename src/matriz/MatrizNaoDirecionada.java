@@ -5,6 +5,7 @@ import java.util.List;
 
 public class MatrizNaoDirecionada {
     private int[][] grafo;
+    private boolean isPonderado;
     private ArrayList<Character> vertices = new ArrayList<Character>();
 
     /**
@@ -78,19 +79,23 @@ public class MatrizNaoDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        int i = buscar_vertice(aresta.charAt(0));
-        int j = buscar_vertice(aresta.charAt(1));
+        if(isPonderado) {
+            int i = buscar_vertice(aresta.charAt(0));
+            int j = buscar_vertice(aresta.charAt(1));
 
-        if(i >=0 && j >= 0) {
-            if(i != j) {
-                // Adiciona uma nova aresta
-                grafo[i][j] = peso;
-                grafo[j][i] = peso;
-            } else {
-                // Adiciona um laco
-                grafo[i][j] = peso;
+            if(i >=0 && j >= 0) {
+                if(i != j) {
+                    // Adiciona uma nova aresta
+                    grafo[i][j] = peso;
+                    grafo[j][i] = peso;
+                } else {
+                    // Adiciona um laco
+                    grafo[i][j] = peso;
+                }
+                return true;
             }
-            return true;
+
+            return false;
         }
 
         return false;
@@ -349,6 +354,23 @@ public class MatrizNaoDirecionada {
         }
     }
 
+    /**
+     * Se o Grafo eh poderado
+     * @param isPonderado
+     */
+    public void setIsPonderado(boolean isPonderado) {
+        this.isPonderado = isPonderado;
+    }
+
+    /**
+     * Se o grafo eh poderado
+     * 
+     * @return true ou false
+     */
+    public boolean isPonderado() {
+        return isPonderado;
+    }
+    
     /**
      * @return int[][] return do grafo
      */

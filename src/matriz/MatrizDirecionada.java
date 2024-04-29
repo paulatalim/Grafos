@@ -5,6 +5,7 @@ import java.util.List;
 
 public class MatrizDirecionada {
     private int[][] grafo;
+    private boolean isPonderado;
     private ArrayList<Character> vertices = new ArrayList<Character>();
 
     /**
@@ -81,6 +82,29 @@ public class MatrizDirecionada {
     }
 
     /**
+     * Adiciona uma aresta do grafo com peso
+     * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
+     * @param peso da aresta
+     * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
+     */
+    public boolean inserir_aresta(String aresta, int peso) {
+        if(isPonderado) {
+            int i = buscar_vertice(aresta.charAt(0));
+            int j = buscar_vertice(aresta.charAt(1));
+
+            if(i >= 0 && j >= 0) {
+                // Adiciona uma nova aresta
+                grafo[i][j] = peso;
+                return true;
+            }
+
+            return false;
+        }
+
+        return false;
+    }
+
+    /**
      * Remove uma aresta do grafo
      * @param aresta a ser retirada (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
@@ -98,6 +122,29 @@ public class MatrizDirecionada {
         return false;
     }
 
+    /**
+     * Atualiza o peso de uma aresta
+     * @param aresta que o peso será atualizado, indicada com seus vertices adjacentes
+     * @param newPeso novo peso da aresta
+     * @return true, caso encontrar os vertices e haver aresta entre eles, ou false, caso contrario
+     */
+    public boolean atualizar_peso_aresta(String aresta, int newPeso) {
+        if(isPonderado) {
+            int i = buscar_vertice(aresta.charAt(0));
+            int j = buscar_vertice(aresta.charAt(1));
+            
+            // Caso haver aresta
+            if(i > 0 && j > 0) {
+                // Adiciona uma nova aresta
+                grafo[i][j] = newPeso;
+                return true;
+            }
+            
+            return false;
+        }
+        return false;
+    }
+    
     /**
      * Verifica se um vertice existe
      * 
@@ -322,6 +369,23 @@ public class MatrizDirecionada {
             }
             System.out.println("|");
         }
+    }
+
+    /**
+     * Se o Grafo eh poderado
+     * @param isPonderado
+     */
+    public void setIsPonderado(boolean isPonderado) {
+        this.isPonderado = isPonderado;
+    }
+
+    /**
+     * Se o grafo eh poderado
+     * 
+     * @return true ou false
+     */
+    public boolean isPonderado() {
+        return isPonderado;
     }
     
     /**
