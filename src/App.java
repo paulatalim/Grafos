@@ -75,12 +75,11 @@ public class App {
 
             if (resposta == 's') {
                 grafoLista.setIsPonderado(true);
-                // grafoMatriz.setIsDirecionado(true);
+                grafoMatriz.setIsPonderado(true);
                 opcao_invalida = false;
             } else if (resposta == 'n') {
                 grafoLista.setIsPonderado(false);
-                //TODO setar grafo ponderado
-                // grafoMatriz.setIsDirecionado(false);
+                grafoMatriz.setIsPonderado(false);
                 opcao_invalida = false;
             } else {
                 UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
@@ -574,15 +573,17 @@ public class App {
                         resposta = scanner.next().toLowerCase().charAt(0);
 
                         if (resposta == 's') {
+                            // Configura o grafo ponderado
                             grafoLista.setIsPonderado(true);
-                            // grafoMatriz.setIsDirecionado(true);
+                            grafoMatriz.setIsPonderado(true);
                             opcao_invalida = false;
                         } else if (resposta == 'n') {
+                            // Configura o grafo nao ponderado
                             grafoLista.setIsPonderado(false);
-                            //TODO setar grafo ponderado
-                            // grafoMatriz.setIsDirecionado(false);
+                            grafoMatriz.setIsPonderado(true);
                             opcao_invalida = false;
                         } else {
+                            // Exibe mensagem de erro
                             UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
                             opcao_invalida = true;
                             UI.exibir_fim_tela();

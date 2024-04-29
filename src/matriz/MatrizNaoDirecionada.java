@@ -39,7 +39,7 @@ public class MatrizNaoDirecionada {
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
      */
-    public void inserir_vertice (char id_vertice) {
+    public void inserir_vertice(char id_vertice) {
         // Verifica se o vertice ja existe
         if(!isNoExist(id_vertice)) {
            // Adiciona o vertice a lista
@@ -76,10 +76,10 @@ public class MatrizNaoDirecionada {
      * Adiciona uma aresta do grafo com peso
      * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
      * @param peso da aresta
-     * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
+     * @return true, caso encontrar os vertices, haver aresta eo peso ser valido, ou false, caso contrario
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        if(isPonderado) {
+        if(isPonderado && peso > 0) {
             int i = buscar_vertice(aresta.charAt(0));
             int j = buscar_vertice(aresta.charAt(1));
 
@@ -132,20 +132,24 @@ public class MatrizNaoDirecionada {
      * @param newPeso novo peso da aresta
      * @return true, caso encontrar os vertices e haver aresta entre eles, ou false, caso contrario
      */
-    public boolean atualizar_peso_aresta(String aresta, int newPeso) {
-        int i = buscar_vertice(aresta.charAt(0));
-        int j = buscar_vertice(aresta.charAt(1));
-
-        if(i > 0 && j > 0) {
-            if(i != j) {
-                // Adiciona uma nova aresta
-                grafo[i][j] = newPeso;
-                grafo[j][i] = newPeso;
-            } else {
-                // Adiciona um laco
-                grafo[i][j] = newPeso;
+    public boolean atualizarPeso(String aresta, int newPeso) {
+        if(isPonderado && newPeso > 0) {
+            int i = buscar_vertice(aresta.charAt(0));
+            int j = buscar_vertice(aresta.charAt(1));
+            
+            if(i > 0 && j > 0) {
+                if(i != j) {
+                    // Adiciona uma nova aresta
+                    grafo[i][j] = newPeso;
+                    grafo[j][i] = newPeso;
+                } else {
+                    // Adiciona um laco
+                    grafo[i][j] = newPeso;
+                }
+                return true;
             }
-            return true;
+            
+            return false;
         }
 
         return false;
@@ -171,7 +175,7 @@ public class MatrizNaoDirecionada {
      * @param id_vertice
      * @return vetor de inteiro representando o grau do vértice
      */
-    public int[] grau_vertice (char id_vertice) {
+    public int[] grau_vertice(char id_vertice) {
         int[] grau = new int[1];
         grau[0] = 0;
         int indexNo = buscar_vertice(id_vertice);
@@ -339,7 +343,7 @@ public class MatrizNaoDirecionada {
     /**
      * Imprime a matriz de adjacencia no console
      */
-    public void exibir_matriz () {
+    public void exibir_matriz() {
         System.out.print("\t   ");
         for (int i = 0; i < vertices.size(); i++) {
             System.out.print(vertices.get(i) + " ");

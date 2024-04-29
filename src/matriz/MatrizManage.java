@@ -161,12 +161,12 @@ public class MatrizManage {
      * @param newPeso novo peso da aresta
      * @return true, caso encontrar os vertices e haver aresta entre eles, ou false, caso contrario
      */
-    public boolean atualizar_peso_aresta(String aresta, int newPeso) {
+    public boolean atualizarPeso(String aresta, int newPeso) {
         if(direcionado) {
-            return md.inserir_aresta(aresta, newPeso);
+            return md.atualizarPeso (aresta, newPeso);
         }
         
-        return mnd.inserir_aresta(aresta, newPeso);
+        return mnd.atualizarPeso (aresta, newPeso);
     }
 
     /**

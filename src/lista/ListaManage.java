@@ -51,7 +51,7 @@ public class ListaManage {
      * 
      * @param id_vertice a ser inserido
      */
-    public void inserir_vertice (char id_vertice) {
+    public void inserir_vertice(char id_vertice) {
         if(direcionado) {
             ld.inserir_vertice(id_vertice);
         } else {
@@ -64,12 +64,26 @@ public class ListaManage {
      *
      * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
      */
-    public boolean inserir_aresta (String aresta) {
+    public boolean inserir_aresta(String aresta) {
         if(direcionado) {
             return ld.inserir_aresta(aresta);
         }
         
         return lnd.inserir_aresta(aresta);
+    }
+
+    /**
+     * Adiciona uma aresta ao grafo
+     *
+     * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
+     * @param peso da aresta
+     */
+    public boolean inserir_aresta(String aresta, int peso) {
+        if(direcionado) {
+            return ld.inserir_aresta(aresta, peso);
+        }
+        
+        return lnd.inserir_aresta(aresta, peso);
     }
 
     /**
@@ -84,6 +98,20 @@ public class ListaManage {
         }
 
         return lnd.remover_aresta(aresta);
+    }
+
+    /**
+     * Adiciona uma aresta ao grafo
+     *
+     * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
+     * @param peso da aresta
+     */
+    public boolean atualizarPeso(String aresta, int peso) {
+        if(direcionado) {
+            return ld.atualizarPeso(aresta, peso);
+        }
+        
+        return lnd.atualizarPeso(aresta, peso);
     }
 
     /**

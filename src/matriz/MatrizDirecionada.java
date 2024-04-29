@@ -11,7 +11,7 @@ public class MatrizDirecionada {
     /**
      * Cria a matriz a partir da lista de vértices.
      */
-    private void initMatriz () {
+    private void initMatriz() {
         int tamanho = vertices.size();
         this.grafo = new int[tamanho][tamanho];
         for(int i = 0; i < tamanho; i++) {
@@ -88,7 +88,7 @@ public class MatrizDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        if(isPonderado) {
+        if(isPonderado && peso > 0) {
             int i = buscar_vertice(aresta.charAt(0));
             int j = buscar_vertice(aresta.charAt(1));
 
@@ -128,7 +128,7 @@ public class MatrizDirecionada {
      * @param newPeso novo peso da aresta
      * @return true, caso encontrar os vertices e haver aresta entre eles, ou false, caso contrario
      */
-    public boolean atualizar_peso_aresta(String aresta, int newPeso) {
+    public boolean atualizarPeso(String aresta, int newPeso) {
         if(isPonderado) {
             int i = buscar_vertice(aresta.charAt(0));
             int j = buscar_vertice(aresta.charAt(1));

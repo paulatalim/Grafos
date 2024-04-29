@@ -11,7 +11,7 @@ public class ListaDirecionada {
     private List<No> grafo;
     private boolean ponderado;
 
-    ListaDirecionada () {
+    ListaDirecionada() {
         grafo = new ArrayList<No>();
     }
 
@@ -474,7 +474,7 @@ public class ListaDirecionada {
     /**
      * Imprime a lista de adjacencia no console
      */
-    public void exibir_lista () {
+    public void exibir_lista() {
         for (int i = 0; i < grafo.size(); i++) {
             No no = grafo.get(i);
             System.out.print("\t" + no.getId() + ": [ ");

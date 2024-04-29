@@ -112,21 +112,26 @@ public class ListaNaoDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        // Encontra os vertice no grafo
-        int aux1 = buscar_vertice(aresta.charAt(0));
-        int aux2 = buscar_vertice(aresta.charAt(1));
+        if(isPonderado && peso > 0) {
 
-        if (aux1 >= 0 && aux2 >= 0) {
-            if(aux1 != aux2) {
-                grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
-                grafo.get(aux2).inserir_aresta(aresta.charAt(0), peso);
-            } else {
-                // Adiciona uma laco
-                grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
+            // Encontra os vertice no grafo
+            int aux1 = buscar_vertice(aresta.charAt(0));
+            int aux2 = buscar_vertice(aresta.charAt(1));
+            
+            if (aux1 >= 0 && aux2 >= 0) {
+                if(aux1 != aux2) {
+                    grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
+                    grafo.get(aux2).inserir_aresta(aresta.charAt(0), peso);
+                } else {
+                    // Adiciona uma laco
+                    grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
+                }
+                return true;
             }
-            return true;
+            
+            return false;
         }
-
+        
         return false;
     }
     
@@ -162,7 +167,7 @@ public class ListaNaoDirecionada {
      * @return true (caso a atualizacao ocorrer com sucesso) ou false (caso ocorrer algum erro)
      */
     public boolean atualizarPeso(String aresta, int newPeso) {
-        if(isPonderado) {
+        if(isPonderado && newPeso > 0) {
             return (
                 grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso) &&
                 grafo.get(buscar_vertice(aresta.charAt(1))).updatePeso(aresta.charAt(0), newPeso)

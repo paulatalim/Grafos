@@ -8,7 +8,7 @@ public class No {
     private List<Character> arestas;
     private List<Integer> pesos;
 
-    public No (char id) {
+    public No(char id) {
         this.id = id;
         arestas = new ArrayList<Character>();
         pesos = new ArrayList<Integer>();
@@ -58,7 +58,7 @@ public class No {
      * @param id do vertice adjacente na lista
      * @return id do vertice adjacente
      */
-    public char getAresta (int id) {
+    public char getAresta(int id) {
         return arestas.get(id);
     }
 
@@ -68,7 +68,7 @@ public class No {
      * @param id do vertice adjacente na lista
      * @return peso da aresta
      */
-    public int getPeso (int id) {
+    public int getPeso(int id) {
         return pesos.get(id);
     }
 
@@ -93,7 +93,7 @@ public class No {
      * 
      * @return quantidade de arestas do vertice
      */
-    public int qnt_aresta () {
+    public int qnt_aresta() {
         if (arestas ==  null) {
             return 0;
         }
