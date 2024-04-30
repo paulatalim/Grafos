@@ -330,16 +330,23 @@ public class MatrizDirecionada {
             }
         }
 
-        // TODO Retirar verificacao se eh desconexo no grafo bipartido
-        // Verifica se ha mais de uma componente no grafo
-        for(int i = 0; i < cores.length; i++) {
-            if(cores[i] == -1) {
-                return false;
-            }
-        }
+        if(!isGrafosConexo()) return false;
 
         return true;
     }
+
+    /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isGrafosConexo() {    
+        for (int i = 0; i < vertices.size(); i++) {
+            if (grau_vertice(vertices.get(i))[0] == 0 && grau_vertice(vertices.get(i))[1] == 0) {
+                return false;
+            }
+        }
+        return true;
+    } 
 
     /**
      * Verifica se o grafo possui aresta

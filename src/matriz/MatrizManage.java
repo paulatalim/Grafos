@@ -53,15 +53,25 @@ public class MatrizManage {
     }
 
     /**
-     * Verifica se o grafo eh bipartido
-     * 
-     * @return true, se for bipartido, false, caso contrar
+     * Confere se o grafo é bipartido ou não
+     * @return true, se for bipartido, false, caso contrário
      */
-    public boolean isBipartido () {
+    public boolean isGrafosBipartido () {
         if(direcionado) {
             return md.isGrafosBipartido();
         }
         return mnd.isGrafosBipartido();
+    }
+
+    /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isGrafosConexo () {
+        if(direcionado) {
+            return md.isGrafosConexo();
+        }
+        return mnd.isGrafosConexo();
     }
 
     /**

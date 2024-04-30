@@ -489,15 +489,11 @@ public class App {
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                         if(useAnaliseMatriz) {
-                            boolean simples = grafoMatriz.isGrafosSimples();
-                            boolean regular = grafoMatriz.isGrafosRegular();
-                            boolean completo = grafoMatriz.isGrafosCompleto();
-
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (simples ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isBipartido() ? "Sim" : "Não"));
-                            // TODO testar se o grafo eh conexo
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoMatriz.isGrafosSimples() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoMatriz.isGrafosRegular() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoMatriz.isGrafosCompleto() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isGrafosBipartido() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN + (grafoMatriz.isGrafosConexo() ? "Sim" : "Não"));
                         } else {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
