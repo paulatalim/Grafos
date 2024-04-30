@@ -31,8 +31,11 @@ public class No {
      * @param peso da aresta
      */
     public void inserir_aresta(char vertice_adjacente, int peso) {
-        arestas.add(vertice_adjacente);
-        pesos.add(peso);
+        if(!arestas.contains(vertice_adjacente)) {
+            arestas.add(vertice_adjacente);
+            pesos.add(peso);
+            System.err.println("Aresta adicionada");
+        }
     }
 
     /**
@@ -44,8 +47,8 @@ public class No {
     public boolean remover_aresta(char vertice_adjacente) {
         for(int i = 0; i < arestas.size(); i++) {
             if(arestas.get(i) == vertice_adjacente) {
-                arestas.remove(arestas.indexOf(vertice_adjacente));
-                pesos.remove(arestas.indexOf(vertice_adjacente));
+                arestas.remove(i);
+                pesos.remove(i);
                 return true;
             }
         }
