@@ -23,6 +23,7 @@ public class App {
         String aresta;
         int opcao;
         char resposta;
+        char resposta1;
         int cont;
         boolean useAnaliseMatriz = true;;
 
@@ -500,7 +501,26 @@ public class App {
                     break;
                    
                 case 8:
-                    // TODO Calcular distancia entre dois vértices 
+                    if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
+                        // Exibe cabecalho da pagina
+                        UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInforme os vertices que desja calcular a distância\n\n");
+
+                        UI.print(UI.CYAN + "\tVértice 1: " + UI.WHITE);
+                        resposta = scanner.next().charAt(0);
+                        
+                        UI.print(UI.CYAN + "\n\tVértice 2: " + UI.WHITE);
+                        resposta1 = scanner.next().charAt(0);
+                    
+                        // TODO Calcular distancia entre dois vértices
+
+                        UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.YELLOW + "8");
+
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                    }
                     break;
 
                 case 9:
