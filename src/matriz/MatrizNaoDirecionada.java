@@ -5,21 +5,20 @@ import java.util.List;
 
 public class MatrizNaoDirecionada {
     private int[][] grafo;
+    private boolean isPonderado;
     private ArrayList<Character> vertices = new ArrayList<Character>();
 
     /**
-     * Verifica se um vertice existe
-     * 
-     * @param id do vertice a ser verificado
-     * @return true, se o vertice existir, false, caso contrario
+     * Cria a matriz a partir da lista de vértices.
      */
-    public boolean isNoExist(char id) {
-        // Encontra o vertice no grafo
-        if(vertices.contains(id)) {
-            return true;
+    private void initMatriz() {
+        int tamanho = vertices.size();
+        this.grafo = new int[tamanho][tamanho];
+        for(int i = 0; i < tamanho; i++) {
+            for(int j = 0; j < tamanho; j++) {
+                this.grafo[i][j] = 0;
+            }
         }
-        
-        return false;
     }
 
     /**
@@ -35,41 +34,18 @@ public class MatrizNaoDirecionada {
         }
         return -1;
     }
-    
+
     /**
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
      */
-    public void inserir_vertice (char id_vertice) {
+    public void inserir_vertice(char id_vertice) {
         // Verifica se o vertice ja existe
         if(!isNoExist(id_vertice)) {
            // Adiciona o vertice a lista
            if(id_vertice != '0') vertices.add(id_vertice);
-           else criar_matriz();
+           else initMatriz();
         }
-    }
-
-    /**
-     * Recebe o ID de um vértice e calcula o seu grau
-     * @param id_vertice
-     * @return vetor de inteiro representando o grau do vértice
-     */
-    public int[] grau_vertice (char id_vertice) {
-        int[] grau = new int[1];
-        grau[0] = 0;
-        int indexNo = buscar_vertice(id_vertice);
-
-        for(int i = 0; i < vertices.size(); i++) {
-            if(grafo[indexNo][i] != 0) {
-                if(indexNo == i) {
-                    grau[0] += 2 * grafo[indexNo][i];
-                } else {
-                    grau[0] += grafo[indexNo][i];
-                }
-            }
-        }
-
-        return grau;
     }
 
     /**
@@ -97,6 +73,127 @@ public class MatrizNaoDirecionada {
     }
 
     /**
+     * Adiciona uma aresta do grafo com peso
+     * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
+     * @param peso da aresta
+     * @return true, caso encontrar os vertices, haver aresta eo peso ser valido, ou false, caso contrario
+     */
+    public boolean inserir_aresta(String aresta, int peso) {
+        if(isPonderado && peso > 0) {
+            int i = buscar_vertice(aresta.charAt(0));
+            int j = buscar_vertice(aresta.charAt(1));
+
+            if(i >= 0 && j >= 0) {
+                if(i != j) {
+                    // Adiciona uma nova aresta
+                    grafo[i][j] = peso;
+                    grafo[j][i] = peso;
+                } else {
+                    // Adiciona um laco
+                    grafo[i][j] = peso;
+                }
+                return true;
+            }
+
+            return false;
+        }
+
+        return false;
+    }
+
+    /**
+     * Remove uma aresta do grafo
+     * @param aresta a ser retirada (String), indicada com seus vertices adjacentes
+     * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
+     */
+    public boolean remover_aresta(String aresta) {
+        int i = buscar_vertice(aresta.charAt(0));
+        int j = buscar_vertice(aresta.charAt(1));
+
+        if(i >=0 && j >= 0 && grafo[i][j] != 0 && grafo[i][j] != 0) {
+            if(i != j) {
+                // Remove uma nova aresta
+                grafo[i][j] = 0;
+                grafo[j][i] = 0;
+            } else {
+                // Remove um laco
+                grafo[i][j] = 0;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Atualiza o peso de uma aresta
+     * @param aresta que o peso será atualizado, indicada com seus vertices adjacentes
+     * @param newPeso novo peso da aresta
+     * @return true, caso encontrar os vertices e haver aresta entre eles, ou false, caso contrario
+     */
+    public boolean atualizarPeso(String aresta, int newPeso) {
+        if(isPonderado && newPeso > 0) {
+            int i = buscar_vertice(aresta.charAt(0));
+            int j = buscar_vertice(aresta.charAt(1));
+            
+            if(i > 0 && j > 0) {
+                if(i != j) {
+                    // Adiciona uma nova aresta
+                    grafo[i][j] = newPeso;
+                    grafo[j][i] = newPeso;
+                } else {
+                    // Adiciona um laco
+                    grafo[i][j] = newPeso;
+                }
+                return true;
+            }
+            
+            return false;
+        }
+
+        return false;
+    }
+
+    /**
+     * Verifica se um vertice existe
+     * 
+     * @param id do vertice a ser verificado
+     * @return true, se o vertice existir, false, caso contrario
+     */
+    public boolean isNoExist(char id) {
+        // Encontra o vertice no grafo
+        if(vertices.contains(id)) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
+     * Recebe o ID de um vértice e calcula o seu grau
+     * @param id_vertice
+     * @return vetor de inteiro representando o grau do vértice
+     */
+    public int[] grau_vertice(char id_vertice) {
+        int[] grau = new int[1];
+        grau[0] = 0;
+        int indexNo = buscar_vertice(id_vertice);
+
+        for(int i = 0; i < vertices.size(); i++) {
+            if(grafo[indexNo][i] != 0) {
+                if(indexNo == i) {
+                    grau[0] += 2 * grafo[indexNo][i];
+                } else {
+                    grau[0] += grafo[indexNo][i];
+                }
+            }
+        }
+
+        return grau;
+    }
+
+    /**
      * Verifica a vizinhaca do vertice
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices adjacentes ao analisado)
@@ -118,44 +215,6 @@ public class MatrizNaoDirecionada {
             vetorVizinhos[i] = Character.valueOf(listaVizinhos.get(i));
         }
         return vetorVizinhos;
-    }
-
-    /**
-     * Remove uma aresta do grafo
-     * @param aresta a ser retirada (String), indicada com seus vertices adjacentes
-     * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
-     */
-    public boolean remover_aresta(String aresta) {
-        int i = buscar_vertice(aresta.charAt(0));
-        int j = buscar_vertice(aresta.charAt(1));
-
-        if(i >=0 && j >= 0 && grafo[i][j] != 0 && grafo[i][j] != 0) {
-            if(i != j) {
-                // Remove uma nova aresta
-                grafo[i][j] -= 1;
-                grafo[j][i] -= 1;
-            } else {
-                // Remove um laco
-                grafo[i][j] --;
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Cria a matriz a partir da lista de vértices.
-     */
-    private void criar_matriz () {
-        int tamanho = vertices.size();
-        this.grafo = new int[tamanho][tamanho];
-        for(int i = 0; i < tamanho; i++) {
-            for(int j = 0; j < tamanho; j++) {
-                this.grafo[i][j] = 0;
-            }
-        }
     }
 
     /**
@@ -258,15 +317,23 @@ public class MatrizNaoDirecionada {
             }
         }
 
-        // Verifica se ha mais de uma componente no grafo
-        for(int i = 0; i < cores.length; i++) {
-            if(cores[i] == -1) {
-                return false;
-            }
-        }
+        if(!isGrafosConexo()) return false;
 
         return true;
     }
+
+    /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isGrafosConexo() {    
+        for (int i = 0; i < vertices.size(); i++) {
+            if (grau_vertice(vertices.get(i))[0] == 0) {
+                return false;
+            }
+        }
+        return true;
+    } 
 
     /**
      * Verifica se o grafo possui aresta
@@ -284,7 +351,7 @@ public class MatrizNaoDirecionada {
     /**
      * Imprime a matriz de adjacencia no console
      */
-    public void exibir_matriz () {
+    public void exibir_matriz() {
         System.out.print("\t   ");
         for (int i = 0; i < vertices.size(); i++) {
             System.out.print(vertices.get(i) + " ");
@@ -299,6 +366,23 @@ public class MatrizNaoDirecionada {
         }
     }
 
+    /**
+     * Se o Grafo eh poderado
+     * @param isPonderado
+     */
+    public void setIsPonderado(boolean isPonderado) {
+        this.isPonderado = isPonderado;
+    }
+
+    /**
+     * Se o grafo eh poderado
+     * 
+     * @return true ou false
+     */
+    public boolean isPonderado() {
+        return isPonderado;
+    }
+    
     /**
      * @return int[][] return do grafo
      */

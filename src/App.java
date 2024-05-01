@@ -23,6 +23,7 @@ public class App {
         String aresta;
         int opcao;
         char resposta;
+        char resposta1;
         int cont;
         boolean useAnaliseMatriz = true;;
 
@@ -75,12 +76,11 @@ public class App {
 
             if (resposta == 's') {
                 grafoLista.setIsPonderado(true);
-                // grafoMatriz.setIsDirecionado(true);
+                grafoMatriz.setIsPonderado(true);
                 opcao_invalida = false;
             } else if (resposta == 'n') {
                 grafoLista.setIsPonderado(false);
-                //TODO setar grafo ponderado
-                // grafoMatriz.setIsDirecionado(false);
+                grafoMatriz.setIsPonderado(false);
                 opcao_invalida = false;
             } else {
                 UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
@@ -265,16 +265,39 @@ public class App {
                             // Leitura da aresta
                             UI.print(UI.CYAN + "\tAresta " + cont + ": " + UI.WHITE);
                             aresta = scanner.next();
-                            UI.println("");
-
-                            if (!aresta.equals("0") && aresta.length() > 1) {
-                                // Adiciona aresta na lista e na matriz
-                                grafoLista.inserir_aresta(aresta);
-                                grafoMatriz.inserir_aresta(aresta);
-                            }
 
                             // Atualiza contador
                             cont++;
+
+                            // Valida a aresta
+                            if (!aresta.equals("0") && aresta.length() > 1) {
+                                if(grafoMatriz.isPonderado()) {
+                                    int peso;
+
+                                    if(grafoLista.isArestaeExist(aresta)) {
+                                        UI.print(UI.CYAN +"\tNovo peso: " + UI.WHITE);
+                                        peso = scanner.nextInt();
+
+                                        grafoLista.atualizarPeso(aresta, peso);
+                                        grafoMatriz.atualizarPeso(aresta, peso);
+                                    
+                                    } else {
+                                        UI.print(UI.CYAN +"\tPeso: " + UI.WHITE);
+                                        peso = scanner.nextInt();
+
+                                        grafoLista.inserir_aresta(aresta, peso);
+                                        grafoMatriz.inserir_aresta(aresta, peso);
+                                    }
+
+                                } else {
+                                    // Adiciona aresta na lista e na matriz
+                                    grafoLista.inserir_aresta(aresta);
+                                    grafoMatriz.inserir_aresta(aresta);
+                                }
+                            }
+
+                            UI.println("");
+
                         } while (!aresta.equals("0"));
                     } else {
                         UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo não possui vértices, adicione vértices para habilitar está função");
@@ -454,7 +477,6 @@ public class App {
                                 graus = grafoMatriz.grau_vertice(resposta);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + graus[0]);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + graus[1]);
-                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + (graus[0] + graus[1]));
                             } else {
                                 UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + "\n");
                             }
@@ -463,7 +485,6 @@ public class App {
                             if(grafoLista.isDirecionado()) {
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + grafoLista.calcularGrauSaida(resposta));
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + grafoLista.calcularGrauEntrada(resposta));
-                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta));
                             } else {
                                 UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta) + "\n");
                             }
@@ -480,7 +501,26 @@ public class App {
                     break;
                    
                 case 8:
-                    // Calcular distancia entre dois vértices 
+                    if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
+                        // Exibe cabecalho da pagina
+                        UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInforme os vertices que desja calcular a distância\n\n");
+
+                        UI.print(UI.CYAN + "\tVértice 1: " + UI.WHITE);
+                        resposta = scanner.next().charAt(0);
+
+                        UI.print(UI.CYAN + "\n\tVértice 2: " + UI.WHITE);
+                        resposta1 = scanner.next().charAt(0);
+
+                        // TODO Calcular distancia entre dois vértices
+
+                        UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.YELLOW + "8");
+
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                    }
                     break;
 
                 case 9:
@@ -492,21 +532,17 @@ public class App {
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                         if(useAnaliseMatriz) {
-                            boolean simples = grafoMatriz.isGrafosSimples();
-                            boolean regular = grafoMatriz.isGrafosRegular();
-                            boolean completo = grafoMatriz.isGrafosCompleto();
-
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (simples ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (regular ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (completo ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isBipartido() ? "Sim" : "Não"));
-                            // TODO testar se o grafo eh conexo
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoMatriz.isGrafosSimples() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoMatriz.isGrafosRegular() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoMatriz.isGrafosCompleto() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isGrafosBipartido() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN + (grafoMatriz.isGrafosConexo() ? "Sim" : "Não"));
                         } else {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
-                            // TODO testar se o grafo eh conexo
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN + (grafoLista.isConexo() ? "Sim" : "Não"));
                         }
                     } else {
                         // Caso o grafo esteja vazio
@@ -517,15 +553,15 @@ public class App {
                     break;
 
                 case 10:
-                    // Busca em Largura
+                    // TODO Busca em Largura
                     break;
                 
                 case 11:
-                    // Busca em Profundidade
+                    // TODO Busca em Profundidade
                     break;
                 
                 case 12:
-                    // AGM
+                    // TODO AGM
                     break;
                 
                 case 13:
@@ -574,15 +610,17 @@ public class App {
                         resposta = scanner.next().toLowerCase().charAt(0);
 
                         if (resposta == 's') {
+                            // Configura o grafo ponderado
                             grafoLista.setIsPonderado(true);
-                            // grafoMatriz.setIsDirecionado(true);
+                            grafoMatriz.setIsPonderado(true);
                             opcao_invalida = false;
                         } else if (resposta == 'n') {
+                            // Configura o grafo nao ponderado
                             grafoLista.setIsPonderado(false);
-                            //TODO setar grafo ponderado
-                            // grafoMatriz.setIsDirecionado(false);
+                            grafoMatriz.setIsPonderado(true);
                             opcao_invalida = false;
                         } else {
+                            // Exibe mensagem de erro
                             UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
                             opcao_invalida = true;
                             UI.exibir_fim_tela();

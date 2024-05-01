@@ -11,7 +11,7 @@ public class ListaDirecionada {
     private List<No> grafo;
     private boolean ponderado;
 
-    ListaDirecionada () {
+    ListaDirecionada() {
         grafo = new ArrayList<No>();
     }
 
@@ -107,12 +107,12 @@ public class ListaDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        int aux = buscar_vertice(aresta.charAt(0));
+        int aux1 = buscar_vertice(aresta.charAt(0));
+        int aux2 = buscar_vertice(aresta.charAt(1));
 
-        if(aux >= 0 && buscar_vertice(aresta.charAt(1)) >= 0) {
+        if(aux1 >= 0 && aux2 >= 0) {
             // Adiciona uma nova aresta
-            grafo.get(aux).inserir_aresta(aresta.charAt(1), peso);
-            return true;
+            return grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
         }
 
         return false;
@@ -131,6 +131,16 @@ public class ListaDirecionada {
         }
 
         // Caso nao encontrar a aresta
+        return false;
+    }
+
+    public boolean isArestaeExist(String aresta) {
+        int aux1 = buscar_vertice(aresta.charAt(0));
+
+        if(aux1 >= 0) {
+            return grafo.get(aux1).isArestaeExist(aresta.charAt(1));
+        }
+
         return false;
     }
 
@@ -238,15 +248,6 @@ public class ListaDirecionada {
     }
 
     /**
-     * Calcula o grau de um vertice
-     * @param vertice a ser analisado
-     * @return int (grau do vertice)
-     */
-    public int calcularGrau(char vertice) {
-        return calcularGrauEntrada(vertice) + calcularGrauSaida(vertice);
-    }
-
-    /**
      * Verifica se o grafo eh simples
      * @return true, se for simples, false, caso contrario
      */
@@ -306,13 +307,11 @@ public class ListaDirecionada {
             for(int i = 0; i < grafo.size(); i++) {
                 vertice = grafo.get(i).getId();
 
-                // Verifica se o vertice possui aresta
-                if(calcularGrau(vertice) == 0) {
-                    return false;
-                }
+                int ge = calcularGrauEntrada(vertice);
+                int gs = calcularGrauSaida(vertice);
 
-                // Verifica se o grau do vertice esta correto
-                if(calcularGrauEntrada(vertice) != calcularGrauSaida(vertice)) {
+                // Verifica se o vertice possui aresta e se grau esta correto
+                if(ge + gs == 0 || ge != gs) {
                     return false;
                 }
 
@@ -337,6 +336,20 @@ public class ListaDirecionada {
 
         return false;
     }
+
+    /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isConexo() {    
+        for (int i = 0; i < grafo.size(); i++) {
+            if (calcularGrauEntrada(grafo.get(i).getId()) == 0 && calcularGrauSaida(grafo.get(i).getId()) == 0) {
+                return false;
+            }
+        }
+        return true;
+    } 
+
 
     /**
      * Adiciona cor aos vertices adjacentes ao vértice inserido
@@ -474,7 +487,7 @@ public class ListaDirecionada {
     /**
      * Imprime a lista de adjacencia no console
      */
-    public void exibir_lista () {
+    public void exibir_lista() {
         for (int i = 0; i < grafo.size(); i++) {
             No no = grafo.get(i);
             System.out.print("\t" + no.getId() + ": [ ");

@@ -112,19 +112,24 @@ public class ListaNaoDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        // Encontra os vertice no grafo
-        int aux1 = buscar_vertice(aresta.charAt(0));
-        int aux2 = buscar_vertice(aresta.charAt(1));
+        if(isPonderado && peso > 0) {
 
-        if (aux1 >= 0 && aux2 >= 0) {
-            if(aux1 != aux2) {
-                grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
-                grafo.get(aux2).inserir_aresta(aresta.charAt(0), peso);
-            } else {
+            // Encontra os vertice no grafo
+            int aux1 = buscar_vertice(aresta.charAt(0));
+            int aux2 = buscar_vertice(aresta.charAt(1));
+            
+            if (aux1 >= 0 && aux2 >= 0) {
+                if(aux1 != aux2) {
+                    // Adiciona uma aresta
+                    return (
+                        grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso) &&
+                        grafo.get(aux2).inserir_aresta(aresta.charAt(0), peso)
+                    );
+                }
+
                 // Adiciona uma laco
-                grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
+                return grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
             }
-            return true;
         }
 
         return false;
@@ -154,6 +159,16 @@ public class ListaNaoDirecionada {
         return false;
     }
 
+    public boolean isArestaeExist(String aresta) {
+        int aux1 = buscar_vertice(aresta.charAt(0));
+
+        if(aux1 >= 0) {
+            return grafo.get(aux1).isArestaeExist(aresta.charAt(1));
+        }
+
+        return false;
+    }
+
     /**
      * Atualiza o Peso de uma aresta
      * 
@@ -162,7 +177,7 @@ public class ListaNaoDirecionada {
      * @return true (caso a atualizacao ocorrer com sucesso) ou false (caso ocorrer algum erro)
      */
     public boolean atualizarPeso(String aresta, int newPeso) {
-        if(isPonderado) {
+        if(isPonderado && newPeso > 0) {
             return (
                 grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso) &&
                 grafo.get(buscar_vertice(aresta.charAt(1))).updatePeso(aresta.charAt(0), newPeso)
@@ -343,15 +358,23 @@ public class ListaNaoDirecionada {
             }
         }
 
-        // Verifica se ha mais de uma componente no grafo
-        for (int i = 0; i < mapeamento.size(); i++) {
-            if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) == -1) {
-                return false;
-            }
-        }
+        if(!isConexo()) return false;
 
         return true;
     }
+
+    /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isConexo() {    
+        for (int i = 0; i < grafo.size(); i++) {
+            if (calcularGrau(grafo.get(i).getId()) == 0) {
+                return false;
+            }
+        }
+        return true;
+    } 
 
     /**
      * Imprime a lista de adjacencia no console
