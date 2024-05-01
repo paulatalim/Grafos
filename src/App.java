@@ -522,7 +522,7 @@ public class App {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
-                            // TODO testar se o grafo eh conexo
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN + (grafoLista.isConexo() ? "Sim" : "Não"));
                         }
                     } else {
                         // Caso o grafo esteja vazio

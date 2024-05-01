@@ -338,6 +338,20 @@ public class ListaDirecionada {
     }
 
     /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isConexo() {    
+        for (int i = 0; i < grafo.size(); i++) {
+            if (calcularGrauEntrada(grafo.get(i).getId()) == 0 && calcularGrauSaida(grafo.get(i).getId()) == 0) {
+                return false;
+            }
+        }
+        return true;
+    } 
+
+
+    /**
      * Adiciona cor aos vertices adjacentes ao vértice inserido
      * @param x vértice inserido
      * @param color vetor com o registro das cores dos vertices

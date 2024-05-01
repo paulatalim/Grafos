@@ -246,6 +246,17 @@ public class ListaManage {
         }
         return lnd.isBipartido();
     }
+
+    /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isConexo () {
+        if(direcionado) {
+            return ld.isConexo();
+        }
+        return lnd.isConexo();
+    }
     
     /**
      * Imprime o grafo em forma de lista
