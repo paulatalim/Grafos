@@ -501,36 +501,45 @@ public class App {
                     break;
                    
                 case 8:
+                    // Distancia entre vertices
+
+                    // Exibe cabecalho da pagina
+                    UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
-                        // Exibe cabecalho da pagina
-                        UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
                         UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInforme os vertices que desja calcular a distância\n\n");
 
+                        // Entrada do primeiro vertice
                         UI.print(UI.CYAN + "\tVértice 1: " + UI.WHITE);
                         resposta = scanner.next().charAt(0);
 
+                        // Entrada do segundo vertice
                         UI.print(UI.CYAN + "\n\tVértice 2: " + UI.WHITE);
                         resposta1 = scanner.next().charAt(0);
+                        
+                        // Calcula a distancia entre os vertices inseridos
+                        if(useAnaliseMatriz) {
+                            // TODO Calcular distancia entre dois vértices na matriz
+                        } else {
+                            // TODO Calcular distancia entre dois vértices na lista
+                        }
 
-                        // TODO Calcular distancia entre dois vértices
-
-                        UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.YELLOW + "8");
+                        // Exibe o resultado da distancia
+                        UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.YELLOW);
 
                     } else {
                         // Caso o grafo esteja vazio
-                        UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n");
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                        UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }
                     break;
 
                 case 9:
                     // Analisa e classifica o grafo
 
+                    // Exibe cabecalho da pagina
+                    UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
-
-                        // Exibe cabecalho da pagina
-                        UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
-
                         if(useAnaliseMatriz) {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoMatriz.isGrafosSimples() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoMatriz.isGrafosRegular() ? "Sim" : "Não"));
@@ -546,22 +555,57 @@ public class App {
                         }
                     } else {
                         // Caso o grafo esteja vazio
-                        UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n");
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                        UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }
 
                     break;
 
                 case 10:
-                    // TODO Busca em Largura
+                    // Busca em Largura
+                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** BUSCA EM LARGURA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
+                        if(useAnaliseMatriz) {
+                            // TODO Busca em Largura em matriz
+                        } else {
+                            // TODO Busca em Largura em lista
+                        }
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                    }
                     break;
                 
                 case 11:
-                    // TODO Busca em Profundidade
+                    // Busca em Profundidade
+                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** BUSCA EM PROFUNDIDADE ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+
+                    if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
+                        if(useAnaliseMatriz) {
+                            // TODO Busca em Profundidade na matriz
+                        } else {
+                            // TODO Busca em Profundidade na lista
+                        }
+
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                    }
                     break;
                 
                 case 12:
-                    // TODO AGM
+                    // Arvore geradora minima
+                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** ÁRVORE GERADORA MÍNIMA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+
+                    if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
+                        if(useAnaliseMatriz) {
+                            // TODO AGM em matriz
+                        } else {
+                            // TODO AGM em lista
+                        }
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                    }
                     break;
                 
                 case 13:
