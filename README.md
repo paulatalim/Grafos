@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=d736ff&fontColor=ffffff&height=200&section=header&text=Grafos&fontSize=45&animation=fadeIn&fontAlignY=38)
+![header](https://capsule-render.vercel.app/api?type=waving&color=930BFF&fontColor=ffffff&height=200&section=header&text=Grafos&fontSize=45&animation=fadeIn&fontAlignY=38)
 
 ## Orientações
 
@@ -73,4 +73,4 @@ c. Selecione a opção `Run Java`, localizado no canto superior direito do VS co
 
 - [Walisson Ferreira](https://www.linkedin.com/in/walisson-ferreira-4b580a36/)
 
-![footer](https://capsule-render.vercel.app/api?type=waving&color=d736ff&height=200&section=footer&animation=fadeIn)
+![footer](https://capsule-render.vercel.app/api?type=waving&color=930BFF&height=200&section=footer&animation=fadeIn)
