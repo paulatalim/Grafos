@@ -508,10 +508,10 @@ public class App {
 
                         UI.print(UI.CYAN + "\tVértice 1: " + UI.WHITE);
                         resposta = scanner.next().charAt(0);
-                        
+
                         UI.print(UI.CYAN + "\n\tVértice 2: " + UI.WHITE);
                         resposta1 = scanner.next().charAt(0);
-                    
+
                         // TODO Calcular distancia entre dois vértices
 
                         UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.YELLOW + "8");
