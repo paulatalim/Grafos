@@ -348,16 +348,23 @@ public class ListaNaoDirecionada {
             }
         }
 
-        // TODO Retirar verificacao se eh desconexo no grafo bipartido
-        // Verifica se ha mais de uma componente no grafo
-        for (int i = 0; i < mapeamento.size(); i++) {
-            if(mapeamento.get(Character.valueOf(grafo.get(i).getId())) == -1) {
-                return false;
-            }
-        }
+        if(!isConexo()) return false;
 
         return true;
     }
+
+    /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isConexo() {    
+        for (int i = 0; i < grafo.size(); i++) {
+            if (calcularGrau(grafo.get(i).getId()) == 0) {
+                return false;
+            }
+        }
+        return true;
+    } 
 
     /**
      * Imprime a lista de adjacencia no console
