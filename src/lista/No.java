@@ -30,12 +30,13 @@ public class No {
      * @param vertice_adjacente que deseja criar uma aresta
      * @param peso da aresta
      */
-    public void inserir_aresta(char vertice_adjacente, int peso) {
+    public boolean inserir_aresta(char vertice_adjacente, int peso) {
         if(!arestas.contains(vertice_adjacente)) {
             arestas.add(vertice_adjacente);
             pesos.add(peso);
-            System.err.println("Aresta adicionada");
+            return true;
         }
+        return false;
     }
 
     /**
@@ -53,6 +54,10 @@ public class No {
             }
         }
         return false;
+    }
+
+    public boolean isArestaeExist(char id) {
+        return arestas.contains(id);
     }
 
     /**

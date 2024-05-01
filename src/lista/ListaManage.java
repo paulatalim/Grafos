@@ -100,6 +100,14 @@ public class ListaManage {
         return lnd.remover_aresta(aresta);
     }
 
+    public boolean isArestaeExist(String aresta) {
+        if(direcionado) {
+            return ld.isArestaeExist(aresta);
+        }
+
+        return lnd.isArestaeExist(aresta);
+    }
+
     /**
      * Adiciona uma aresta ao grafo
      *

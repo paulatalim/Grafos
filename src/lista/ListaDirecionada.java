@@ -107,12 +107,12 @@ public class ListaDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        int aux = buscar_vertice(aresta.charAt(0));
+        int aux1 = buscar_vertice(aresta.charAt(0));
+        int aux2 = buscar_vertice(aresta.charAt(1));
 
-        if(aux >= 0 && buscar_vertice(aresta.charAt(1)) >= 0) {
+        if(aux1 >= 0 && aux2 >= 0) {
             // Adiciona uma nova aresta
-            grafo.get(aux).inserir_aresta(aresta.charAt(1), peso);
-            return true;
+            return grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
         }
 
         return false;
@@ -131,6 +131,16 @@ public class ListaDirecionada {
         }
 
         // Caso nao encontrar a aresta
+        return false;
+    }
+
+    public boolean isArestaeExist(String aresta) {
+        int aux1 = buscar_vertice(aresta.charAt(0));
+
+        if(aux1 >= 0) {
+            return grafo.get(aux1).isArestaeExist(aresta.charAt(1));
+        }
+
         return false;
     }
 

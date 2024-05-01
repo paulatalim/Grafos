@@ -264,16 +264,39 @@ public class App {
                             // Leitura da aresta
                             UI.print(UI.CYAN + "\tAresta " + cont + ": " + UI.WHITE);
                             aresta = scanner.next();
-                            UI.println("");
-
-                            if (!aresta.equals("0") && aresta.length() > 1) {
-                                // Adiciona aresta na lista e na matriz
-                                grafoLista.inserir_aresta(aresta);
-                                grafoMatriz.inserir_aresta(aresta);
-                            }
 
                             // Atualiza contador
                             cont++;
+
+                            // Valida a aresta
+                            if (!aresta.equals("0") && aresta.length() > 1) {
+                                if(grafoMatriz.isPonderado()) {
+                                    int peso;
+
+                                    if(grafoLista.isArestaeExist(aresta)) {
+                                        UI.print(UI.CYAN +"\tNovo peso: " + UI.WHITE);
+                                        peso = scanner.nextInt();
+
+                                        grafoLista.atualizarPeso(aresta, peso);
+                                        grafoMatriz.atualizarPeso(aresta, peso);
+                                    
+                                    } else {
+                                        UI.print(UI.CYAN +"\tPeso: " + UI.WHITE);
+                                        peso = scanner.nextInt();
+
+                                        grafoLista.inserir_aresta(aresta, peso);
+                                        grafoMatriz.inserir_aresta(aresta, peso);
+                                    }
+
+                                } else {
+                                    // Adiciona aresta na lista e na matriz
+                                    grafoLista.inserir_aresta(aresta);
+                                    grafoMatriz.inserir_aresta(aresta);
+                                }
+                            }
+
+                            UI.println("");
+
                         } while (!aresta.equals("0"));
                     } else {
                         UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo não possui vértices, adicione vértices para habilitar está função");

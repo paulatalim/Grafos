@@ -120,16 +120,16 @@ public class ListaNaoDirecionada {
             
             if (aux1 >= 0 && aux2 >= 0) {
                 if(aux1 != aux2) {
-                    grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
-                    grafo.get(aux2).inserir_aresta(aresta.charAt(0), peso);
-                } else {
-                    // Adiciona uma laco
-                    grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
+                    // Adiciona uma aresta
+                    return (
+                        grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso) &&
+                        grafo.get(aux2).inserir_aresta(aresta.charAt(0), peso)
+                    );
                 }
-                return true;
+
+                // Adiciona uma laco
+                return grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
             }
-            
-            return false;
         }
 
         return false;
@@ -156,6 +156,16 @@ public class ListaNaoDirecionada {
         }
 
         // Caso não encontrar algum dos vertices
+        return false;
+    }
+
+    public boolean isArestaeExist(String aresta) {
+        int aux1 = buscar_vertice(aresta.charAt(0));
+
+        if(aux1 >= 0) {
+            return grafo.get(aux1).isArestaeExist(aresta.charAt(1));
+        }
+
         return false;
     }
 

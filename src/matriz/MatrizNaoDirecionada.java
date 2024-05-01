@@ -83,7 +83,7 @@ public class MatrizNaoDirecionada {
             int i = buscar_vertice(aresta.charAt(0));
             int j = buscar_vertice(aresta.charAt(1));
 
-            if(i == 0 && j == 0) {
+            if(i >= 0 && j >= 0) {
                 if(i != j) {
                     // Adiciona uma nova aresta
                     grafo[i][j] = peso;
