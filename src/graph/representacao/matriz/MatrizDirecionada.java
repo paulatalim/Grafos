@@ -1,7 +1,9 @@
-package matriz;
+package graph.representacao.matriz;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import graph.busca.BreadthFirstSearch;
 
 public class MatrizDirecionada {
     private int[][] grafo;
@@ -359,6 +361,11 @@ public class MatrizDirecionada {
             }
         }
         return false;
+    }
+
+    public char[] realizarBuscaLargura() {
+        BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices);
+        return toArrayChar(BFS.bfs(vertices.get(0)));
     }
 
     /**

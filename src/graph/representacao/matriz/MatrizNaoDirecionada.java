@@ -1,7 +1,9 @@
-package matriz;
+package graph.representacao.matriz;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import graph.busca.BreadthFirstSearch;
 
 public class MatrizNaoDirecionada {
     private int[][] grafo;
@@ -348,6 +350,12 @@ public class MatrizNaoDirecionada {
         return false;
     }
 
+     public char[] realizarBuscaLargura() {
+        BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices);
+        return toArrayChar(BFS.bfs(vertices.get(0)));
+    }
+
+    
     /**
      * Imprime a matriz de adjacencia no console
      */

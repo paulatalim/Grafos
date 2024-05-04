@@ -1,9 +1,11 @@
-package lista;
+package graph.representacao.lista;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import graph.busca.BreadthFirstSearch;
 
 public class ListaNaoDirecionada {
     private List<No> grafo;
@@ -375,6 +377,11 @@ public class ListaNaoDirecionada {
         }
         return true;
     } 
+
+    public char[] realizarBuscaLargura() {
+        BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
+        return toArrayChar(BFS.bfs(grafo.get(0).getId()));
+    }
 
     /**
      * Imprime a lista de adjacencia no console

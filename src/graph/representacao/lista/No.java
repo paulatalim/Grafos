@@ -1,4 +1,4 @@
-package lista;
+package graph.representacao.lista;
 
 import java.util.List;
 import java.util.ArrayList;

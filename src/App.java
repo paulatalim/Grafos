@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-import lista.ListaManage;
-import matriz.MatrizManage;
+import graph.representacao.lista.ListaManage;
+import graph.representacao.matriz.MatrizManage;
 
 /**
  * PONTÍFICIA UNIVERSIDADE CATÓLICA DE MINAS GERAIS

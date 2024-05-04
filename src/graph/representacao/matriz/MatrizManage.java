@@ -1,4 +1,4 @@
-package matriz;
+package graph.representacao.matriz;
 
 public class MatrizManage {
     private boolean direcionado;
@@ -179,17 +179,7 @@ public class MatrizManage {
         return mnd.atualizarPeso (aresta, newPeso);
     }
 
-    /**
-     * Imprime o grafo em forma de matriz
-     */
-    public void exibir_matriz () {
-        if(direcionado) {
-            md.exibir_matriz();
-        } else {
-            mnd.exibir_matriz();
-        }
-    }
-
+    
     /**
      * Verifica a vizinhaca do vertice
      * @param id_vertice a ser analisado
@@ -197,12 +187,12 @@ public class MatrizManage {
      */
     public char[] verfica_vizinhos (char id_vertice) {
         if(direcionado){
-           return null;
+            return null;
         } else {
             return mnd.verifica_vizinhanca(id_vertice);   
         }
     }
-
+    
     /**
      * Verifica os sucessores de um vertice
      * @param vertice a ser analisado
@@ -215,7 +205,7 @@ public class MatrizManage {
         }
         return null;
     }
-
+    
     /**
      * Verifica os predecessores de um vertice
      * @param id_vertice a ser analisado
@@ -226,11 +216,31 @@ public class MatrizManage {
             char[] arrayPredecessores = md.verifica_predecessores(id_vertice);
             return arrayPredecessores;
         }
-
+        
         return null;
     }
 
-        /** 
+    public char[] realizarBuscaLargura() {
+        if(direcionado) {
+            return md.realizarBuscaLargura();
+        }
+
+        return mnd.realizarBuscaLargura();
+    }
+
+    
+    /**
+     * Imprime o grafo em forma de matriz
+     */
+    public void exibir_matriz () {
+        if(direcionado) {
+            md.exibir_matriz();
+        } else {
+            mnd.exibir_matriz();
+        }
+    }
+
+    /** 
      * Se o grafo eh ou nao direcionado
      * @param isDirecionado
      */

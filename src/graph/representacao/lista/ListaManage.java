@@ -1,4 +1,4 @@
-package lista;
+package graph.representacao.lista;
 
 import java.util.List;
 
@@ -258,6 +258,14 @@ public class ListaManage {
         return lnd.isConexo();
     }
     
+    public char[] realizarBuscaLargura() {
+        if(direcionado) {
+            return ld.realizarBuscaLargura();
+        }
+
+        return lnd.realizarBuscaLargura();
+    }
+
     /**
      * Imprime o grafo em forma de lista
      */
