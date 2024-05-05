@@ -566,8 +566,10 @@ public class App {
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         if(useAnaliseMatriz) {
                             // TODO Busca em Largura em matriz
-                        } else {
+                            UI.print("\t" + String.valueOf(grafoMatriz.realizarBuscaLargura()));
+                        } else {    
                             // TODO Busca em Largura em lista
+                            UI.print("\t" + String.valueOf(grafoLista.realizarBuscaLargura()));
                         }
                     } else {
                         // Caso o grafo esteja vazio

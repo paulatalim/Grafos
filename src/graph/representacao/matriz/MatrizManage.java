@@ -224,7 +224,6 @@ public class MatrizManage {
         if(direcionado) {
             return md.realizarBuscaLargura();
         }
-
         return mnd.realizarBuscaLargura();
     }
 
