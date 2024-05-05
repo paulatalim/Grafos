@@ -38,6 +38,21 @@ public class MatrizNaoDirecionada {
     }
 
     /**
+     * Converte uma List<Character> para um vertor de char
+     * @param list - lista a ser convertida
+     * @return Array de caracteres
+     */
+    private char[] toArrayChar(List<Character> list) {
+        char[] vetor = new char[list.size()];
+        
+        for(int i = 0; i < list.size(); i++) {
+            vetor[i] = Character.valueOf(list.get(i));
+        }
+
+        return vetor;
+    }
+
+    /**
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
      */
@@ -350,12 +365,12 @@ public class MatrizNaoDirecionada {
         return false;
     }
 
-     public char[] realizarBuscaLargura() {
+    public char[] realizarBuscaLargura() {
         BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices);
         return toArrayChar(BFS.bfs(vertices.get(0)));
     }
 
-    
+
     /**
      * Imprime a matriz de adjacencia no console
      */

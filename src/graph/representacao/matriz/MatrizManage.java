@@ -178,7 +178,6 @@ public class MatrizManage {
         
         return mnd.atualizarPeso (aresta, newPeso);
     }
-
     
     /**
      * Verifica a vizinhaca do vertice
@@ -228,7 +227,6 @@ public class MatrizManage {
         return mnd.realizarBuscaLargura();
     }
 
-    
     /**
      * Imprime o grafo em forma de matriz
      */
