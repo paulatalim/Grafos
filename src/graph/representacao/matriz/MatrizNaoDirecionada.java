@@ -227,11 +227,7 @@ public class MatrizNaoDirecionada {
             }
         }
         
-        char[] vetorVizinhos = new char[listaVizinhos.size()];
-        for(int i = 0; i < listaVizinhos.size(); i++) {
-            vetorVizinhos[i] = Character.valueOf(listaVizinhos.get(i));
-        }
-        return vetorVizinhos;
+        return toArrayChar(listaVizinhos);
     }
 
     /**

@@ -40,7 +40,7 @@ public class BreadthFirstSearch {
             // Dequeue a vertex from queue and print it
             int currentNode = queue.poll();
             tree.add(vertices.get(currentNode));
-            System.out.print(currentNode + " ");
+            //System.out.print(currentNode + " ");
 
             // Get all adjacent vertices of the dequeued
             // vertex currentNode If an adjacent has not
@@ -103,10 +103,9 @@ public class BreadthFirstSearch {
     // Function to perform Breadth First Search on a graph
     // represented using adjacency list
     public ArrayList<Character> bfs(char startNode) {
-        if(graphL.isEmpty()) {
+        if(graphL == null) {
             return bfsMatriz(startNode);
         }
-
         return bfsList(startNode);
     }
 }
