@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import graph.busca.BreadthFirstSearch;
+import graph.busca.DepthFirstSearch;
 
 public class ListaNaoDirecionada {
     private List<No> grafo;
@@ -381,6 +382,12 @@ public class ListaNaoDirecionada {
     public char[] realizarBuscaLargura() {
         BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
         return toArrayChar(BFS.bfs(grafo.get(0).getId()));
+    }
+
+    public DepthFirstSearch realizarBuscaProfundidade() {
+        DepthFirstSearch DFS = new DepthFirstSearch(grafo);
+        DFS.dfs(grafo.get(0).getId());
+        return DFS;
     }
 
     /**

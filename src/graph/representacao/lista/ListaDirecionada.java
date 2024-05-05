@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Queue;
 
 import graph.busca.BreadthFirstSearch;
+import graph.busca.DepthFirstSearch;
 
 public class ListaDirecionada {
     private List<No> grafo;
@@ -489,6 +490,12 @@ public class ListaDirecionada {
     public char[] realizarBuscaLargura() {
         BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
         return toArrayChar(BFS.bfs(grafo.get(0).getId()));
+    }
+
+    public DepthFirstSearch realizarBuscaProfundidade() {
+        DepthFirstSearch DFS = new DepthFirstSearch(grafo);
+        DFS.dfs(grafo.get(0).getId());
+        return DFS;
     }
 
     /**

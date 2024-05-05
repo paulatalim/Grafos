@@ -1,5 +1,7 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
+import graph.busca.DepthFirstSearch;
 import graph.representacao.lista.ListaManage;
 import graph.representacao.matriz.MatrizManage;
 
@@ -18,6 +20,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         ListaManage grafoLista = new ListaManage();
         MatrizManage grafoMatriz = new MatrizManage();
+        DepthFirstSearch buscaEmProfundidade;
 
         boolean opcao_invalida;
         String aresta;
@@ -584,8 +587,17 @@ public class App {
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         if(useAnaliseMatriz) {
                             // TODO Busca em Profundidade na matriz
+                            buscaEmProfundidade = grafoMatriz.realizarBuscaProfundidade();
+                            UI.println("\tTDs: " + Arrays.toString(buscaEmProfundidade.getTD()));
+                            UI.println("\tTTs: " + Arrays.toString(buscaEmProfundidade.getTT()));
+                            UI.println("\tPais: " + Arrays.toString(buscaEmProfundidade.getPais()));
+                            
                         } else {
                             // TODO Busca em Profundidade na lista
+                            buscaEmProfundidade = grafoLista.realizarBuscaProfundidade();
+                            UI.println("\tTDs: " + Arrays.toString(buscaEmProfundidade.getTD()));
+                            UI.println("\tTTs: " + Arrays.toString(buscaEmProfundidade.getTT()));
+                            UI.println("\tPais: " + Arrays.toString(buscaEmProfundidade.getPais()));
                         }
 
                     } else {

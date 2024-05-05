@@ -1,5 +1,7 @@
 package graph.representacao.matriz;
 
+import graph.busca.DepthFirstSearch;
+
 public class MatrizManage {
     private boolean direcionado;
     private boolean ponderado;
@@ -227,6 +229,12 @@ public class MatrizManage {
         return mnd.realizarBuscaLargura();
     }
 
+    public DepthFirstSearch realizarBuscaProfundidade() {
+        if(direcionado) {
+            return md.realizarBuscaProfundidade();
+        }
+        return mnd.realizarBuscaProfundidade();
+    }
     
     /**
      * Imprime o grafo em forma de matriz
