@@ -172,13 +172,14 @@ public class App {
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
                 UI.println("\t" + "10 - Realizar Busca em Largura");
                 UI.print("\t" + "11 - Realizar Busca em Profundidade");
+                UI.print("\t" + "12 - Realizar Ordenação Topologica");
                 
                 if(grafoLista.isPonderado()) {
-                    UI.print("\n\t" + "12 - Gerar Árvore Geradora Mínima");
+                    UI.print("\n\t" + "13 - Gerar Árvore Geradora Mínima");
                 }
 
                 UI.print(UI.PURPLE_BACKGROUND + UI.BLACK + "\n\n\t" + " OUTROS   " + "\n");
-                UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "13 - Criar novo grafo" + "\n"
+                UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "14 - Criar novo grafo" + "\n"
                                     + "\t" + "0 - SAIR" + "\n");
                 
                 if (opcao_invalida) {
@@ -191,7 +192,7 @@ public class App {
                 opcao_invalida = true;
 
                 // Valida a resposta do usuario
-            } while (opcao < 0 || opcao > 13 || (!grafoLista.isPonderado() && opcao == 12));
+            } while (opcao < 0 || opcao > 14 || (!grafoLista.isPonderado() && opcao == 13));
 
             switch (opcao) {
                 case 1:
@@ -595,6 +596,21 @@ public class App {
                     break;
                 
                 case 12:
+                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** ORDENAÇÃO TOPOLÓGICA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+
+                    if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
+                        if(useAnaliseMatriz) {
+                            // TODO ordenacao na matriz
+                        } else {
+                            // TODO odenacao na lista
+                        }
+                    } else {
+                        // Caso o grafo esteja vazio
+                        UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                    }
+                    break;
+                
+                case 13:
                     // Arvore geradora minima
                     UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** ÁRVORE GERADORA MÍNIMA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
 
@@ -610,7 +626,7 @@ public class App {
                     }
                     break;
                 
-                case 13:
+                case 14:
                     // Cria novo grafo
 
                     opcao_invalida = true;
