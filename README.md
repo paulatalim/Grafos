@@ -25,19 +25,35 @@ Para uma melhor experiência com o programa, abra as configurações do VS Code 
 
 ### 2. Clonar projeto
 
-Para clonar o projeto abra seu prompt comando e coloque os seguintes comando
+Para clonar o projeto abra seu `command prompt` e coloque os seguintes comando
 
 ```
-git clone https://github.com/paulatalim/Grafos-Trabalho.git
+git clone https://github.com/paulatalim/Grafos.git
 ```
 
 ```
-cd Grafos-Trabalho
+cd Grafos
 ```
 
 > Obs: instale o [git](https://git-scm.com/) para rodar os comandos acima
 
-### 3. Rodar o programa
+### 3. Compilar código
+
+Para evitar erros de versões no `jdk`, compile o código. Para isso, siga as orientações:
+
+a. Abra a pasta do projeto no `command prompt`;
+
+b. Insira os seguintes comandos no terminal:
+
+```
+cd src
+```
+
+```
+javac App.java -d ../bin
+```
+
+### 4. Rodar o programa
 
 a. Abra o projeto em seu VS Code;
 

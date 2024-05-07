@@ -9,15 +9,16 @@ import java.util.Queue;
 
 public class ListaDirecionada {
     private List<No> grafo;
+    private boolean ponderado;
 
-    ListaDirecionada () {
+    ListaDirecionada() {
         grafo = new ArrayList<No>();
     }
 
     /**
      * Encontra um vertice no grafo
      * @param id do vertice a ser procurado
-     * @return indice na lista no grafo
+     * @return indice na lista no grafo ou -1, se o vertice não existir
      */
     private int buscar_vertice(char id) {
         for(int i = 0; i < grafo.size(); i++) {
@@ -90,10 +91,28 @@ public class ListaDirecionada {
     public boolean inserir_aresta(String aresta) {
         int aux = buscar_vertice(aresta.charAt(0));
 
-        if(aux >=0) {
+        if(aux >= 0 && buscar_vertice(aresta.charAt(1)) >= 0) {
             // Adiciona uma nova aresta
             grafo.get(aux).inserir_aresta(aresta.charAt(1));
             return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Adiciona uma aresta do grafo
+     * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
+     * @param peso da aresta
+     * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
+     */
+    public boolean inserir_aresta(String aresta, int peso) {
+        int aux1 = buscar_vertice(aresta.charAt(0));
+        int aux2 = buscar_vertice(aresta.charAt(1));
+
+        if(aux1 >= 0 && aux2 >= 0) {
+            // Adiciona uma nova aresta
+            return grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
         }
 
         return false;
@@ -115,45 +134,222 @@ public class ListaDirecionada {
         return false;
     }
 
-    public List<Character> encontrarPredecessores(char vertice) {
+    public boolean isArestaeExist(String aresta) {
+        int aux1 = buscar_vertice(aresta.charAt(0));
+
+        if(aux1 >= 0) {
+            return grafo.get(aux1).isArestaeExist(aresta.charAt(1));
+        }
+
+        return false;
+    }
+
+    /**
+     * Atualiza o Peso de uma aresta
+     * 
+     * @param aresta que o peso vai ser atualizado
+     * @param newPeso o novo peso da aresta
+     * @return true (caso a atualizacao ocorrer com sucesso) ou false (caso ocorrer algum erro)
+     */
+    public boolean atualizarPeso(String aresta, int newPeso) {
+        if(ponderado) {
+            return grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso);
+        }
+        return false;
+    }
+
+    /**
+     * Converte uma List<Character> para um vertor de char
+     * @param list - lista a ser convertida
+     * @return Array de caracteres
+     */
+    private char[] toArrayChar(List<Character> list) {
+        char[] vetor = new char[list.size()];
+        
+        for(int i = 0; i < list.size(); i++) {
+            vetor[i] = Character.valueOf(list.get(i));
+        }
+
+        return vetor;
+    }
+
+    /**
+     * Verifica os predecessores de um vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices predecessores)
+     */
+    public char[] encontrarPredecessores(char vertice) {
         List<Character> predecessor = new ArrayList<Character>();
 
         for (int i = 0; i < grafo.size(); i++) {
             for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                if(grafo.get(i).getAresta(j) == vertice) {
+                if(grafo.get(i).getAresta(j) == vertice && !predecessor.contains(grafo.get(i).getId())) {
                     predecessor.add(Character.valueOf(grafo.get(i).getId()));
                 }
             }
         }
 
-        return predecessor;
+        return toArrayChar(predecessor);
     }
 
-    public List<Character> encontrarSucessores(char vertice) {
+    /**
+     * Verifica os sucessores de um vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices sucessores)
+     */
+    public char[] encontrarSucessores(char vertice) {
         List<Character> sucessores = new ArrayList<Character>();
 
         for (int i = 0; i < grafo.size(); i++) {
             if(grafo.get(i).getId() == vertice) {
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                    sucessores.add(grafo.get(i).getAresta(j));
+                    if(!sucessores.contains(grafo.get(i).getAresta(j))) {
+                        sucessores.add(grafo.get(i).getAresta(j));
+                    }
                 }
             }
         }
 
-        return sucessores;
+        return toArrayChar(sucessores);
     }
 
-    public int grauEntrada(char vertice) {
-        return encontrarPredecessores(vertice).size();
+    /**
+     * Calcula o grau de entrada de um vertice
+     * @param vertice a ser analisado
+     * @return int (grau de entrada do vertice)
+     */
+    public int calcularGrauEntrada(char vertice) {
+        int grau = 0;
+
+        for (int i = 0; i < grafo.size(); i++) {
+            for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                if(grafo.get(i).getAresta(j) == vertice) {
+                    grau ++;
+                }
+            }
+        }
+
+        return grau;
     }
 
-    public int grauSaida(char vertice) {
-        return encontrarSucessores(vertice).size();
+     /**
+     * Calcula o grau de saida de um vertice
+     * @param vertice a ser analisado
+     * @return int (grau de saida do vertice)
+     */
+    public int calcularGrauSaida(char vertice) {
+        for (int i = 0; i < grafo.size(); i++) {
+            if(grafo.get(i).getId() == vertice) {
+                return grafo.get(i).qnt_aresta();
+            }
+        }
+
+        return -1;
     }
 
-    public int grafo(char vertice) {
-        return grauEntrada(vertice) + grauSaida(vertice);
+    /**
+     * Verifica se o grafo eh simples
+     * @return true, se for simples, false, caso contrario
+     */
+    public boolean isSimples() {
+        for(int i = 0; i < grafo.size(); i++) {
+            for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                // Verifica se ha laco
+                if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                    return false;
+                }
+
+                // Verifica se há aresta paralela
+                for(int k = grafo.get(i).qnt_aresta() - 1; k > j; k--) {
+                    if(k != j && grafo.get(i).getAresta(j) == grafo.get(i).getAresta(k)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
+
+    /**
+     * Verifica se o grafo eh regular
+     * @return true, se for regular, false, caso contrario
+     */
+    public boolean isRegular() {
+        if(isGrafosEmpty()) {
+            return false;
+        }
+
+        char verticeAux;
+        char vertice = grafo.get(0).getId();
+        int grauEntrada = calcularGrauEntrada(vertice);
+        int grauSaida = calcularGrauSaida(vertice);
+        
+        for(int i = 1; i < grafo.size(); i++) {
+            verticeAux = grafo.get(i).getId();
+
+            if(grauEntrada != calcularGrauEntrada(verticeAux) || grauSaida != calcularGrauSaida(verticeAux)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Verifica se o grafo eh completo
+     * @return true, se for completo, false, caso contrario
+     */
+    public boolean isCompleto() {
+        if(isSimples()) {
+            char vertice;
+            boolean exist;
+            for(int i = 0; i < grafo.size(); i++) {
+                vertice = grafo.get(i).getId();
+
+                int ge = calcularGrauEntrada(vertice);
+                int gs = calcularGrauSaida(vertice);
+
+                // Verifica se o vertice possui aresta e se grau esta correto
+                if(ge + gs == 0 || ge != gs) {
+                    return false;
+                }
+
+                exist = true;
+                // Verifica se há aresta
+                for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                    exist = false;
+
+                    for(int k = 0; k < grafo.size(); k++) {
+                        if(grafo.get(i).getAresta(j) == grafo.get(k).getId() && grafo.get(k).getId() != grafo.get(i).getId()) {
+                            exist = true;
+                        }
+                    }
+
+                    if(!exist) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isConexo() {    
+        for (int i = 0; i < grafo.size(); i++) {
+            if (calcularGrauEntrada(grafo.get(i).getId()) == 0 && calcularGrauSaida(grafo.get(i).getId()) == 0) {
+                return false;
+            }
+        }
+        return true;
+    } 
+
 
     /**
      * Adiciona cor aos vertices adjacentes ao vértice inserido
@@ -291,7 +487,7 @@ public class ListaDirecionada {
     /**
      * Imprime a lista de adjacencia no console
      */
-    public void exibir_lista () {
+    public void exibir_lista() {
         for (int i = 0; i < grafo.size(); i++) {
             No no = grafo.get(i);
             System.out.print("\t" + no.getId() + ": [ ");
@@ -306,6 +502,23 @@ public class ListaDirecionada {
 
             System.out.println(" ]");
         }
+    }
+
+    /**
+     * Se o Grafo eh poderado
+     * @param isPonderado
+     */
+    public void setIsPonderado(boolean isPonderado) {
+        this.ponderado = isPonderado;
+    }
+
+    /**
+     * Se o grafo eh poderado
+     * 
+     * @return true ou false
+     */
+    public boolean isPonderado() {
+        return ponderado;
     }
 
     /**

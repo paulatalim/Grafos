@@ -1,10 +1,8 @@
 package matriz;
 
-
-//import java.util.List;
-
 public class MatrizManage {
     private boolean direcionado;
+    private boolean ponderado;
     private MatrizDirecionada md;
     private MatrizNaoDirecionada mnd;
 
@@ -55,6 +53,28 @@ public class MatrizManage {
     }
 
     /**
+     * Confere se o grafo é bipartido ou não
+     * @return true, se for bipartido, false, caso contrário
+     */
+    public boolean isGrafosBipartido () {
+        if(direcionado) {
+            return md.isGrafosBipartido();
+        }
+        return mnd.isGrafosBipartido();
+    }
+
+    /**
+     * Confere se o grafo é conexo ou não
+     * @return true, se for conexo, false, caso contrário
+     */
+    public boolean isGrafosConexo () {
+        if(direcionado) {
+            return md.isGrafosConexo();
+        }
+        return mnd.isGrafosConexo();
+    }
+
+    /**
      * Verifica se um vertice existe
      * 
      * @param id do vertice a ser verificado
@@ -88,7 +108,7 @@ public class MatrizManage {
      */
     public int[] grau_vertice (char id_vertice) {
         if(direcionado) {
-            return md.grau_vertice(id_vertice);
+            return null;
         }
         return mnd.grau_vertice(id_vertice);
     }
@@ -119,6 +139,19 @@ public class MatrizManage {
     }
 
     /**
+     * Adiciona uma aresta ao grafo
+     *
+     * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
+     */
+    public boolean inserir_aresta (String aresta, int peso) {
+        if(direcionado) {
+            return md.inserir_aresta(aresta, peso);
+        }
+        
+        return mnd.inserir_aresta(aresta, peso);
+    }
+
+    /**
      * Remove uma aresta do grafo
      * 
      * @param aresta - informada pelo id dos vertices adjacentes
@@ -133,6 +166,71 @@ public class MatrizManage {
     }
 
     /**
+     * Atualiza o peso de uma aresta
+     * @param aresta que o peso será atualizado, indicada com seus vertices adjacentes
+     * @param newPeso novo peso da aresta
+     * @return true, caso encontrar os vertices e haver aresta entre eles, ou false, caso contrario
+     */
+    public boolean atualizarPeso(String aresta, int newPeso) {
+        if(direcionado) {
+            return md.atualizarPeso (aresta, newPeso);
+        }
+        
+        return mnd.atualizarPeso (aresta, newPeso);
+    }
+
+    /**
+     * Imprime o grafo em forma de matriz
+     */
+    public void exibir_matriz () {
+        if(direcionado) {
+            md.exibir_matriz();
+        } else {
+            mnd.exibir_matriz();
+        }
+    }
+
+    /**
+     * Verifica a vizinhaca do vertice
+     * @param id_vertice a ser analisado
+     * @return vetor de char (vertices adjacentes ao analisado) ou null (caso o grafo ser direcionado)
+     */
+    public char[] verfica_vizinhos (char id_vertice) {
+        if(direcionado){
+           return null;
+        } else {
+            return mnd.verifica_vizinhanca(id_vertice);   
+        }
+    }
+
+    /**
+     * Verifica os sucessores de um vertice
+     * @param vertice a ser analisado
+     * @return vetor de char (vertices sucessores) ou null (caso o grafo nao ser direcionado)
+     */
+    public char[] verifica_sucessores (char id_vertice){
+        if(direcionado){
+            char[] arraySucessores = md.verifica_sucessores(id_vertice);
+            return arraySucessores;
+        }
+        return null;
+    }
+
+    /**
+     * Verifica os predecessores de um vertice
+     * @param id_vertice a ser analisado
+     * @return vetor de char (vertices predecessores) ou null (caso o grafo nao ser direcionado)
+     */
+    public char[] verifica_predecessores (char id_vertice){
+        if(direcionado){
+            char[] arrayPredecessores = md.verifica_predecessores(id_vertice);
+            return arrayPredecessores;
+        }
+
+        return null;
+    }
+
+        /** 
      * Se o grafo eh ou nao direcionado
      * @param isDirecionado
      */
@@ -155,40 +253,25 @@ public class MatrizManage {
     }
 
     /**
-     * Imprime o grafo em forma de matriz
+     * Se o Grafo eh poderado
+     * @param isPonderado
      */
-    public void exibir_matriz () {
+    public void setIsPonderado(boolean isPonderado) {
+        this.ponderado = isPonderado;
+
         if(direcionado) {
-            md.exibir_matriz();
+            md.setIsPonderado(isPonderado);
         } else {
-            mnd.exibir_matriz();
+            mnd.setIsPonderado(isPonderado);
         }
     }
 
-    public char[] verfica_vizinhos (char id_vertice) {
-        if(direcionado){
-           return new char[0];
-        } else {
-            return mnd.verifica_vizinhanca(id_vertice);   
-        }
-    }
-
-    public char[] verifica_sucessores (char id_vertice){
-        if(direcionado){
-            char[] arraySucessores = md.verifica_sucessores(id_vertice);
-            return arraySucessores;
-            
-        } else {
-            return new char[0];
-        }
-    }
-
-    public char[] verifica_predecessores (char id_vertice){
-        if(direcionado){
-            char[] arrayPredecessores = md.verifica_predecessores(id_vertice);
-            return arrayPredecessores;
-        } else { 
-            return new char[0];
-        }
+    /**
+     * Se o grafo eh poderado
+     * 
+     * @return true ou false
+     */
+    public boolean isPonderado() {
+        return ponderado;
     }
 }
