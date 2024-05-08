@@ -171,7 +171,7 @@ public class App {
                 UI.println(UI.BLUE_BACKGROUND + UI.BLACK + "\t" + " ALGORITMOS DE BUSCA E ÁRVORE   ");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
                 UI.println("\t" + "10 - Realizar Busca em Largura");
-                UI.print("\t" + "11 - Realizar Busca em Profundidade");
+                UI.println("\t" + "11 - Realizar Busca em Profundidade");
                 UI.print("\t" + "12 - Realizar Ordenação Topologica");
                 
                 if(grafoLista.isPonderado()) {
@@ -679,7 +679,7 @@ public class App {
                         } else if (resposta == 'n') {
                             // Configura o grafo nao ponderado
                             grafoLista.setIsPonderado(false);
-                            grafoMatriz.setIsPonderado(true);
+                            grafoMatriz.setIsPonderado(false);
                             opcao_invalida = false;
                         } else {
                             // Exibe mensagem de erro
@@ -696,9 +696,9 @@ public class App {
                         UI.println(UI.BLACK_BACKGROUND + UI.GREEN + "\tInformações do grafo:");
             
                         if(grafoLista.isDirecionado()) {
-                            UI.print("\t - Grafo Direcionado");
+                            UI.println("\t - Grafo Direcionado");
                         } else {
-                            UI.print("\t - Grafo Não Direcionado");
+                            UI.println("\t - Grafo Não Direcionado");
                         }
 
                         if (grafoLista.isPonderado()) {
