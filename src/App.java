@@ -172,7 +172,7 @@ public class App {
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
                 UI.println("\t" + "10 - Realizar Busca em Largura");
                 UI.println("\t" + "11 - Realizar Busca em Profundidade");
-                UI.print("\t" + "12 - Realizar Ordenação Topologica");
+                UI.print("\t" + "12 - Realizar Ordenação Topológica");
                 
                 if(grafoLista.isPonderado()) {
                     UI.print("\n\t" + "13 - Gerar Árvore Geradora Mínima");
@@ -564,13 +564,28 @@ public class App {
                 case 10:
                     // Busca em Largura
                     UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** BUSCA EM LARGURA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    char[] result;
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         if(useAnaliseMatriz) {
                             // TODO Busca em Largura em matriz
-                            grafoMatriz.realizarBuscaLargura();
+                            result = grafoMatriz.realizarBuscaLargura();
                         } else {
                             // TODO Busca em Largura em lista
-                            grafoLista.realizarBuscaLargura();
+                            result = grafoLista.realizarBuscaLargura();
+                        }
+
+                        // Exibe a arvore ou as arvores geradas
+                        UI.print("\t- Árvore 1: " + result[0]);
+                        cont = 2;
+                        for(int i = 1; i < result.length; i++) {
+                            if(result[i] != '-') {
+
+                                UI.print(" -> " + result[i]);
+                            } else {
+
+                                UI.print("\n\n\t- Árvore " + cont + ": " + result[++i]);
+                                cont++;
+                            }
                         }
                     } else {
                         // Caso o grafo esteja vazio

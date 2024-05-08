@@ -30,32 +30,48 @@ public class BreadthFirstSearch {
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[vertices.size()];
         ArrayList<Character> tree = new ArrayList<>();
+        boolean allNodeVisited = false;
 
         // Mark the current node as visited and enqueue it
         visited[vertices.indexOf(verticeInicial)] = true;
         queue.add(vertices.indexOf(verticeInicial));
 
-        // Iterate over the queue
-        while (!queue.isEmpty()) {
-            // Dequeue a vertex from queue and print it
-            int currentNode = queue.poll();
-            tree.add(vertices.get(currentNode));
-            //System.out.print(currentNode + " ");
+        while(allNodeVisited) {
 
-            // Get all adjacent vertices of the dequeued
-            // vertex currentNode If an adjacent has not
-            // been visited, then mark it visited and
-            // enqueue 
-            
-            for (int i = 0; i < vertices.size(); i++) {
-                if(graphM[currentNode][i] != 0 || graphM[i][currentNode] != 0) {
-                    if(!visited[i]) {
-                        visited[i] = true;
-                        queue.add(i);
+            // Iterate over the queue
+            while (!queue.isEmpty()) {
+                // Dequeue a vertex from queue and print it
+                int currentNode = queue.poll();
+                tree.add(vertices.get(currentNode));
+                //System.out.print(currentNode + " ");
+                
+                // Get all adjacent vertices of the dequeued
+                // vertex currentNode If an adjacent has not
+                // been visited, then mark it visited and
+                // enqueue 
+                
+                for (int i = 0; i < vertices.size(); i++) {
+                    if(graphM[currentNode][i] != 0 || graphM[i][currentNode] != 0) {
+                        if(!visited[i]) {
+                            visited[i] = true;
+                            queue.add(i);
+                        }
                     }
                 }
             }
+
+            // Verifica se todos os vertices foram visitados
+            allNodeVisited = true;
+            for(int i = 0; i < visited.length; i ++) {
+                if(!visited[i]) {
+                    visited[i] = true;
+                    queue.add(i);
+                    allNodeVisited = false;
+                    tree.add('-');
+                }
+            }
         }
+
 
         return tree;
     }
@@ -104,6 +120,8 @@ public class BreadthFirstSearch {
             for(int i = 0; i < visited.length; i++) {
                 if(!visited[i]) {
                     allNodeVisited = false;
+                    queue.add(i);
+                    visited[i] = true;
                     tree.add('-');
                 }
             }
