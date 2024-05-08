@@ -64,6 +64,7 @@ public class BreadthFirstSearch {
         // Create a queue for BFS
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[graphL.size()];
+        boolean allNodeVisited = false;
         ArrayList<Character> tree = new ArrayList<>();
 
         // Mark the current node as visited and enqueue 
@@ -75,24 +76,35 @@ public class BreadthFirstSearch {
             }
         }
 
-        // Iterate over the queue
-        while (!queue.isEmpty()) {
-            // Dequeue a vertex from queue and print it
-            int currentNode = queue.poll();
-            tree.add(graphL.get(currentNode).getId());
-            System.out.print(currentNode + " ");
-
-            // Verifica se os vizinhos de cada vertice ja foram visitados
-            // Se nao foram, sao marcados como visitas e eh adiconado a fila
-            for(int i = 0; i < graphL.get(currentNode).qnt_aresta(); i++) {
-                for(int j = 0; j < graphL.size(); j++) {
-                    if(graphL.get(i).getId() == graphL.get(currentNode).getAresta(j)) {
-                        if (!visited[i]) {
-                            visited[i] = true;
-                            queue.add(i);
-                            break;
+        while (!allNodeVisited) {
+            
+            // Iterate over the queue
+            while (!queue.isEmpty()) {
+                // Dequeue a vertex from queue and print it
+                int currentNode = queue.poll();
+                tree.add(graphL.get(currentNode).getId());
+                
+                // Verifica se os vizinhos de cada vertice ja foram visitados
+                // Se nao foram, sao marcados como visitas e eh adiconado a fila
+                for(int i = 0; i < graphL.get(currentNode).qnt_aresta(); i++) {
+                    for(int j = 0; j < graphL.size(); j++) {
+                        if(graphL.get(j).getId() == graphL.get(currentNode).getAresta(i)) {
+                            if (!visited[j]) {
+                                visited[j] = true;
+                                queue.add(j);
+                                break;
+                            }
                         }
                     }
+                }
+            }
+
+            // Verifica se ha vertice nao visitado
+            allNodeVisited = true;
+            for(int i = 0; i < visited.length; i++) {
+                if(!visited[i]) {
+                    allNodeVisited = false;
+                    tree.add('-');
                 }
             }
         }
