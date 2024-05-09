@@ -108,7 +108,7 @@ public class MatrizManage {
      */
     public int[] grau_vertice (char id_vertice) {
         if(direcionado) {
-            return null;
+            return md.grau_vertice(id_vertice);
         }
         return mnd.grau_vertice(id_vertice);
     }

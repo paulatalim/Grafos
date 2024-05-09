@@ -475,7 +475,6 @@ public class App {
                             int[] graus = grafoMatriz.grau_vertice(resposta);
 
                             if(grafoMatriz.isDirecionado()) {
-                                graus = grafoMatriz.grau_vertice(resposta);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + graus[0]);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + graus[1]);
                             } else {
@@ -574,7 +573,7 @@ public class App {
 
                         // Exibe o resultado da busca
                         UI.println("\tA seguir está a ordem em que os vértices foram visitados durante a busca\n");
-                        UI.print("\tOrdem de visitação: " + result[0]);
+                        UI.print("\tOrdem de visitação: " + UI.CYAN + result[0]);
                         for(int i = 1; i < result.length; i++) {
                             UI.print(" " + result[i]);                            
                         }

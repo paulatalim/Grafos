@@ -6,7 +6,7 @@ import java.util.List;
 import graph.busca.BreadthFirstSearch;
 
 public class MatrizDirecionada {
-    private int[][] grafo;
+    private Integer[][] grafo;
     private boolean isPonderado;
     private ArrayList<Character> vertices = new ArrayList<Character>();
 
@@ -15,10 +15,19 @@ public class MatrizDirecionada {
      */
     private void initMatriz() {
         int tamanho = vertices.size();
-        this.grafo = new int[tamanho][tamanho];
-        for(int i = 0; i < tamanho; i++) {
-            for(int j = 0; j < tamanho; j++) {
-                this.grafo[i][j] = 0;
+        this.grafo = new Integer[tamanho][tamanho];
+
+        if(!isPonderado) {
+            for(int i = 0; i < tamanho; i++) {
+                for(int j = 0; j < tamanho; j++) {
+                    this.grafo[i][j] = 0;
+                }
+            }
+        } else {
+            for(int i = 0; i < tamanho; i++) {
+                for(int j = 0; j < tamanho; j++) {
+                    this.grafo[i][j] = null;
+                }
             }
         }
     }
@@ -115,10 +124,16 @@ public class MatrizDirecionada {
         int i = buscar_vertice(aresta.charAt(0));
         int j = buscar_vertice(aresta.charAt(1));
 
-        if(i >=0 && j >= 0 && grafo[i][j] != 0) {
-            // Adiciona uma nova aresta
-            grafo[i][j] -= 1;
-            return true;
+        if(i >= 0 && j >= 0) {
+            // Remove uma nova aresta
+            if(!isPonderado && grafo[i][j] != 0) {
+                grafo[i][j] -= 1;
+                return true;
+            
+            } else if (isPonderado && grafo[i][j] != null) {
+                grafo[i][j] = null;
+                return true;
+            }
         }
 
         return false;
@@ -170,12 +185,18 @@ public class MatrizDirecionada {
     public int[] grau_vertice (char id_vertice) {
         int[] graus = new int[2];
         int indexNo = buscar_vertice(id_vertice);
+        
+        // Inicializa o vetor
+        graus[0] = 0;
+        graus[1] = 0;
 
         for(int i = 0; i < vertices.size(); i++) {
-            if(grafo[indexNo][i] != 0) {
+            if((!isPonderado && grafo[indexNo][i] != 0) 
+                || (isPonderado && grafo[indexNo][i] != null)) {
                 graus[0] += grafo[indexNo][i];
             }
-            if(grafo[i][indexNo] != 0) {
+            if((!isPonderado && grafo[i][indexNo] != 0)
+                || (isPonderado && grafo[i][indexNo] != null)) {
                 graus[1] += grafo[i][indexNo];
             }
         }
@@ -194,7 +215,8 @@ public class MatrizDirecionada {
         int index_vertice = buscar_vertice(id_vertice);
 
         for(int i = 0; i < vertices.size(); i++){
-            if(grafo[index_vertice][i] != 0){
+            if((!isPonderado && grafo[index_vertice][i] != 0) ||
+                (isPonderado && grafo[index_vertice][i] != null)) {
                 listaSucessores.add(vertices.get(i));
             }
         }
@@ -213,7 +235,8 @@ public class MatrizDirecionada {
         int index_vertice = buscar_vertice(id_vertice);
 
         for(int i = 0; i < vertices.size(); i++){
-            if(grafo[i][index_vertice] != 0){
+            if((!isPonderado && grafo[i][index_vertice] != 0) ||
+                (isPonderado && grafo[i][index_vertice] != null)) {
                 listaPredecessores.add(vertices.get(i));
             }
         }
@@ -239,6 +262,7 @@ public class MatrizDirecionada {
     public boolean isGrafosSimples() {
         for(int i = 0; i < vertices.size(); i++) {
             for(int j = 0; j < vertices.size(); j++) {
+                // TODO fazer verificacao para grafo simples e ponderado
                 if(grafo[i][j] != 0 && i == j || grafo[i][j] > 1) return false;
             }
         }
@@ -280,7 +304,9 @@ public class MatrizDirecionada {
         if(isGrafosSimples()) {
             for(int i = 0; i < vertices.size(); i++) {
                 for(int j = 0; j < vertices.size(); j++) {
-                    if(!(grafo[i][j] != 0) && i != j) {
+                    if((!isPonderado && grafo[i][j] == 0) ||
+                        (isPonderado && grafo[i][j] == null) && 
+                        i != j ) {
                         return false;
                     }
                 }
@@ -357,14 +383,16 @@ public class MatrizDirecionada {
     public boolean temAresta() {
         for(int i = 0; i < vertices.size(); i++) {
             for(int j = 0; j < vertices.size(); j++) {
-                if(grafo[i][j] != 0) return true;
+                if((!isPonderado && grafo[i][j] != 0) ||
+                    (isPonderado && grafo[i][j] != null))
+                    return true;
             }
         }
         return false;
     }
 
     public char[] realizarBuscaLargura() {
-        BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices);
+        BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices, isPonderado);
         return toArrayChar(BFS.bfs(vertices.get(0)));
     }
 
@@ -380,7 +408,11 @@ public class MatrizDirecionada {
         for (int i = 0; i < vertices.size(); i++) {
             System.out.print("\t" + vertices.get(i) + "| ");
             for (int j = 0; j < vertices.size(); j++) {
-                System.out.print(grafo[i][j] + " ");
+                if(grafo[i][j] != null) {
+                    System.out.print(grafo[i][j] + " ");
+                } else {
+                    System.out.print("- ");
+                }
             }
             System.out.println("|");
         }
@@ -406,7 +438,7 @@ public class MatrizDirecionada {
     /**
      * @return int[][] return do grafo
      */
-    public int[][] getGrafo() {
+    public Integer[][] getGrafo() {
         return grafo;
     }
 }

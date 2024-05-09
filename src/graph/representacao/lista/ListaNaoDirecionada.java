@@ -238,9 +238,9 @@ public class ListaNaoDirecionada {
                 // Verifica se ha laco
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
                     if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
-                        grau += 2;
+                        grau += 2 * grafo.get(i).getPeso(j);
                     } else {
-                        grau ++;
+                        grau += grafo.get(i).getPeso(j);
                     }
                 }
 

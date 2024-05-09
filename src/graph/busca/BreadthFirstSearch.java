@@ -10,22 +10,23 @@ import graph.representacao.lista.No;
 // Classe para realizar a busca em largura
 public class BreadthFirstSearch {
     private List<No> graphL;
-    private int[][] graphM;
+    private Integer[][] graphM;
     private ArrayList<Character> vertices;
+    private boolean isPonderado;
 
     public BreadthFirstSearch(List<No> grafo) {
         graphL = grafo;
     }
 
-    public BreadthFirstSearch(int[][] grafo, ArrayList<Character> vertices) {
+    public BreadthFirstSearch(Integer[][] grafo, ArrayList<Character> vertices, boolean isPonderado) {
         graphM = grafo;
         this.vertices = vertices;
+        this.isPonderado = isPonderado;
     }
 
     private ArrayList<Character> bfsMatriz(char verticeInicial) {
         // Create a queue for BFS
         Queue<Integer> queue = new LinkedList<>();
-        boolean[] visited = new boolean[vertices.size()];
         ArrayList<Character> tree = new ArrayList<>();
         boolean allNodeVisited = false;
 
@@ -45,7 +46,7 @@ public class BreadthFirstSearch {
 
             // Verifica se todos os vertices foram visitados
             allNodeVisited = true;
-            for(int i = 0; i < visited.length; i ++) {
+            for(int i = 0; i < vertices.size(); i ++) {
                 if(L[i] == 0) {
                     allNodeVisited = false;
                     queue.add(i);
@@ -64,7 +65,8 @@ public class BreadthFirstSearch {
                 // Anlise dos visinhos
                 for (int neighbor = 0; neighbor < vertices.size(); neighbor++) {
                     // Busca do vertice vizinho
-                    if(graphM[currentNode][neighbor] != 0) {
+                    if((!isPonderado && graphM[currentNode][neighbor] != 0) ||
+                        (isPonderado && graphM[currentNode][neighbor] != null)) {
                         if(L[neighbor] == 0) {
                             // Aresta pai
                             pai[neighbor] = vertices.get(currentNode);

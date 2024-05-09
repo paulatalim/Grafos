@@ -226,7 +226,7 @@ public class ListaDirecionada {
         for (int i = 0; i < grafo.size(); i++) {
             for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
                 if(grafo.get(i).getAresta(j) == vertice) {
-                    grau ++;
+                    grau += grafo.get(i).getPeso(j);
                 }
             }
         }
@@ -242,7 +242,13 @@ public class ListaDirecionada {
     public int calcularGrauSaida(char vertice) {
         for (int i = 0; i < grafo.size(); i++) {
             if(grafo.get(i).getId() == vertice) {
-                return grafo.get(i).qnt_aresta();
+                int grau = 0;
+
+                for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                    grau += grafo.get(i).getPeso(j);
+                }
+
+                return grau;
             }
         }
 
