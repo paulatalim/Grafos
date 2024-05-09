@@ -9,17 +9,17 @@ public class DepthFirstSearch {
     private List<No> graphL;
     private int[][] graphM;
     private ArrayList<Character> vertices;
+    private ArrayList<Character> ordemVisita;
     private int t;
     private int[] td;
     private int[] tt;
-    private char[] pai;
 
     public DepthFirstSearch(List<No> graph) {
         graphL = graph;
         t = 0;
         td = new int[graphL.size()];
         tt = new int[graphL.size()];
-        pai = new char[graphL.size()];
+        ordemVisita = new ArrayList<>();
     }
 
     public DepthFirstSearch(int[][] graph, ArrayList<Character> vertices) {
@@ -28,7 +28,7 @@ public class DepthFirstSearch {
         t = 0;
         td = new int[vertices.size()];
         tt = new int[vertices.size()];
-        pai = new char[vertices.size()];
+        ordemVisita = new ArrayList<>();
     }
 
     private void dfsMatrizRaiz (char verticeRaiz) {
@@ -48,12 +48,12 @@ public class DepthFirstSearch {
 
     private void dfsMatriz (char verticeAtual) {
         int indiceVerticeAtual = vertices.indexOf(verticeAtual);
+        ordemVisita.add(verticeAtual);
         t += 1;
         td[indiceVerticeAtual] = t;
         for(int i = 0; i < vertices.size(); i++) {
             if(graphM[indiceVerticeAtual][i] != 0) {
                 if(td[i] == 0) {
-                    pai[i] = verticeAtual;
                     dfsMatriz(vertices.get(i));
                 }
             }
@@ -84,6 +84,7 @@ public class DepthFirstSearch {
                 indiceVerticeAtual = i;
             } 
         }
+        ordemVisita.add(verticeAtual);
         t += 1;
         td[indiceVerticeAtual] = t;
         char verticeSendoAnalisado;
@@ -92,7 +93,6 @@ public class DepthFirstSearch {
             for(int j = 0; j < graphL.size(); j++) {
                 if(graphL.get(j).getId() == verticeSendoAnalisado) {
                     if(td[j] == 0) {
-                        pai[j] = verticeAtual;
                         dfsLista(verticeSendoAnalisado);
                     }
                 }
@@ -111,25 +111,21 @@ public class DepthFirstSearch {
         }
     }
 
-    //TODO: entender como a exibição da árvore vai funcionar.
-    public void exibirArvore () {
-        char atualFilho, atualPai;
-        ArrayList<Character> raizes = new ArrayList<Character>();
-        for (int i = 0; i < pai.length; i++) {
-            if(pai[i] == '\0') raizes.add(vertices.get(i));
-        }
-
-        for (char raiz : raizes) {
-            System.out.println("\t" + raiz);
-            atualPai = raiz;
-            for (int i = 0; i < pai.length; i++) {
-                if(pai[i] == atualPai) {
-                    atualFilho = vertices.get(i);
-                    System.out.println("\t|");
-                    System.out.println("\t|_" + atualFilho);
-                }
+    public char[] getVertices() {
+        char[] vertices;
+        if(graphL == null) {
+            vertices = new char[this.vertices.size()];
+            for(int i = 0; i < vertices.length; i++) {
+                vertices[i] = this.vertices.get(i);
             }
+            return vertices;
         }
+        vertices = new char[graphL.size()];
+        for(int i = 0; i < vertices.length; i++) {
+            vertices[i] = graphL.get(i).getId();
+        }
+        return vertices;
+
     }
 
     public int[] getTD() {
@@ -140,7 +136,11 @@ public class DepthFirstSearch {
         return tt;
     }
 
-    public char[] getPais() {
-        return pai;
+    public char[] getOrdem() {
+        char[] ordem = new char[ordemVisita.size()];
+        for(int i = 0; i < ordem.length; i++) {
+            ordem[i] = ordemVisita.get(i);
+        }
+        return ordem;
     }
 }
