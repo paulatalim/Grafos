@@ -114,7 +114,7 @@ public class ListaNaoDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        if(isPonderado && peso > 0) {
+        if(isPonderado) {
 
             // Encontra os vertice no grafo
             int aux1 = buscar_vertice(aresta.charAt(0));
@@ -179,7 +179,7 @@ public class ListaNaoDirecionada {
      * @return true (caso a atualizacao ocorrer com sucesso) ou false (caso ocorrer algum erro)
      */
     public boolean atualizarPeso(String aresta, int newPeso) {
-        if(isPonderado && newPeso > 0) {
+        if(isPonderado) {
             return (
                 grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso) &&
                 grafo.get(buscar_vertice(aresta.charAt(1))).updatePeso(aresta.charAt(0), newPeso)

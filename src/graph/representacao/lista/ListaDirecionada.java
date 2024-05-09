@@ -112,7 +112,7 @@ public class ListaDirecionada {
         int aux1 = buscar_vertice(aresta.charAt(0));
         int aux2 = buscar_vertice(aresta.charAt(1));
 
-        if(aux1 >= 0 && aux2 >= 0) {
+        if(aux1 >= 0 && aux2 >= 0 && ponderado) {
             // Adiciona uma nova aresta
             return grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
         }

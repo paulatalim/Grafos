@@ -25,7 +25,7 @@ public class App {
         char resposta;
         char resposta1;
         int cont;
-        boolean useAnaliseMatriz = true;;
+        boolean useAnaliseMatriz = true;
 
         // Valida a resposta do usuario
         do {

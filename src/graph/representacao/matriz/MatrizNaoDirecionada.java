@@ -96,7 +96,7 @@ public class MatrizNaoDirecionada {
      * @return true, caso encontrar os vertices, haver aresta eo peso ser valido, ou false, caso contrario
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        if(isPonderado && peso > 0) {
+        if(isPonderado) {
             int i = buscar_vertice(aresta.charAt(0));
             int j = buscar_vertice(aresta.charAt(1));
 
@@ -150,7 +150,7 @@ public class MatrizNaoDirecionada {
      * @return true, caso encontrar os vertices e haver aresta entre eles, ou false, caso contrario
      */
     public boolean atualizarPeso(String aresta, int newPeso) {
-        if(isPonderado && newPeso > 0) {
+        if(isPonderado) {
             int i = buscar_vertice(aresta.charAt(0));
             int j = buscar_vertice(aresta.charAt(1));
             
