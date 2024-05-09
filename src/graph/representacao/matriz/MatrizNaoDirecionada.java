@@ -3,6 +3,7 @@ package graph.representacao.matriz;
 import java.util.ArrayList;
 import java.util.List;
 
+import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
 
@@ -373,7 +374,14 @@ public class MatrizNaoDirecionada {
         return DFS;
     }
 
-    
+    public ArvoreGeradoraMinima encontrarAGM() {
+        if(isGrafosConexo() && isPonderado) { 
+            ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo, vertices);
+            return AGM;
+        }
+        return null;
+    }
+
     /**
      * Imprime a matriz de adjacencia no console
      */
