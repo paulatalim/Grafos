@@ -567,26 +567,18 @@ public class App {
                     char[] result;
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         if(useAnaliseMatriz) {
-                            // TODO Busca em Largura em matriz
                             result = grafoMatriz.realizarBuscaLargura();
                         } else {
-                            // TODO Busca em Largura em lista
                             result = grafoLista.realizarBuscaLargura();
                         }
 
-                        // Exibe a arvore ou as arvores geradas
-                        UI.print("\t- Árvore 1: " + result[0]);
-                        cont = 2;
+                        // Exibe o resultado da busca
+                        UI.println("\tA seguir está a ordem em que os vértices foram visitados durante a busca\n");
+                        UI.print("\tOrdem de visitação: " + result[0]);
                         for(int i = 1; i < result.length; i++) {
-                            if(result[i] != '-') {
-
-                                UI.print(" -> " + result[i]);
-                            } else {
-
-                                UI.print("\n\n\t- Árvore " + cont + ": " + result[++i]);
-                                cont++;
-                            }
+                            UI.print(" " + result[i]);                            
                         }
+
                     } else {
                         // Caso o grafo esteja vazio
                         UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
