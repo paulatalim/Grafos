@@ -260,10 +260,16 @@ public class MatrizDirecionada {
      * @return true se for simples, caso contrário, false
      */
     public boolean isGrafosSimples() {
-        for(int i = 0; i < vertices.size(); i++) {
-            for(int j = 0; j < vertices.size(); j++) {
-                // TODO fazer verificacao para grafo simples e ponderado
-                if(grafo[i][j] != 0 && i == j || grafo[i][j] > 1) return false;
+        if(!isPonderado) {
+            for(int i = 0; i < vertices.size(); i++) {
+                for(int j = 0; j < vertices.size(); j++) {
+                    if(grafo[i][j] != 0 && i == j || grafo[i][j] > 1) return false;
+                }
+            }
+        } else {
+            // Verifica se possui laco quando o grafo eh ponderado
+            for(int i = 0; i < vertices.size(); i++) {
+                if(grafo[i][i] != null) return false;
             }
         }
         return true;

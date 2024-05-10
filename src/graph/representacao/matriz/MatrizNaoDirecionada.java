@@ -265,12 +265,16 @@ public class MatrizNaoDirecionada {
      * @return true se for simples, caso contrário, false
      */
     public boolean isGrafosSimples() {
-        for(int i = 0; i < vertices.size(); i++) {
-            for(int j = 0; j < vertices.size(); j++) {
-                if((!isPonderado && ((grafo[i][j] != 0 && i == j) || grafo[i][j] > 1)))
-                    // TODO fazer verificacao de grafo simples ponderado
-                // || (isPonderado && ((grafo[i][j] != null && i == j) || grafo[i][j] != null))) 
-                    return false;
+        if(!isPonderado) {
+            for(int i = 0; i < vertices.size(); i++) {
+                for(int j = 0; j < vertices.size(); j++) {
+                    if((grafo[i][j] != 0 && i == j) || grafo[i][j] > 1) return false;
+                }
+            }
+        } else {
+            // Verifica se possui laco quando o grafo eh ponderado
+            for(int i = 0; i < vertices.size(); i++) {
+                if(grafo[i][i] != null) return false;
             }
         }
         return true;
@@ -317,10 +321,6 @@ public class MatrizNaoDirecionada {
      * @return true se for, caso contrário, false
      */
     public boolean isGrafosBipartido() {
-        if(isGrafosEmpty()) {
-            return false;
-        }
-
         // inicia um vetor do tamanho dos vértices existentes
         int[] cores = new int[vertices.size()];
         // associa "nenhuma cor" para cada vértice no vetor

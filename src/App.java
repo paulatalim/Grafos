@@ -168,7 +168,7 @@ public class App {
                 UI.print("\t" + "8 - Calcular distancia entre dois vértices" + "\n");
                 UI.print("\t" + "9 - Analisar e classificar grafo" + "\n\n");
                 
-                UI.println(UI.BLUE_BACKGROUND + UI.BLACK + "\t" + " ALGORITMOS DE BUSCA E ÁRVORE   ");
+                UI.println(UI.BLUE_BACKGROUND + UI.BLACK + "\t" + " ALGORITMOS DE BUSCA, ORDENAÇÃO E ÁRVORE   ");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
                 UI.println("\t" + "10 - Realizar Busca em Largura");
                 UI.println("\t" + "11 - Realizar Busca em Profundidade");
