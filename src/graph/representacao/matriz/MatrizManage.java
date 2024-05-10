@@ -219,11 +219,11 @@ public class MatrizManage {
         return null;
     }
 
-    public char[] realizarBuscaLargura() {
+    public char[] realizarBuscaLargura(char verticeInicial) {
         if(direcionado) {
-            return md.realizarBuscaLargura();
+            return md.realizarBuscaLargura(verticeInicial);
         }
-        return mnd.realizarBuscaLargura();
+        return mnd.realizarBuscaLargura(verticeInicial);
     }
 
     /**

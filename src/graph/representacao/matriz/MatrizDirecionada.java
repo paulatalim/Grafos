@@ -52,12 +52,20 @@ public class MatrizDirecionada {
      * @return Array de caracteres
      */
     private char[] toArrayChar(List<Character> list) {
+        // Verifica se a lista existe
+        if(list == null) {
+            return null;
+        }
+
+        // Cria um vetor auxiliar para armazenar os valores convertidos
         char[] vetor = new char[list.size()];
         
+        // Conversao dos valores da lista para vetor
         for(int i = 0; i < list.size(); i++) {
             vetor[i] = Character.valueOf(list.get(i));
         }
 
+        // Retorno da lista convertida para vetor
         return vetor;
     }
 
@@ -374,12 +382,8 @@ public class MatrizDirecionada {
      * @return true, se for conexo, false, caso contrário
      */
     public boolean isGrafosConexo() {    
-        for (int i = 0; i < vertices.size(); i++) {
-            if (grau_vertice(vertices.get(i))[0] == 0 && grau_vertice(vertices.get(i))[1] == 0) {
-                return false;
-            }
-        }
-        return true;
+        BreadthFirstSearch bfs = new BreadthFirstSearch(grafo, vertices, isPonderado);
+        return bfs.getIsConexo();
     } 
 
     /**
@@ -397,9 +401,9 @@ public class MatrizDirecionada {
         return false;
     }
 
-    public char[] realizarBuscaLargura() {
+    public char[] realizarBuscaLargura(char verticeInicial) {
         BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices, isPonderado);
-        return toArrayChar(BFS.bfs(vertices.get(0)));
+        return toArrayChar(BFS.bfs(verticeInicial));
     }
 
     /**

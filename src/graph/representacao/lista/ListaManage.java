@@ -258,12 +258,12 @@ public class ListaManage {
         return lnd.isConexo();
     }
     
-    public char[] realizarBuscaLargura() {
+    public char[] realizarBuscaLargura(char verticeInicial) {
         if(direcionado) {
-            return ld.realizarBuscaLargura();
+            return ld.realizarBuscaLargura(verticeInicial);
         }
 
-        return lnd.realizarBuscaLargura();
+        return lnd.realizarBuscaLargura(verticeInicial);
     }
 
     /**

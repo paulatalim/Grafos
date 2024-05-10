@@ -13,6 +13,7 @@ public class BreadthFirstSearch {
     private Integer[][] graphM;
     private ArrayList<Character> vertices;
     private boolean isPonderado;
+    private boolean isConexo;
 
     public BreadthFirstSearch(List<No> grafo) {
         graphL = grafo;
@@ -33,7 +34,7 @@ public class BreadthFirstSearch {
         int[] L = new int[vertices.size()];
         int[] nivel = new int[vertices.size()];
         char[] pai = new char[vertices.size()];
-        int time = 0;
+        int time = 1;
 
         // Inicializa as variaveis
         for (int i = 0; i < vertices.size(); i++) {
@@ -42,21 +43,20 @@ public class BreadthFirstSearch {
             pai[i] = '-';
         }
 
-        while(!allNodeVisited) {
-
-            // Verifica se todos os vertices foram visitados
-            allNodeVisited = true;
-            for(int i = 0; i < vertices.size(); i ++) {
-                if(L[i] == 0) {
-                    allNodeVisited = false;
-                    queue.add(i);
-                    time++;
-                    L[i] = time;
-                    tree.add(vertices.get(i));
-                    break;
-                }
+        // Inicializa o primeiro vertice
+        for(int i = 0; i < vertices.size(); i++) {
+            if (vertices.get(i) == verticeInicial) {
+                queue.add(i);
+                L[i] = time;
+                tree.add(vertices.get(i));
+                break;
+            } else if(i + 1 == vertices.size()) {
+                // caso nao encontrar o vertice
+                return null;
             }
+        }
 
+        while(!allNodeVisited) {
             // Realiza a busca em largura
             while (!queue.isEmpty()) {
                 // Dequeue a vertex from queue and print it
@@ -95,6 +95,19 @@ public class BreadthFirstSearch {
                 }
             }
 
+            // Verifica se todos os vertices foram visitados
+            allNodeVisited = true;
+            for(int i = 0; i < vertices.size(); i ++) {
+                if(L[i] == 0) {
+                    allNodeVisited = false;
+                    queue.add(i);
+                    time++;
+                    L[i] = time;
+                    tree.add(vertices.get(i));
+                    isConexo = false;
+                    break;
+                }
+            }
             
         }
 
@@ -110,7 +123,7 @@ public class BreadthFirstSearch {
         int[] L = new int[graphL.size()];
         int[] nivel = new int[graphL.size()];
         char[] pai = new char[graphL.size()];
-        int time = 0;
+        int time = 1;
 
         // Inicializa as variaveis
         for (int i = 0; i < graphL.size(); i++) {
@@ -119,21 +132,20 @@ public class BreadthFirstSearch {
             pai[i] = '-';
         }
 
-        while (!allNodeVisited) {
-            // Verifica se ha vertice nao visitado
-            allNodeVisited = true;
-            for(int i = 0; i < graphL.size(); i++) {
-                if(L[i] == 0) {
-                    time ++;
-                    L[i] = time;
-                    queue.add(i);
-                    allNodeVisited = false;
-                    tree.add(graphL.get(i).getId());
-                    break;
-                }
+        // Inicializa o primeiro vertice
+        for(int i = 0; i < graphL.size(); i++) {
+            if(graphL.get(i).getId() == verticeInicial) {
+                L[i] = time;
+                queue.add(i);
+                tree.add(verticeInicial);
+                break;
+            } else if(i + 1 == graphL.size()) {
+                // caso nao encontrar o vertice
+                return null;
             }
-            
-            // Iterate over the queue
+        }
+
+        while (!allNodeVisited) {
             while (!queue.isEmpty()) {
                 // Dequeue a vertex from queue and print it
                 int currentNode = queue.poll();
@@ -174,6 +186,20 @@ public class BreadthFirstSearch {
                     }
                 }
             }
+
+            // Verifica se ha vertice nao visitado
+            allNodeVisited = true;
+            for(int i = 0; i < graphL.size(); i++) {
+                if(L[i] == 0) {
+                    time ++;
+                    L[i] = time;
+                    queue.add(i);
+                    allNodeVisited = false;
+                    tree.add(graphL.get(i).getId());
+                    isConexo = false;
+                    break;
+                }
+            }
         }
 
         return tree;
@@ -186,5 +212,17 @@ public class BreadthFirstSearch {
             return bfsMatriz(startNode);
         }
         return bfsList(startNode);
+    }
+
+    public boolean getIsConexo() {
+        isConexo = true;
+
+        if(graphL == null) {
+            bfsMatriz(vertices.get(0));
+        } else {
+            bfsList(graphL.get(0).getId());
+        }
+
+        return isConexo;
     }
 }

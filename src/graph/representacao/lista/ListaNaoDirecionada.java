@@ -194,12 +194,20 @@ public class ListaNaoDirecionada {
      * @return Array de caracteres
      */
     private char[] toArrayChar(List<Character> list) {
+        // Verifica se a lista existe
+        if(list == null) {
+            return null;
+        }
+
+        // Cria um vetor auxiliar para armazenar os valores convertidos
         char[] vetor = new char[list.size()];
         
+        // Conversao dos valores da lista para vetor
         for(int i = 0; i < list.size(); i++) {
             vetor[i] = Character.valueOf(list.get(i));
         }
 
+        // Retorno da lista convertida para vetor
         return vetor;
     }
 
@@ -370,17 +378,13 @@ public class ListaNaoDirecionada {
      * @return true, se for conexo, false, caso contrário
      */
     public boolean isConexo() {    
-        for (int i = 0; i < grafo.size(); i++) {
-            if (calcularGrau(grafo.get(i).getId()) == 0) {
-                return false;
-            }
-        }
-        return true;
+        BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
+        return bfs.getIsConexo();
     } 
 
-    public char[] realizarBuscaLargura() {
+    public char[] realizarBuscaLargura(char verticeInicial) {
         BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
-        return toArrayChar(BFS.bfs(grafo.get(0).getId()));
+        return toArrayChar(BFS.bfs(verticeInicial));
     }
 
     /**

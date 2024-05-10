@@ -544,13 +544,13 @@ public class App {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoMatriz.isGrafosSimples() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoMatriz.isGrafosRegular() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoMatriz.isGrafosCompleto() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isGrafosBipartido() ? "Sim" : "Não"));
+                            // UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isGrafosBipartido() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN + (grafoMatriz.isGrafosConexo() ? "Sim" : "Não"));
                         } else {
                             UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
+                            // UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
                             UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN + (grafoLista.isConexo() ? "Sim" : "Não"));
                         }
                     } else {
@@ -565,19 +565,27 @@ public class App {
                     UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** BUSCA EM LARGURA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
                     char[] result;
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
+                        UI.print("\tInsira o primeiro vértice a ser visitado na busca\n\n");
+                        // Leitura do vértice
+                        UI.print(UI.CYAN + "\tVértice: " + UI.WHITE);
+                        resposta = scanner.next().charAt(0);
+                        UI.println("");
+
                         if(useAnaliseMatriz) {
-                            result = grafoMatriz.realizarBuscaLargura();
+                            result = grafoMatriz.realizarBuscaLargura(resposta);
                         } else {
-                            result = grafoLista.realizarBuscaLargura();
+                            result = grafoLista.realizarBuscaLargura(resposta);
                         }
-
-                        // Exibe o resultado da busca
-                        UI.println("\tA seguir está a ordem em que os vértices foram visitados durante a busca\n");
-                        UI.print("\tOrdem de visitação: " + UI.CYAN + result[0]);
-                        for(int i = 1; i < result.length; i++) {
-                            UI.print(" " + result[i]);                            
+                        if(result != null) {
+                            // Exibe o resultado da busca
+                            UI.println(UI.YELLOW + "\n\tA seguir está a ordem em que os vértices foram visitados durante a busca\n");
+                            UI.print("\tOrdem de visitação: " + UI.CYAN + result[0]);
+                            for(int i = 1; i < result.length; i++) {
+                                UI.print(" " + result[i]);                            
+                            }   
+                        } else {
+                            UI.print(UI.RED + "\tVértice inválido.");
                         }
-
                     } else {
                         // Caso o grafo esteja vazio
                         UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
