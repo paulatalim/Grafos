@@ -444,6 +444,11 @@ public class ListaDirecionada {
         return true;
     }
 
+    /**
+     * Realiza uma busca em largura no grafo
+     * @param verticeInicial char (vertice que a busca em largura ira iniciar)
+     * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
+     */
     public char[] realizarBuscaLargura(char verticeInicial) {
         BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
         return toArrayChar(BFS.bfs(verticeInicial));

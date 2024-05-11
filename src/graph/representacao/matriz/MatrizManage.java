@@ -219,6 +219,11 @@ public class MatrizManage {
         return null;
     }
 
+    /**
+     * Realiza uma busca em largura no grafo
+     * @param verticeInicial char (vertice que a busca em largura ira iniciar)
+     * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
+     */
     public char[] realizarBuscaLargura(char verticeInicial) {
         if(direcionado) {
             return md.realizarBuscaLargura(verticeInicial);

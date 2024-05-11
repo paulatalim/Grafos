@@ -205,8 +205,11 @@ public class BreadthFirstSearch {
         return tree;
     }
 
-    // Function to perform Breadth First Search on a graph
-    // represented using adjacency list
+    /**
+     * Realiza uma busca em largura no grafo
+     * @param startNode char (vertice que a busca em largura ira iniciar)
+     * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
+     */
     public ArrayList<Character> bfs(char startNode) {
         if(graphL == null) {
             return bfsMatriz(startNode);
@@ -214,12 +217,20 @@ public class BreadthFirstSearch {
         return bfsList(startNode);
     }
 
+    /**
+     * Verifica se o grafo eh conexo atraves da busca em largura
+     * @return boolean (true, se o grafo ser conexo, ou false, caso contrario)
+     */
     public boolean getIsConexo() {
+        // Inicializa variavel
         isConexo = true;
 
+        // Verificacao de qual metodo chamar
         if(graphL == null) {
+            // Realiza uma busca em largura atraves da matriz de adjacencia
             bfsMatriz(vertices.get(0));
         } else {
+            // Realiza uma busca em largura atraves da lista de adjacencia
             bfsList(graphL.get(0).getId());
         }
 

@@ -401,6 +401,11 @@ public class MatrizNaoDirecionada {
         return false;
     }
 
+    /**
+     * Realiza uma busca em largura no grafo
+     * @param verticeInicial char (vertice que a busca em largura ira iniciar)
+     * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
+     */
     public char[] realizarBuscaLargura(char verticeInicial) {
         BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices, isPonderado);
         return toArrayChar(BFS.bfs(verticeInicial));
