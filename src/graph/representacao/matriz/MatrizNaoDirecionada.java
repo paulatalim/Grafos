@@ -377,6 +377,7 @@ public class MatrizNaoDirecionada {
     public ArvoreGeradoraMinima encontrarAGM() {
         if(isGrafosConexo() && isPonderado) { 
             ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo, vertices);
+            AGM.encontrarAGM();
             return AGM;
         }
         return null;

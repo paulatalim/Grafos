@@ -1,5 +1,6 @@
 package graph.representacao.matriz;
 
+import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.DepthFirstSearch;
 
 public class MatrizManage {
@@ -234,6 +235,13 @@ public class MatrizManage {
             return md.realizarBuscaProfundidade();
         }
         return mnd.realizarBuscaProfundidade();
+    }
+
+    public ArvoreGeradoraMinima encontrarAGM() {
+        if(direcionado) {
+            return null;
+        }
+        return mnd.encontrarAGM();
     }
     
     /**

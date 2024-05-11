@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
 
@@ -388,6 +389,15 @@ public class ListaNaoDirecionada {
         DepthFirstSearch DFS = new DepthFirstSearch(grafo);
         DFS.dfs(grafo.get(0).getId());
         return DFS;
+    }
+
+    public ArvoreGeradoraMinima encontrarAGM() {
+        if(isConexo() && isPonderado) {
+            ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo);
+            AGM.encontrarAGM();
+            return AGM;
+        }
+        return null;
     }
 
     /**
