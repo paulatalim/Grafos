@@ -339,40 +339,56 @@ public class MatrizDirecionada {
             return false;
         }
 
-        // inicia um vetor do tamanho dos vértices existentes
+        // Inicia um vetor do tamanho dos vértices existentes
         int[] cores = new int[vertices.size()];
+        boolean allIsVerficado = false;
 
-        // associa "nenhuma cor" para cada vértice no vetor
+        // Associa "nenhuma cor" para cada vértice no vetor
         for (int i = 1; i < cores.length; i++) {
             cores[i] = -1;
         }
         
-        cores[0] = 1; // inicia o primeiro vértice com uma das duas cores
+        // Inicia o primeiro vértice com uma das duas cores
+        cores[0] = 1; 
 
-        for (int i = 0; i < vertices.size(); i++) {
-            for (int j = 0; j < vertices.size(); j++) {
-                // Verifica se eh um laco
-                if(i == j && grafo[i][j] != 0) {
-                    return false;
-                }
-                // confere se há vinhanca
-                else if((grafo[i][j] != 0 || grafo[j][i] != 0) && i != j) {
-                    // tenta colorir o vértice vizinho com uma cor oposta a sua
-                    if(cores[i] == 0 && (cores[j] == -1 || cores[j] == 1)) {
-                        cores[j] = 1;
-                    }
-                    else if(cores[i] == 1 && (cores[j] == -1 || cores[j] == 0)) {
-                        cores[j] = 0;
-                    }
-                    // caso não consiga, já determina que o grafo não é bipartido
-                    else {
+        while(!allIsVerficado) {
+
+            for (int i = 0; i < vertices.size(); i++) {
+                for (int j = 0; j < vertices.size(); j++) {
+                    // Verifica se eh um laco
+                    if(i == j && (isPonderado && grafo[i][j] != null) || (!isPonderado && grafo[i][j] != 0)) {
                         return false;
+                    }
+                    // confere se há vinhanca
+                    else if(((isPonderado && (grafo[i][j] != null || grafo[j][i] != null))
+                            || (!isPonderado && (grafo[i][j] != 0 || grafo[j][i] != 0)))
+                            && i != j) {
+                        // tenta colorir o vértice vizinho com uma cor oposta a sua
+                        if(cores[i] == 0 && (cores[j] == -1 || cores[j] == 1)) {
+                            cores[j] = 1;
+                        }
+                        else if(cores[i] == 1 && (cores[j] == -1 || cores[j] == 0)) {
+                            cores[j] = 0;
+                        }
+                        // caso não consiga, já determina que o grafo não é bipartido
+                        else if(cores[i] != -1) {
+                            return false;
+                        }
                     }
                 }
             }
-        }
+            
+            allIsVerficado = true;
 
-        if(!isGrafosConexo()) return false;
+            // Verifica se algum vertice nao foi verificado; colorido
+            for(int i = 0; i < vertices.size(); i++) {
+                if(cores[i] == -1) {
+                    cores[i] = 0;
+                    allIsVerficado = false;
+                    break;
+                }
+            }
+        }
 
         return true;
     }

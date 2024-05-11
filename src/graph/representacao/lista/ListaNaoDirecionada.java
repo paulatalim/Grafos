@@ -327,48 +327,60 @@ public class ListaNaoDirecionada {
      */
     public boolean isBipartido () {
         Map<Character, Byte> mapeamento = new HashMap<Character, Byte>();
-        boolean[] isVerificado = new boolean[grafo.size()];
         byte color = 0;
         byte result;
+        boolean allIsVerficado = false;
 
         // Inicializa o mapeamento
         for(int i = 1; i < grafo.size(); i++) {
             mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) -1);
-            isVerificado[i] = false;
         }
 
         mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
-            
-        // Encontra o proximo vertice a ser vericado
-        for(int i = 0; i < grafo.size(); i++) {
-            color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
-
-            if(color == 0) {
-                color ++;
-            } else if (color == 1) {
-                color = 0;
-            }
-
-            // verifica a vizinhanca
-            for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
-
-                // Verifica se ha laco
-                if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
-                    return false;
+        
+        while (!allIsVerficado) {
+            // Encontra o proximo vertice a ser vericado
+            for(int i = 0; i < grafo.size(); i++) {
+                color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
+                
+                if (color != -1) {
+                    if(color == 0) {
+                        color ++;
+                    } else if (color == 1) {
+                        color = 0;
+                    }
+                    
+                    // verifica a vizinhanca
+                    for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                        result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
+                        
+                        // Verifica se ha laco
+                        if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                            return false;
+                        }
+                        // Inicializa cor
+                        else if(result == (byte) -1) {
+                            mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
+                            
+                            // Caso a cor ser invalida
+                        } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
+                            return false;
+                        }
+                    }
                 }
-                // Inicializa cor
-                else if(result == (byte) -1) {
-                    mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
+            }
+            
+            allIsVerficado = true;
 
-                // Caso a cor ser invalida
-                } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
-                    return false;
+            // Verifica se algum vertice nao foi verificado; colorido
+            for(int i = 0; i < grafo.size(); i++) {
+                if(mapeamento.get(Character.valueOf((grafo.get(i).getId()))) == -1) {
+                    mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) 0);
+                    allIsVerficado = false;
+                    break;
                 }
             }
         }
-
-        if(!isConexo()) return false;
 
         return true;
     }
