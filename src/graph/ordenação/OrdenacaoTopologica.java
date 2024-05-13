@@ -9,15 +9,17 @@ import graph.representacao.lista.No;
 
 public class OrdenacaoTopologica {
     private List<No> graphL;
-    private int[][] graphM;
+    private Integer[][] graphM;
     private ArrayList<Character> vertices;
+    private boolean ponderado;
 
     public OrdenacaoTopologica(List<No> grafo) {
         graphL = grafo;
     }
 
-    public OrdenacaoTopologica(int[][] grafo, ArrayList<Character> vertices) {
+    public OrdenacaoTopologica(Integer[][] grafo, ArrayList<Character> vertices, boolean ponderado) {
         graphM = grafo;
+        this.ponderado = ponderado;
         this.vertices = vertices;
     }
 
@@ -63,7 +65,7 @@ public class OrdenacaoTopologica {
             pilhaRecursao[vertice] = true;
 
             for (int i = 0; i < graphM.length; i++) {
-                if (graphM[vertice][i] == 1) {
+                if ((ponderado && graphM[vertice][i] != null || (!ponderado && graphM[vertice][i] != 0))) {
                     if (!visitado[i] && hasCycleUtil(i, visitado, pilhaRecursao)) {
                         return true;
                     } else if (pilhaRecursao[i]) {
@@ -76,11 +78,11 @@ public class OrdenacaoTopologica {
         return false;
     }
 
-    private static void dfs(int[][] grafo, int vertice, boolean[] visitado, ArrayList<Character> ordenacao) {
+    private void dfs(Integer[][] grafo, int vertice, boolean[] visitado, ArrayList<Character> ordenacao) {
         visitado[vertice] = true;
 
         for (int i = 0; i < grafo.length; i++) {
-            if (grafo[vertice][i] == 1 && !visitado[i]) {
+            if ((ponderado && grafo[vertice][i] != null || (!ponderado && grafo[vertice][i] != 0)) && !visitado[i]) {
                 dfs(grafo, i, visitado, ordenacao);
             }
         }
@@ -110,7 +112,7 @@ public class OrdenacaoTopologica {
         // Calcular o grau de entrada de cada vértice
         for (int i = 0; i < graphM.length; i++) {
             for (int j = 0; j < graphM.length; j++) {
-                if (graphM[i][j] == 1) {
+                if ((ponderado && graphM[i][j] != null) || (!ponderado && graphM[i][j] != 0)){
                     grauEntrada[j]++;
                 }
             }
