@@ -2,6 +2,7 @@ package graph.representacao.matriz;
 
 import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.DepthFirstSearch;
+import graph.ordenação.OrdenacaoTopologica;
 
 public class MatrizManage {
     private boolean direcionado;
@@ -293,6 +294,15 @@ public class MatrizManage {
         } else {
             mnd.setIsPonderado(isPonderado);
         }
+    }
+
+    public OrdenacaoTopologica ordenacaoTopologica(){
+        if(direcionado){
+            OrdenacaoTopologica ordenacao = md.ordenacaoTopologica();
+            return ordenacao;
+        }
+        return null;
+        
     }
 
     /**

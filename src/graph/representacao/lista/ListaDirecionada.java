@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
+import graph.ordenação.OrdenacaoTopologica;
 
 public class ListaDirecionada {
     private List<No> grafo;
@@ -480,6 +481,16 @@ public class ListaDirecionada {
             System.out.println(" ]");
         }
     }
+
+     public OrdenacaoTopologica ordenacaoTopologicaList(){
+        
+        OrdenacaoTopologica ordenacaoTopologicaList = new OrdenacaoTopologica(grafo);
+        char verticeInicial = ordenacaoTopologicaList.escolherVerticeInicialLista();
+        ordenacaoTopologicaList.imprimirOrdenacaoLista(verticeInicial);
+        return ordenacaoTopologicaList;
+    
+    }
+    
 
     /**
      * Se o Grafo eh poderado

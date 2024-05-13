@@ -14,7 +14,7 @@ import graph.representacao.matriz.MatrizManage;
  * @author Paula Cristina Talim Gonçalves
  * @author Rafael Vicente Souza E Paula
  * 
- * DATA DE CRIAÇÃO: 27 de fev. de 2024
+ *         DATA DE CRIAÇÃO: 27 de fev. de 2024
  */
 public class App {
     public static void main(String[] args) throws Exception {
@@ -38,7 +38,7 @@ public class App {
             UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** " + "grafos".toUpperCase() + " ***  ");
             UI.print(UI.BLACK_BACKGROUND + UI.PURPLE + "\t\t\t\t\t  Seja bem vindo!\n\n\n");
             UI.print(UI.YELLOW + UI.BLACK_BACKGROUND + "\tVamos iniciar criando um grafo ...\n\n"
-                            + "\tEsse grafo é direcionado? (s/n)\n\n");
+                    + "\tEsse grafo é direcionado? (s/n)\n\n");
             UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
             resposta = scanner.next().toLowerCase().charAt(0);
 
@@ -64,10 +64,10 @@ public class App {
             // Pergunta se o grafo é ou não direcionado
             UI.println(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t  *** " + "grafos".toUpperCase() + " ***  ");
             UI.print(UI.BLACK_BACKGROUND + UI.PURPLE + "\t\t\t\t\t  Seja bem vindo!\n\n\n");
-            
+
             UI.println(UI.GREEN + "\tInformações do grafo:");
 
-            if(grafoLista.isDirecionado()) {
+            if (grafoLista.isDirecionado()) {
                 UI.print("\t - Grafo Direcionado");
             } else {
                 UI.print("\t - Grafo Não Direcionado");
@@ -147,18 +147,18 @@ public class App {
 
             // Validacao da entrada do usuario
             do {
-                //Exibe o menu das opcoes
+                // Exibe o menu das opcoes
                 UI.print(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t" + "  *** GRAFOS ***  " + "\n\n\n");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "O que deseja fazer no grafo" + "\n\n");
-                
+
                 UI.print(UI.RED_BACKGROUND + UI.WHITE + "\t" + " REPRESENTAÇÕES   " + "\n");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "1 - Exibir em forma de lista de adjacência" + "\n"
-                            + "\t" + "2 - Exibir em forma de matriz de adjacência" + "\n\n");
-                
+                        + "\t" + "2 - Exibir em forma de matriz de adjacência" + "\n\n");
+
                 UI.print(UI.YELLOW_BACKGROUND + UI.BLACK + "\t" + " MANIPULAÇÃO   " + "\n");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "3 - Adicionar vértices" + "\n"
-                            + "\t" + "4 - Adicionar arestas" + "\n"
-                            + "\t" + "5 - Remover aresta" + "\n\n");
+                        + "\t" + "4 - Adicionar arestas" + "\n"
+                        + "\t" + "5 - Remover aresta" + "\n\n");
 
                 UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\t" + " ANÁLISE   ");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
@@ -185,8 +185,8 @@ public class App {
 
                 UI.print(UI.PURPLE_BACKGROUND + UI.BLACK + "\n\n\t" + " OUTROS   " + "\n");
                 UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "14 - Criar novo grafo" + "\n"
-                                    + "\t" + "0 - SAIR" + "\n");
-                
+                        + "\t" + "0 - SAIR" + "\n");
+
                 if (opcao_invalida) {
                     UI.println(UI.RED + "\t" + "Opcao inválida. Tente novavemente." + "\n");
                 }
@@ -202,7 +202,8 @@ public class App {
             switch (opcao) {
                 case 1:
                     // exibir o grafo em forma de lista
-                    UI.print(UI.RED_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** LISTA DE ADJACÊNCIA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    UI.print(UI.RED_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** LISTA DE ADJACÊNCIA ***   \n\n\n"
+                            + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                     if (!grafoLista.isGrafosEmpty()) {
                         // Exibe o grafo
@@ -214,7 +215,8 @@ public class App {
                     break;
                 case 2:
                     // exibe o grafo em forma de matriz
-                    UI.print(UI.RED_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** MATRIZ DE ADJACÊNCIA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    UI.print(UI.RED_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** MATRIZ DE ADJACÊNCIA ***   \n\n\n"
+                            + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                     if (!grafoMatriz.isGrafosEmpty()) {
                         // Exibe o grafo
@@ -227,11 +229,12 @@ public class App {
                 case 3:
                     // Informa como deve ser feita a entrada de dados para o usuario
                     UI.print(UI.YELLOW_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** ADICIONANDO VÉRTICES ***   \n\n\n");
-                    
-                    if(grafoLista.isGrafosEmpty()) {
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInforme letras diferente para indentificar os vértices\n"
+
+                    if (grafoLista.isGrafosEmpty()) {
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tInforme letras diferente para indentificar os vértices\n"
                                 + UI.YELLOW + "\tDigite \"0\" para interromper a leitura\n");
-                        
+
                         cont = 1;
 
                         do {
@@ -257,11 +260,11 @@ public class App {
                 case 4:
                     // Informa como deve ser feita a entrada de dados para o usuario
                     UI.print(UI.YELLOW_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** ADICIONANDO ARESTAS ***   \n\n\n");
-                    
-                    if(!grafoLista.isGrafosEmpty()) {
+
+                    if (!grafoLista.isGrafosEmpty()) {
                         UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInforme os vértices adjacentes da aresta\n"
-                                    + "\tExemplo: AB, CD, EF\n\n"
-                                    + "\tDigite \"0\" para interromper a leitura\n");
+                                + "\tExemplo: AB, CD, EF\n\n"
+                                + "\tDigite \"0\" para interromper a leitura\n");
 
                         cont = 1;
                         do {
@@ -274,18 +277,18 @@ public class App {
 
                             // Valida a aresta
                             if (!aresta.equals("0") && aresta.length() > 1) {
-                                if(grafoMatriz.isPonderado()) {
+                                if (grafoMatriz.isPonderado()) {
                                     int peso;
 
-                                    if(grafoLista.isArestaeExist(aresta)) {
-                                        UI.print(UI.CYAN +"\tNovo peso: " + UI.WHITE);
+                                    if (grafoLista.isArestaeExist(aresta)) {
+                                        UI.print(UI.CYAN + "\tNovo peso: " + UI.WHITE);
                                         peso = scanner.nextInt();
 
                                         grafoLista.atualizarPeso(aresta, peso);
                                         grafoMatriz.atualizarPeso(aresta, peso);
-                                    
+
                                     } else {
-                                        UI.print(UI.CYAN +"\tPeso: " + UI.WHITE);
+                                        UI.print(UI.CYAN + "\tPeso: " + UI.WHITE);
                                         peso = scanner.nextInt();
 
                                         grafoLista.inserir_aresta(aresta, peso);
@@ -303,7 +306,8 @@ public class App {
 
                         } while (!aresta.equals("0"));
                     } else {
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo não possui vértices, adicione vértices para habilitar está função");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tSeu grafo não possui vértices, adicione vértices para habilitar está função");
                     }
                     break;
 
@@ -314,9 +318,10 @@ public class App {
                     UI.print(UI.YELLOW_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DELETAR ARESTA ***   \n\n\n");
 
                     if (!grafoLista.isGrafosEmpty() && grafoLista.temAresta()) {
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInforme os vértices adjacentes da aresta que deseja retirar\n"
-                                    + "\tExemplo: AB, CD, EF\n\n");
-                        
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tInforme os vértices adjacentes da aresta que deseja retirar\n"
+                                + "\tExemplo: AB, CD, EF\n\n");
+
                         opcao_invalida = true;
 
                         // Leitura da aresta
@@ -325,23 +330,25 @@ public class App {
                         UI.println("");
 
                         // Remove aresta na lista e na matriz
-                        if(aresta.length() > 1) {
+                        if (aresta.length() > 1) {
                             opcao_invalida = !grafoLista.remover_aresta(aresta) || !grafoMatriz.remover_aresta(aresta);
                         }
 
                         // Valida o vértice
-                        if(opcao_invalida) {
+                        if (opcao_invalida) {
                             UI.println(UI.RED + "\t" + "Aresta inválida" + "\n");
                         } else {
                             UI.println(UI.YELLOW + "\tAresta removida com sucesso !!!");
                         }
                     } else if (!grafoLista.temAresta()) {
                         // Caso o grafo nao possua aresta
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo não tem aresta, adicione arestas para habilitar está função");
-                    
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tSeu grafo não tem aresta, adicione arestas para habilitar está função");
+
                     } else {
                         // Caso o grafo esteja vazio
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices e arestas para habilitar está função");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tSeu grafo está vazio, adicione vértices e arestas para habilitar está função");
                     }
                     break;
                 case 6:
@@ -351,8 +358,10 @@ public class App {
                         // Identifica sucessores e predecessores de um vértice
 
                         // Exibe o cabecalho da pagina
-                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** SUCESSORES E PREDECESSORES ***   \n\n");
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW +"\tInsira o vértice que deseja saber seus predecessores e sucessores\n");
+                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK
+                                + "\n\t\t\t\t\t   *** SUCESSORES E PREDECESSORES ***   \n\n");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tInsira o vértice que deseja saber seus predecessores e sucessores\n");
 
                         // Entrada do vértice
                         UI.print(UI.CYAN + "\tVértice: " + UI.WHITE);
@@ -362,10 +371,11 @@ public class App {
                         String separacao = "";
                         char[] array;
 
-                        if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
+                        if (useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
                             array = grafoMatriz.verifica_sucessores(resposta);
 
-                            UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                            UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN
+                                    + "\n\t[ ");
                             for (int i = 0; i < array.length; i++) {
                                 UI.print(separacao);
                                 UI.print(String.valueOf(array[i]));
@@ -376,18 +386,20 @@ public class App {
                             separacao = "";
                             array = grafoMatriz.verifica_predecessores(resposta);
 
-                            UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                            UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:"
+                                    + UI.CYAN + "\n\t[ ");
                             for (int i = 0; i < array.length; i++) {
                                 UI.print(separacao);
                                 UI.print(String.valueOf(array[i]));
                                 separacao = ", ";
                             }
                             UI.print(" ]");
-                        
+
                         } else if (grafoLista.isVerticeExist(resposta)) {
                             array = grafoLista.encontrarSucessores(resposta);
 
-                            UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                            UI.print(UI.YELLOW + "\tOs sucessores do vértice " + resposta + " é composto por:" + UI.CYAN
+                                    + "\n\t[ ");
                             for (int i = 0; i < array.length; i++) {
                                 UI.print(separacao);
                                 UI.print(String.valueOf(array[i]));
@@ -398,7 +410,8 @@ public class App {
                             separacao = "";
                             array = grafoLista.encontrarPredecessores(resposta);
 
-                            UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:" + UI.CYAN + "\n\t[ ");
+                            UI.print(UI.YELLOW + "\tOs predecessores do vértice " + resposta + " é composto por:"
+                                    + UI.CYAN + "\n\t[ ");
                             for (int i = 0; i < array.length; i++) {
                                 UI.print(separacao);
                                 UI.print(String.valueOf(array[i]));
@@ -412,8 +425,10 @@ public class App {
                     } else if (!grafoLista.isGrafosEmpty()) {
                         // Identifica vizinhaça de um vértice
                         // Exibe o cabecalho da pagina
-                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** VIZINHAÇA DO VÉRTICE ***   \n\n\n"
-                                 + UI.BLACK_BACKGROUND + UI.YELLOW +"\tInsira o vértice que deseja saber sua vizinhaça\n");
+                        UI.println(
+                                UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** VIZINHAÇA DO VÉRTICE ***   \n\n\n"
+                                        + UI.BLACK_BACKGROUND + UI.YELLOW
+                                        + "\tInsira o vértice que deseja saber sua vizinhaça\n");
 
                         // Entrada do vértice
                         UI.print(UI.CYAN + "\tVértice: " + UI.WHITE);
@@ -423,21 +438,23 @@ public class App {
                         String separacao;
                         char[] arrayVizinhos;
 
-                        if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
+                        if (useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
                             separacao = "";
                             arrayVizinhos = grafoMatriz.verfica_vizinhos(resposta);
-                            UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN + "\n\t[ ");
+                            UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN
+                                    + "\n\t[ ");
                             for (int i = 0; i < arrayVizinhos.length; i++) {
                                 UI.print(separacao);
                                 UI.print(String.valueOf(arrayVizinhos[i]));
                                 separacao = ", ";
                             }
                             UI.print(" ]");
-                        
+
                         } else if (grafoLista.isVerticeExist(resposta)) {
                             separacao = "";
                             arrayVizinhos = grafoLista.vizinhaca(resposta);
-                            UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN + "\n\t[ ");
+                            UI.print(UI.YELLOW + "\tA vizinhança do vértice " + resposta + " é composta por:" + UI.CYAN
+                                    + "\n\t[ ");
                             for (int i = 0; i < arrayVizinhos.length; i++) {
                                 UI.print(separacao);
                                 UI.print(String.valueOf(arrayVizinhos[i]));
@@ -450,12 +467,15 @@ public class App {
                         }
                     } else {
                         if (grafoLista.isDirecionado() && grafoMatriz.isDirecionado()) {
-                            UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** SUCESSORES E PREDECESSORES ***   \n\n");
+                            UI.println(UI.GREEN_BACKGROUND + UI.BLACK
+                                    + "\n\t\t\t\t\t   *** SUCESSORES E PREDECESSORES ***   \n\n");
                         } else {
-                            UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t  *** VIZINHANÇA DO VÉRTICE ***   \n\n\n");
+                            UI.print(UI.GREEN_BACKGROUND + UI.BLACK
+                                    + "\n\t\t\t\t\t  *** VIZINHANÇA DO VÉRTICE ***   \n\n\n");
                         }
                         // Caso o grafo esteja vazio
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }
 
                     break;
@@ -467,28 +487,32 @@ public class App {
                         // Exibe o cabecalho da pagina
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** GRAU DO VÉRTICE ***   \n\n\n");
                         UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o vértice que deseja saber o grau\n");
-                        
+
                         // Entrada do vértice
                         UI.print(UI.CYAN + "\tVértice: " + UI.WHITE);
                         resposta = scanner.next().charAt(0);
                         UI.println("");
 
-                        if(useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
+                        if (useAnaliseMatriz && grafoMatriz.isVerticeExist(resposta)) {
                             int[] graus = grafoMatriz.grau_vertice(resposta);
 
-                            if(grafoMatriz.isDirecionado()) {
+                            if (grafoMatriz.isDirecionado()) {
+                                graus = grafoMatriz.grau_vertice(resposta);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + graus[0]);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + graus[1]);
                             } else {
                                 UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + graus[0] + "\n");
                             }
 
-                        } else if(grafoLista.isVerticeExist(resposta)) {
-                            if(grafoLista.isDirecionado()) {
-                                UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + grafoLista.calcularGrauSaida(resposta));
-                                UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + grafoLista.calcularGrauEntrada(resposta));
+                        } else if (grafoLista.isVerticeExist(resposta)) {
+                            if (grafoLista.isDirecionado()) {
+                                UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN
+                                        + grafoLista.calcularGrauSaida(resposta));
+                                UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN
+                                        + grafoLista.calcularGrauEntrada(resposta));
                             } else {
-                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta) + "\n");
+                                UI.println(UI.YELLOW + "\t" + " - Grau: " + UI.CYAN + grafoLista.calcularGrau(resposta)
+                                        + "\n");
                             }
 
                         } else {
@@ -497,19 +521,22 @@ public class App {
                     } else {
                         // Caso o grafo esteja vazio
                         UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** GRAU DO VÉRTICE ***   \n\n\n");
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }
 
                     break;
-                   
+
                 case 8:
                     // Distancia entre vertices
 
                     // Exibe cabecalho da pagina
-                    UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
-                    
+                    UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n"
+                            + UI.BLACK_BACKGROUND + UI.YELLOW);
+
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInforme os vertices que desja calcular a distância\n\n");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tInforme os vertices que desja calcular a distância\n\n");
 
                         // Entrada do primeiro vertice
                         UI.print(UI.CYAN + "\tVértice 1: " + UI.WHITE);
@@ -518,9 +545,9 @@ public class App {
                         // Entrada do segundo vertice
                         UI.print(UI.CYAN + "\n\tVértice 2: " + UI.WHITE);
                         resposta1 = scanner.next().charAt(0);
-                        
+
                         // Calcula a distancia entre os vertices inseridos
-                        if(useAnaliseMatriz) {
+                        if (useAnaliseMatriz) {
                             // TODO Calcular distancia entre dois vértices na matriz
                         } else {
                             // TODO Calcular distancia entre dois vértices na lista
@@ -539,21 +566,32 @@ public class App {
                     // Analisa e classifica o grafo
 
                     // Exibe cabecalho da pagina
-                    UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CLASSIFICAÇÃO DO GRAFO ***   \n\n\n"
+                            + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
-                        if(useAnaliseMatriz) {
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoMatriz.isGrafosSimples() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoMatriz.isGrafosRegular() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoMatriz.isGrafosCompleto() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoMatriz.isGrafosBipartido() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN + (grafoMatriz.isGrafosConexo() ? "Sim" : "Não"));
+                        if (useAnaliseMatriz) {
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN
+                                    + (grafoMatriz.isGrafosSimples() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN
+                                    + (grafoMatriz.isGrafosRegular() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN
+                                    + (grafoMatriz.isGrafosCompleto() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN
+                                    + (grafoMatriz.isGrafosBipartido() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN
+                                    + (grafoMatriz.isGrafosConexo() ? "Sim" : "Não"));
                         } else {
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN + (grafoLista.isSimples() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN + (grafoLista.isRegular() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN + (grafoLista.isCompleto() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN + (grafoLista.isBipartido() ? "Sim" : "Não"));
-                            UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN + (grafoLista.isConexo() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Simples: " + UI.CYAN
+                                    + (grafoLista.isSimples() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Regular: " + UI.CYAN
+                                    + (grafoLista.isRegular() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Completo: " + UI.CYAN
+                                    + (grafoLista.isCompleto() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Bipartido: " + UI.CYAN
+                                    + (grafoLista.isBipartido() ? "Sim" : "Não"));
+                            UI.println(UI.YELLOW + "\t" + " - Grafo Conexo: " + UI.CYAN
+                                    + (grafoLista.isConexo() ? "Sim" : "Não"));
                         }
                     } else {
                         // Caso o grafo esteja vazio
@@ -590,13 +628,15 @@ public class App {
                         }
                     } else {
                         // Caso o grafo esteja vazio
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
+                                + "\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }
                     break;
-                
+
                 case 11:
                     // Busca em Profundidade
-                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** BUSCA EM PROFUNDIDADE ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** BUSCA EM PROFUNDIDADE ***   \n\n\n"
+                            + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         UI.print("\tInsira o primeiro vértice a ser visitado na busca\n\n");
@@ -622,14 +662,16 @@ public class App {
                         UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }
                     break;
-                
+
                 case 12:
-                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** ORDENAÇÃO TOPOLÓGICA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** ORDENAÇÃO TOPOLÓGICA ***   \n\n\n"
+                            + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
-                        if(useAnaliseMatriz) {
-                            // TODO ordenacao na matriz
+                        if (useAnaliseMatriz) {
+                            grafoMatriz.ordenacaoTopologica();
                         } else {
+                            grafoLista.ordenacaoTopologList();
                             // TODO odenacao na lista
                         }
                     } else {
@@ -637,10 +679,11 @@ public class App {
                         UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }
                     break;
-                
+
                 case 13:
                     // Arvore geradora minima
-                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** ÁRVORE GERADORA MÍNIMA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** ÁRVORE GERADORA MÍNIMA ***   \n\n\n"
+                            + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         if(useAnaliseMatriz) {
@@ -658,7 +701,7 @@ public class App {
                         UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }
                     break;
-                
+
                 case 14:
                     // Cria novo grafo
 
@@ -667,9 +710,10 @@ public class App {
                     do {
                         // Pergunta se o grafo é ou não direcionado
                         UI.print(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** NOVO GRAFO ***   \n\n\n"
-                                + UI.BLACK_BACKGROUND + UI.YELLOW + "\tO novo grafo é direcionado? (s/n)" + UI.CYAN +"\n\n\tResposta: " + UI.WHITE);
+                                + UI.BLACK_BACKGROUND + UI.YELLOW + "\tO novo grafo é direcionado? (s/n)" + UI.CYAN
+                                + "\n\n\tResposta: " + UI.WHITE);
                         resposta = scanner.next().toLowerCase().charAt(0);
-            
+
                         if (resposta == 's') {
                             grafoLista.setIsDirecionado(true);
                             grafoMatriz.setIsDirecionado(true);
@@ -678,7 +722,7 @@ public class App {
                             grafoLista.setIsDirecionado(false);
                             grafoMatriz.setIsDirecionado(false);
                             opcao_invalida = false;
-                        }  else {
+                        } else {
                             UI.println(UI.RED + "\t" + "Resposta inválida. Tente novavemente." + "\n");
                             UI.exibir_fim_tela();
                         }
@@ -692,7 +736,7 @@ public class App {
                         UI.print(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** NOVO GRAFO ***   \n\n\n");
                         UI.println(UI.BLACK_BACKGROUND + UI.GREEN + "\tInformações do grafo:");
 
-                        if(grafoLista.isDirecionado()) {
+                        if (grafoLista.isDirecionado()) {
                             UI.print("\t - Grafo Direcionado");
                         } else {
                             UI.print("\t - Grafo Não Direcionado");
@@ -739,16 +783,17 @@ public class App {
                         } else {
                             UI.print("\t - Grafo não ponderado");
                         }
-            
+
                         UI.println("\n\n");
-            
-                        UI.print(UI.YELLOW + "\tPara a análise do grafo, você deseja utilizar os métodos de qual classe?\n\n");
+
+                        UI.print(UI.YELLOW
+                                + "\tPara a análise do grafo, você deseja utilizar os métodos de qual classe?\n\n");
                         UI.print("\t1 - Matriz de Adjacência\n"
                                 + "\t2 - Lista de Adjacência\n\n");
-            
+
                         UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
                         resposta = scanner.next().toLowerCase().charAt(0);
-            
+
                         if (resposta == '1') {
                             useAnaliseMatriz = true;
                             opcao_invalida = false;
@@ -764,10 +809,12 @@ public class App {
                     break;
                 case 0:
                     UI.println(UI.YELLOW + "Desligando sistema ...\n\n\n"
-                               + UI.PURPLE_BACKGROUND + UI.WHITE +"\t\t\t\t\t   Obrigado e volte sempre   \n\n" + UI.RESET);
+                            + UI.PURPLE_BACKGROUND + UI.WHITE + "\t\t\t\t\t   Obrigado e volte sempre   \n\n"
+                            + UI.RESET);
             }
 
             // Preparo para reiniciar programa
+
             if (opcao != 0) {
                 UI.exibir_fim_tela();
             }

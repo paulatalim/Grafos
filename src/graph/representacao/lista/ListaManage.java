@@ -4,6 +4,7 @@ import java.util.List;
 
 import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.DepthFirstSearch;
+import graph.ordenação.OrdenacaoTopologica;
 
 public class ListaManage {
     private boolean direcionado;
@@ -354,4 +355,12 @@ public class ListaManage {
 
         return lnd.getGrafo();
     }
+
+    public OrdenacaoTopologica ordenacaoTopologList(){
+        if(direcionado) {
+            return ld.ordenacaoTopologicaList();
+        } 
+        return null;
+    }
+
 }
