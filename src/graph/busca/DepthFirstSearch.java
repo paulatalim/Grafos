@@ -7,8 +7,9 @@ import graph.representacao.lista.No;
 
 public class DepthFirstSearch {
     private List<No> graphL;
-    private int[][] graphM;
+    private Integer[][] graphM;
     private ArrayList<Character> vertices;
+    private boolean isPonderado;
     private ArrayList<Character> ordemVisita;
     private int t;
     private int[] td;
@@ -22,9 +23,10 @@ public class DepthFirstSearch {
         ordemVisita = new ArrayList<>();
     }
 
-    public DepthFirstSearch(int[][] graph, ArrayList<Character> vertices) {
+    public DepthFirstSearch(Integer[][] graph, ArrayList<Character> vertices, boolean isPonderado) {
         graphM = graph;
         this.vertices = vertices;
+        this.isPonderado = isPonderado;
         t = 0;
         td = new int[vertices.size()];
         tt = new int[vertices.size()];
@@ -52,7 +54,7 @@ public class DepthFirstSearch {
         t += 1;
         td[indiceVerticeAtual] = t;
         for(int i = 0; i < vertices.size(); i++) {
-            if(graphM[indiceVerticeAtual][i] != 0) {
+            if((isPonderado && graphM[indiceVerticeAtual][i] != null) || (!isPonderado && graphM[indiceVerticeAtual][i] != 0) ) {
                 if(td[i] == 0) {
                     dfsMatriz(vertices.get(i));
                 }
@@ -104,7 +106,7 @@ public class DepthFirstSearch {
 
     public void dfs (char verticeInicial) {
         if (graphL == null) {
-            dfsMatrizRaiz(verticeInicial);
+            dfsMatrizRaiz(verticeInicial); //qual descoberta?
         }
         else {
             dfsListaRaiz(verticeInicial);

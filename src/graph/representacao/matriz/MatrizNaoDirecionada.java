@@ -413,15 +413,15 @@ public class MatrizNaoDirecionada {
         return toArrayChar(BFS.bfs(verticeInicial));
     }
 
-    public DepthFirstSearch realizarBuscaProfundidade() {
-        DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices);
-        DFS.dfs(vertices.get(0));
+    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
+        DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices, isPonderado);
+        DFS.dfs(raiz);
         return DFS;
     }
 
     public ArvoreGeradoraMinima encontrarAGM() {
         if(isGrafosConexo() && isPonderado) { 
-            ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo, vertices);
+            ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo, vertices); 
             AGM.encontrarAGM();
             return AGM;
         }
