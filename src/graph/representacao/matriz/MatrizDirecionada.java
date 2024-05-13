@@ -428,9 +428,9 @@ public class MatrizDirecionada {
         return toArrayChar(BFS.bfs(verticeInicial));
     }
 
-    public DepthFirstSearch realizarBuscaProfundidade() {
-        DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices);
-        DFS.dfs(vertices.get(0));
+    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
+        DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices, isPonderado);
+        DFS.dfs(raiz); // tem que fazer aquilo de escolher o vértice raiz
         return DFS;
     }
 

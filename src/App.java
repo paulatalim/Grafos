@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.DepthFirstSearch;
 import graph.representacao.lista.ListaManage;
 import graph.representacao.matriz.MatrizManage;
@@ -21,12 +22,13 @@ public class App {
         ListaManage grafoLista = new ListaManage();
         MatrizManage grafoMatriz = new MatrizManage();
         DepthFirstSearch buscaEmProfundidade;
+        ArvoreGeradoraMinima arvoreGeradoraMinima;
 
         boolean opcao_invalida;
         String aresta;
         int opcao;
         char resposta;
-        char resposta1;
+        char resposta1; 
         int cont;
         boolean useAnaliseMatriz = true;
 
@@ -597,22 +599,23 @@ public class App {
                     UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** BUSCA EM PROFUNDIDADE ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
+                        UI.print("\tInsira o primeiro vértice a ser visitado na busca\n\n");
+                        // Leitura do vértice
+                        UI.print(UI.CYAN + "\tVértice: " + UI.WHITE);
+                        resposta = scanner.next().charAt(0);
+                        UI.println("");
+                        
                         if(useAnaliseMatriz) {
-                            // TODO Busca em Profundidade na matriz
-                            buscaEmProfundidade = grafoMatriz.realizarBuscaProfundidade();
-                            UI.println("\tVértices: " + Arrays.toString(buscaEmProfundidade.getVertices()));
-                            UI.println("\tOrdem de Visita: " + Arrays.toString(buscaEmProfundidade.getOrdem()));
-                            UI.println("\tTDs: " + Arrays.toString(buscaEmProfundidade.getTD()));
-                            UI.println("\tTTs: " + Arrays.toString(buscaEmProfundidade.getTT()));
-                            
+                            buscaEmProfundidade = grafoMatriz.realizarBuscaProfundidade(resposta);
                         } else {
-                            // TODO Busca em Profundidade na lista
-                            buscaEmProfundidade = grafoLista.realizarBuscaProfundidade();
-                            UI.println("\tVértices: " + Arrays.toString(buscaEmProfundidade.getVertices()));
-                            UI.println("\tOrdem de Visita: " + Arrays.toString(buscaEmProfundidade.getOrdem()));
-                            UI.println("\tTDs: " + Arrays.toString(buscaEmProfundidade.getTD()));
-                            UI.println("\tTTs: " + Arrays.toString(buscaEmProfundidade.getTT()));
+                            buscaEmProfundidade = grafoMatriz.realizarBuscaProfundidade(resposta);
                         }
+                        // Exibe o resultado da busca
+                        UI.println(UI.YELLOW + "\n\tA seguir está a ordem em que os vértices foram visitados durante a busca\n");
+                        UI.println("\tVértices: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getVertices())); 
+                        UI.println("\tTDs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTD())); 
+                        UI.println("\tTTs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTT())); 
+                        UI.print("\tOrdem de visitação: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getOrdem())); 
 
                     } else {
                         // Caso o grafo esteja vazio
@@ -641,11 +644,16 @@ public class App {
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         if(useAnaliseMatriz) {
-                            // TODO AGM em matriz
+                            arvoreGeradoraMinima = grafoMatriz.encontrarAGM();
+                            if(arvoreGeradoraMinima != null) arvoreGeradoraMinima.printGraphMAGM();
+                            else UI.println("\tNão há Árvore Geradora Mínima para o grafo.");
                         } else {
-                            // TODO AGM em lista
+                            arvoreGeradoraMinima = grafoLista.encontrarAGM();
+                            if(arvoreGeradoraMinima != null) arvoreGeradoraMinima.printGraphLAGM();
+                            else UI.println("\tNão há Árvore Geradora Mínima para o grafo.");
                         }
-                    } else {
+                    } 
+                    else {
                         // Caso o grafo esteja vazio
                         UI.println("\tSeu grafo está vazio, adicione vértices para habilitar está função");
                     }

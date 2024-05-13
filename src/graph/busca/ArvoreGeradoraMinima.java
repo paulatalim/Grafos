@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import graph.representacao.lista.No;
-import graph.representacao.matriz.MatrizNaoDirecionada;
 
 public class ArvoreGeradoraMinima{
     private List<No> graphL;
     private List<No> graphLAGM;
-    private int[][] graphM;
-    private int[][] graphMAGM;
+    private Integer[][] graphM;
+    private Integer[][] graphMAGM;
     private ArrayList<Character> vertices;
     private String[] arestasOrdenadas;
 
@@ -34,7 +33,7 @@ public class ArvoreGeradoraMinima{
         
     }
 
-    public ArvoreGeradoraMinima(int[][] graph, ArrayList<Character> vertices) {
+    public ArvoreGeradoraMinima(Integer[][] graph, ArrayList<Character> vertices) {
         graphM = graph;
         this.vertices = vertices;
             
@@ -42,7 +41,7 @@ public class ArvoreGeradoraMinima{
         ArrayList<String> arestas = new ArrayList<String>();
         for(int i = 0; i < tamanho; i++) {
             for(int j = i; j < tamanho; j++) {
-                if(i != j && graphM[i][j] != 0) {
+                if(i != j && graphM[i][j] != null) {
                     arestas.add(String.valueOf(i) + String.valueOf(j));
                 }
             }
@@ -50,10 +49,10 @@ public class ArvoreGeradoraMinima{
         arestasOrdenadas = arestas.toArray(new String[0]);
         ordenarArestas();
         
-        graphMAGM = new int[tamanho][tamanho];
+        graphMAGM = new Integer[tamanho][tamanho];
         for(int i = 0; i < tamanho; i++) {
             for(int j = 0; j < tamanho; j++) {
-                graphMAGM[i][j] = 0;
+                graphMAGM[i][j] = null;
             }
         }
     }
@@ -72,7 +71,11 @@ public class ArvoreGeradoraMinima{
 
                 while (j >= 0 && graphM[matrizI][matrizJ] > graphM[keyI][keyJ]) {
                     arestasOrdenadas[j + 1] = arestasOrdenadas[j];
-                    j = j - 1;
+                    j--;
+                    if(j >= 0) {
+                        matrizI = Character.getNumericValue(arestasOrdenadas[j].charAt(0));
+                        matrizJ = Character.getNumericValue(arestasOrdenadas[j].charAt(1));
+                    }
                 }
                 arestasOrdenadas[j + 1] = key;
             }
@@ -84,15 +87,20 @@ public class ArvoreGeradoraMinima{
 
                 int listaI = Character.getNumericValue(arestasOrdenadas[j].charAt(0));
                 int listaJ = Character.getNumericValue(arestasOrdenadas[j].charAt(1));
-                char verticeJ = graphL.get(listaI).getAresta(listaJ);
+                // char verticeJ = graphL.get(listaI).getAresta(listaJ);
 
                 int keyI = Character.getNumericValue(arestasOrdenadas[j].charAt(0));
                 int keyJ = Character.getNumericValue(arestasOrdenadas[j].charAt(1));
-                char keyVerticeJ = graphL.get(keyI).getAresta(keyJ);
+                // char keyVerticeJ = graphL.get(keyI).getAresta(keyJ);
 
-                while (j >= 0 && graphL.get(listaI).getPeso(verticeJ) > graphL.get(keyI).getPeso(keyVerticeJ)) {
+                while (j >= 0 && graphL.get(listaI).getPeso(listaJ) > graphL.get(keyI).getPeso(keyJ)) {
                     arestasOrdenadas[j + 1] = arestasOrdenadas[j];
-                    j = j - 1;
+                    j--;
+                    if(j >= 0) {
+                        listaI = Character.getNumericValue(arestasOrdenadas[j].charAt(0));
+                        listaJ = Character.getNumericValue(arestasOrdenadas[j].charAt(1));
+                        // verticeJ = graphL.get(listaI).getAresta(listaJ);
+                    }
                 }
                 arestasOrdenadas[j + 1] = key;
             }
@@ -115,8 +123,8 @@ public class ArvoreGeradoraMinima{
     private boolean formaCicloUtil(char[] verticesVisitados, int vertice, int pai) {
         verticesVisitados[vertice] = (char) vertice; 
 
-        for(int i = 0; i < verticesVisitados.length; i++) {
-            if(graphL == null) {
+        if (graphL == null) {
+            for(int i = 0; i < verticesVisitados.length; i++) {
                 if(graphMAGM[vertice][i] != 0) {
                     if(verticesVisitados[i] == '\u0000') {
                         if(formaCicloUtil(verticesVisitados, i, vertice)) return true;
@@ -126,11 +134,13 @@ public class ArvoreGeradoraMinima{
                     }
                 }
             }
-            else {
+        }
+        else {
+            for(int i = 0; i < graphLAGM.get(vertice).qnt_aresta(); i++) {
                 if(verticesVisitados[i] == '\u0000') {
                     if(formaCicloUtil(verticesVisitados, i, vertice)) return true;
                 }
-                else if(i != pai) {
+                else if(graphLAGM.get(vertice).getAresta(i) != graphLAGM.get(pai).getId()){
                     return true;
                 }
             }
@@ -166,26 +176,21 @@ public class ArvoreGeradoraMinima{
         int i = 0;
         int indexI;
         int indexJ;
-        int pesoI;
         int pesoJ;
-        char verticeI;
         char verticeJ;
         ArrayList<String> arestasVisitadas = new ArrayList<String>();
         
-        while(arestasVisitadas.size() < vertices.size() - 1) {
+        while(arestasVisitadas.size() < graphLAGM.size() - 1) {
             indexI = Character.getNumericValue(arestasOrdenadas[i].charAt(0));
             indexJ = Character.getNumericValue(arestasOrdenadas[i].charAt(1));
-            verticeI = graphL.get(indexI).getAresta(indexJ);
+
             verticeJ = graphL.get(indexI).getAresta(indexJ);
-            pesoI = graphL.get(indexI).getPeso(verticeJ);
-            pesoJ = graphL.get(indexJ).getPeso(verticeI);
+            pesoJ = graphL.get(indexJ).getPeso(verticeJ);
             
-            graphLAGM.get(indexI).inserir_aresta(verticeJ, pesoI);
-            graphLAGM.get(indexJ).inserir_aresta(verticeI, pesoJ);
+            graphLAGM.get(indexI).inserir_aresta(verticeJ, pesoJ);
             
             if(formaCiclo(graphLAGM.size())) {
                 graphLAGM.get(indexI).remover_aresta(verticeJ);
-                graphLAGM.get(indexJ).remover_aresta(verticeI);
             }
             else {
                 arestasVisitadas.add(arestasOrdenadas[i]);
@@ -203,12 +208,36 @@ public class ArvoreGeradoraMinima{
         }
     }
 
-    public int[][] getGraphMAGM() {
-        return graphMAGM;
+    public void printGraphMAGM() {
+        System.out.print("\t   ");
+        for (int i = 0; i < vertices.size(); i++) {
+            System.out.print(vertices.get(i) + " ");
+        }
+        System.out.print("\n");
+        for (int i = 0; i < vertices.size(); i++) {
+            System.out.print("\t" + vertices.get(i) + "| ");
+            for (int j = 0; j < vertices.size(); j++) {
+                System.out.print(graphMAGM[i][j] + " ");
+            }
+            System.out.println("|");
+        }
     }
 
-    public List<No> getGraphLAGM() {
-        return graphLAGM;
+    public void printGraphLAGM() {
+        for (int i = 0; i < graphLAGM.size(); i++) {
+            No no = graphLAGM.get(i);
+            System.out.print("\t" + no.getId() + ": [ ");
+
+            if (no.qnt_aresta() > 0) {
+                System.out.print(no.getAresta(0));
+            }
+
+            for (int j = 1; j < no.qnt_aresta(); j++) {
+                System.out.print(", " + no.getAresta(j));
+            }
+
+            System.out.println(" ]");
+        }
     }
 
 

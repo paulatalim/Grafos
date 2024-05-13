@@ -234,11 +234,11 @@ public class MatrizManage {
         return mnd.realizarBuscaLargura(verticeInicial);
     }
 
-    public DepthFirstSearch realizarBuscaProfundidade() {
+    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
         if(direcionado) {
-            return md.realizarBuscaProfundidade();
+            return md.realizarBuscaProfundidade(raiz);
         }
-        return mnd.realizarBuscaProfundidade();
+        return mnd.realizarBuscaProfundidade(raiz);
     }
 
     public ArvoreGeradoraMinima encontrarAGM() {
