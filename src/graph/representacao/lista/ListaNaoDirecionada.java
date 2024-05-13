@@ -114,7 +114,7 @@ public class ListaNaoDirecionada {
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
     public boolean inserir_aresta(String aresta, int peso) {
-        if(isPonderado && peso > 0) {
+        if(isPonderado) {
 
             // Encontra os vertice no grafo
             int aux1 = buscar_vertice(aresta.charAt(0));
@@ -179,7 +179,7 @@ public class ListaNaoDirecionada {
      * @return true (caso a atualizacao ocorrer com sucesso) ou false (caso ocorrer algum erro)
      */
     public boolean atualizarPeso(String aresta, int newPeso) {
-        if(isPonderado && newPeso > 0) {
+        if(isPonderado) {
             return (
                 grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso) &&
                 grafo.get(buscar_vertice(aresta.charAt(1))).updatePeso(aresta.charAt(0), newPeso)
@@ -194,12 +194,20 @@ public class ListaNaoDirecionada {
      * @return Array de caracteres
      */
     private char[] toArrayChar(List<Character> list) {
+        // Verifica se a lista existe
+        if(list == null) {
+            return null;
+        }
+
+        // Cria um vetor auxiliar para armazenar os valores convertidos
         char[] vetor = new char[list.size()];
         
+        // Conversao dos valores da lista para vetor
         for(int i = 0; i < list.size(); i++) {
             vetor[i] = Character.valueOf(list.get(i));
         }
 
+        // Retorno da lista convertida para vetor
         return vetor;
     }
 
@@ -238,9 +246,9 @@ public class ListaNaoDirecionada {
                 // Verifica se ha laco
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
                     if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
-                        grau += 2;
+                        grau += 2 * grafo.get(i).getPeso(j);
                     } else {
-                        grau ++;
+                        grau += grafo.get(i).getPeso(j);
                     }
                 }
 
@@ -319,48 +327,60 @@ public class ListaNaoDirecionada {
      */
     public boolean isBipartido () {
         Map<Character, Byte> mapeamento = new HashMap<Character, Byte>();
-        boolean[] isVerificado = new boolean[grafo.size()];
         byte color = 0;
         byte result;
+        boolean allIsVerficado = false;
 
         // Inicializa o mapeamento
         for(int i = 1; i < grafo.size(); i++) {
             mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) -1);
-            isVerificado[i] = false;
         }
 
         mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
-            
-        // Encontra o proximo vertice a ser vericado
-        for(int i = 0; i < grafo.size(); i++) {
-            color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
-
-            if(color == 0) {
-                color ++;
-            } else if (color == 1) {
-                color = 0;
-            }
-
-            // verifica a vizinhanca
-            for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
-
-                // Verifica se ha laco
-                if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
-                    return false;
+        
+        while (!allIsVerficado) {
+            // Encontra o proximo vertice a ser vericado
+            for(int i = 0; i < grafo.size(); i++) {
+                color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
+                
+                if (color != -1) {
+                    if(color == 0) {
+                        color ++;
+                    } else if (color == 1) {
+                        color = 0;
+                    }
+                    
+                    // verifica a vizinhanca
+                    for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
+                        result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
+                        
+                        // Verifica se ha laco
+                        if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                            return false;
+                        }
+                        // Inicializa cor
+                        else if(result == (byte) -1) {
+                            mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
+                            
+                            // Caso a cor ser invalida
+                        } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
+                            return false;
+                        }
+                    }
                 }
-                // Inicializa cor
-                else if(result == (byte) -1) {
-                    mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
+            }
+            
+            allIsVerficado = true;
 
-                // Caso a cor ser invalida
-                } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
-                    return false;
+            // Verifica se algum vertice nao foi verificado; colorido
+            for(int i = 0; i < grafo.size(); i++) {
+                if(mapeamento.get(Character.valueOf((grafo.get(i).getId()))) == -1) {
+                    mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) 0);
+                    allIsVerficado = false;
+                    break;
                 }
             }
         }
-
-        if(!isConexo()) return false;
 
         return true;
     }
@@ -370,17 +390,18 @@ public class ListaNaoDirecionada {
      * @return true, se for conexo, false, caso contrário
      */
     public boolean isConexo() {    
-        for (int i = 0; i < grafo.size(); i++) {
-            if (calcularGrau(grafo.get(i).getId()) == 0) {
-                return false;
-            }
-        }
-        return true;
+        BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
+        return bfs.getIsConexo();
     } 
 
-    public char[] realizarBuscaLargura() {
+    /**
+     * Realiza uma busca em largura no grafo
+     * @param verticeInicial char (vertice que a busca em largura ira iniciar)
+     * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
+     */
+    public char[] realizarBuscaLargura(char verticeInicial) {
         BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
-        return toArrayChar(BFS.bfs(grafo.get(0).getId()));
+        return toArrayChar(BFS.bfs(verticeInicial));
     }
 
     /**

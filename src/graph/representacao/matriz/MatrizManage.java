@@ -108,7 +108,7 @@ public class MatrizManage {
      */
     public int[] grau_vertice (char id_vertice) {
         if(direcionado) {
-            return null;
+            return md.grau_vertice(id_vertice);
         }
         return mnd.grau_vertice(id_vertice);
     }
@@ -219,11 +219,16 @@ public class MatrizManage {
         return null;
     }
 
-    public char[] realizarBuscaLargura() {
+    /**
+     * Realiza uma busca em largura no grafo
+     * @param verticeInicial char (vertice que a busca em largura ira iniciar)
+     * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
+     */
+    public char[] realizarBuscaLargura(char verticeInicial) {
         if(direcionado) {
-            return md.realizarBuscaLargura();
+            return md.realizarBuscaLargura(verticeInicial);
         }
-        return mnd.realizarBuscaLargura();
+        return mnd.realizarBuscaLargura(verticeInicial);
     }
 
     /**

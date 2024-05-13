@@ -25,7 +25,7 @@ public class App {
         char resposta;
         char resposta1;
         int cont;
-        boolean useAnaliseMatriz = true;;
+        boolean useAnaliseMatriz = true;
 
         // Valida a resposta do usuario
         do {
@@ -168,11 +168,11 @@ public class App {
                 UI.print("\t" + "8 - Calcular distancia entre dois vértices" + "\n");
                 UI.print("\t" + "9 - Analisar e classificar grafo" + "\n\n");
                 
-                UI.println(UI.BLUE_BACKGROUND + UI.BLACK + "\t" + " ALGORITMOS DE BUSCA E ÁRVORE   ");
+                UI.println(UI.BLUE_BACKGROUND + UI.BLACK + "\t" + " ALGORITMOS DE BUSCA, ORDENAÇÃO E ÁRVORE   ");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
                 UI.println("\t" + "10 - Realizar Busca em Largura");
-                UI.print("\t" + "11 - Realizar Busca em Profundidade");
-                UI.print("\t" + "12 - Realizar Ordenação Topologica");
+                UI.println("\t" + "11 - Realizar Busca em Profundidade");
+                UI.print("\t" + "12 - Realizar Ordenação Topológica");
                 
                 if(grafoLista.isPonderado()) {
                     UI.print("\n\t" + "13 - Gerar Árvore Geradora Mínima");
@@ -475,7 +475,6 @@ public class App {
                             int[] graus = grafoMatriz.grau_vertice(resposta);
 
                             if(grafoMatriz.isDirecionado()) {
-                                graus = grafoMatriz.grau_vertice(resposta);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Saída: " + UI.CYAN + graus[0]);
                                 UI.println(UI.YELLOW + "\t" + " - Grau de Entrada: " + UI.CYAN + graus[1]);
                             } else {
@@ -564,13 +563,28 @@ public class App {
                 case 10:
                     // Busca em Largura
                     UI.print(UI.BLUE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t   *** BUSCA EM LARGURA ***   \n\n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
+                    char[] result;
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
+                        UI.print("\tInsira o primeiro vértice a ser visitado na busca\n\n");
+                        // Leitura do vértice
+                        UI.print(UI.CYAN + "\tVértice: " + UI.WHITE);
+                        resposta = scanner.next().charAt(0);
+                        UI.println("");
+
                         if(useAnaliseMatriz) {
-                            // TODO Busca em Largura em matriz
-                            grafoMatriz.realizarBuscaLargura();
+                            result = grafoMatriz.realizarBuscaLargura(resposta);
                         } else {
-                            // TODO Busca em Largura em lista
-                            grafoLista.realizarBuscaLargura();
+                            result = grafoLista.realizarBuscaLargura(resposta);
+                        }
+                        if(result != null) {
+                            // Exibe o resultado da busca
+                            UI.println(UI.YELLOW + "\n\tA seguir está a ordem em que os vértices foram visitados durante a busca\n");
+                            UI.print("\tOrdem de visitação: " + UI.CYAN + result[0]);
+                            for(int i = 1; i < result.length; i++) {
+                                UI.print(" " + result[i]);                            
+                            }   
+                        } else {
+                            UI.print(UI.RED + "\tVértice inválido.");
                         }
                     } else {
                         // Caso o grafo esteja vazio
@@ -679,7 +693,7 @@ public class App {
                         } else if (resposta == 'n') {
                             // Configura o grafo nao ponderado
                             grafoLista.setIsPonderado(false);
-                            grafoMatriz.setIsPonderado(true);
+                            grafoMatriz.setIsPonderado(false);
                             opcao_invalida = false;
                         } else {
                             // Exibe mensagem de erro
@@ -696,9 +710,9 @@ public class App {
                         UI.println(UI.BLACK_BACKGROUND + UI.GREEN + "\tInformações do grafo:");
             
                         if(grafoLista.isDirecionado()) {
-                            UI.print("\t - Grafo Direcionado");
+                            UI.println("\t - Grafo Direcionado");
                         } else {
-                            UI.print("\t - Grafo Não Direcionado");
+                            UI.println("\t - Grafo Não Direcionado");
                         }
 
                         if (grafoLista.isPonderado()) {
