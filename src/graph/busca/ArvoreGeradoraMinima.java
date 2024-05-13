@@ -125,7 +125,7 @@ public class ArvoreGeradoraMinima{
 
         if (graphL == null) {
             for(int i = 0; i < verticesVisitados.length; i++) {
-                if(graphMAGM[vertice][i] != 0) {
+                if(graphMAGM[vertice][i] != null) {
                     if(verticesVisitados[i] == '\u0000') {
                         if(formaCicloUtil(verticesVisitados, i, vertice)) return true;
                     }
@@ -162,8 +162,8 @@ public class ArvoreGeradoraMinima{
             graphMAGM[indexJ][indexI] = graphM[indexJ][indexI];
 
             if(formaCiclo(vertices.size())) {
-                graphMAGM[indexI][indexJ] = 0;
-                graphMAGM[indexJ][indexI] = 0;
+                graphMAGM[indexI][indexJ] = null;
+                graphMAGM[indexJ][indexI] = null;
             }
             else {
                 arestasVisitadas.add(arestasOrdenadas[i]);
