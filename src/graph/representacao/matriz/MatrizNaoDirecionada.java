@@ -3,7 +3,9 @@ package graph.representacao.matriz;
 import java.util.ArrayList;
 import java.util.List;
 
+import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.BreadthFirstSearch;
+import graph.busca.DepthFirstSearch;
 
 public class MatrizNaoDirecionada {
     private Integer[][] grafo;
@@ -411,6 +413,20 @@ public class MatrizNaoDirecionada {
         return toArrayChar(BFS.bfs(verticeInicial));
     }
 
+    public DepthFirstSearch realizarBuscaProfundidade() {
+        DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices);
+        DFS.dfs(vertices.get(0));
+        return DFS;
+    }
+
+    public ArvoreGeradoraMinima encontrarAGM() {
+        if(isGrafosConexo() && isPonderado) { 
+            ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo, vertices);
+            AGM.encontrarAGM();
+            return AGM;
+        }
+        return null;
+    }
 
     /**
      * Imprime a matriz de adjacencia no console

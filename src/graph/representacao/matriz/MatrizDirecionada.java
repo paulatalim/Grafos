@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import graph.busca.BreadthFirstSearch;
+import graph.busca.DepthFirstSearch;
 
 public class MatrizDirecionada {
     private Integer[][] grafo;
@@ -425,6 +426,12 @@ public class MatrizDirecionada {
     public char[] realizarBuscaLargura(char verticeInicial) {
         BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices, isPonderado);
         return toArrayChar(BFS.bfs(verticeInicial));
+    }
+
+    public DepthFirstSearch realizarBuscaProfundidade() {
+        DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices);
+        DFS.dfs(vertices.get(0));
+        return DFS;
     }
 
     /**

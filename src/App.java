@@ -1,5 +1,7 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
+import graph.busca.DepthFirstSearch;
 import graph.representacao.lista.ListaManage;
 import graph.representacao.matriz.MatrizManage;
 
@@ -18,6 +20,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         ListaManage grafoLista = new ListaManage();
         MatrizManage grafoMatriz = new MatrizManage();
+        DepthFirstSearch buscaEmProfundidade;
 
         boolean opcao_invalida;
         String aresta;
@@ -235,14 +238,11 @@ public class App {
                             resposta = scanner.next().charAt(0);
                             UI.println("");
 
-                            Character.isDigit(resposta);
-
-                            if (resposta != '0' && (Character.isDigit(resposta) || Character.isLetter(resposta))) {
+                            if (Character.isDigit(resposta) || Character.isLetter(resposta)) {
                                 // Adiciona vértice na lista
-                                grafoLista.inserir_vertice(resposta);
+                                if(resposta != '0') grafoLista.inserir_vertice(resposta);
+                                grafoMatriz.inserir_vertice(resposta);
                             }
-
-                            grafoMatriz.inserir_vertice(resposta);
 
                             // Atualiza contador
                             cont++;
@@ -599,8 +599,19 @@ public class App {
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         if(useAnaliseMatriz) {
                             // TODO Busca em Profundidade na matriz
+                            buscaEmProfundidade = grafoMatriz.realizarBuscaProfundidade();
+                            UI.println("\tVértices: " + Arrays.toString(buscaEmProfundidade.getVertices()));
+                            UI.println("\tOrdem de Visita: " + Arrays.toString(buscaEmProfundidade.getOrdem()));
+                            UI.println("\tTDs: " + Arrays.toString(buscaEmProfundidade.getTD()));
+                            UI.println("\tTTs: " + Arrays.toString(buscaEmProfundidade.getTT()));
+                            
                         } else {
                             // TODO Busca em Profundidade na lista
+                            buscaEmProfundidade = grafoLista.realizarBuscaProfundidade();
+                            UI.println("\tVértices: " + Arrays.toString(buscaEmProfundidade.getVertices()));
+                            UI.println("\tOrdem de Visita: " + Arrays.toString(buscaEmProfundidade.getOrdem()));
+                            UI.println("\tTDs: " + Arrays.toString(buscaEmProfundidade.getTD()));
+                            UI.println("\tTTs: " + Arrays.toString(buscaEmProfundidade.getTT()));
                         }
 
                     } else {

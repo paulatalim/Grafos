@@ -2,6 +2,9 @@ package graph.representacao.lista;
 
 import java.util.List;
 
+import graph.busca.ArvoreGeradoraMinima;
+import graph.busca.DepthFirstSearch;
+
 public class ListaManage {
     private boolean direcionado;
     private boolean ponderado;
@@ -269,6 +272,20 @@ public class ListaManage {
         }
 
         return lnd.realizarBuscaLargura(verticeInicial);
+    }
+
+    public DepthFirstSearch realizarBuscaProfundidade() {
+        if(direcionado) {
+            return ld.realizarBuscaProfundidade();
+        }
+        return lnd.realizarBuscaProfundidade();
+    }
+
+    public ArvoreGeradoraMinima encontrarAGM() {
+        if(direcionado) {
+            return null;
+        }
+        return lnd.encontrarAGM();
     }
 
     /**

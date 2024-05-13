@@ -1,5 +1,8 @@
 package graph.representacao.matriz;
 
+import graph.busca.ArvoreGeradoraMinima;
+import graph.busca.DepthFirstSearch;
+
 public class MatrizManage {
     private boolean direcionado;
     private boolean ponderado;
@@ -231,6 +234,20 @@ public class MatrizManage {
         return mnd.realizarBuscaLargura(verticeInicial);
     }
 
+    public DepthFirstSearch realizarBuscaProfundidade() {
+        if(direcionado) {
+            return md.realizarBuscaProfundidade();
+        }
+        return mnd.realizarBuscaProfundidade();
+    }
+
+    public ArvoreGeradoraMinima encontrarAGM() {
+        if(direcionado) {
+            return null;
+        }
+        return mnd.encontrarAGM();
+    }
+    
     /**
      * Imprime o grafo em forma de matriz
      */
