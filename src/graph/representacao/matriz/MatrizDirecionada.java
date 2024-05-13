@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import graph.busca.BreadthFirstSearch;
+import graph.ordenação.OrdenacaoTopologica;
+
 
 public class MatrizDirecionada {
     private int[][] grafo;
@@ -386,6 +388,14 @@ public class MatrizDirecionada {
         }
     }
 
+    public OrdenacaoTopologica ordenacaoTopologica(){
+        
+        OrdenacaoTopologica ordenacaoTopologica = new OrdenacaoTopologica(grafo, vertices);
+        char verticeInicial = ordenacaoTopologica.escolherVerticeInicial();
+        ordenacaoTopologica.imprimirOrdenacao(verticeInicial);
+        return ordenacaoTopologica;
+    
+    }
     /**
      * Se o Grafo eh poderado
      * @param isPonderado
