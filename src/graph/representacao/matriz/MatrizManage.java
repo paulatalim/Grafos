@@ -1,5 +1,8 @@
 package graph.representacao.matriz;
 
+import graph.ordenação.OrdenacaoTopologica;
+
+
 public class MatrizManage {
     private boolean direcionado;
     private boolean ponderado;
@@ -271,6 +274,15 @@ public class MatrizManage {
         } else {
             mnd.setIsPonderado(isPonderado);
         }
+    }
+
+    public OrdenacaoTopologica ordenacaoTopologica(){
+        if(direcionado){
+            OrdenacaoTopologica ordenacao = md.ordenacaoTopologica();
+            return ordenacao;
+        }
+        return null;
+        
     }
 
     /**
