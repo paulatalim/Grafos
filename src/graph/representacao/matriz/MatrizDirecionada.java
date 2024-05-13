@@ -458,13 +458,12 @@ public class MatrizDirecionada {
     }
 
     public OrdenacaoTopologica ordenacaoTopologica(){
-        
         OrdenacaoTopologica ordenacaoTopologica = new OrdenacaoTopologica(grafo, vertices);
         char verticeInicial = ordenacaoTopologica.escolherVerticeInicial();
         ordenacaoTopologica.imprimirOrdenacao(verticeInicial);
         return ordenacaoTopologica;
-    
     }
+    
     /**
      * Se o Grafo eh poderado
      * @param isPonderado
