@@ -705,11 +705,19 @@ public class App {
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         if(useAnaliseMatriz) {
                             arvoreGeradoraMinima = grafoMatriz.encontrarAGM();
-                            if(arvoreGeradoraMinima != null) arvoreGeradoraMinima.printGraphMAGM();
+                            if(arvoreGeradoraMinima != null) {
+                                arvoreGeradoraMinima.printGraphMAGM();
+                                UI.println("");
+                                UI.print("\tCusto Total: " + arvoreGeradoraMinima.getCustoTotal());
+                            }
                             else UI.println("\tNão há Árvore Geradora Mínima para o grafo.");
                         } else {
                             arvoreGeradoraMinima = grafoLista.encontrarAGM();
-                            if(arvoreGeradoraMinima != null) arvoreGeradoraMinima.printGraphLAGM();
+                            if(arvoreGeradoraMinima != null) {
+                                arvoreGeradoraMinima.printGraphLAGM();
+                                UI.println("");
+                                UI.print("\tCusto Total: " + arvoreGeradoraMinima.getCustoTotal());
+                            }
                             else UI.println("\tNão há Árvore Geradora Mínima para o grafo.");
                         }
                     } 
