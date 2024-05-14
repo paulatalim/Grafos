@@ -1,4 +1,4 @@
-package lista;
+package graph.representacao.lista;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -85,15 +85,9 @@ public class No {
      * 
      * @param id do vertice adjacente
      * @param newPeso novo peso da aresta
-     * @return true (se foi atualizado com sucesso) ou false (ocorreu algum erro)
      */
-    public boolean updatePeso(char id, int newPeso) {
-        if(newPeso > 0) {
-            pesos.set(arestas.indexOf(id), newPeso);
-            return true;
-        }
-
-        return false;
+    public void updatePeso(char id, int newPeso) {
+        pesos.set(arestas.indexOf(id), newPeso);
     }
 
     /**
