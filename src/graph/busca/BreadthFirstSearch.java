@@ -7,7 +7,9 @@ import java.util.Queue;
 
 import graph.representacao.lista.No;
 
-// Classe para realizar a busca em largura
+/**
+ * Classe para realizar a busca em largura
+ */ 
 public class BreadthFirstSearch {
     private List<No> graphL;
     private Integer[][] graphM;
@@ -25,6 +27,10 @@ public class BreadthFirstSearch {
         this.isPonderado = isPonderado;
     }
 
+    /**
+     * Realiza uma busca em largura na matriz de adjacencia
+     * @return ArrayList<Character> - lista da sequencia em q os vertices foram visitados
+     */
     private ArrayList<Character> bfsMatriz(char verticeInicial) {
         // Create a queue for BFS
         Queue<Integer> queue = new LinkedList<>();
@@ -114,6 +120,10 @@ public class BreadthFirstSearch {
         return tree;
     }
 
+    /**
+     * Realiza uma busca em largura na lista de adjacencia
+     * @return ArrayList<Character> - lista da sequencia em q os vertices foram visitados
+     */
     private ArrayList<Character> bfsList(char verticeInicial) {
         // Create a queue for BFS
         Queue<Integer> queue = new LinkedList<>();

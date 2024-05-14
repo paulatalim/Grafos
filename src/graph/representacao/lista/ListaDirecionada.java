@@ -5,11 +5,12 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import graph.caminho.Dijkstra;
+import graph.ordenacao.OrdenacaoTopologica;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
-import graph.ordenação.OrdenacaoTopologica;
 
-public class ListaDirecionada {
+class ListaDirecionada {
     private List<No> grafo;
     private boolean ponderado;
 
@@ -136,6 +137,11 @@ public class ListaDirecionada {
         return false;
     }
 
+    /**
+     * Verifica se uma aresta existe no grafo
+     * @param aresta id da aresta ser avaliada (String)
+     * @return true (se a aresta ser valida) ou false (se a aresta nao existir nao grafo)
+     */
     public boolean isArestaeExist(String aresta) {
         int aux1 = buscar_vertice(aresta.charAt(0));
 
@@ -155,7 +161,8 @@ public class ListaDirecionada {
      */
     public boolean atualizarPeso(String aresta, int newPeso) {
         if(ponderado) {
-            return grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso);
+            grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso);
+            return true;
         }
         return false;
     }
@@ -447,6 +454,17 @@ public class ListaDirecionada {
     }
 
     /**
+     * Calcula o caminho minimo entre a os vertices
+     * @param a char (id do vertice a ser analisado)
+     * @param b char (id do vertice a ser analisado)
+     * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
+     */
+    public Integer calcularCaminhoMinimo(char a, char b) {
+        Dijkstra dijkstra = new Dijkstra(grafo);
+        return dijkstra.calcularCaminhoMinimo(a, b);
+    }
+
+    /**
      * Realiza uma busca em largura no grafo
      * @param verticeInicial char (vertice que a busca em largura ira iniciar)
      * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
@@ -485,8 +503,8 @@ public class ListaDirecionada {
      public OrdenacaoTopologica ordenacaoTopologicaList(){
         
         OrdenacaoTopologica ordenacaoTopologicaList = new OrdenacaoTopologica(grafo);
-        char verticeInicial = ordenacaoTopologicaList.escolherVerticeInicialLista();
-        ordenacaoTopologicaList.imprimirOrdenacaoLista(verticeInicial);
+        // char verticeInicial = ordenacaoTopologicaList.escolherVerticeInicialLista();
+        ordenacaoTopologicaList.imprimirOrdenacaoLista();
         return ordenacaoTopologicaList;
     
     }

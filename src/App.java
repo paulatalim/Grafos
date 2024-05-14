@@ -170,16 +170,19 @@ public class App {
                 }
 
                 UI.print("\t" + "7 - Identificar grau de um vértice" + "\n");
-                UI.print("\t" + "8 - Calcular distancia entre dois vértices" + "\n");
+                UI.print("\t" + "8 - Calcular Caminho Mínimo entre dois vértices" + "\n");
                 UI.print("\t" + "9 - Analisar e classificar grafo" + "\n\n");
                 
                 UI.println(UI.BLUE_BACKGROUND + UI.BLACK + "\t" + " ALGORITMOS DE BUSCA, ORDENAÇÃO E ÁRVORE   ");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
                 UI.println("\t" + "10 - Realizar Busca em Largura");
-                UI.println("\t" + "11 - Realizar Busca em Profundidade");
-                UI.print("\t" + "12 - Realizar Ordenação Topológica");
+                UI.print("\t" + "11 - Realizar Busca em Profundidade");
+
+                if(grafoLista.isDirecionado()) {
+                    UI.print("\n\t" + "12 - Realizar Ordenação Topológica");
+                }
                 
-                if(grafoLista.isPonderado()) {
+                if(grafoLista.isPonderado() && !grafoLista.isDirecionado()) {
                     UI.print("\n\t" + "13 - Gerar Árvore Geradora Mínima");
                 }
 
@@ -197,7 +200,7 @@ public class App {
                 opcao_invalida = true;
 
                 // Valida a resposta do usuario
-            } while (opcao < 0 || opcao > 14 || (!grafoLista.isPonderado() && opcao == 13));
+            } while (opcao < 0 || opcao > 14 || (!grafoLista.isDirecionado() && opcao== 12) || ((grafoLista.isDirecionado() || !grafoLista.isPonderado()) && opcao == 13));
 
             switch (opcao) {
                 case 1:
@@ -531,12 +534,12 @@ public class App {
                     // Distancia entre vertices
 
                     // Exibe cabecalho da pagina
-                    UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISTÂNCIA ***   \n\n\n"
+                    UI.print(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CAMINHO MÍNIMO ***   \n\n\n"
                             + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
-                                + "\tInforme os vertices que desja calcular a distância\n\n");
+                                + "\tInforme os vértices para calcular o caminho mínimo entre eles\n\n");
 
                         // Entrada do primeiro vertice
                         UI.print(UI.CYAN + "\tVértice 1: " + UI.WHITE);
@@ -546,15 +549,30 @@ public class App {
                         UI.print(UI.CYAN + "\n\tVértice 2: " + UI.WHITE);
                         resposta1 = scanner.next().charAt(0);
 
+                        Integer distancia;
+
                         // Calcula a distancia entre os vertices inseridos
                         if (useAnaliseMatriz) {
-                            // TODO Calcular distancia entre dois vértices na matriz
+                            distancia = grafoMatriz.calcularCaminhoMinimo(resposta, resposta1);
                         } else {
-                            // TODO Calcular distancia entre dois vértices na lista
+                            distancia = grafoLista.calcularCaminhoMinimo(resposta, resposta1);
                         }
 
-                        // Exibe o resultado da distancia
-                        UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.YELLOW);
+                        UI.print(UI.YELLOW);
+
+                        // Avalia o resultado obtido
+                        if(distancia == null) {
+                            // Exibe mensagem caso a entrada seja invalida
+                            UI.print(UI.RED + "\n\n\tErro: algum dos vértices é inválido ou o grafo possui peso negativo");
+                        
+                        } else if(distancia == Integer.MAX_VALUE) {
+                            // Exibe mensagem caso não existe caminho entre os vertices
+                            UI.print("\n\n\tNão há caminho entre os vértices");
+                        
+                        } else {   
+                            // Exibe o resultado da distancia
+                            UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.CYAN + distancia);
+                        }
 
                     } else {
                         // Caso o grafo esteja vazio
@@ -672,7 +690,6 @@ public class App {
                             grafoMatriz.ordenacaoTopologica();
                         } else {
                             grafoLista.ordenacaoTopologList();
-                            // TODO odenacao na lista
                         }
                     } else {
                         // Caso o grafo esteja vazio

@@ -6,8 +6,9 @@ import java.util.List;
 import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
+import graph.caminho.Dijkstra;
 
-public class MatrizNaoDirecionada {
+class MatrizNaoDirecionada {
     private Integer[][] grafo;
     private boolean isPonderado;
     private ArrayList<Character> vertices = new ArrayList<Character>();
@@ -93,7 +94,7 @@ public class MatrizNaoDirecionada {
         int i = buscar_vertice(aresta.charAt(0));
         int j = buscar_vertice(aresta.charAt(1));
 
-        if(i >=0 && j >= 0) {
+        if(i >= 0 && j >= 0) {
             if(i != j) {
                 // Adiciona uma nova aresta
                 grafo[i][j] += 1;
@@ -146,7 +147,7 @@ public class MatrizNaoDirecionada {
         int i = buscar_vertice(aresta.charAt(0));
         int j = buscar_vertice(aresta.charAt(1));
 
-        if(i >=0 && j >= 0 && grafo[i][j] != 0 && grafo[i][j] != 0) {
+        if(i >= 0 && j >= 0 && grafo[i][j] != 0 && grafo[i][j] != 0) {
             if(i != j) {
                 // Remove uma nova aresta
                 if(!isPonderado) {
@@ -183,7 +184,7 @@ public class MatrizNaoDirecionada {
             int i = buscar_vertice(aresta.charAt(0));
             int j = buscar_vertice(aresta.charAt(1));
             
-            if(i > 0 && j > 0) {
+            if(i >= 0 && j >= 0) {
                 if(i != j) {
                     // Adiciona uma nova aresta
                     grafo[i][j] = newPeso;
@@ -401,6 +402,17 @@ public class MatrizNaoDirecionada {
             }
         }
         return false;
+    }
+
+    /**
+     * Calcula o caminho minimo entre a os vertices
+     * @param a char (id do vertice a ser analisado)
+     * @param b char (id do vertice a ser analisado)
+     * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
+     */
+    public Integer calcularCaminhoMinimo(char a, char b) {
+        Dijkstra dijkstra = new Dijkstra(grafo, vertices, isPonderado);
+        return dijkstra.calcularCaminhoMinimo(a, b);
     }
 
     /**

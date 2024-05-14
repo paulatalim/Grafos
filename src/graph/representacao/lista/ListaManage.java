@@ -4,7 +4,7 @@ import java.util.List;
 
 import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.DepthFirstSearch;
-import graph.ordenação.OrdenacaoTopologica;
+import graph.ordenacao.OrdenacaoTopologica;
 
 public class ListaManage {
     private boolean direcionado;
@@ -104,6 +104,11 @@ public class ListaManage {
         return lnd.remover_aresta(aresta);
     }
 
+    /**
+     * Verifica se uma aresta existe no grafo
+     * @param aresta id da aresta ser avaliada (String)
+     * @return true (se a aresta ser valida) ou false (se a aresta nao existir nao grafo)
+     */
     public boolean isArestaeExist(String aresta) {
         if(direcionado) {
             return ld.isArestaeExist(aresta);
@@ -260,6 +265,20 @@ public class ListaManage {
             return ld.isConexo();
         }
         return lnd.isConexo();
+    }
+
+    /**
+     * Calcula o caminho minimo entre a os vertices
+     * @param a char (id do vertice a ser analisado)
+     * @param b char (id do vertice a ser analisado)
+     * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
+     */
+    public Integer calcularCaminhoMinimo(char a, char b) {
+        if (direcionado) {
+            return ld.calcularCaminhoMinimo(a, b);
+        } 
+
+        return lnd.calcularCaminhoMinimo(a, b);
     }
     
     /**
