@@ -2,7 +2,7 @@ package graph.representacao.matriz;
 
 import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.DepthFirstSearch;
-import graph.ordenação.OrdenacaoTopologica;
+import graph.ordenacao.OrdenacaoTopologica;
 
 public class MatrizManage {
     private boolean direcionado;

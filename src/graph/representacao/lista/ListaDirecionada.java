@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import graph.caminho.Dijkstra;
+import graph.ordenacao.OrdenacaoTopologica;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
-import graph.ordenação.OrdenacaoTopologica;
 
 public class ListaDirecionada {
     private List<No> grafo;

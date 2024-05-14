@@ -4,7 +4,7 @@ import java.util.List;
 
 import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.DepthFirstSearch;
-import graph.ordenação.OrdenacaoTopologica;
+import graph.ordenacao.OrdenacaoTopologica;
 
 public class ListaManage {
     private boolean direcionado;

@@ -6,7 +6,7 @@ import java.util.List;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
 import graph.caminho.Dijkstra;
-import graph.ordenação.OrdenacaoTopologica;
+import graph.ordenacao.OrdenacaoTopologica;
 
 public class MatrizDirecionada {
     private Integer[][] grafo;

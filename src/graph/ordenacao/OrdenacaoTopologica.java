@@ -1,4 +1,4 @@
-package graph.ordenação;
+package graph.ordenacao;
 
 import java.util.ArrayList;
 import java.util.List;
