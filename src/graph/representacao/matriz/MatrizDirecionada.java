@@ -441,10 +441,18 @@ class MatrizDirecionada {
         return toArrayChar(BFS.bfs(verticeInicial));
     }
 
+    /**
+     * Realiza uma busca em profundidade no grafo
+     * @param raiz char (vertice que a busca em profundidade irá iniciar)
+     * @return objeto da classe DepthFirstSearch
+     */
     public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
-        DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices, isPonderado);
-        DFS.dfs(raiz); // tem que fazer aquilo de escolher o vértice raiz
-        return DFS;
+        if(isNoExist(raiz)) {
+            DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices, isPonderado);
+            DFS.dfs(raiz);
+            return DFS;
+        }
+        return null; 
     }
 
     /**

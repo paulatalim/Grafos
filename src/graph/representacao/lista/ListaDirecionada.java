@@ -474,10 +474,18 @@ class ListaDirecionada {
         return toArrayChar(BFS.bfs(verticeInicial));
     }
 
-    public DepthFirstSearch realizarBuscaProfundidade() {
-        DepthFirstSearch DFS = new DepthFirstSearch(grafo);
-        DFS.dfs(grafo.get(0).getId());
-        return DFS;
+    /**
+     * Realiza uma busca em profundidade no grafo
+     * @param raiz char (vertice que a busca em profundidade irá iniciar)
+     * @return objeto da classe DepthFirstSearch
+     */
+    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
+        if(isNoExist(raiz)) {
+            DepthFirstSearch DFS = new DepthFirstSearch(grafo);
+            DFS.dfs(raiz);
+            return DFS;
+        }
+        return null;
     }
 
     /**
@@ -500,7 +508,7 @@ class ListaDirecionada {
         }
     }
 
-     public OrdenacaoTopologica ordenacaoTopologicaList(){
+     public OrdenacaoTopologica ordenacaoTopologicaList() {
         
         OrdenacaoTopologica ordenacaoTopologicaList = new OrdenacaoTopologica(grafo);
         // char verticeInicial = ordenacaoTopologicaList.escolherVerticeInicialLista();

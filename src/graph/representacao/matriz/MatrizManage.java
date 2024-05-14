@@ -249,6 +249,11 @@ public class MatrizManage {
         return mnd.realizarBuscaLargura(verticeInicial);
     }
 
+    /**
+     * Realiza uma busca em profundidade no grafo
+     * @param raiz char (vertice que a busca em profundidade irá iniciar)
+     * @return objeto da classe DepthFirstSearch
+     */
     public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
         if(direcionado) {
             return md.realizarBuscaProfundidade(raiz);
