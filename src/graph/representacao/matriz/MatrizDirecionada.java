@@ -466,8 +466,8 @@ public class MatrizDirecionada {
     public OrdenacaoTopologica ordenacaoTopologica(){
         
         OrdenacaoTopologica ordenacaoTopologica = new OrdenacaoTopologica(grafo, vertices, isPonderado);
-        char verticeInicial = ordenacaoTopologica.escolherVerticeInicial();
-        ordenacaoTopologica.imprimirOrdenacao(verticeInicial);
+        // char verticeInicial = ordenacaoTopologica.escolherVerticeInicial();
+        ordenacaoTopologica.imprimirOrdenacao();
         return ordenacaoTopologica;
     }
 

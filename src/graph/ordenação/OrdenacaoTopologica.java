@@ -1,7 +1,6 @@
 package graph.ordenação;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Collections;
 
@@ -23,30 +22,44 @@ public class OrdenacaoTopologica {
         this.vertices = vertices;
     }
 
-    public ArrayList<Character> otMatriz(char verticeInicial) {
+    private ArrayList<Character> otMatriz() {
+        // Verifica se ha ciclo
         if (hasCycle()) {
             System.out.println("\tO grafo contém um ciclo. Não é possível realizar uma ordenação topológica.");
             return new ArrayList<>(); // Se houver um ciclo, retornamos uma lista vazia
         }
 
+        // Inicializa variaveis
         boolean[] visited = new boolean[graphM.length];
         ArrayList<Character> ordenacao = new ArrayList<>();
+        boolean allVerticesVisitados = false;
 
-        for (int i = 0; i < graphM.length; i++) {
-            if (!visited[i]) {
-                dfs(graphM, i, visited, ordenacao);
+        // Ordena os vertices
+        while(!allVerticesVisitados) {
+            // Realiza uma busca em profundidade
+            for (int i = 0; i < graphM.length; i++) {
+                if (!visited[i]) {
+                    dfs(graphM, i, visited, ordenacao);
+                }
+            }
+
+            // Verifica se todos os vertices foram visitados
+            allVerticesVisitados = true;
+            for(int i = 0; i < vertices.size(); i++) {
+                if(!visited[i]) {
+                    allVerticesVisitados = false;
+                    break;
+                }
             }
         }
-        Collections.reverse(ordenacao);
 
-        if (ordenacao.get(0) != verticeInicial) {
-            ordenacao.remove(Character.valueOf(verticeInicial));
-        }
+        // Inverte a ordenacao
+        Collections.reverse(ordenacao);
 
         return ordenacao;
     }
 
-    public boolean hasCycle() {
+    private boolean hasCycle() {
         boolean[] visitado = new boolean[graphM.length];
         boolean[] pilhaRecursao = new boolean[graphM.length]; // Pilha para rastrear recursivamente os vértices
                                                               // visitados
@@ -81,17 +94,19 @@ public class OrdenacaoTopologica {
     private void dfs(Integer[][] grafo, int vertice, boolean[] visitado, ArrayList<Character> ordenacao) {
         visitado[vertice] = true;
 
+        // Verifica todos os sucessores do vertice
         for (int i = 0; i < grafo.length; i++) {
             if ((ponderado && grafo[vertice][i] != null || (!ponderado && grafo[vertice][i] != 0)) && !visitado[i]) {
                 dfs(grafo, i, visitado, ordenacao);
             }
         }
 
-        ordenacao.add((char) ('A' + vertice));
+        // Adiciona vertice a ordenacao topologica
+        ordenacao.add(vertices.get(vertice));
     }
 
-    public void imprimirOrdenacao(char verticeInicial) {
-        ArrayList<Character> ordenacao = otMatriz(verticeInicial);
+    public void imprimirOrdenacao() {
+        ArrayList<Character> ordenacao = otMatriz();
         if (!ordenacao.isEmpty()) {
             System.out.println("\tOrdenação Topológica:");
             System.out.print("\t");
@@ -106,34 +121,37 @@ public class OrdenacaoTopologica {
         }
     }
 
-    public char escolherVerticeInicial() {
-        int[] grauEntrada = new int[graphM.length]; // Array para armazenar o grau de entrada de cada vértice
+    // public char escolherVerticeInicial() {
+    //     int[] grauEntrada = new int[graphM.length]; // Array para armazenar o grau de entrada de cada vértice
 
-        // Calcular o grau de entrada de cada vértice
-        for (int i = 0; i < graphM.length; i++) {
-            for (int j = 0; j < graphM.length; j++) {
-                if ((ponderado && graphM[i][j] != null) || (!ponderado && graphM[i][j] != 0)){
-                    grauEntrada[j]++;
-                }
-            }
-        }
+    //     // Calcular o grau de entrada de cada vértice
+    //     for (int i = 0; i < graphM.length; i++) {
+    //         for (int j = 0; j < graphM.length; j++) {
+    //             if ((ponderado && graphM[i][j] != null) || (!ponderado && graphM[i][j] != 0)){
+    //                 if(!ponderado) {
+    //                     grauEntrada[j]++;
+    //                 } else  {
+    //                     grauEntrada[j] += graphM[i][j];
+    //                 }
+    //             }
+    //         }
+    //     }
 
-        // Encontrar o primeiro vértice com grau de entrada zero
-        for (int i = 0; i < graphM.length; i++) {
-            if (grauEntrada[i] == 0) {
-                return (char) ('A' + i); // Retorna o vértice com grau de entrada zero
-            }
-        }
+    //     // Encontrar o primeiro vértice com grau de entrada zero
+    //     for (int i = 0; i < vertices.size(); i++) {
+    //         if (grauEntrada[i] == 0) {
+    //             return vertices.get(i); // Retorna o vértice com grau de entrada zero
+    //         }
+    //     }
 
-        return ' '; // Retorna um espaço em branco se não houver vértice com grau de entrada zero
-    }
+    //     return ' '; // Retorna um espaço em branco se não houver vértice com grau de entrada zero
+    // }
 
-    // ==========================================================================================================================
-    // ==========================================================================================================================
-    // =============================================== GRAFO - LISTA ADJACENCIA
-    // =================================================
+    /************************************
+     * METODOS PARA LISTA DE ADJACENCIA *
+     ************************************/
 
-    public ArrayList<Character> otLista(char verticeInicial) {
+    private ArrayList<Character> otLista() {
         if (hasCycleLista()) {
             System.out.println("\tO grafo contém um ciclo. Não é possível realizar uma ordenação topológica.");
             return new ArrayList<>(); // Se houver um ciclo, retornamos uma lista vazia
@@ -141,22 +159,34 @@ public class OrdenacaoTopologica {
 
         boolean[] visited = new boolean[graphL.size()];
         ArrayList<Character> ordenacao = new ArrayList<>();
+        boolean allVerticesVisitados = false;
 
-        for (int i = 0; i < graphL.size(); i++) {
-            if (!visited[i]) {
-                dfs(i, visited, ordenacao);
+        // Realiza a ordenacao topologica
+        while (!allVerticesVisitados) {
+            // Realiza uma busca em profundidadade
+            for (int i = 0; i < graphL.size(); i++) {
+                if (!visited[i]) {
+                    dfs(i, visited, ordenacao);    
+                }
+            }
+
+            // Verifica se todos os vertice foram visitados
+            allVerticesVisitados = true;
+            for(int i = 0; i < graphL.size(); i++) {
+                if(!visited[i]) {
+                    allVerticesVisitados = false;
+                    break;
+                }
             }
         }
-        Collections.reverse(ordenacao);
 
-        if (ordenacao.get(0) != verticeInicial) {
-            ordenacao.remove(Character.valueOf(verticeInicial));
-        }
+        // Inverte a ordenacao obtida
+        Collections.reverse(ordenacao);
 
         return ordenacao;
     }
 
-    public boolean hasCycleLista() {
+    private boolean hasCycleLista() {
         boolean[] visitado = new boolean[graphL.size()];
         boolean[] pilhaRecursao = new boolean[graphL.size()]; // Pilha para rastrear recursivamente os vértices
                                                               // visitados
@@ -176,12 +206,18 @@ public class OrdenacaoTopologica {
 
             No currentNo = graphL.get(vertice);
             for (int i = 0; i < currentNo.qnt_aresta(); i++) {
-                char adjacentId = currentNo.getAresta(i);
-                int adjacentIndex = adjacentId - 'A';
-                if (!visitado[adjacentIndex] && hasCycleUtilLista(adjacentIndex, visitado, pilhaRecursao)) {
-                    return true;
-                } else if (pilhaRecursao[adjacentIndex]) {
-                    return true;
+                for(int j = 0; j < graphL.size(); j++) {
+                    if(currentNo.getAresta(i) == graphL.get(j).getId()) {
+                        // char adjacentId = currentNo.getAresta(i);
+                        // int adjacentIndex = adjacentId - 'A';
+                        if (!visitado[j] && hasCycleUtilLista(j, visitado, pilhaRecursao)) {
+                            return true;
+                        } else if (pilhaRecursao[j]) {
+                            return true;
+                        }
+
+                        break;
+                    }
                 }
             }
         }
@@ -194,18 +230,24 @@ public class OrdenacaoTopologica {
 
         No currentNo = graphL.get(vertice);
         for (int i = 0; i < currentNo.qnt_aresta(); i++) {
-            char adjacentId = currentNo.getAresta(i);
-            int adjacentIndex = adjacentId - 'A';
-            if (!visitado[adjacentIndex]) {
-                dfs(adjacentIndex, visitado, ordenacao);
+            for(int j = 0; j < graphL.size(); j++) {
+                if(graphL.get(j).getId() == currentNo.getAresta(i)) {
+                    // char adjacentId = currentNo.getAresta(i);
+                    // int adjacentIndex = adjacentId - 'A';
+                    if (!visitado[j]) {
+                        dfs(j, visitado, ordenacao);
+                    }
+
+                    break;
+                }
             }
         }
 
-        ordenacao.add((char) ('A' + vertice));
+        ordenacao.add(graphL.get(vertice).getId());
     }
 
-    public void imprimirOrdenacaoLista(char verticeInicial) {
-        ArrayList<Character> ordenacao = otLista(verticeInicial);
+    public void imprimirOrdenacaoLista() {
+        ArrayList<Character> ordenacao = otLista();
         if (!ordenacao.isEmpty()) {
             System.out.println("\tOrdenação Topológica:");
             System.out.print("\t");
@@ -220,24 +262,28 @@ public class OrdenacaoTopologica {
         }
     }
 
-    public char escolherVerticeInicialLista() {
-        boolean[] grauEntradaZero = new boolean[graphL.size()]; // Array para marcar vértices com grau de entrada zero
+    // public char escolherVerticeInicialLista() {
+    //     boolean[] grauEntradaZero = new boolean[graphL.size()]; // Array para marcar vértices com grau de entrada zero
 
-        // Percorrer os nós para marcar aqueles com grau de entrada zero
-        for (No no : graphL) {
-            for (int i = 0; i < no.qnt_aresta(); i++) {
-                char adjacentId = no.getAresta(i);
-                grauEntradaZero[adjacentId - 'A'] = true;
-            }
-        }
+    //     // Percorrer os nós para marcar aqueles com grau de entrada zero
+    //     for (No no : graphL) {
+    //         for (int i = 0; i < no.qnt_aresta(); i++) {
+    //             for(int j = 0; j < graphL.size(); j++) {
+    //                 if(no.getAresta(i) == graphL.get(j).getId()) {
+    //                     grauEntradaZero[j] = true;
+    //                     break;
+    //                 }
+    //             }
+    //         }
+    //     }
 
-        // Encontrar o primeiro vértice com grau de entrada zero
-        for (int i = 0; i < grauEntradaZero.length; i++) {
-            if (!grauEntradaZero[i]) {
-                return (char) ('A' + i); // Retorna o vértice com grau de entrada zero
-            }
-        }
+    //     // Encontrar o primeiro vértice com grau de entrada zero
+    //     for (int i = 0; i < grauEntradaZero.length; i++) {
+    //         if (!grauEntradaZero[i]) {
+    //             return graphL.get(i).getId(); // Retorna o vértice com grau de entrada zero
+    //         }
+    //     }
 
-        return ' '; // Retorna um espaço em branco se não houver vértice com grau de entrada zero
-    }
+    //     return ' '; // Retorna um espaço em branco se não houver vértice com grau de entrada zero
+    // }
 }

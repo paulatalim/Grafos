@@ -492,8 +492,8 @@ public class ListaDirecionada {
      public OrdenacaoTopologica ordenacaoTopologicaList(){
         
         OrdenacaoTopologica ordenacaoTopologicaList = new OrdenacaoTopologica(grafo);
-        char verticeInicial = ordenacaoTopologicaList.escolherVerticeInicialLista();
-        ordenacaoTopologicaList.imprimirOrdenacaoLista(verticeInicial);
+        // char verticeInicial = ordenacaoTopologicaList.escolherVerticeInicialLista();
+        ordenacaoTopologicaList.imprimirOrdenacaoLista();
         return ordenacaoTopologicaList;
     
     }
