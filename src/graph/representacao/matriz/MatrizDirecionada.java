@@ -477,10 +477,12 @@ class MatrizDirecionada {
         }
     }
 
+    /**
+     * Faz uma ordenacao topologica com os vertices do grafo
+     * @return objeto da ordenacao topologica
+     */
     public OrdenacaoTopologica ordenacaoTopologica() {
-        
         OrdenacaoTopologica ordenacaoTopologica = new OrdenacaoTopologica(grafo, vertices, isPonderado);
-        // char verticeInicial = ordenacaoTopologica.escolherVerticeInicial();
         ordenacaoTopologica.imprimirOrdenacao();
         return ordenacaoTopologica;
     }

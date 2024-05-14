@@ -63,6 +63,10 @@ public class OrdenacaoTopologica {
         return ordenacao;
     }
 
+    /**
+     * Verifica se ha um ciclo na lista de adjacencia
+     * @return true (se haver ciclo) ou false (se nao haver ciclo)
+     */
     private boolean hasCycle() {
         boolean[] visitado = new boolean[graphM.length];
         boolean[] pilhaRecursao = new boolean[graphM.length]; // Pilha para rastrear recursivamente os vértices
@@ -76,6 +80,13 @@ public class OrdenacaoTopologica {
         return false; // Se não encontrarmos nenhum ciclo, retornamos false
     }
 
+     /**
+     * Verifica se ha um ciclo na entre um vertice especificado na lista de ajacencia
+     * @param vertice int (index do vertice)
+     * @param visitado vetor de boolean (vetor verificando quais vertices foram visitados)
+     * @param pilhaRecurso o conjunto de vertices verificado
+     * @return true (se haver ciclo) ou false (se nao haver ciclo)
+     */
     private boolean hasCycleUtil(int vertice, boolean[] visitado, boolean[] pilhaRecursao) {
         if (!visitado[vertice]) {
             visitado[vertice] = true;
@@ -95,6 +106,13 @@ public class OrdenacaoTopologica {
         return false;
     }
 
+    /**
+     * Realiza uma busca em profundidade na matriz de adjacencia e ordena os vertices
+     * @param grafo vetor de interos (grafo que esta sendo utilizado)
+     * @param vertice int (index do vertice)
+     * @param visitado vetor de boolean (vetor verificando quais vertices foram visitados)
+     * @param ordenacao lista de char (vertor que possui a odenacao)
+     */
     private void dfs(Integer[][] grafo, int vertice, boolean[] visitado, ArrayList<Character> ordenacao) {
         visitado[vertice] = true;
 
@@ -109,6 +127,9 @@ public class OrdenacaoTopologica {
         ordenacao.add(vertices.get(vertice));
     }
 
+     /**
+     * Faz uma ordenacao topologica com os vertices da matriz de adjacencia e a imprime
+     */
     public void imprimirOrdenacao() {
         ArrayList<Character> ordenacao = otMatriz();
         if (!ordenacao.isEmpty()) {
@@ -124,36 +145,6 @@ public class OrdenacaoTopologica {
             System.out.println();
         }
     }
-
-    // public char escolherVerticeInicial() {
-    //     int[] grauEntrada = new int[graphM.length]; // Array para armazenar o grau de entrada de cada vértice
-
-    //     // Calcular o grau de entrada de cada vértice
-    //     for (int i = 0; i < graphM.length; i++) {
-    //         for (int j = 0; j < graphM.length; j++) {
-    //             if ((ponderado && graphM[i][j] != null) || (!ponderado && graphM[i][j] != 0)){
-    //                 if(!ponderado) {
-    //                     grauEntrada[j]++;
-    //                 } else  {
-    //                     grauEntrada[j] += graphM[i][j];
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     // Encontrar o primeiro vértice com grau de entrada zero
-    //     for (int i = 0; i < vertices.size(); i++) {
-    //         if (grauEntrada[i] == 0) {
-    //             return vertices.get(i); // Retorna o vértice com grau de entrada zero
-    //         }
-    //     }
-
-    //     return ' '; // Retorna um espaço em branco se não houver vértice com grau de entrada zero
-    // }
-
-    /************************************
-     * METODOS PARA LISTA DE ADJACENCIA *
-     ************************************/
 
     /**
      * Realiza uma ordenacao topologica dos vertices do grafo em lista de adjacencia
@@ -196,7 +187,7 @@ public class OrdenacaoTopologica {
 
     /**
      * Verifica se ha um ciclo na lista de adjacencia
-     * @return
+     * @return true (se haver ciclo) ou false (se nao haver ciclo)
      */
     private boolean hasCycleLista() {
         boolean[] visitado = new boolean[graphL.size()];
@@ -244,6 +235,12 @@ public class OrdenacaoTopologica {
         return false;
     }
 
+    /**
+     * Realiza uma busca em profundidade na lista de adjacencia e ordena os vertices
+     * @param vertice int (index do vertice)
+     * @param visitado vetor de boolean (vetor verificando quais vertices foram visitados)
+     * @param ordenacao lista de char (vertor que possui a odenacao)
+     */
     private void dfs(int vertice, boolean[] visitado, ArrayList<Character> ordenacao) {
         visitado[vertice] = true;
 
@@ -265,6 +262,9 @@ public class OrdenacaoTopologica {
         ordenacao.add(graphL.get(vertice).getId());
     }
 
+    /**
+     * Faz uma ordenacao topologica com os vertices da lista de adjacencia e a imprime
+     */
     public void imprimirOrdenacaoLista() {
         ArrayList<Character> ordenacao = otLista();
         if (!ordenacao.isEmpty()) {
@@ -280,29 +280,4 @@ public class OrdenacaoTopologica {
             System.out.println();
         }
     }
-
-    // public char escolherVerticeInicialLista() {
-    //     boolean[] grauEntradaZero = new boolean[graphL.size()]; // Array para marcar vértices com grau de entrada zero
-
-    //     // Percorrer os nós para marcar aqueles com grau de entrada zero
-    //     for (No no : graphL) {
-    //         for (int i = 0; i < no.qnt_aresta(); i++) {
-    //             for(int j = 0; j < graphL.size(); j++) {
-    //                 if(no.getAresta(i) == graphL.get(j).getId()) {
-    //                     grauEntradaZero[j] = true;
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     // Encontrar o primeiro vértice com grau de entrada zero
-    //     for (int i = 0; i < grauEntradaZero.length; i++) {
-    //         if (!grauEntradaZero[i]) {
-    //             return graphL.get(i).getId(); // Retorna o vértice com grau de entrada zero
-    //         }
-    //     }
-
-    //     return ' '; // Retorna um espaço em branco se não houver vértice com grau de entrada zero
-    // }
 }

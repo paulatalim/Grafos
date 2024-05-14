@@ -380,9 +380,13 @@ public class ListaManage {
         return lnd.getGrafo();
     }
 
-    public OrdenacaoTopologica ordenacaoTopologList(){
+    /**
+     * Faz uma ordenacao topologica com os vertices do grafo
+     * @return objeto da ordenacao topologica
+     */
+    public OrdenacaoTopologica ordenacaoTopologica(){
         if(direcionado) {
-            return ld.ordenacaoTopologicaList();
+            return ld.ordenacaoTopologica();
         } 
         return null;
     }
