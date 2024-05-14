@@ -294,11 +294,16 @@ public class ListaManage {
         return lnd.realizarBuscaLargura(verticeInicial);
     }
 
-    public DepthFirstSearch realizarBuscaProfundidade() {
+    /**
+     * Realiza uma busca em profundidade no grafo
+     * @param raiz char (vertice que a busca em profundidade irá iniciar)
+     * @return objeto da classe DepthFirstSearch
+     */
+    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
         if(direcionado) {
-            return ld.realizarBuscaProfundidade();
+            return ld.realizarBuscaProfundidade(raiz);
         }
-        return lnd.realizarBuscaProfundidade();
+        return lnd.realizarBuscaProfundidade(raiz);
     }
 
     public ArvoreGeradoraMinima encontrarAGM() {

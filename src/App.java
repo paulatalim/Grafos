@@ -666,14 +666,20 @@ public class App {
                         if(useAnaliseMatriz) {
                             buscaEmProfundidade = grafoMatriz.realizarBuscaProfundidade(resposta);
                         } else {
-                            buscaEmProfundidade = grafoMatriz.realizarBuscaProfundidade(resposta);
+                            buscaEmProfundidade = grafoLista.realizarBuscaProfundidade(resposta);
                         }
-                        // Exibe o resultado da busca
-                        UI.println(UI.YELLOW + "\n\tA seguir está a ordem em que os vértices foram visitados durante a busca\n");
-                        UI.println("\tVértices: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getVertices())); 
-                        UI.println("\tTDs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTD())); 
-                        UI.println("\tTTs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTT())); 
-                        UI.print("\tOrdem de visitação: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getOrdem())); 
+
+                        if(buscaEmProfundidade != null) {
+                            // Exibe o resultado da busca
+                            UI.println(UI.YELLOW + "\n\tA seguir está a ordem em que os vértices foram visitados durante a busca\n");
+                            UI.println("\tVértices: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getVertices())); 
+                            UI.println("\tTDs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTD())); 
+                            UI.println("\tTTs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTT())); 
+                            UI.print("\tOrdem de visitação: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getOrdem()));
+                        }
+                        else {
+                            UI.print(UI.RED + "\tVértice inválido.");
+                        } 
 
                     } else {
                         // Caso o grafo esteja vazio
