@@ -561,10 +561,10 @@ public class App {
                         // Avalia o resultado obtido
                         if(distancia == null) {
                             // Exibe mensagem caso a entrada seja invalida
-                            UI.print("\tVértice Inválido");
+                            UI.print("\n\n\tVértice Inválido");
                         } else if(distancia == Integer.MAX_VALUE) {
                             // Exibe mensagem caso não existe caminho entre os vertices
-                            UI.print("\tNão há caminho entre os vértices");
+                            UI.print("\n\n\tNão há caminho entre os vértices");
                         } else {   
                             // Exibe o resultado da distancia
                             UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.CYAN + distancia);

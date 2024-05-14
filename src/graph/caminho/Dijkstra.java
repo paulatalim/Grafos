@@ -62,23 +62,16 @@ public class Dijkstra {
         for(int i = 0; i < vertices.size(); i++) {
             if(vertices.get(i) == raiz) {
                 distance[i] = 0;
-                break;
-            } 
-        }
-
-        
-        for(int i = 0; i < vertices.size(); i++) {
-            if(explorado[i] == false &&  distance[i] != Integer.MAX_VALUE) {
                 loop = true;
                 break;
-            }
+            } 
         }
 
         while(loop) {
 
             // Encontra os vertices explorados
             for(int i = 0; i < vertices.size(); i++) {
-                if(!explorado[i]) {
+                if(!explorado[i] && distance[i] != Integer.MAX_VALUE) {
                     verticeAtual = i;
 
                     for(int j = 0; j < vertices.size(); j ++) {
@@ -96,12 +89,15 @@ public class Dijkstra {
             for(int i = 0; i < vertices.size(); i++) {
                 if((isPonderado && graphM[verticeAtual][i] != null) || (!isPonderado && graphM[verticeAtual][i] != 0)) {
                     if(!explorado[i]) {
+                        // Verifica se o peso eh negativo
+                        if(graphM[verticeAtual][i] < 0) {
+                            return null;
+                        }
+
                         if(distance[verticeAtual] + graphM[verticeAtual][i] < distance[i]) {
                             distance[i] = distance[verticeAtual] + graphM[verticeAtual][i];
                             predecessores[i] = vertices.get(verticeAtual);
                         }
-
-                        break;
                     }
                 }
             }
@@ -144,24 +140,17 @@ public class Dijkstra {
         // Inicializa raiz
         for(int i = 0; i < graphL.size(); i++) {
             if(graphL.get(i).getId() == raiz) {
-                distance[i] = 0;
-                break;
-            } 
-        }
-
-        
-        for(int i = 0; i < graphL.size(); i++) {
-            if(explorado[i] == false &&  distance[i] != Integer.MAX_VALUE) {
+                distance[i] = 0; 
                 loop = true;
                 break;
-            }
+            } 
         }
 
         while(loop) {
 
             // Encontra os vertices explorados
             for(int i = 0; i < graphL.size(); i++) {
-                if(!explorado[i]) {
+                if(!explorado[i] && distance[i] != Integer.MAX_VALUE) {
                     verticeAtual = i;
 
                     for(int j = 0; j < graphL.size(); j ++) {
@@ -180,6 +169,11 @@ public class Dijkstra {
                 for(int j = 0; j < graphL.size(); j++) {
                     if(graphL.get(verticeAtual).getAresta(i) == graphL.get(j).getId()) {
                         if(!explorado[j]) {
+                            // Verifica se o peso eh valido
+                            if(graphL.get(verticeAtual).getPeso(i) < 0) {
+                                return null;
+                            }
+
                             if(distance[verticeAtual] + graphL.get(verticeAtual).getPeso(i) < distance[j]) {
                                 distance[j] = distance[verticeAtual] + graphL.get(verticeAtual).getPeso(i);
                                 predecessores[j] = graphL.get(verticeAtual).getId();
