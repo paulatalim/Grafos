@@ -182,7 +182,7 @@ public class App {
                     UI.println("\t" + "12 - Realizar Ordenação Topológica");
                 }
                 
-                if(grafoLista.isPonderado()) {
+                if(grafoLista.isPonderado() && !grafoLista.isDirecionado()) {
                     UI.print("\t" + "13 - Gerar Árvore Geradora Mínima");
                 }
 
@@ -200,7 +200,7 @@ public class App {
                 opcao_invalida = true;
 
                 // Valida a resposta do usuario
-            } while (opcao < 0 || opcao > 14 || (!grafoLista.isDirecionado() && opcao== 12) || (!grafoLista.isPonderado() && opcao == 13));
+            } while (opcao < 0 || opcao > 14 || (!grafoLista.isDirecionado() && opcao== 12) || ((grafoLista.isDirecionado() || !grafoLista.isPonderado()) && opcao == 13));
 
             switch (opcao) {
                 case 1:
@@ -539,7 +539,7 @@ public class App {
 
                     if (!grafoLista.isGrafosEmpty() && !grafoMatriz.isGrafosEmpty()) {
                         UI.println(UI.BLACK_BACKGROUND + UI.YELLOW
-                                + "\tInforme os vertices que desja calcular a caminho mínimo\n\n");
+                                + "\tInforme os vértices para calcular o caminho mínimo entre eles\n\n");
 
                         // Entrada do primeiro vertice
                         UI.print(UI.CYAN + "\tVértice 1: " + UI.WHITE);
@@ -558,13 +558,17 @@ public class App {
                             distancia = grafoLista.calcularCaminhoMinimo(resposta, resposta1);
                         }
 
+                        UI.print(UI.YELLOW);
+
                         // Avalia o resultado obtido
                         if(distancia == null) {
                             // Exibe mensagem caso a entrada seja invalida
-                            UI.print("\n\n\tVértice Inválido");
+                            UI.print(UI.RED + "\n\n\tErro: algum dos vértices é inválido ou o grafo possui peso negativo");
+                        
                         } else if(distancia == Integer.MAX_VALUE) {
                             // Exibe mensagem caso não existe caminho entre os vertices
                             UI.print("\n\n\tNão há caminho entre os vértices");
+                        
                         } else {   
                             // Exibe o resultado da distancia
                             UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.CYAN + distancia);
