@@ -156,7 +156,8 @@ public class ListaDirecionada {
      */
     public boolean atualizarPeso(String aresta, int newPeso) {
         if(ponderado) {
-            return grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso);
+            grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso);
+            return true;
         }
         return false;
     }

@@ -183,11 +183,11 @@ public class ListaNaoDirecionada {
      */
     public boolean atualizarPeso(String aresta, int newPeso) {
         if(isPonderado) {
-            return (
-                grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso) &&
-                grafo.get(buscar_vertice(aresta.charAt(1))).updatePeso(aresta.charAt(0), newPeso)
-            );
+            grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso);
+            grafo.get(buscar_vertice(aresta.charAt(1))).updatePeso(aresta.charAt(0), newPeso);
+            return true;
         }
+        
         return false;
     }
 
