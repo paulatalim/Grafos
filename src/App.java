@@ -176,14 +176,14 @@ public class App {
                 UI.println(UI.BLUE_BACKGROUND + UI.BLACK + "\t" + " ALGORITMOS DE BUSCA, ORDENAÇÃO E ÁRVORE   ");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW);
                 UI.println("\t" + "10 - Realizar Busca em Largura");
-                UI.println("\t" + "11 - Realizar Busca em Profundidade");
+                UI.print("\t" + "11 - Realizar Busca em Profundidade");
 
                 if(grafoLista.isDirecionado()) {
-                    UI.println("\t" + "12 - Realizar Ordenação Topológica");
+                    UI.print("\n\t" + "12 - Realizar Ordenação Topológica");
                 }
                 
                 if(grafoLista.isPonderado() && !grafoLista.isDirecionado()) {
-                    UI.print("\t" + "13 - Gerar Árvore Geradora Mínima");
+                    UI.print("\n\t" + "13 - Gerar Árvore Geradora Mínima");
                 }
 
                 UI.print(UI.PURPLE_BACKGROUND + UI.BLACK + "\n\n\t" + " OUTROS   " + "\n");
@@ -690,7 +690,6 @@ public class App {
                             grafoMatriz.ordenacaoTopologica();
                         } else {
                             grafoLista.ordenacaoTopologList();
-                            // TODO odenacao na lista
                         }
                     } else {
                         // Caso o grafo esteja vazio
