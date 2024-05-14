@@ -707,7 +707,7 @@ public class App {
                         } else {
                             UI.print(UI.RED + "\n\tResposta inválida. Tente novamente.\n");
                             opcao_invalida = true;
-                            UI.exibir_fim_tela();
+                          UI.exibir_fim_tela();
                         }
                     } while (opcao_invalida);
                     break;
