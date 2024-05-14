@@ -8,7 +8,7 @@ import graph.busca.DepthFirstSearch;
 import graph.caminho.Dijkstra;
 import graph.ordenacao.OrdenacaoTopologica;
 
-public class MatrizDirecionada {
+class MatrizDirecionada {
     private Integer[][] grafo;
     private boolean isPonderado;
     private ArrayList<Character> vertices = new ArrayList<Character>();
@@ -76,7 +76,7 @@ public class MatrizDirecionada {
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
      */
-    public void inserir_vertice (char id_vertice) {
+    public void inserir_vertice(char id_vertice) {
         // Verifica se o vertice ja existe
         if(!isNoExist(id_vertice)) {
            // Adiciona o vertice a lista
@@ -420,6 +420,12 @@ public class MatrizDirecionada {
         return false;
     }
 
+    /**
+     * Calcula o caminho minimo entre a os vertices
+     * @param a char (id do vertice a ser analisado)
+     * @param b char (id do vertice a ser analisado)
+     * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
+     */
     public Integer calcularCaminhoMinimo(char a, char b) {
         Dijkstra dijkstra = new Dijkstra(grafo, vertices, isPonderado);
         return dijkstra.calcularCaminhoMinimo(a, b);
@@ -444,7 +450,7 @@ public class MatrizDirecionada {
     /**
      * Imprime a matriz de adjacencia no console
      */
-    public void exibir_matriz () {
+    public void exibir_matriz() {
         System.out.print("\t   ");
         for (int i = 0; i < vertices.size(); i++) {
             System.out.print(vertices.get(i) + " ");
@@ -463,7 +469,7 @@ public class MatrizDirecionada {
         }
     }
 
-    public OrdenacaoTopologica ordenacaoTopologica(){
+    public OrdenacaoTopologica ordenacaoTopologica() {
         
         OrdenacaoTopologica ordenacaoTopologica = new OrdenacaoTopologica(grafo, vertices, isPonderado);
         // char verticeInicial = ordenacaoTopologica.escolherVerticeInicial();

@@ -60,7 +60,7 @@ public class MatrizManage {
      * Confere se o grafo é bipartido ou não
      * @return true, se for bipartido, false, caso contrário
      */
-    public boolean isGrafosBipartido () {
+    public boolean isGrafosBipartido() {
         if(direcionado) {
             return md.isGrafosBipartido();
         }
@@ -71,7 +71,7 @@ public class MatrizManage {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    public boolean isGrafosConexo () {
+    public boolean isGrafosConexo() {
         if(direcionado) {
             return md.isGrafosConexo();
         }
@@ -97,7 +97,7 @@ public class MatrizManage {
      * 
      * @param id_vertice a ser inserido
      */
-    public void inserir_vertice (char id_vertice) {
+    public void inserir_vertice(char id_vertice) {
         if(direcionado) {
             md.inserir_vertice(id_vertice);
         } else {
@@ -110,7 +110,7 @@ public class MatrizManage {
      * @param id_vertice
      * @return vetor de inteiros contendo o grau ou os graus do vértice
      */
-    public int[] grau_vertice (char id_vertice) {
+    public int[] grau_vertice(char id_vertice) {
         if(direcionado) {
             return md.grau_vertice(id_vertice);
         }
@@ -134,7 +134,7 @@ public class MatrizManage {
      *
      * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
      */
-    public boolean inserir_aresta (String aresta) {
+    public boolean inserir_aresta(String aresta) {
         if(direcionado) {
             return md.inserir_aresta(aresta);
         }
@@ -147,7 +147,7 @@ public class MatrizManage {
      *
      * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
      */
-    public boolean inserir_aresta (String aresta, int peso) {
+    public boolean inserir_aresta(String aresta, int peso) {
         if(direcionado) {
             return md.inserir_aresta(aresta, peso);
         }
@@ -188,7 +188,7 @@ public class MatrizManage {
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices adjacentes ao analisado) ou null (caso o grafo ser direcionado)
      */
-    public char[] verfica_vizinhos (char id_vertice) {
+    public char[] verfica_vizinhos(char id_vertice) {
         if(direcionado){
             return null;
         } else {
@@ -201,7 +201,7 @@ public class MatrizManage {
      * @param vertice a ser analisado
      * @return vetor de char (vertices sucessores) ou null (caso o grafo nao ser direcionado)
      */
-    public char[] verifica_sucessores (char id_vertice){
+    public char[] verifica_sucessores(char id_vertice) {
         if(direcionado){
             char[] arraySucessores = md.verifica_sucessores(id_vertice);
             return arraySucessores;
@@ -214,7 +214,7 @@ public class MatrizManage {
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices predecessores) ou null (caso o grafo nao ser direcionado)
      */
-    public char[] verifica_predecessores (char id_vertice){
+    public char[] verifica_predecessores(char id_vertice) {
         if(direcionado){
             char[] arrayPredecessores = md.verifica_predecessores(id_vertice);
             return arrayPredecessores;
@@ -223,6 +223,12 @@ public class MatrizManage {
         return null;
     }
 
+    /**
+     * Calcula o caminho minimo entre a os vertices
+     * @param a char (id do vertice a ser analisado)
+     * @param b char (id do vertice a ser analisado)
+     * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
+     */
     public Integer calcularCaminhoMinimo(char a, char b) {
         if (direcionado) {
             return md.calcularCaminhoMinimo(a, b);
@@ -257,10 +263,19 @@ public class MatrizManage {
         return mnd.encontrarAGM();
     }
     
+    public OrdenacaoTopologica ordenacaoTopologica() {
+        if(direcionado){
+            OrdenacaoTopologica ordenacao = md.ordenacaoTopologica();
+            return ordenacao;
+        }
+
+        return null;
+    }
+
     /**
      * Imprime o grafo em forma de matriz
      */
-    public void exibir_matriz () {
+    public void exibir_matriz() {
         if(direcionado) {
             md.exibir_matriz();
         } else {
@@ -302,15 +317,6 @@ public class MatrizManage {
         } else {
             mnd.setIsPonderado(isPonderado);
         }
-    }
-
-    public OrdenacaoTopologica ordenacaoTopologica(){
-        if(direcionado){
-            OrdenacaoTopologica ordenacao = md.ordenacaoTopologica();
-            return ordenacao;
-        }
-        return null;
-        
     }
 
     /**

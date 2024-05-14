@@ -10,11 +10,11 @@ import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
 import graph.caminho.Dijkstra;
 
-public class ListaNaoDirecionada {
+class ListaNaoDirecionada {
     private List<No> grafo;
     private boolean isPonderado;
 
-    ListaNaoDirecionada () {
+    ListaNaoDirecionada() {
         grafo = new ArrayList<No>();
     }
 
@@ -75,7 +75,7 @@ public class ListaNaoDirecionada {
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
      */
-    public void inserir_vertice (char id_vertice) {
+    public void inserir_vertice(char id_vertice) {
         // Verifica se o vertice exite
         if(!isNoExist(id_vertice)) {
             // Cria o novo vertice
@@ -164,6 +164,11 @@ public class ListaNaoDirecionada {
         return false;
     }
 
+    /**
+     * Verifica se uma aresta existe no grafo
+     * @param aresta id da aresta ser avaliada (String)
+     * @return true (se a aresta ser valida) ou false (se a aresta nao existir nao grafo)
+     */
     public boolean isArestaeExist(String aresta) {
         int aux1 = buscar_vertice(aresta.charAt(0));
 
@@ -328,7 +333,7 @@ public class ListaNaoDirecionada {
      * 
      * @return true, se for bipartido, false, caso contrar
      */
-    public boolean isBipartido () {
+    public boolean isBipartido() {
         Map<Character, Byte> mapeamento = new HashMap<Character, Byte>();
         byte color = 0;
         byte result;
@@ -388,6 +393,12 @@ public class ListaNaoDirecionada {
         return true;
     }
 
+    /**
+     * Calcula o caminho minimo entre a os vertices
+     * @param a char (id do vertice a ser analisado)
+     * @param b char (id do vertice a ser analisado)
+     * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
+     */
     public Integer calcularCaminhoMinimo(char a, char b) {
         Dijkstra dijkstra = new Dijkstra(grafo);
         return dijkstra.calcularCaminhoMinimo(a, b);
@@ -430,7 +441,7 @@ public class ListaNaoDirecionada {
     /**
      * Imprime a lista de adjacencia no console
      */
-    public void exibir_lista () {
+    public void exibir_lista() {
         for (int i = 0; i < grafo.size(); i++) {
             No no = grafo.get(i);
             System.out.print("\t" + no.getId() + ": [ ");

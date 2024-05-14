@@ -10,7 +10,7 @@ import graph.ordenacao.OrdenacaoTopologica;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
 
-public class ListaDirecionada {
+class ListaDirecionada {
     private List<No> grafo;
     private boolean ponderado;
 
@@ -137,6 +137,11 @@ public class ListaDirecionada {
         return false;
     }
 
+    /**
+     * Verifica se uma aresta existe no grafo
+     * @param aresta id da aresta ser avaliada (String)
+     * @return true (se a aresta ser valida) ou false (se a aresta nao existir nao grafo)
+     */
     public boolean isArestaeExist(String aresta) {
         int aux1 = buscar_vertice(aresta.charAt(0));
 
@@ -448,6 +453,12 @@ public class ListaDirecionada {
         return true;
     }
 
+    /**
+     * Calcula o caminho minimo entre a os vertices
+     * @param a char (id do vertice a ser analisado)
+     * @param b char (id do vertice a ser analisado)
+     * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
+     */
     public Integer calcularCaminhoMinimo(char a, char b) {
         Dijkstra dijkstra = new Dijkstra(grafo);
         return dijkstra.calcularCaminhoMinimo(a, b);
