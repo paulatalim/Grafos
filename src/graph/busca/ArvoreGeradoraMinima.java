@@ -12,10 +12,12 @@ public class ArvoreGeradoraMinima{
     private Integer[][] graphMAGM;
     private ArrayList<Character> vertices;
     private String[] arestasOrdenadas;
+    private int custoTotal;
 
     public ArvoreGeradoraMinima(List<No> graph) {
         graphL = graph;
         graphLAGM = new ArrayList<No>();
+        custoTotal = 0;
         
         ArrayList<String> arestas = new ArrayList<String>();
         for(int i = 0; i < graphL.size(); i++) {
@@ -37,6 +39,7 @@ public class ArvoreGeradoraMinima{
     public ArvoreGeradoraMinima(Integer[][] graph, ArrayList<Character> vertices) {
         graphM = graph;
         this.vertices = vertices;
+        custoTotal = 0;
             
         int tamanho = vertices.size();
         ArrayList<String> arestas = new ArrayList<String>();
@@ -187,6 +190,7 @@ public class ArvoreGeradoraMinima{
             }
             else {
                 arestasVisitadas.add(arestasOrdenadas[i]);
+                custoTotal += graphM[indexI][indexJ];
             }
             i += 1;
         }
@@ -222,6 +226,7 @@ public class ArvoreGeradoraMinima{
             }
             else {
                 arestasVisitadas.add(arestasOrdenadas[i]);
+                custoTotal += peso;
             }
             i += 1;
         }
@@ -269,16 +274,19 @@ public class ArvoreGeradoraMinima{
             System.out.print("\t" + no.getId() + ": [ ");
 
             if (no.qnt_aresta() > 0) {
-                System.out.print(no.getAresta(0));
+                System.out.print("(" + no.getAresta(0) + ", " + no.getPeso(0) + ")");
             }
 
             for (int j = 1; j < no.qnt_aresta(); j++) {
-                System.out.print(", " + no.getAresta(j));
+                System.out.print(", (" + no.getAresta(j) + ", " + no.getPeso(j) + ")");
             }
 
             System.out.println(" ]");
         }
     }
 
+    public int getCustoTotal() {
+        return custoTotal;
+    }
 
 }
