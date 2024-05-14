@@ -162,7 +162,7 @@ public class MatrizDirecionada {
             int j = buscar_vertice(aresta.charAt(1));
             
             // Caso haver aresta
-            if(i > 0 && j > 0) {
+            if(i >= 0 && j >= 0) {
                 // Adiciona uma nova aresta
                 grafo[i][j] = newPeso;
                 return true;
