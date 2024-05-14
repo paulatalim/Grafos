@@ -22,6 +22,10 @@ public class OrdenacaoTopologica {
         this.vertices = vertices;
     }
 
+    /**
+     * Realiza uma ordenacao topologica dos vertices do grafo em matriz de adjacencia
+     * @return ArrayList<Character> (lista dos vertices ordenados)
+     */
     private ArrayList<Character> otMatriz() {
         // Verifica se ha ciclo
         if (hasCycle()) {
@@ -151,6 +155,10 @@ public class OrdenacaoTopologica {
      * METODOS PARA LISTA DE ADJACENCIA *
      ************************************/
 
+    /**
+     * Realiza uma ordenacao topologica dos vertices do grafo em lista de adjacencia
+     * @return ArrayList<Character> (lista dos vertices ordenados)
+     */
     private ArrayList<Character> otLista() {
         if (hasCycleLista()) {
             System.out.println("\tO grafo contém um ciclo. Não é possível realizar uma ordenação topológica.");
@@ -186,6 +194,10 @@ public class OrdenacaoTopologica {
         return ordenacao;
     }
 
+    /**
+     * Verifica se ha um ciclo na lista de adjacencia
+     * @return
+     */
     private boolean hasCycleLista() {
         boolean[] visitado = new boolean[graphL.size()];
         boolean[] pilhaRecursao = new boolean[graphL.size()]; // Pilha para rastrear recursivamente os vértices
@@ -199,6 +211,13 @@ public class OrdenacaoTopologica {
         return false; // Se não encontrarmos nenhum ciclo, retornamos false
     }
 
+    /**
+     * Verifica se ha um ciclo na entre um vertice especificado na lista de ajacencia
+     * @param vertice int (index do vertice)
+     * @param visitado vetor de boolean (vetor verificando quais vertices foram visitados)
+     * @param pilhaRecurso o conjunto de vertices verificado
+     * @return true (se haver ciclo) ou false (se nao haver ciclo)
+     */
     private boolean hasCycleUtilLista(int vertice, boolean[] visitado, boolean[] pilhaRecursao) {
         if (!visitado[vertice]) {
             visitado[vertice] = true;
