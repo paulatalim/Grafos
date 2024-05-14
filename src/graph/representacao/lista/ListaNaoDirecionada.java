@@ -8,6 +8,7 @@ import java.util.Map;
 import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
+import graph.caminho.Dijkstra;
 
 public class ListaNaoDirecionada {
     private List<No> grafo;
@@ -385,6 +386,11 @@ public class ListaNaoDirecionada {
         }
 
         return true;
+    }
+
+    public Integer calcularCaminhoMinimo(char a, char b) {
+        Dijkstra dijkstra = new Dijkstra(grafo);
+        return dijkstra.calcularCaminhoMinimo(a, b);
     }
 
     /**

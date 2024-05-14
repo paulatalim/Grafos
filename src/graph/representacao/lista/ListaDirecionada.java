@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import graph.caminho.Dijkstra;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
 import graph.ordenação.OrdenacaoTopologica;
@@ -444,6 +445,11 @@ public class ListaDirecionada {
         }
 
         return true;
+    }
+
+    public Integer calcularCaminhoMinimo(char a, char b) {
+        Dijkstra dijkstra = new Dijkstra(grafo);
+        return dijkstra.calcularCaminhoMinimo(a, b);
     }
 
     /**

@@ -223,6 +223,14 @@ public class MatrizManage {
         return null;
     }
 
+    public Integer calcularCaminhoMinimo(char a, char b) {
+        if (direcionado) {
+            return md.calcularCaminhoMinimo(a, b);
+        } 
+
+        return mnd.calcularCaminhoMinimo(a, b);
+    }
+
     /**
      * Realiza uma busca em largura no grafo
      * @param verticeInicial char (vertice que a busca em largura ira iniciar)

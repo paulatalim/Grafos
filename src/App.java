@@ -32,9 +32,6 @@ public class App {
         int cont;
         boolean useAnaliseMatriz = true;
 
-        double test = Double.POSITIVE_INFINITY;
-
-        System.out.println((int) test);
         // Valida a resposta do usuario
         do {
             // Pergunta se o grafo é ou não direcionado
@@ -182,11 +179,11 @@ public class App {
                 UI.println("\t" + "11 - Realizar Busca em Profundidade");
 
                 if(grafoLista.isDirecionado()) {
-                    UI.print("\t" + "12 - Realizar Ordenação Topológica");
+                    UI.println("\t" + "12 - Realizar Ordenação Topológica");
                 }
                 
                 if(grafoLista.isPonderado()) {
-                    UI.print("\n\t" + "13 - Gerar Árvore Geradora Mínima");
+                    UI.print("\t" + "13 - Gerar Árvore Geradora Mínima");
                 }
 
                 UI.print(UI.PURPLE_BACKGROUND + UI.BLACK + "\n\n\t" + " OUTROS   " + "\n");
@@ -552,15 +549,26 @@ public class App {
                         UI.print(UI.CYAN + "\n\tVértice 2: " + UI.WHITE);
                         resposta1 = scanner.next().charAt(0);
 
+                        Integer distancia;
+
                         // Calcula a distancia entre os vertices inseridos
                         if (useAnaliseMatriz) {
-                            // TODO Calcular distancia entre dois vértices na matriz
+                            distancia = grafoMatriz.calcularCaminhoMinimo(resposta, resposta1);
                         } else {
-                            // TODO Calcular distancia entre dois vértices na lista
+                            distancia = grafoLista.calcularCaminhoMinimo(resposta, resposta1);
                         }
 
-                        // Exibe o resultado da distancia
-                        UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.YELLOW);
+                        // Avalia o resultado obtido
+                        if(distancia == null) {
+                            // Exibe mensagem caso a entrada seja invalida
+                            UI.print("\tVértice Inválido");
+                        } else if(distancia == Integer.MAX_VALUE) {
+                            // Exibe mensagem caso não existe caminho entre os vertices
+                            UI.print("\tNão há caminho entre os vértices");
+                        } else {   
+                            // Exibe o resultado da distancia
+                            UI.println(UI.YELLOW + "\n\n\t- Distância: " + UI.CYAN + distancia);
+                        }
 
                     } else {
                         // Caso o grafo esteja vazio

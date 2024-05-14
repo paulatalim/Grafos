@@ -5,6 +5,7 @@ import java.util.List;
 
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
+import graph.caminho.Dijkstra;
 import graph.ordenação.OrdenacaoTopologica;
 
 public class MatrizDirecionada {
@@ -417,6 +418,11 @@ public class MatrizDirecionada {
             }
         }
         return false;
+    }
+
+    public Integer calcularCaminhoMinimo(char a, char b) {
+        Dijkstra dijkstra = new Dijkstra(grafo, vertices, isPonderado);
+        return dijkstra.calcularCaminhoMinimo(a, b);
     }
 
     /**

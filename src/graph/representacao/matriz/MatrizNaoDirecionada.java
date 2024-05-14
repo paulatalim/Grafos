@@ -6,6 +6,7 @@ import java.util.List;
 import graph.busca.ArvoreGeradoraMinima;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
+import graph.caminho.Dijkstra;
 
 public class MatrizNaoDirecionada {
     private Integer[][] grafo;
@@ -401,6 +402,11 @@ public class MatrizNaoDirecionada {
             }
         }
         return false;
+    }
+
+    public Integer calcularCaminhoMinimo(char a, char b) {
+        Dijkstra dijkstra = new Dijkstra(grafo, vertices, isPonderado);
+        return dijkstra.calcularCaminhoMinimo(a, b);
     }
 
     /**

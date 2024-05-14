@@ -261,6 +261,14 @@ public class ListaManage {
         }
         return lnd.isConexo();
     }
+
+    public Integer calcularCaminhoMinimo(char a, char b) {
+        if (direcionado) {
+            return ld.calcularCaminhoMinimo(a, b);
+        } 
+
+        return lnd.calcularCaminhoMinimo(a, b);
+    }
     
     /**
      * Realiza uma busca em largura no grafo
