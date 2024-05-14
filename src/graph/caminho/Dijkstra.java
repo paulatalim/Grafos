@@ -24,6 +24,33 @@ public class Dijkstra {
         this.isPonderado = isPonderado;
     }
 
+    private boolean containPesoNegativo() {
+        if(graphL == null) {
+            if(isPonderado) {
+                for(int i = 0; i < vertices.size(); i++) {
+                    for(int j = 0; j <vertices.size(); j++) {
+                        if(graphM[i][j] != null) {
+                            if(graphM[i][j] < 0) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            for(int i = 0; i < graphL.size(); i++) {
+                for(int j = 0; j < graphL.get(i).qnt_aresta(); j++) {
+                    if(graphL.get(i).getPeso(j) < 0) {
+                        return true;
+                    }
+                    
+                }
+            }
+        }
+
+        return false;
+    }
+
     private boolean validarVerticeLista(char vertice) {
         for(int i = 0; i < graphL.size(); i++) {
             if(graphL.get(i).getId() == vertice) {
@@ -44,7 +71,7 @@ public class Dijkstra {
         return false;
     }
 
-    public Integer calcularCaminhoMinimoMatriz(char raiz, char saida) {
+    private Integer calcularCaminhoMinimoMatriz(char raiz, char saida) {
         Integer[] distance = new Integer[vertices.size()];
         Character[] predecessores = new Character[vertices.size()];
         boolean[] explorado = new boolean[vertices.size()];
@@ -89,13 +116,13 @@ public class Dijkstra {
             for(int i = 0; i < vertices.size(); i++) {
                 if((isPonderado && graphM[verticeAtual][i] != null) || (!isPonderado && graphM[verticeAtual][i] != 0)) {
                     if(!explorado[i]) {
-                        // Verifica se o peso eh negativo
-                        if(graphM[verticeAtual][i] < 0) {
-                            return null;
-                        }
+                        if((isPonderado && distance[verticeAtual] + graphM[verticeAtual][i] < distance[i]) || (!isPonderado && distance[verticeAtual] + 1 < distance[i])) {
+                            if(isPonderado) {
+                                distance[i] = distance[verticeAtual] + graphM[verticeAtual][i];
+                            } else {
+                                distance[i] = distance[verticeAtual] + 1;
+                            }
 
-                        if(distance[verticeAtual] + graphM[verticeAtual][i] < distance[i]) {
-                            distance[i] = distance[verticeAtual] + graphM[verticeAtual][i];
                             predecessores[i] = vertices.get(verticeAtual);
                         }
                     }
@@ -123,7 +150,7 @@ public class Dijkstra {
         return null;
     }
 
-    public Integer calcularCaminhoMinimoLista(char raiz, char saida) {
+    private Integer calcularCaminhoMinimoLista(char raiz, char saida) {
         Integer[] distance = new Integer[graphL.size()];
         Character[] predecessores = new Character[graphL.size()];
         boolean[] explorado = new boolean[graphL.size()];
@@ -169,11 +196,6 @@ public class Dijkstra {
                 for(int j = 0; j < graphL.size(); j++) {
                     if(graphL.get(verticeAtual).getAresta(i) == graphL.get(j).getId()) {
                         if(!explorado[j]) {
-                            // Verifica se o peso eh valido
-                            if(graphL.get(verticeAtual).getPeso(i) < 0) {
-                                return null;
-                            }
-
                             if(distance[verticeAtual] + graphL.get(verticeAtual).getPeso(i) < distance[j]) {
                                 distance[j] = distance[verticeAtual] + graphL.get(verticeAtual).getPeso(i);
                                 predecessores[j] = graphL.get(verticeAtual).getId();
@@ -207,6 +229,9 @@ public class Dijkstra {
     }
 
     public Integer calcularCaminhoMinimo(char vertice1, char vertice2) {
+        // Verifica se ha peso negativo no grafo
+        if(containPesoNegativo()) return null;
+
         if(graphL == null) {
             if(!validarVerticeMatriz(vertice1)) return null;
             return calcularCaminhoMinimoMatriz(vertice1, vertice2);
