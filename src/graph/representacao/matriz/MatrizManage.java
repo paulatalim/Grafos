@@ -272,6 +272,10 @@ public class MatrizManage {
         return mnd.encontrarAGM();
     }
     
+    /**
+     * Faz uma ordenacao topologica com os vertices do grafo
+     * @return objeto da ordenacao topologica
+     */
     public OrdenacaoTopologica ordenacaoTopologica() {
         if(direcionado){
             OrdenacaoTopologica ordenacao = md.ordenacaoTopologica();

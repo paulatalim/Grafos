@@ -695,7 +695,7 @@ public class App {
                         if (useAnaliseMatriz) {
                             grafoMatriz.ordenacaoTopologica();
                         } else {
-                            grafoLista.ordenacaoTopologList();
+                            grafoLista.ordenacaoTopologica();
                         }
                     } else {
                         // Caso o grafo esteja vazio

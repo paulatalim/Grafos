@@ -508,15 +508,15 @@ class ListaDirecionada {
         }
     }
 
-     public OrdenacaoTopologica ordenacaoTopologicaList() {
-        
+    /**
+     * Faz uma ordenacao topologica com os vertices do grafo
+     * @return objeto da ordenacao topologica
+     */
+    public OrdenacaoTopologica ordenacaoTopologica() {
         OrdenacaoTopologica ordenacaoTopologicaList = new OrdenacaoTopologica(grafo);
-        // char verticeInicial = ordenacaoTopologicaList.escolherVerticeInicialLista();
         ordenacaoTopologicaList.imprimirOrdenacaoLista();
         return ordenacaoTopologicaList;
-    
     }
-    
 
     /**
      * Se o Grafo eh poderado
