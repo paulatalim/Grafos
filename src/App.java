@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-import graph.busca.ArvoreGeradoraMinima;
+import graph.AGM.ArvoreGeradoraMinima;
 import graph.busca.DepthFirstSearch;
 import graph.representacao.lista.ListaManage;
 import graph.representacao.matriz.MatrizManage;
@@ -672,9 +672,9 @@ public class App {
                         if(buscaEmProfundidade != null) {
                             // Exibe o resultado da busca
                             UI.println(UI.YELLOW + "\n\tA seguir está a ordem em que os vértices foram visitados durante a busca\n");
-                            UI.println("\tVértices: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getVertices())); 
-                            UI.println("\tTDs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTD())); 
-                            UI.println("\tTTs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTT())); 
+                            UI.println("\tVértices: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getVertices()) + UI.YELLOW); 
+                            UI.println("\tTDs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTD()) + UI.YELLOW); 
+                            UI.println("\tTTs: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getTT()) + UI.YELLOW); 
                             UI.print("\tOrdem de visitação: " + UI.CYAN + Arrays.toString(buscaEmProfundidade.getOrdem()));
                         }
                         else {

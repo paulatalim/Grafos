@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import graph.busca.ArvoreGeradoraMinima;
+import graph.AGM.ArvoreGeradoraMinima;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
 import graph.caminho.Dijkstra;

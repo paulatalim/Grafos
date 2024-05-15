@@ -1,4 +1,4 @@
-package graph.busca;
+package graph.AGM;
 
 import java.util.ArrayList;
 import java.util.List;

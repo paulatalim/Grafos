@@ -3,7 +3,7 @@ package graph.representacao.matriz;
 import java.util.ArrayList;
 import java.util.List;
 
-import graph.busca.ArvoreGeradoraMinima;
+import graph.AGM.ArvoreGeradoraMinima;
 import graph.busca.BreadthFirstSearch;
 import graph.busca.DepthFirstSearch;
 import graph.caminho.Dijkstra;
