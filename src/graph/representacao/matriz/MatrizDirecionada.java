@@ -321,8 +321,8 @@ class MatrizDirecionada {
         if(isGrafosSimples()) {
             for(int i = 0; i < vertices.size(); i++) {
                 for(int j = 0; j < vertices.size(); j++) {
-                    if((!isPonderado && grafo[i][j] == 0) ||
-                        (isPonderado && grafo[i][j] == null) && 
+                    if(((!isPonderado && grafo[i][j] == 0) ||
+                        (isPonderado && grafo[i][j] == null)) && 
                         i != j ) {
                         return false;
                     }
