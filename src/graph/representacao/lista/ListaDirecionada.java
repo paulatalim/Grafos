@@ -477,7 +477,7 @@ class ListaDirecionada {
     /**
      * Realiza uma busca em profundidade no grafo
      * @param raiz char (vertice que a busca em profundidade irá iniciar)
-     * @return objeto da classe DepthFirstSearch
+     * @return objeto da classe DepthFirstSearch caso o vértice raiz exista no grafo, senão retorna null.
      */
     public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
         if(isNoExist(raiz)) {

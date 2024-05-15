@@ -261,6 +261,10 @@ public class MatrizManage {
         return mnd.realizarBuscaProfundidade(raiz);
     }
 
+    /**
+     * Encontra a Árvore Geradora Mínima do grafo.
+     * @return objeto da classe ArvoreGeradoraMinima no caso do grafo ser não-direcionado, senão retorna null.
+     */
     public ArvoreGeradoraMinima encontrarAGM() {
         if(direcionado) {
             return null;

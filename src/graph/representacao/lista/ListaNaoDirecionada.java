@@ -426,7 +426,7 @@ class ListaNaoDirecionada {
     /**
      * Realiza uma busca em profundidade no grafo
      * @param raiz char (vertice que a busca em profundidade irá iniciar)
-     * @return objeto da classe DepthFirstSearch
+     * @return objeto da classe DepthFirstSearch caso o vértice raiz exista no grafo, senão retorna null.
      */
     public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
         if(isNoExist(raiz)) {
@@ -437,6 +437,10 @@ class ListaNaoDirecionada {
         return null;
     }
 
+    /**
+     * Encontra a Árvore Geradora Mínima do grafo.
+     * @return objeto da classe ArvoreGeradoraMinima no caso do grafo ser conexo e ponderado, senão retorna null.
+     */
     public ArvoreGeradoraMinima encontrarAGM() {
         if(isConexo() && isPonderado) {
             ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo);
