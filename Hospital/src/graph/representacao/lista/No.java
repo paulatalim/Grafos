@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class No {
-    private char id;
-    private List<Character> arestas;
+    private String id;
+    private List<String> arestas;
     private List<Integer> pesos;
 
-    public No(char id) {
+    public No(String id) {
         this.id = id;
-        arestas = new ArrayList<Character>();
+        arestas = new ArrayList<String>();
         pesos = new ArrayList<Integer>();
     }
 
@@ -19,7 +19,7 @@ public class No {
      * 
      * @param vertice_adjacente que deseja criar uma aresta
      */
-    public void inserir_aresta(char vertice_adjacente) {
+    public void inserir_aresta(String vertice_adjacente) {
         arestas.add(vertice_adjacente);
         pesos.add(1);
     }
@@ -30,7 +30,7 @@ public class No {
      * @param vertice_adjacente que deseja criar uma aresta
      * @param peso da aresta
      */
-    public boolean inserir_aresta(char vertice_adjacente, int peso) {
+    public boolean inserir_aresta(String vertice_adjacente, int peso) {
         if(!arestas.contains(vertice_adjacente)) {
             arestas.add(vertice_adjacente);
             pesos.add(peso);
@@ -45,9 +45,9 @@ public class No {
      * @param vertice_adjacente a ser retirado a aresta
      * @return true, se a aresta foi retirada, false, se o vertice adjacente nao for encontrado
      */
-    public boolean remover_aresta(char vertice_adjacente) {
+    public boolean remover_aresta(String vertice_adjacente) {
         for(int i = 0; i < arestas.size(); i++) {
-            if(arestas.get(i) == vertice_adjacente) {
+            if(arestas.get(i).equals(vertice_adjacente)) {
                 arestas.remove(i);
                 pesos.remove(i);
                 return true;
@@ -56,7 +56,7 @@ public class No {
         return false;
     }
 
-    public boolean isArestaeExist(char id) {
+    public boolean isArestaeExist(String id) {
         return arestas.contains(id);
     }
 
@@ -66,7 +66,7 @@ public class No {
      * @param id do vertice adjacente na lista
      * @return id do vertice adjacente
      */
-    public char getAresta(int id) {
+    public String getAresta(int id) {
         return arestas.get(id);
     }
 
@@ -86,7 +86,7 @@ public class No {
      * @param id do vertice adjacente
      * @param newPeso novo peso da aresta
      */
-    public void updatePeso(char id, int newPeso) {
+    public void updatePeso(String id, int newPeso) {
         pesos.set(arestas.indexOf(id), newPeso);
     }
 
@@ -105,14 +105,14 @@ public class No {
     /**
      * @return char return the id
      */
-    public char getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(char id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

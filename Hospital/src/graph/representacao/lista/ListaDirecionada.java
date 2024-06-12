@@ -8,7 +8,7 @@ import java.util.HashMap;
 import graph.caminho.Dijkstra;
 import graph.ordenacao.OrdenacaoTopologica;
 import graph.busca.BreadthFirstSearch;
-import graph.busca.DepthFirstSearch;
+// import graph.busca.DepthFirstSearch;
 
 class ListaDirecionada {
     private List<No> grafo;
@@ -23,9 +23,9 @@ class ListaDirecionada {
      * @param id do vertice a ser procurado
      * @return indice na lista no grafo ou -1, se o vertice não existir
      */
-    private int buscar_vertice(char id) {
+    private int buscar_vertice(String id) {
         for(int i = 0; i < grafo.size(); i++) {
-            if (grafo.get(i).getId() == id) {
+            if (grafo.get(i).getId().equals(id)) {
                 return i;
             }
         }
@@ -62,7 +62,7 @@ class ListaDirecionada {
      * @param id do vertice a ser verificado
      * @return true, se o vertice existir, false, caso contrario
      */
-    public boolean isNoExist(char id) {
+    public boolean isNoExist(String id) {
         // Encontra o vertice no grafo
         if(buscar_vertice(id) >= 0) {
             return true;
@@ -75,7 +75,7 @@ class ListaDirecionada {
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
      */
-    public void inserir_vertice (char id_vertice) {
+    public void inserir_vertice (String id_vertice) {
         // Verifica se o vertice ja existe
         if(!isNoExist(id_vertice)) {
             // Cria o novo vertice
@@ -91,12 +91,12 @@ class ListaDirecionada {
      * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
-    public boolean inserir_aresta(String aresta) {
-        int aux = buscar_vertice(aresta.charAt(0));
+    public boolean inserir_aresta(String vertice1, String vertice2) {
+        int aux = buscar_vertice(vertice1);
 
-        if(aux >= 0 && buscar_vertice(aresta.charAt(1)) >= 0) {
+        if(aux >= 0 && buscar_vertice(vertice2) >= 0) {
             // Adiciona uma nova aresta
-            grafo.get(aux).inserir_aresta(aresta.charAt(1));
+            grafo.get(aux).inserir_aresta(vertice2);
             return true;
         }
 
@@ -109,13 +109,13 @@ class ListaDirecionada {
      * @param peso da aresta
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
-    public boolean inserir_aresta(String aresta, int peso) {
-        int aux1 = buscar_vertice(aresta.charAt(0));
-        int aux2 = buscar_vertice(aresta.charAt(1));
+    public boolean inserir_aresta(String vertice1, String vertice2, int peso) {
+        int aux1 = buscar_vertice(vertice1);
+        int aux2 = buscar_vertice(vertice2);
 
         if(aux1 >= 0 && aux2 >= 0 && ponderado) {
             // Adiciona uma nova aresta
-            return grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
+            return grafo.get(aux1).inserir_aresta(vertice2, peso);
         }
 
         return false;
@@ -126,11 +126,11 @@ class ListaDirecionada {
      * @param aresta a ser retirada (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
-    public boolean remover_aresta(String aresta) {
-        int aux1 = buscar_vertice(aresta.charAt(0));
+    public boolean remover_aresta(String vertice1, String vertice2) {
+        int aux1 = buscar_vertice(vertice1);
 
         if (aux1 >= 0) {
-            return grafo.get(aux1).remover_aresta(aresta.charAt(1));
+            return grafo.get(aux1).remover_aresta(vertice2);
         }
 
         // Caso nao encontrar a aresta
@@ -142,11 +142,11 @@ class ListaDirecionada {
      * @param aresta id da aresta ser avaliada (String)
      * @return true (se a aresta ser valida) ou false (se a aresta nao existir nao grafo)
      */
-    public boolean isArestaeExist(String aresta) {
-        int aux1 = buscar_vertice(aresta.charAt(0));
+    public boolean isArestaeExist(String vertice1, String vertice2) {
+        int aux1 = buscar_vertice(vertice1);
 
         if(aux1 >= 0) {
-            return grafo.get(aux1).isArestaeExist(aresta.charAt(1));
+            return grafo.get(aux1).isArestaeExist(vertice2);
         }
 
         return false;
@@ -159,9 +159,9 @@ class ListaDirecionada {
      * @param newPeso o novo peso da aresta
      * @return true (caso a atualizacao ocorrer com sucesso) ou false (caso ocorrer algum erro)
      */
-    public boolean atualizarPeso(String aresta, int newPeso) {
+    public boolean atualizarPeso(String vertice1, String vertice2, int newPeso) {
         if(ponderado) {
-            grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso);
+            grafo.get(buscar_vertice(vertice1)).updatePeso(vertice2, newPeso);
             return true;
         }
         return false;
@@ -195,18 +195,18 @@ class ListaDirecionada {
      * @param vertice a ser analisado
      * @return vetor de char (vertices predecessores)
      */
-    public char[] encontrarPredecessores(char vertice) {
-        List<Character> predecessor = new ArrayList<Character>();
+    public List<String> encontrarPredecessores(String vertice) {
+        List<String> predecessor = new ArrayList<String>();
 
         for (int i = 0; i < grafo.size(); i++) {
             for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                if(grafo.get(i).getAresta(j) == vertice && !predecessor.contains(grafo.get(i).getId())) {
-                    predecessor.add(Character.valueOf(grafo.get(i).getId()));
+                if(grafo.get(i).getAresta(j).equals(vertice) && !predecessor.contains(grafo.get(i).getId())) {
+                    predecessor.add(grafo.get(i).getId());
                 }
             }
         }
 
-        return toArrayChar(predecessor);
+        return predecessor;
     }
 
     /**
@@ -214,11 +214,11 @@ class ListaDirecionada {
      * @param vertice a ser analisado
      * @return vetor de char (vertices sucessores)
      */
-    public char[] encontrarSucessores(char vertice) {
-        List<Character> sucessores = new ArrayList<Character>();
+    public List<String> encontrarSucessores(String vertice) {
+        List<String> sucessores = new ArrayList<String>();
 
         for (int i = 0; i < grafo.size(); i++) {
-            if(grafo.get(i).getId() == vertice) {
+            if(grafo.get(i).getId().equals(vertice)) {
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
                     if(!sucessores.contains(grafo.get(i).getAresta(j))) {
                         sucessores.add(grafo.get(i).getAresta(j));
@@ -227,7 +227,7 @@ class ListaDirecionada {
             }
         }
 
-        return toArrayChar(sucessores);
+        return sucessores;
     }
 
     /**
@@ -235,12 +235,12 @@ class ListaDirecionada {
      * @param vertice a ser analisado
      * @return int (grau de entrada do vertice)
      */
-    public int calcularGrauEntrada(char vertice) {
+    public int calcularGrauEntrada(String vertice) {
         int grau = 0;
 
         for (int i = 0; i < grafo.size(); i++) {
             for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                if(grafo.get(i).getAresta(j) == vertice) {
+                if(grafo.get(i).getAresta(j).equals(vertice)) {
                     grau += grafo.get(i).getPeso(j);
                 }
             }
@@ -254,9 +254,9 @@ class ListaDirecionada {
      * @param vertice a ser analisado
      * @return int (grau de saida do vertice)
      */
-    public int calcularGrauSaida(char vertice) {
+    public int calcularGrauSaida(String vertice) {
         for (int i = 0; i < grafo.size(); i++) {
-            if(grafo.get(i).getId() == vertice) {
+            if(grafo.get(i).getId().equals(vertice)) {
                 int grau = 0;
 
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
@@ -278,13 +278,13 @@ class ListaDirecionada {
         for(int i = 0; i < grafo.size(); i++) {
             for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
                 // Verifica se ha laco
-                if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                if(grafo.get(i).getId().equals(grafo.get(i).getAresta(j))) {
                     return false;
                 }
 
                 // Verifica se há aresta paralela
                 for(int k = grafo.get(i).qnt_aresta() - 1; k > j; k--) {
-                    if(k != j && grafo.get(i).getAresta(j) == grafo.get(i).getAresta(k)) {
+                    if(k != j && grafo.get(i).getAresta(j).equals(grafo.get(i).getAresta(k))) {
                         return false;
                     }
                 }
@@ -303,8 +303,8 @@ class ListaDirecionada {
             return false;
         }
 
-        char verticeAux;
-        char vertice = grafo.get(0).getId();
+        String verticeAux;
+        String vertice = grafo.get(0).getId();
         int grauEntrada = calcularGrauEntrada(vertice);
         int grauSaida = calcularGrauSaida(vertice);
         
@@ -325,7 +325,7 @@ class ListaDirecionada {
      */
     public boolean isCompleto() {
         if(isSimples()) {
-            char vertice;
+            String vertice;
             boolean exist;
             for(int i = 0; i < grafo.size(); i++) {
                 vertice = grafo.get(i).getId();
@@ -344,7 +344,7 @@ class ListaDirecionada {
                     exist = false;
 
                     for(int k = 0; k < grafo.size(); k++) {
-                        if(grafo.get(i).getAresta(j) == grafo.get(k).getId() && grafo.get(k).getId() != grafo.get(i).getId()) {
+                        if(grafo.get(i).getAresta(j).equals(grafo.get(k).getId()) && !grafo.get(k).getId().equals(grafo.get(i).getId())) {
                             exist = true;
                         }
                     }
@@ -375,23 +375,23 @@ class ListaDirecionada {
      * @return true, se for bipartido, false, caso contrar
      */
     public boolean isBipartido () {
-        Map<Character, Byte> mapeamento = new HashMap<Character, Byte>();
+        Map<String, Byte> mapeamento = new HashMap<String, Byte>();
         byte color = 0;
         byte result;
         boolean allIsVerficado = false;
-        char[] vizinhos;
+        List<String> vizinhos;
 
         // Inicializa o mapeamento
         for(int i = 1; i < grafo.size(); i++) {
-            mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) -1);
+            mapeamento.put(grafo.get(i).getId(), (byte) -1);
         }
 
-        mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
+        mapeamento.put(grafo.get(0).getId(), color);
         
         while (!allIsVerficado) {
             // Encontra o proximo vertice a ser vericado
             for(int i = 0; i < grafo.size(); i++) {
-                color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
+                color = mapeamento.get(grafo.get(i).getId());
                 
                 if (color != -1) {
                     if(color == 0) {
@@ -404,12 +404,12 @@ class ListaDirecionada {
                     vizinhos = encontrarPredecessores(grafo.get(i).getId());
 
                     // Verifica os predecessores do vertice
-                    for(int j = 0; j < vizinhos.length; j++) {
-                        result = mapeamento.get(Character.valueOf(vizinhos[j]));
+                    for(int j = 0; j < vizinhos.size(); j++) {
+                        result = mapeamento.get(vizinhos.get(j));
                         
                         // Inicializa cor
                         if(result == (byte) -1) {
-                            mapeamento.put(vizinhos[j], color);
+                            mapeamento.put(vizinhos.get(j), color);
                             
                             // Caso a cor ser invalida
                         } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
@@ -419,15 +419,15 @@ class ListaDirecionada {
                     
                     // Verifica os sucessores do vertice
                     for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                        result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
+                        result = mapeamento.get(grafo.get(i).getAresta(j));
                         
                         // Verifica se ha laco
-                        if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                        if(grafo.get(i).getId().equals(grafo.get(i).getAresta(j))) {
                             return false;
                         }
                         // Inicializa cor
                         else if(result == (byte) -1) {
-                            mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
+                            mapeamento.put(grafo.get(i).getAresta(j), color);
                             
                             // Caso a cor ser invalida
                         } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
@@ -442,8 +442,8 @@ class ListaDirecionada {
 
             // Verifica se algum vertice nao foi verificado; colorido
             for(int i = 0; i < grafo.size(); i++) {
-                if(mapeamento.get(Character.valueOf((grafo.get(i).getId()))) == -1) {
-                    mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) 0);
+                if(mapeamento.get((grafo.get(i).getId())) == -1) {
+                    mapeamento.put(grafo.get(i).getId(), (byte) 0);
                     allIsVerficado = false;
                     break;
                 }
@@ -479,14 +479,14 @@ class ListaDirecionada {
      * @param raiz char (vertice que a busca em profundidade irá iniciar)
      * @return objeto da classe DepthFirstSearch caso o vértice raiz exista no grafo, senão retorna null.
      */
-    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
-        if(isNoExist(raiz)) {
-            DepthFirstSearch DFS = new DepthFirstSearch(grafo);
-            DFS.dfs(raiz);
-            return DFS;
-        }
-        return null;
-    }
+    // public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
+    //     if(isNoExist(raiz)) {
+    //         DepthFirstSearch DFS = new DepthFirstSearch(grafo);
+    //         DFS.dfs(raiz);
+    //         return DFS;
+    //     }
+    //     return null;
+    // }
 
     /**
      * Imprime a lista de adjacencia no console

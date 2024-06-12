@@ -3,7 +3,7 @@ package graph.representacao.lista;
 import java.util.List;
 
 import graph.AGM.ArvoreGeradoraMinima;
-import graph.busca.DepthFirstSearch;
+// import graph.busca.DepthFirstSearch;
 import graph.ordenacao.OrdenacaoTopologica;
 
 public class ListaManage {
@@ -42,7 +42,7 @@ public class ListaManage {
      * @param id do vertice a ser verificado
      * @return true, se o vertice existir, false, caso contrario
      */
-    public boolean isVerticeExist(char id) {
+    public boolean isVerticeExist(String id) {
         if(direcionado) {
             return ld.isNoExist(id);
         }
@@ -55,7 +55,7 @@ public class ListaManage {
      * 
      * @param id_vertice a ser inserido
      */
-    public void inserir_vertice(char id_vertice) {
+    public void inserir_vertice(String id_vertice) {
         if(direcionado) {
             ld.inserir_vertice(id_vertice);
         } else {
@@ -68,12 +68,12 @@ public class ListaManage {
      *
      * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
      */
-    public boolean inserir_aresta(String aresta) {
+    public boolean inserir_aresta(String vertice1, String vertice2) {
         if(direcionado) {
-            return ld.inserir_aresta(aresta);
+            return ld.inserir_aresta(vertice1, vertice2);
         }
         
-        return lnd.inserir_aresta(aresta);
+        return lnd.inserir_aresta(vertice1, vertice2);
     }
 
     /**
@@ -82,12 +82,12 @@ public class ListaManage {
      * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
      * @param peso da aresta
      */
-    public boolean inserir_aresta(String aresta, int peso) {
+    public boolean inserir_aresta(String vertice1, String vertice2, int peso) {
         if(direcionado) {
-            return ld.inserir_aresta(aresta, peso);
+            return ld.inserir_aresta(vertice1, vertice2, peso);
         }
         
-        return lnd.inserir_aresta(aresta, peso);
+        return lnd.inserir_aresta(vertice1, vertice2, peso);
     }
 
     /**
@@ -96,12 +96,12 @@ public class ListaManage {
      * @param aresta - informada pelo id dos vertices adjacentes
      * @return true, se foi possivel remover, false, se a aresta for invalida
      */
-    public boolean remover_aresta(String aresta) {
+    public boolean remover_aresta(String vertice1, String vertice2) {
         if(direcionado) {
-            return ld.remover_aresta(aresta);
+            return ld.remover_aresta(vertice1, vertice2);
         }
 
-        return lnd.remover_aresta(aresta);
+        return lnd.remover_aresta(vertice1, vertice2);
     }
 
     /**
@@ -109,12 +109,12 @@ public class ListaManage {
      * @param aresta id da aresta ser avaliada (String)
      * @return true (se a aresta ser valida) ou false (se a aresta nao existir nao grafo)
      */
-    public boolean isArestaeExist(String aresta) {
+    public boolean isArestaeExist(String vertice1, String vertice2) {
         if(direcionado) {
-            return ld.isArestaeExist(aresta);
+            return ld.isArestaeExist(vertice1, vertice2);
         }
 
-        return lnd.isArestaeExist(aresta);
+        return lnd.isArestaeExist(vertice1, vertice2);
     }
 
     /**
@@ -123,12 +123,12 @@ public class ListaManage {
      * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
      * @param peso da aresta
      */
-    public boolean atualizarPeso(String aresta, int peso) {
+    public boolean atualizarPeso(String vertice1, String vertice2, int peso) {
         if(direcionado) {
-            return ld.atualizarPeso(aresta, peso);
+            return ld.atualizarPeso(vertice1, vertice2, peso);
         }
         
-        return lnd.atualizarPeso(aresta, peso);
+        return lnd.atualizarPeso(vertice1, vertice2, peso);
     }
 
     /**
@@ -136,7 +136,7 @@ public class ListaManage {
      * @param vertice a ser analisado
      * @return vetor de char (vertices predecessores) ou null (caso o grafo nao ser direcionado)
      */
-    public char[] encontrarPredecessores(char vertice) {
+    public List<String> encontrarPredecessores(String vertice) {
         if(direcionado) {
             return ld.encontrarPredecessores(vertice);
         }
@@ -149,7 +149,7 @@ public class ListaManage {
      * @param vertice a ser analisado
      * @return vetor de char (vertices sucessores) ou null (caso o grafo nao ser direcionado)
      */
-    public char[] encontrarSucessores(char vertice) {
+    public List<String> encontrarSucessores(String vertice) {
         if(direcionado) {
             return ld.encontrarSucessores(vertice);
         }
@@ -162,7 +162,7 @@ public class ListaManage {
      * @param vertice a ser analisado
      * @return int (grau de entrada do vertice) ou -1 (caso o grafo nao ser direcionado)
      */
-    public int calcularGrauEntrada(char vertice) {
+    public int calcularGrauEntrada(String vertice) {
         if(direcionado) {
             return ld.calcularGrauEntrada(vertice);
         }
@@ -175,7 +175,7 @@ public class ListaManage {
      * @param vertice a ser analisado
      * @return int (grau de saida do vertice) ou -1 (caso o grafo nao ser direcionado)
      */
-    public int calcularGrauSaida(char vertice) {
+    public int calcularGrauSaida(String vertice) {
         if(direcionado) {
             return ld.calcularGrauSaida(vertice);
         }
@@ -188,7 +188,7 @@ public class ListaManage {
      * @param vertice a ser analisado
      * @return vetor de char (vertices adjacentes ao analisado) ou null (caso o grafo ser direcionado)
      */
-    public char[] vizinhaca(char vertice) {
+    public List<String> vizinhaca(String vertice) {
         if(!direcionado) {
             return lnd.vizinhaca(vertice);
         }
@@ -201,7 +201,7 @@ public class ListaManage {
      * @param vertice a ser analisado
      * @return int (grau do vertice)
      */
-    public int calcularGrau(char vertice) {
+    public int calcularGrau(String vertice) {
         if(direcionado) {
             return -1;
         }
@@ -299,12 +299,12 @@ public class ListaManage {
      * @param raiz char (vertice que a busca em profundidade irá iniciar)
      * @return objeto da classe DepthFirstSearch
      */
-    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
-        if(direcionado) {
-            return ld.realizarBuscaProfundidade(raiz);
-        }
-        return lnd.realizarBuscaProfundidade(raiz);
-    }
+    // public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
+    //     if(direcionado) {
+    //         return ld.realizarBuscaProfundidade(raiz);
+    //     }
+    //     return lnd.realizarBuscaProfundidade(raiz);
+    // }
     
     /**
      * Encontra a Árvore Geradora Mínima do grafo.

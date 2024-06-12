@@ -7,7 +7,7 @@ import java.util.Map;
 
 import graph.AGM.ArvoreGeradoraMinima;
 import graph.busca.BreadthFirstSearch;
-import graph.busca.DepthFirstSearch;
+// import graph.busca.DepthFirstSearch;
 import graph.caminho.Dijkstra;
 
 class ListaNaoDirecionada {
@@ -23,9 +23,9 @@ class ListaNaoDirecionada {
      * @param id do vertice a ser procurado
      * @return indice na lista no grafo
      */
-    private int buscar_vertice(char id) {
+    private int buscar_vertice(String id) {
         for(int i = 0; i < grafo.size(); i++) {
-            if (grafo.get(i).getId() == id) {
+            if (grafo.get(i).getId().equals(id)) {
                 return i;
             }
         }
@@ -62,7 +62,7 @@ class ListaNaoDirecionada {
      * @param id do vertice a ser verificado
      * @return true, se o vertice existir, false, caso contrario
      */
-    public boolean isNoExist(char id) {
+    public boolean isNoExist(String id) {
         // Encontra o vertice no grafo
         if(buscar_vertice(id) >= 0) {
             return true;
@@ -75,7 +75,7 @@ class ListaNaoDirecionada {
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
      */
-    public void inserir_vertice(char id_vertice) {
+    public void inserir_vertice(String id_vertice) {
         // Verifica se o vertice exite
         if(!isNoExist(id_vertice)) {
             // Cria o novo vertice
@@ -91,18 +91,18 @@ class ListaNaoDirecionada {
      * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
-    public boolean inserir_aresta(String aresta) {
+    public boolean inserir_aresta(String vertice1, String vertice2) {
         // Encontra os vertice no grafo
-        int aux1 = buscar_vertice(aresta.charAt(0));
-        int aux2 = buscar_vertice(aresta.charAt(1));
+        int aux1 = buscar_vertice(vertice1);
+        int aux2 = buscar_vertice(vertice2);
 
         if (aux1 >= 0 && aux2 >= 0) {
             if(aux1 != aux2) {
-                grafo.get(aux1).inserir_aresta(aresta.charAt(1));
-                grafo.get(aux2).inserir_aresta(aresta.charAt(0));
+                grafo.get(aux1).inserir_aresta(vertice2);
+                grafo.get(aux2).inserir_aresta(vertice1);
             } else {
                 // Adiciona uma laco
-                grafo.get(aux1).inserir_aresta(aresta.charAt(1));
+                grafo.get(aux1).inserir_aresta(vertice2);
             }
             return true;
         }
@@ -116,24 +116,24 @@ class ListaNaoDirecionada {
      * @param peso da aresta
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
-    public boolean inserir_aresta(String aresta, int peso) {
+    public boolean inserir_aresta(String vertice1, String vertice2, int peso) {
         if(isPonderado) {
 
             // Encontra os vertice no grafo
-            int aux1 = buscar_vertice(aresta.charAt(0));
-            int aux2 = buscar_vertice(aresta.charAt(1));
+            int aux1 = buscar_vertice(vertice1);
+            int aux2 = buscar_vertice(vertice2);
             
             if (aux1 >= 0 && aux2 >= 0) {
                 if(aux1 != aux2) {
                     // Adiciona uma aresta
                     return (
-                        grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso) &&
-                        grafo.get(aux2).inserir_aresta(aresta.charAt(0), peso)
+                        grafo.get(aux1).inserir_aresta(vertice2, peso) &&
+                        grafo.get(aux2).inserir_aresta(vertice1, peso)
                     );
                 }
 
                 // Adiciona uma laco
-                return grafo.get(aux1).inserir_aresta(aresta.charAt(1), peso);
+                return grafo.get(aux1).inserir_aresta(vertice2, peso);
             }
         }
 
@@ -145,17 +145,17 @@ class ListaNaoDirecionada {
      * @param aresta a ser retirada (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
-    public boolean remover_aresta(String aresta) {
+    public boolean remover_aresta(String vertice1, String vertice2) {
         // Encontra os vertice no grafo
-        int aux1 = buscar_vertice(aresta.charAt(0));
-        int aux2 = buscar_vertice(aresta.charAt(1));
+        int aux1 = buscar_vertice(vertice1);
+        int aux2 = buscar_vertice(vertice2);
 
         if (aux1 >= 0 && aux2 >= 0) {
             if(aux1 != aux2) {
-                grafo.get(aux1).remover_aresta(aresta.charAt(1));
-                grafo.get(aux2).remover_aresta(aresta.charAt(0));
+                grafo.get(aux1).remover_aresta(vertice2);
+                grafo.get(aux2).remover_aresta(vertice1);
             } else {
-                grafo.get(aux2).remover_aresta(aresta.charAt(0));
+                grafo.get(aux2).remover_aresta(vertice1);
             }
             return true;
         }
@@ -169,11 +169,11 @@ class ListaNaoDirecionada {
      * @param aresta id da aresta ser avaliada (String)
      * @return true (se a aresta ser valida) ou false (se a aresta nao existir nao grafo)
      */
-    public boolean isArestaeExist(String aresta) {
-        int aux1 = buscar_vertice(aresta.charAt(0));
+    public boolean isArestaeExist(String vertice1, String vertice2) {
+        int aux1 = buscar_vertice(vertice1);
 
         if(aux1 >= 0) {
-            return grafo.get(aux1).isArestaeExist(aresta.charAt(1));
+            return grafo.get(aux1).isArestaeExist(vertice2);
         }
 
         return false;
@@ -186,10 +186,10 @@ class ListaNaoDirecionada {
      * @param newPeso o novo peso da aresta
      * @return true (caso a atualizacao ocorrer com sucesso) ou false (caso ocorrer algum erro)
      */
-    public boolean atualizarPeso(String aresta, int newPeso) {
+    public boolean atualizarPeso(String vertice1, String vertice2, int newPeso) {
         if(isPonderado) {
-            grafo.get(buscar_vertice(aresta.charAt(0))).updatePeso(aresta.charAt(1), newPeso);
-            grafo.get(buscar_vertice(aresta.charAt(1))).updatePeso(aresta.charAt(0), newPeso);
+            grafo.get(buscar_vertice(vertice1)).updatePeso(vertice2, newPeso);
+            grafo.get(buscar_vertice(vertice2)).updatePeso(vertice1, newPeso);
             return true;
         }
         
@@ -224,11 +224,11 @@ class ListaNaoDirecionada {
      * @param vertice a ser analisado
      * @return vetor de char (vertices adjacentes ao analisado)
      */
-    public char[] vizinhaca(char vertice) {
-        List<Character> vizinhos = new ArrayList<Character>();
+    public List<String> vizinhaca(String vertice) {
+        List<String> vizinhos = new ArrayList<String>();
 
         for(int i = 0; i < grafo.size(); i++) {
-            if(grafo.get(i).getId() == vertice) {
+            if(grafo.get(i).getId().equals(vertice)) {
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
                     if(!vizinhos.contains(grafo.get(i).getAresta(j))) {
                         vizinhos.add(grafo.get(i).getAresta(j));
@@ -237,7 +237,7 @@ class ListaNaoDirecionada {
             }
         }
 
-        return toArrayChar(vizinhos);
+        return vizinhos;
     }
 
     /**
@@ -245,15 +245,15 @@ class ListaNaoDirecionada {
      * @param vertice a ser analisado
      * @return int (grau do vertice)
      */
-    public int calcularGrau(char vertice) {
+    public int calcularGrau(String vertice) {
         int grau = 0;
 
         for(int i = 0; i < grafo.size(); i++) {
-            if(grafo.get(i).getId() == vertice) {
+            if(grafo.get(i).getId().equals(vertice)) {
                 
                 // Verifica se ha laco
                 for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                    if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                    if(grafo.get(i).getId().equals(grafo.get(i).getAresta(j))) {
                         grau += 2 * grafo.get(i).getPeso(j);
                     } else {
                         grau += grafo.get(i).getPeso(j);
@@ -275,13 +275,13 @@ class ListaNaoDirecionada {
         for(int i = 0; i < grafo.size(); i++) {
             for(int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
                 // Verifica se ha laco
-                if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                if(grafo.get(i).getId().equals(grafo.get(i).getAresta(j))) {
                     return false;
                 }
 
                 // Verifica se há aresta paralela
                 for(int k = grafo.get(i).qnt_aresta() - 1; k > j; k--) {
-                    if(k != j && grafo.get(i).getAresta(j) == grafo.get(i).getAresta(k)) {
+                    if(k != j && grafo.get(i).getAresta(j).equals(grafo.get(i).getAresta(k))) {
                         return false;
                     }
                 }
@@ -334,22 +334,22 @@ class ListaNaoDirecionada {
      * @return true, se for bipartido, false, caso contrar
      */
     public boolean isBipartido() {
-        Map<Character, Byte> mapeamento = new HashMap<Character, Byte>();
+        Map<String, Byte> mapeamento = new HashMap<String, Byte>();
         byte color = 0;
         byte result;
         boolean allIsVerficado = false;
 
         // Inicializa o mapeamento
         for(int i = 1; i < grafo.size(); i++) {
-            mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) -1);
+            mapeamento.put(grafo.get(i).getId(), (byte) -1);
         }
 
-        mapeamento.put(Character.valueOf(grafo.get(0).getId()), color);
+        mapeamento.put(grafo.get(0).getId(), color);
         
         while (!allIsVerficado) {
             // Encontra o proximo vertice a ser vericado
             for(int i = 0; i < grafo.size(); i++) {
-                color = mapeamento.get(Character.valueOf(grafo.get(i).getId()));
+                color = mapeamento.get(grafo.get(i).getId());
                 
                 if (color != -1) {
                     if(color == 0) {
@@ -360,15 +360,15 @@ class ListaNaoDirecionada {
                     
                     // verifica a vizinhanca
                     for (int j = 0; j < grafo.get(i).qnt_aresta(); j++) {
-                        result = mapeamento.get(Character.valueOf(grafo.get(i).getAresta(j)));
+                        result = mapeamento.get(grafo.get(i).getAresta(j));
                         
                         // Verifica se ha laco
-                        if(grafo.get(i).getId() == grafo.get(i).getAresta(j)) {
+                        if(grafo.get(i).getId().equals(grafo.get(i).getAresta(j))) {
                             return false;
                         }
                         // Inicializa cor
                         else if(result == (byte) -1) {
-                            mapeamento.put(Character.valueOf(grafo.get(i).getAresta(j)), color);
+                            mapeamento.put(grafo.get(i).getAresta(j), color);
                             
                             // Caso a cor ser invalida
                         } else if ((color == 0 && result == 1) || (color == 1 && result == 0)) {
@@ -382,8 +382,8 @@ class ListaNaoDirecionada {
 
             // Verifica se algum vertice nao foi verificado; colorido
             for(int i = 0; i < grafo.size(); i++) {
-                if(mapeamento.get(Character.valueOf((grafo.get(i).getId()))) == -1) {
-                    mapeamento.put(Character.valueOf(grafo.get(i).getId()), (byte) 0);
+                if(mapeamento.get((grafo.get(i).getId())) == -1) {
+                    mapeamento.put(grafo.get(i).getId(), (byte) 0);
                     allIsVerficado = false;
                     break;
                 }
@@ -428,14 +428,14 @@ class ListaNaoDirecionada {
      * @param raiz char (vertice que a busca em profundidade irá iniciar)
      * @return objeto da classe DepthFirstSearch caso o vértice raiz exista no grafo, senão retorna null.
      */
-    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
-        if(isNoExist(raiz)) {
-            DepthFirstSearch DFS = new DepthFirstSearch(grafo);
-            DFS.dfs(raiz);
-            return DFS;
-        }
-        return null;
-    }
+    // public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
+    //     if(isNoExist(raiz)) {
+    //         DepthFirstSearch DFS = new DepthFirstSearch(grafo);
+    //         DFS.dfs(raiz);
+    //         return DFS;
+    //     }
+    //     return null;
+    // }
 
     /**
      * Encontra a Árvore Geradora Mínima do grafo.
