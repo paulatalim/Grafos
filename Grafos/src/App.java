@@ -14,7 +14,7 @@ import graph.representacao.matriz.MatrizManage;
  * @author Paula Cristina Talim Gonçalves
  * @author Rafael Vicente Souza E Paula
  * 
- *         DATA DE CRIAÇÃO: 27 de fev. de 2024
+ * DATA DE CRIAÇÃO: 27 de fev. de 2024
  */
 public class App {
     public static void main(String[] args) throws Exception {
