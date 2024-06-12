@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 import graph.AGM.ArvoreGeradoraMinima;
@@ -20,18 +19,13 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         ListaManage grafoLista = new ListaManage();
-        MatrizManage grafoMatriz = new MatrizManage();
-        DepthFirstSearch buscaEmProfundidade;
-        ArvoreGeradoraMinima arvoreGeradoraMinima;
+        // MatrizManage grafoMatriz = new MatrizManage();
+        // DepthFirstSearch buscaEmProfundidade;
+        // ArvoreGeradoraMinima arvoreGeradoraMinima;
 
         boolean opcao_invalida;
         String aresta;
         int opcao;
-        char resposta;
-        char resposta1; 
-        int cont;
-        boolean useAnaliseMatriz = true;
-
 
         // Repete o programa
         do {
@@ -43,7 +37,7 @@ public class App {
             do {
                 // Exibe o menu das opcoes
                 UI.print(UI.PURPLE_BACKGROUND + UI.WHITE + "\n\t\t\t\t\t" + "  *** DOCTORS WITHOUT WEEKENDS ***  " + "\n\n\n");
-                UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "O que deseja fazer no grafo" + "\n\n");
+                UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "O que deseja fazer" + "\n\n");
 
                 UI.print(UI.RED_BACKGROUND + UI.WHITE + "\t" + " REPRESENTAÇÕES   " + "\n");
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "1 - Exibir em forma de lista de adjacência" + "\n"
