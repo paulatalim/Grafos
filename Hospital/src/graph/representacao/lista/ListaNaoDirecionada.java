@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import graph.AGM.ArvoreGeradoraMinima;
-import graph.busca.BreadthFirstSearch;
-// import graph.busca.DepthFirstSearch;
-import graph.caminho.Dijkstra;
+// import graph.AGM.ArvoreGeradoraMinima;
+// import graph.busca.BreadthFirstSearch;
+// // import graph.busca.DepthFirstSearch;
+// import graph.caminho.Dijkstra;
 
 class ListaNaoDirecionada {
     private List<No> grafo;
@@ -201,23 +201,23 @@ class ListaNaoDirecionada {
      * @param list - lista a ser convertida
      * @return Array de caracteres
      */
-    private char[] toArrayChar(List<Character> list) {
-        // Verifica se a lista existe
-        if(list == null) {
-            return null;
-        }
+    // private char[] toArrayChar(List<Character> list) {
+    //     // Verifica se a lista existe
+    //     if(list == null) {
+    //         return null;
+    //     }
 
-        // Cria um vetor auxiliar para armazenar os valores convertidos
-        char[] vetor = new char[list.size()];
+    //     // Cria um vetor auxiliar para armazenar os valores convertidos
+    //     char[] vetor = new char[list.size()];
         
-        // Conversao dos valores da lista para vetor
-        for(int i = 0; i < list.size(); i++) {
-            vetor[i] = Character.valueOf(list.get(i));
-        }
+    //     // Conversao dos valores da lista para vetor
+    //     for(int i = 0; i < list.size(); i++) {
+    //         vetor[i] = Character.valueOf(list.get(i));
+    //     }
 
-        // Retorno da lista convertida para vetor
-        return vetor;
-    }
+    //     // Retorno da lista convertida para vetor
+    //     return vetor;
+    // }
 
     /**
      * Verifica a vizinhaca do vertice
@@ -399,29 +399,29 @@ class ListaNaoDirecionada {
      * @param b char (id do vertice a ser analisado)
      * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
      */
-    public Integer calcularCaminhoMinimo(char a, char b) {
-        Dijkstra dijkstra = new Dijkstra(grafo);
-        return dijkstra.calcularCaminhoMinimo(a, b);
-    }
+    // public Integer calcularCaminhoMinimo(char a, char b) {
+    //     Dijkstra dijkstra = new Dijkstra(grafo);
+    //     return dijkstra.calcularCaminhoMinimo(a, b);
+    // }
 
     /**
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    public boolean isConexo() {    
-        BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
-        return bfs.getIsConexo();
-    } 
+    // public boolean isConexo() {    
+    //     BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
+    //     return bfs.getIsConexo();
+    // } 
 
     /**
      * Realiza uma busca em largura no grafo
      * @param verticeInicial char (vertice que a busca em largura ira iniciar)
      * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
      */
-    public char[] realizarBuscaLargura(char verticeInicial) {
-        BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
-        return toArrayChar(BFS.bfs(verticeInicial));
-    }
+    // public char[] realizarBuscaLargura(char verticeInicial) {
+    //     BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
+    //     return toArrayChar(BFS.bfs(verticeInicial));
+    // }
 
     /**
      * Realiza uma busca em profundidade no grafo
@@ -441,14 +441,14 @@ class ListaNaoDirecionada {
      * Encontra a Árvore Geradora Mínima do grafo.
      * @return objeto da classe ArvoreGeradoraMinima no caso do grafo ser conexo e ponderado, senão retorna null.
      */
-    public ArvoreGeradoraMinima encontrarAGM() {
-        if(isConexo() && isPonderado) {
-            ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo);
-            AGM.encontrarAGM();
-            return AGM;
-        }
-        return null;
-    }
+    // public ArvoreGeradoraMinima encontrarAGM() {
+    //     if(isConexo() && isPonderado) {
+    //         ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo);
+    //         AGM.encontrarAGM();
+    //         return AGM;
+    //     }
+    //     return null;
+    // }
 
     /**
      * Imprime a lista de adjacencia no console

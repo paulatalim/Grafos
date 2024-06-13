@@ -3,15 +3,15 @@ package graph.representacao.matriz;
 import java.util.ArrayList;
 import java.util.List;
 
-import graph.busca.BreadthFirstSearch;
-import graph.busca.DepthFirstSearch;
-import graph.caminho.Dijkstra;
-import graph.ordenacao.OrdenacaoTopologica;
+// import graph.busca.BreadthFirstSearch;
+// import graph.busca.DepthFirstSearch;
+// import graph.caminho.Dijkstra;
+// import graph.ordenacao.OrdenacaoTopologica;
 
 class MatrizDirecionada {
     private Integer[][] grafo;
     private boolean isPonderado;
-    private ArrayList<Character> vertices = new ArrayList<Character>();
+    private ArrayList<String> vertices = new ArrayList<String>();
 
     /**
      * Cria a matriz a partir da lista de vértices.
@@ -40,9 +40,9 @@ class MatrizDirecionada {
      * @param id do vertice a ser procurado
      * @return indice na lista no grafo
      */
-    private int buscar_vertice(char id) {
+    private int buscar_vertice(String id) {
         for(int i = 0; i < vertices.size(); i++) {
-            if (vertices.get(i) == id) {
+            if (vertices.get(i).equals(id)) {
                 return i;
             }
         }
@@ -54,33 +54,33 @@ class MatrizDirecionada {
      * @param list - lista a ser convertida
      * @return Array de caracteres
      */
-    private char[] toArrayChar(List<Character> list) {
-        // Verifica se a lista existe
-        if(list == null) {
-            return null;
-        }
+    // private char[] toArrayChar(List<Character> list) {
+    //     // Verifica se a lista existe
+    //     if(list == null) {
+    //         return null;
+    //     }
 
-        // Cria um vetor auxiliar para armazenar os valores convertidos
-        char[] vetor = new char[list.size()];
+    //     // Cria um vetor auxiliar para armazenar os valores convertidos
+    //     char[] vetor = new char[list.size()];
         
-        // Conversao dos valores da lista para vetor
-        for(int i = 0; i < list.size(); i++) {
-            vetor[i] = Character.valueOf(list.get(i));
-        }
+    //     // Conversao dos valores da lista para vetor
+    //     for(int i = 0; i < list.size(); i++) {
+    //         vetor[i] = Character.valueOf(list.get(i));
+    //     }
 
-        // Retorno da lista convertida para vetor
-        return vetor;
-    }
+    //     // Retorno da lista convertida para vetor
+    //     return vetor;
+    // }
 
     /**
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
      */
-    public void inserir_vertice(char id_vertice) {
+    public void inserir_vertice(String id_vertice) {
         // Verifica se o vertice ja existe
         if(!isNoExist(id_vertice)) {
            // Adiciona o vertice a lista
-           if(id_vertice != '0') vertices.add(id_vertice);
+           if(!id_vertice.equals('0')) vertices.add(id_vertice);
            else initMatriz();
         }
     }
@@ -90,9 +90,9 @@ class MatrizDirecionada {
      * @param aresta a ser inserida (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
-    public boolean inserir_aresta(String aresta) {
-        int i = buscar_vertice(aresta.charAt(0));
-        int j = buscar_vertice(aresta.charAt(1));
+    public boolean inserir_aresta(String vertice1, String vertice2) {
+        int i = buscar_vertice(vertice1);
+        int j = buscar_vertice(vertice2);
 
         if(i >=0 && j >= 0) {
             // Adiciona uma nova aresta
@@ -109,10 +109,10 @@ class MatrizDirecionada {
      * @param peso da aresta
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
-    public boolean inserir_aresta(String aresta, int peso) {
+    public boolean inserir_aresta(String vertice1, String vertice2, int peso) {
         if(isPonderado) {
-            int i = buscar_vertice(aresta.charAt(0));
-            int j = buscar_vertice(aresta.charAt(1));
+            int i = buscar_vertice(vertice1);
+            int j = buscar_vertice(vertice2);
 
             if(i >= 0 && j >= 0) {
                 // Adiciona uma nova aresta
@@ -131,9 +131,9 @@ class MatrizDirecionada {
      * @param aresta a ser retirada (String), indicada com seus vertices adjacentes
      * @return true, caso encontrar os vertices, ou false, caso não encontrar algum dos vertices adjacentes
      */
-    public boolean remover_aresta(String aresta) {
-        int i = buscar_vertice(aresta.charAt(0));
-        int j = buscar_vertice(aresta.charAt(1));
+    public boolean remover_aresta(String vertice1, String vertice2) {
+        int i = buscar_vertice(vertice1);
+        int j = buscar_vertice(vertice2);
 
         if(i >= 0 && j >= 0) {
             // Remove uma nova aresta
@@ -156,10 +156,10 @@ class MatrizDirecionada {
      * @param newPeso novo peso da aresta
      * @return true, caso encontrar os vertices e haver aresta entre eles, ou false, caso contrario
      */
-    public boolean atualizarPeso(String aresta, int newPeso) {
+    public boolean atualizarPeso(String vertice1, String vertice2, int newPeso) {
         if(isPonderado) {
-            int i = buscar_vertice(aresta.charAt(0));
-            int j = buscar_vertice(aresta.charAt(1));
+            int i = buscar_vertice(vertice1);
+            int j = buscar_vertice(vertice2);
             
             // Caso haver aresta
             if(i >= 0 && j >= 0) {
@@ -179,7 +179,7 @@ class MatrizDirecionada {
      * @param id do vertice a ser verificado
      * @return true, se o vertice existir, false, caso contrario
      */
-    public boolean isNoExist(char id) {
+    public boolean isNoExist(String id) {
         // Encontra o vertice no grafo
         if(vertices.contains(id)) {
             return true;
@@ -193,7 +193,7 @@ class MatrizDirecionada {
      * @param id_vertice
      * @return vetor de inteiros representando os graus de saída e de entrada do vértice
      */
-    public int[] grau_vertice (char id_vertice) {
+    public int[] grau_vertice (String id_vertice) {
         int[] graus = new int[2];
         int indexNo = buscar_vertice(id_vertice);
         
@@ -220,8 +220,8 @@ class MatrizDirecionada {
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices sucessores)
      */
-    public char[] verifica_sucessores(char id_vertice){
-        List<Character> listaSucessores = new ArrayList<>();
+    public List<String> verifica_sucessores(String id_vertice){
+        List<String> listaSucessores = new ArrayList<>();
 
         int index_vertice = buscar_vertice(id_vertice);
 
@@ -232,7 +232,7 @@ class MatrizDirecionada {
             }
         }
 
-        return toArrayChar(listaSucessores);
+        return listaSucessores;
     }
 
     /**
@@ -240,8 +240,8 @@ class MatrizDirecionada {
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices predecessores)
      */
-    public char[] verifica_predecessores(char id_vertice){
-        List<Character> listaPredecessores = new ArrayList<>();
+    public List<String> verifica_predecessores(String id_vertice){
+        List<String> listaPredecessores = new ArrayList<>();
 
         int index_vertice = buscar_vertice(id_vertice);
 
@@ -252,7 +252,7 @@ class MatrizDirecionada {
             }
         }
 
-        return  toArrayChar(listaPredecessores);
+        return listaPredecessores;
     }
 
     /**
@@ -400,10 +400,10 @@ class MatrizDirecionada {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    public boolean isGrafosConexo() {    
-        BreadthFirstSearch bfs = new BreadthFirstSearch(grafo, vertices, isPonderado);
-        return bfs.getIsConexo();
-    } 
+    // public boolean isGrafosConexo() {    
+    //     BreadthFirstSearch bfs = new BreadthFirstSearch(grafo, vertices, isPonderado);
+    //     return bfs.getIsConexo();
+    // } 
 
     /**
      * Verifica se o grafo possui aresta
@@ -426,34 +426,34 @@ class MatrizDirecionada {
      * @param b char (id do vertice a ser analisado)
      * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
      */
-    public Integer calcularCaminhoMinimo(char a, char b) {
-        Dijkstra dijkstra = new Dijkstra(grafo, vertices, isPonderado);
-        return dijkstra.calcularCaminhoMinimo(a, b);
-    }
+    // public Integer calcularCaminhoMinimo(char a, char b) {
+    //     Dijkstra dijkstra = new Dijkstra(grafo, vertices, isPonderado);
+    //     return dijkstra.calcularCaminhoMinimo(a, b);
+    // }
 
     /**
      * Realiza uma busca em largura no grafo
      * @param verticeInicial char (vertice que a busca em largura ira iniciar)
      * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
      */
-    public char[] realizarBuscaLargura(char verticeInicial) {
-        BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices, isPonderado);
-        return toArrayChar(BFS.bfs(verticeInicial));
-    }
+    // public char[] realizarBuscaLargura(char verticeInicial) {
+    //     BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices, isPonderado);
+    //     return toArrayChar(BFS.bfs(verticeInicial));
+    // }
 
     /**
      * Realiza uma busca em profundidade no grafo
      * @param raiz char (vertice que a busca em profundidade irá iniciar)
      * @return objeto da classe DepthFirstSearch caso o vértice raiz exista no grafo, senão retorna null.
      */
-    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
-        if(isNoExist(raiz)) {
-            DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices, isPonderado);
-            DFS.dfs(raiz);
-            return DFS;
-        }
-        return null; 
-    }
+    // public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
+    //     if(isNoExist(raiz)) {
+    //         DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices, isPonderado);
+    //         DFS.dfs(raiz);
+    //         return DFS;
+    //     }
+    //     return null; 
+    // }
 
     /**
      * Imprime a matriz de adjacencia no console
@@ -481,11 +481,11 @@ class MatrizDirecionada {
      * Faz uma ordenacao topologica com os vertices do grafo
      * @return objeto da ordenacao topologica
      */
-    public OrdenacaoTopologica ordenacaoTopologica() {
-        OrdenacaoTopologica ordenacaoTopologica = new OrdenacaoTopologica(grafo, vertices, isPonderado);
-        ordenacaoTopologica.imprimirOrdenacao();
-        return ordenacaoTopologica;
-    }
+    // public OrdenacaoTopologica ordenacaoTopologica() {
+    //     OrdenacaoTopologica ordenacaoTopologica = new OrdenacaoTopologica(grafo, vertices, isPonderado);
+    //     ordenacaoTopologica.imprimirOrdenacao();
+    //     return ordenacaoTopologica;
+    // }
 
     /**
      * Se o Grafo eh poderado

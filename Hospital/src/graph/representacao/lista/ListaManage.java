@@ -2,9 +2,9 @@ package graph.representacao.lista;
 
 import java.util.List;
 
-import graph.AGM.ArvoreGeradoraMinima;
-// import graph.busca.DepthFirstSearch;
-import graph.ordenacao.OrdenacaoTopologica;
+// import graph.AGM.ArvoreGeradoraMinima;
+// // import graph.busca.DepthFirstSearch;
+// import graph.ordenacao.OrdenacaoTopologica;
 
 public class ListaManage {
     private boolean direcionado;
@@ -260,12 +260,12 @@ public class ListaManage {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    public boolean isConexo () {
-        if(direcionado) {
-            return ld.isConexo();
-        }
-        return lnd.isConexo();
-    }
+    // public boolean isConexo () {
+    //     if(direcionado) {
+    //         return ld.isConexo();
+    //     }
+    //     return lnd.isConexo();
+    // }
 
     /**
      * Calcula o caminho minimo entre a os vertices
@@ -273,26 +273,26 @@ public class ListaManage {
      * @param b char (id do vertice a ser analisado)
      * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
      */
-    public Integer calcularCaminhoMinimo(char a, char b) {
-        if (direcionado) {
-            return ld.calcularCaminhoMinimo(a, b);
-        } 
+    // public Integer calcularCaminhoMinimo(char a, char b) {
+    //     if (direcionado) {
+    //         return ld.calcularCaminhoMinimo(a, b);
+    //     } 
 
-        return lnd.calcularCaminhoMinimo(a, b);
-    }
+    //     return lnd.calcularCaminhoMinimo(a, b);
+    // }
     
     /**
      * Realiza uma busca em largura no grafo
      * @param verticeInicial char (vertice que a busca em largura ira iniciar)
      * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
      */
-    public char[] realizarBuscaLargura(char verticeInicial) {
-        if(direcionado) {
-            return ld.realizarBuscaLargura(verticeInicial);
-        }
+    // public char[] realizarBuscaLargura(char verticeInicial) {
+    //     if(direcionado) {
+    //         return ld.realizarBuscaLargura(verticeInicial);
+    //     }
 
-        return lnd.realizarBuscaLargura(verticeInicial);
-    }
+    //     return lnd.realizarBuscaLargura(verticeInicial);
+    // }
 
     /**
      * Realiza uma busca em profundidade no grafo
@@ -310,12 +310,12 @@ public class ListaManage {
      * Encontra a Árvore Geradora Mínima do grafo.
      * @return objeto da classe ArvoreGeradoraMinima no caso do grafo ser não-direcionado, senão retorna null.
      */
-    public ArvoreGeradoraMinima encontrarAGM() {
-        if(direcionado) {
-            return null;
-        }
-        return lnd.encontrarAGM();
-    }
+    // public ArvoreGeradoraMinima encontrarAGM() {
+    //     if(direcionado) {
+    //         return null;
+    //     }
+    //     return lnd.encontrarAGM();
+    // }
 
     /**
      * Imprime o grafo em forma de lista
@@ -388,11 +388,10 @@ public class ListaManage {
      * Faz uma ordenacao topologica com os vertices do grafo
      * @return objeto da ordenacao topologica
      */
-    public OrdenacaoTopologica ordenacaoTopologica(){
-        if(direcionado) {
-            return ld.ordenacaoTopologica();
-        } 
-        return null;
-    }
-
+    // public OrdenacaoTopologica ordenacaoTopologica(){
+    //     if(direcionado) {
+    //         return ld.ordenacaoTopologica();
+    //     } 
+    //     return null;
+    // }
 }

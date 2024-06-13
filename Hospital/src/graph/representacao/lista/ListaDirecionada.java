@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import graph.caminho.Dijkstra;
-import graph.ordenacao.OrdenacaoTopologica;
-import graph.busca.BreadthFirstSearch;
+// import graph.caminho.Dijkstra;
+// import graph.ordenacao.OrdenacaoTopologica;
+// import graph.busca.BreadthFirstSearch;
 // import graph.busca.DepthFirstSearch;
 
 class ListaDirecionada {
@@ -172,23 +172,23 @@ class ListaDirecionada {
      * @param list - lista a ser convertida
      * @return Array de caracteres
      */
-    private char[] toArrayChar(List<Character> list) {
-        // Verifica se a lista existe
-        if(list == null) {
-            return null;
-        }
+    // private char[] toArrayChar(List<Character> list) {
+    //     // Verifica se a lista existe
+    //     if(list == null) {
+    //         return null;
+    //     }
 
-        // Cria um vetor auxiliar para armazenar os valores convertidos
-        char[] vetor = new char[list.size()];
+    //     // Cria um vetor auxiliar para armazenar os valores convertidos
+    //     char[] vetor = new char[list.size()];
         
-        // Conversao dos valores da lista para vetor
-        for(int i = 0; i < list.size(); i++) {
-            vetor[i] = Character.valueOf(list.get(i));
-        }
+    //     // Conversao dos valores da lista para vetor
+    //     for(int i = 0; i < list.size(); i++) {
+    //         vetor[i] = Character.valueOf(list.get(i));
+    //     }
 
-        // Retorno da lista convertida para vetor
-        return vetor;
-    }
+    //     // Retorno da lista convertida para vetor
+    //     return vetor;
+    // }
 
     /**
      * Verifica os predecessores de um vertice
@@ -364,10 +364,10 @@ class ListaDirecionada {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    public boolean isConexo() {    
-        BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
-        return bfs.getIsConexo();
-    } 
+    // public boolean isConexo() {    
+    //     BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
+    //     return bfs.getIsConexo();
+    // } 
 
     /**
      * Verifica se o grafo eh bipartido
@@ -459,20 +459,20 @@ class ListaDirecionada {
      * @param b char (id do vertice a ser analisado)
      * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
      */
-    public Integer calcularCaminhoMinimo(char a, char b) {
-        Dijkstra dijkstra = new Dijkstra(grafo);
-        return dijkstra.calcularCaminhoMinimo(a, b);
-    }
+    // public Integer calcularCaminhoMinimo(char a, char b) {
+    //     Dijkstra dijkstra = new Dijkstra(grafo);
+    //     return dijkstra.calcularCaminhoMinimo(a, b);
+    // }
 
     /**
      * Realiza uma busca em largura no grafo
      * @param verticeInicial char (vertice que a busca em largura ira iniciar)
      * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
      */
-    public char[] realizarBuscaLargura(char verticeInicial) {
-        BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
-        return toArrayChar(BFS.bfs(verticeInicial));
-    }
+    // public char[] realizarBuscaLargura(char verticeInicial) {
+    //     BreadthFirstSearch BFS = new BreadthFirstSearch(grafo);
+    //     return toArrayChar(BFS.bfs(verticeInicial));
+    // }
 
     /**
      * Realiza uma busca em profundidade no grafo
@@ -512,11 +512,11 @@ class ListaDirecionada {
      * Faz uma ordenacao topologica com os vertices do grafo
      * @return objeto da ordenacao topologica
      */
-    public OrdenacaoTopologica ordenacaoTopologica() {
-        OrdenacaoTopologica ordenacaoTopologicaList = new OrdenacaoTopologica(grafo);
-        ordenacaoTopologicaList.imprimirOrdenacaoLista();
-        return ordenacaoTopologicaList;
-    }
+    // public OrdenacaoTopologica ordenacaoTopologica() {
+    //     OrdenacaoTopologica ordenacaoTopologicaList = new OrdenacaoTopologica(grafo);
+    //     ordenacaoTopologicaList.imprimirOrdenacaoLista();
+    //     return ordenacaoTopologicaList;
+    // }
 
     /**
      * Se o Grafo eh poderado

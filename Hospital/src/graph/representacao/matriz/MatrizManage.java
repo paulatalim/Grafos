@@ -1,8 +1,10 @@
 package graph.representacao.matriz;
 
-import graph.AGM.ArvoreGeradoraMinima;
-import graph.busca.DepthFirstSearch;
-import graph.ordenacao.OrdenacaoTopologica;
+import java.util.List;
+
+// import graph.AGM.ArvoreGeradoraMinima;
+// import graph.busca.DepthFirstSearch;
+// import graph.ordenacao.OrdenacaoTopologica;
 
 public class MatrizManage {
     private boolean direcionado;
@@ -71,12 +73,12 @@ public class MatrizManage {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    public boolean isGrafosConexo() {
-        if(direcionado) {
-            return md.isGrafosConexo();
-        }
-        return mnd.isGrafosConexo();
-    }
+    // public boolean isGrafosConexo() {
+    //     if(direcionado) {
+    //         return md.isGrafosConexo();
+    //     }
+    //     return mnd.isGrafosConexo();
+    // }
 
     /**
      * Verifica se um vertice existe
@@ -84,7 +86,7 @@ public class MatrizManage {
      * @param id do vertice a ser verificado
      * @return true, se o vertice existir, false, caso contrario
      */
-    public boolean isVerticeExist(char id) {
+    public boolean isVerticeExist(String id) {
         if(direcionado) {
             return md.isNoExist(id);
         }
@@ -97,7 +99,7 @@ public class MatrizManage {
      * 
      * @param id_vertice a ser inserido
      */
-    public void inserir_vertice(char id_vertice) {
+    public void inserir_vertice(String id_vertice) {
         if(direcionado) {
             md.inserir_vertice(id_vertice);
         } else {
@@ -110,7 +112,7 @@ public class MatrizManage {
      * @param id_vertice
      * @return vetor de inteiros contendo o grau ou os graus do vértice
      */
-    public int[] grau_vertice(char id_vertice) {
+    public int[] grau_vertice(String id_vertice) {
         if(direcionado) {
             return md.grau_vertice(id_vertice);
         }
@@ -134,12 +136,12 @@ public class MatrizManage {
      *
      * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
      */
-    public boolean inserir_aresta(String aresta) {
+    public boolean inserir_aresta(String vertice1, String vertice2) {
         if(direcionado) {
-            return md.inserir_aresta(aresta);
+            return md.inserir_aresta(vertice1, vertice2);
         }
         
-        return mnd.inserir_aresta(aresta);
+        return mnd.inserir_aresta(vertice1, vertice2);
     }
 
     /**
@@ -147,12 +149,12 @@ public class MatrizManage {
      *
      * @param aresta a ser inserida (informe os vertices adjacentes, ex: AB, CD, 12)
      */
-    public boolean inserir_aresta(String aresta, int peso) {
+    public boolean inserir_aresta(String vertice1, String vertice2, int peso) {
         if(direcionado) {
-            return md.inserir_aresta(aresta, peso);
+            return md.inserir_aresta(vertice1, vertice2, peso);
         }
         
-        return mnd.inserir_aresta(aresta, peso);
+        return mnd.inserir_aresta(vertice1, vertice2, peso);
     }
 
     /**
@@ -161,12 +163,12 @@ public class MatrizManage {
      * @param aresta - informada pelo id dos vertices adjacentes
      * @return true, se foi possivel remover, false, se a aresta for invalida
      */
-    public boolean remover_aresta(String aresta) {
+    public boolean remover_aresta(String vertice1, String vertice2) {
         if(direcionado) {
-            return md.remover_aresta(aresta);
+            return md.remover_aresta(vertice1, vertice2);
         }
 
-        return mnd.remover_aresta(aresta);
+        return mnd.remover_aresta(vertice1, vertice2);
     }
 
     /**
@@ -175,12 +177,12 @@ public class MatrizManage {
      * @param newPeso novo peso da aresta
      * @return true, caso encontrar os vertices e haver aresta entre eles, ou false, caso contrario
      */
-    public boolean atualizarPeso(String aresta, int newPeso) {
+    public boolean atualizarPeso(String vertice1, String vertice2, int newPeso) {
         if(direcionado) {
-            return md.atualizarPeso (aresta, newPeso);
+            return md.atualizarPeso(vertice1, vertice2, newPeso);
         }
         
-        return mnd.atualizarPeso (aresta, newPeso);
+        return mnd.atualizarPeso(vertice1, vertice2, newPeso);
     }
     
     /**
@@ -188,7 +190,7 @@ public class MatrizManage {
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices adjacentes ao analisado) ou null (caso o grafo ser direcionado)
      */
-    public char[] verfica_vizinhos(char id_vertice) {
+    public List<String> verfica_vizinhos(String id_vertice) {
         if(direcionado){
             return null;
         } else {
@@ -201,10 +203,9 @@ public class MatrizManage {
      * @param vertice a ser analisado
      * @return vetor de char (vertices sucessores) ou null (caso o grafo nao ser direcionado)
      */
-    public char[] verifica_sucessores(char id_vertice) {
+    public List<String> verifica_sucessores(String id_vertice) {
         if(direcionado){
-            char[] arraySucessores = md.verifica_sucessores(id_vertice);
-            return arraySucessores;
+            return md.verifica_sucessores(id_vertice);
         }
         return null;
     }
@@ -214,10 +215,9 @@ public class MatrizManage {
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices predecessores) ou null (caso o grafo nao ser direcionado)
      */
-    public char[] verifica_predecessores(char id_vertice) {
+    public List<String> verifica_predecessores(String id_vertice) {
         if(direcionado){
-            char[] arrayPredecessores = md.verifica_predecessores(id_vertice);
-            return arrayPredecessores;
+            return md.verifica_predecessores(id_vertice);
         }
         
         return null;
@@ -229,61 +229,61 @@ public class MatrizManage {
      * @param b char (id do vertice a ser analisado)
      * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
      */
-    public Integer calcularCaminhoMinimo(char a, char b) {
-        if (direcionado) {
-            return md.calcularCaminhoMinimo(a, b);
-        } 
+    // public Integer calcularCaminhoMinimo(char a, char b) {
+    //     if (direcionado) {
+    //         return md.calcularCaminhoMinimo(a, b);
+    //     } 
 
-        return mnd.calcularCaminhoMinimo(a, b);
-    }
+    //     return mnd.calcularCaminhoMinimo(a, b);
+    // }
 
     /**
      * Realiza uma busca em largura no grafo
      * @param verticeInicial char (vertice que a busca em largura ira iniciar)
      * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
      */
-    public char[] realizarBuscaLargura(char verticeInicial) {
-        if(direcionado) {
-            return md.realizarBuscaLargura(verticeInicial);
-        }
-        return mnd.realizarBuscaLargura(verticeInicial);
-    }
+    // public char[] realizarBuscaLargura(char verticeInicial) {
+    //     if(direcionado) {
+    //         return md.realizarBuscaLargura(verticeInicial);
+    //     }
+    //     return mnd.realizarBuscaLargura(verticeInicial);
+    // }
 
     /**
      * Realiza uma busca em profundidade no grafo
      * @param raiz char (vertice que a busca em profundidade irá iniciar)
      * @return objeto da classe DepthFirstSearch
      */
-    public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
-        if(direcionado) {
-            return md.realizarBuscaProfundidade(raiz);
-        }
-        return mnd.realizarBuscaProfundidade(raiz);
-    }
+    // public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
+    //     if(direcionado) {
+    //         return md.realizarBuscaProfundidade(raiz);
+    //     }
+    //     return mnd.realizarBuscaProfundidade(raiz);
+    // }
 
     /**
      * Encontra a Árvore Geradora Mínima do grafo.
      * @return objeto da classe ArvoreGeradoraMinima no caso do grafo ser não-direcionado, senão retorna null.
      */
-    public ArvoreGeradoraMinima encontrarAGM() {
-        if(direcionado) {
-            return null;
-        }
-        return mnd.encontrarAGM();
-    }
+    // public ArvoreGeradoraMinima encontrarAGM() {
+    //     if(direcionado) {
+    //         return null;
+    //     }
+    //     return mnd.encontrarAGM();
+    // }
     
     /**
      * Faz uma ordenacao topologica com os vertices do grafo
      * @return objeto da ordenacao topologica
      */
-    public OrdenacaoTopologica ordenacaoTopologica() {
-        if(direcionado){
-            OrdenacaoTopologica ordenacao = md.ordenacaoTopologica();
-            return ordenacao;
-        }
+    // public OrdenacaoTopologica ordenacaoTopologica() {
+    //     if(direcionado){
+    //         OrdenacaoTopologica ordenacao = md.ordenacaoTopologica();
+    //         return ordenacao;
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 
     /**
      * Imprime o grafo em forma de matriz
