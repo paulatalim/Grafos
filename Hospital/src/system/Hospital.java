@@ -17,7 +17,7 @@ public class Hospital {
     ArrayList<Integer> S;
     ArrayList<String> DoctorName;
     
-    Hospital() {
+    public Hospital() {
         // Criacao de grafo
         grafoLista = new ListaManage();
         grafoMatriz = new MatrizManage();
@@ -45,6 +45,8 @@ public class Hospital {
     }
 
     public void addHoliday(String name, Integer days) {
+        if(HolidayName.contains(name)) return;
+
         grafoLista.inserir_vertice("D" + D.size());
         grafoMatriz.inserir_vertice("D" + D.size());
         
@@ -56,6 +58,8 @@ public class Hospital {
     }
 
     public void addDoctor(String name) {
+        if(DoctorName.contains(name) || c != -1) return;
+
         grafoLista.inserir_vertice("S" + S.size());
         grafoMatriz.inserir_vertice("S" + S.size());
 
@@ -73,10 +77,13 @@ public class Hospital {
      * @return true, se conseguir adicionar a disponilidade, false, caso contrario
      */
     public boolean addDoctorAvailability(String nameDoctor, String nameHoliday) {
-        if(!DoctorName.contains(nameDoctor) || !HolidayName.contains(nameHoliday)) {
-            return false;
-        }
+        // Valida os parametros
+        if(!DoctorName.contains(nameDoctor) || !HolidayName.contains(nameHoliday)) return false;
 
+        // Verifica se excedeu o limite
+        if(grafoMatriz.verifica_sucessores(nameDoctor).size() >= c) return false;
+
+        // Adiciona a aresta
         grafoLista.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
         grafoMatriz.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
 
@@ -85,6 +92,30 @@ public class Hospital {
 
     public void verificarAtribuicaoMedicos() {
         // TODO chama o algoritmo de fluxo
+    }
+
+    public String HolidayListToString() {
+        if(HolidayName.isEmpty()) return null;
+
+        String str = "";
+
+        for (int i = 0; i < HolidayName.size(); i++) {
+            str += "\t- " + HolidayName.get(i) + "\n";
+        }
+
+        return str;
+    }
+
+    public String DoctorsListToString() {
+        if(DoctorName.isEmpty()) return null;
+
+        String str = "";
+
+        for (int i = 0; i < DoctorName.size(); i++) {
+            str += "\t- " + DoctorName.get(i) + "\n";
+        }
+
+        return str;
     }
 
     public int getC() {
