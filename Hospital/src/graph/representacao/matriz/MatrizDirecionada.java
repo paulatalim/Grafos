@@ -18,18 +18,46 @@ class MatrizDirecionada {
      */
     private void initMatriz() {
         int tamanho = vertices.size();
-        this.grafo = new Integer[tamanho][tamanho];
 
-        if(!isPonderado) {
-            for(int i = 0; i < tamanho; i++) {
-                for(int j = 0; j < tamanho; j++) {
-                    this.grafo[i][j] = 0;
+        if(this.grafo == null) {
+            this.grafo = new Integer[tamanho][tamanho];
+            
+            if(!isPonderado) {
+                for(int i = 0; i < tamanho; i++) {
+                    for(int j = 0; j < tamanho; j++) {
+                        this.grafo[i][j] = 0;
+                    }
+                }
+            } else {
+                for(int i = 0; i < tamanho; i++) {
+                    for(int j = 0; j < tamanho; j++) {
+                        this.grafo[i][j] = null;
+                    }
                 }
             }
         } else {
-            for(int i = 0; i < tamanho; i++) {
-                for(int j = 0; j < tamanho; j++) {
-                    this.grafo[i][j] = null;
+            Integer[][] grafo_aux = this.grafo.clone();
+            this.grafo = new Integer[tamanho][tamanho];
+            
+            if(!isPonderado) {
+                for(int i = 0; i < tamanho; i++) {
+                    for(int j = 0; j < tamanho; j++) {
+                        if(i < grafo_aux.length && j < grafo_aux.length) {
+                            this.grafo[i][j] = grafo_aux[i][j];
+                        } else {
+                            this.grafo[i][j] = 0;
+                        }
+                    }
+                }
+            } else {
+                for(int i = 0; i < tamanho; i++) {
+                    for(int j = 0; j < tamanho; j++) {
+                        if(i < grafo_aux.length && j < grafo_aux.length) {
+                            this.grafo[i][j] = grafo_aux[i][j];
+                        } else {
+                            this.grafo[i][j] = null;
+                        }
+                    }
                 }
             }
         }
@@ -80,8 +108,8 @@ class MatrizDirecionada {
         // Verifica se o vertice ja existe
         if(!isNoExist(id_vertice)) {
            // Adiciona o vertice a lista
-           if(!id_vertice.equals('0')) vertices.add(id_vertice);
-           else initMatriz();
+           vertices.add(id_vertice);
+           initMatriz();
         }
     }
 
