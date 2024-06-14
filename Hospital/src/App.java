@@ -19,10 +19,14 @@ import system.Hospital;
  */
 public class App {
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        Hospital hospital = new Hospital();
         boolean opcao_invalida;
         int opcao;
+        int resposta_int;
+        String resposta_str_1;
+        // String resposta_str_2;
+        
+        Scanner scanner = new Scanner(System.in);
+        Hospital hospital = new Hospital();
 
         // Repete o programa
         do {
@@ -40,7 +44,7 @@ public class App {
                 if(hospital.getC() == -1) UI.println("\t" + "2 - Cadastrar disponibilidade de dias dos médicos plantonistas");
                 else UI.println("\t" + "2 - Cadastrar médico");
                 if(hospital.HolidayListToString() != null) UI.println("\t" + "3 - Exibir feriados");
-                if(hospital.DoctorsListToString() != null) UI.println("\t" + "4 - Exibir lista de médico plantonistas");
+                if(hospital.DoctorsListToString() != null) UI.println("\t" + "4 - Exibir lista de médicos cadastrados");
                 if(hospital.HolidayListToString() != null && hospital.DoctorsListToString() != null) {
                     UI.println("\t" + "5 - Inserir disponibilidade para plantão");
                     UI.println("\t" + "6 - Gerar Relatorio de Plantão");
@@ -66,28 +70,60 @@ public class App {
             switch (opcao) {
                 case 1:
                     // Cadastrar feriado
-                    hospital.addHoliday("Carnaval", 4);
+
+                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** FERIADOS ***   \n\n");
+                    UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome e a duração do feriado\n");
+
+                    // Entrada do nome do feriado
+                    UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
+                    resposta_str_1 = scanner.next();
+                    UI.println("");
+
+                    // Entrada da duracao do feriado
+                    UI.print(UI.CYAN + "\tDuração: " + UI.WHITE);
+                    resposta_int = scanner.nextInt();
+                    UI.println("");
+
+                    // Adiciona o feriado
+                    hospital.addHoliday(resposta_str_1, resposta_int);
                     break;
                 
                 case 2:
                     if(hospital.getC() == -1) {
                         // Cadastrar disponibilidade de dias dos médicos plantonistas
-                        hospital.setC(5);
+                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** FERIADOS ***   \n\n");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira a quantidade de dias máximos de plantão que um médico pode fazer\n");
+                        
+                        // Entrada da quantidade maxima de dias de plantao
+                        UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
+                        resposta_int = scanner.nextInt();
+
+                        // Configura a quantidade maxima de dias de plantao
+                        hospital.setC(resposta_int);
                     } else {
                         // Cadastrar médico
-                        hospital.addDoctor("Natalia");
+                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CADASTRO DE MÉDICO ***   \n\n");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome do médico a seguir\n");
+
+                        // Entrada do nome do feriado
+                        UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
+                        resposta_str_1 = scanner.next();
+
+                        hospital.addDoctor(resposta_str_1);
                     }
 
                     break;
                 
                 case 3:
                     // Exibir feriados
-                    UI.print(hospital.HolidayListToString());
+                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** LISTA DE FERIADOS ***   \n\n");
+                    UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + hospital.HolidayListToString());
                     break;
                 
                 case 4:
                     // Exibir lista de médico plantonistas
-                    UI.print(hospital.DoctorsListToString());
+                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** LISTA DE MÉDICOS ***   \n\n");
+                    UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + hospital.DoctorsListToString());
                     break;
                 
                 case 5:
