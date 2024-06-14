@@ -58,7 +58,7 @@ public class Hospital {
     }
 
     public void addDoctor(String name) {
-        if(DoctorName.contains(name) || c != -1) return;
+        if(DoctorName.contains(name) || c == -1) return;
 
         grafoLista.inserir_vertice("S" + S.size());
         grafoMatriz.inserir_vertice("S" + S.size());
