@@ -23,7 +23,7 @@ public class App {
         int opcao;
         int resposta_int;
         String resposta_str_1;
-        // String resposta_str_2;
+        String resposta_str_2;
         
         Scanner scanner = new Scanner(System.in);
         Hospital hospital = new Hospital();
@@ -72,7 +72,7 @@ public class App {
                     // Cadastrar feriado
 
                     UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** FERIADOS ***   \n\n");
-                    UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome e a duração do feriado\n");
+                    UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome e a duração, em dias, do feriado\n");
 
                     // Entrada do nome do feriado
                     UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
@@ -127,6 +127,21 @@ public class App {
                     break;
                 
                 case 5:
+                    // disponibilidade para plantão
+                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISPONIBILIDADE DE PLANTÃO ***   \n\n");
+
+                    UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o feriado e o médico que irá fazer plantão.\n");
+
+                    // Entrada do nome do feriado
+                    UI.print(UI.CYAN + "\tFeriado: " + UI.WHITE);
+                    resposta_str_1 = scanner.next();
+
+                    // Entrada do nome do medico
+                    UI.print(UI.CYAN + "\tMédico: " + UI.WHITE);
+                    resposta_str_2 = scanner.next();
+
+                    // Adicao da disponibilidade
+                    hospital.addDoctorAvailability(resposta_str_2, resposta_str_1);
                     break;
                 
                 case 6:

@@ -81,7 +81,7 @@ public class Hospital {
         if(!DoctorName.contains(nameDoctor) || !HolidayName.contains(nameHoliday)) return false;
 
         // Verifica se excedeu o limite
-        if(grafoMatriz.verifica_sucessores(nameDoctor).size() >= c) return false;
+        if(grafoMatriz.verifica_sucessores("S" + DoctorName.indexOf(nameDoctor)).size() >= c) return false;
 
         // Adiciona a aresta
         grafoLista.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
