@@ -80,7 +80,7 @@ class MatrizNaoDirecionada {
         // Verifica se o vertice ja existe
         if(!isNoExist(id_vertice)) {
            // Adiciona o vertice a lista
-           if(!id_vertice.equals('0')) vertices.add(id_vertice);
+           if(!id_vertice.equals("0")) vertices.add(id_vertice);
            else initMatriz();
         }
     }

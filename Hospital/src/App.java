@@ -47,12 +47,12 @@ public class App {
                 if(hospital.DoctorsListToString() != null) UI.println("\t" + "4 - Exibir lista de médicos cadastrados");
                 if(hospital.HolidayListToString() != null && hospital.DoctorsListToString() != null) {
                     UI.println("\t" + "5 - Inserir disponibilidade para plantão");
-                    UI.println("\t" + "6 - Gerar Relatorio de Plantão");
+                    UI.println("\t" + "6 - Gerar Relatório de Plantão");
                 }
                 UI.println("\t" + "0 - SAIR" + "\n");
 
                 if (opcao_invalida) {
-                    UI.println(UI.RED + "\t" + "Opcao inválida. Tente novavemente." + "\n");
+                    UI.println(UI.RED + "\t" + "Opção inválida. Tente novavemente." + "\n");
                 }
                 UI.print(UI.CYAN + "\t" + "Insira o número da operação: " + UI.WHITE);
                 opcao = scanner.nextInt();
