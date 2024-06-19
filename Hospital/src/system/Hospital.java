@@ -10,11 +10,11 @@ import graph.representacao.matriz.MatrizManage;
 public class Hospital {
     ListaManage grafoLista = new ListaManage();
     MatrizManage grafoMatriz = new MatrizManage();
-    ArrayList<Integer> D;
+    // ArrayList<Integer> D;
     ArrayList<String> HolidayName;
     int c;
 
-    ArrayList<Integer> S;
+    // ArrayList<Integer> S;
     ArrayList<String> DoctorName;
     
     public Hospital() {
@@ -37,9 +37,9 @@ public class Hospital {
         grafoMatriz.inserir_vertice("U");
 
         // Inicializa variaveis
-        D = new ArrayList<Integer>();
+        // D = new ArrayList<Integer>();
         HolidayName = new ArrayList<>();
-        S = new ArrayList<>();
+        // S = new ArrayList<>();
         DoctorName = new ArrayList<>();
         c = -1;
     }
@@ -47,26 +47,26 @@ public class Hospital {
     public void addHoliday(String name, Integer days) {
         if(HolidayName.contains(name)) return;
 
-        grafoLista.inserir_vertice("D" + D.size());
-        grafoMatriz.inserir_vertice("D" + D.size());
+        grafoLista.inserir_vertice("D" + HolidayName.size());
+        grafoMatriz.inserir_vertice("D" + HolidayName.size());
         
-        grafoLista.inserir_aresta("D" + D.size(),"U", days);
-        grafoMatriz.inserir_aresta("D" + D.size(),"U", days);
+        grafoLista.inserir_aresta("D" + HolidayName.size(),"U", days);
+        grafoMatriz.inserir_aresta("D" + HolidayName.size(),"U", days);
 
-        D.add(days);
+        // D.add(days);
         HolidayName.add(name);
     }
 
     public void addDoctor(String name) {
         if(DoctorName.contains(name) || c == -1) return;
 
-        grafoLista.inserir_vertice("S" + S.size());
-        grafoMatriz.inserir_vertice("S" + S.size());
+        grafoLista.inserir_vertice("S" + DoctorName.size());
+        grafoMatriz.inserir_vertice("S" + DoctorName.size());
 
-        grafoLista.inserir_aresta("S", "S" + S.size(), c);
-        grafoMatriz.inserir_aresta("S", "S" + S.size(), c);
+        grafoLista.inserir_aresta("S", "S" + DoctorName.size(), c);
+        grafoMatriz.inserir_aresta("S", "S" + DoctorName.size(), c);
 
-        S.add(1);
+        // S.add(1);
         DoctorName.add(name);
     }
 
