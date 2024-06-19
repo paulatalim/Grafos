@@ -73,19 +73,31 @@ public class App {
 
                     UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** FERIADOS ***   \n\n");
                     UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome e a duração, em dias, do feriado\n");
+                    UI.println("\tDigite \"0\" para interromper a leitura\n");
 
-                    // Entrada do nome do feriado
-                    UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
-                    resposta_str_1 = scanner.next();
-                    UI.println("");
+                    resposta_int = 0;
 
-                    // Entrada da duracao do feriado
-                    UI.print(UI.CYAN + "\tDuração: " + UI.WHITE);
-                    resposta_int = scanner.nextInt();
-                    UI.println("");
+                    do {
+                        // Entrada do nome do feriado
+                        UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
+                        resposta_str_1 = scanner.next();
+                        
+                        if(!resposta_str_1.equals("0")) {
+
+                            // Entrada da duracao do feriado
+                            UI.print(UI.CYAN + "\tDuração: " + UI.WHITE);
+                            resposta_int = scanner.nextInt();
+                            UI.println("");
+                        
+                            // Adiona registro de feriado
+                            if(resposta_int != 0) {
+                                hospital.addHoliday(resposta_str_1, resposta_int);
+                            }
+                        }
+
+                    } while (!resposta_str_1.equals("0") && resposta_int != 0);
 
                     // Adiciona o feriado
-                    hospital.addHoliday(resposta_str_1, resposta_int);
                     break;
                 
                 case 2:
@@ -102,14 +114,26 @@ public class App {
                         hospital.setC(resposta_int);
                     } else {
                         // Cadastrar médico
-                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CADASTRO DE MÉDICO ***   \n\n");
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome do médico a seguir\n");
+                        do {
+                            UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CADASTRO DE MÉDICOS ***   \n\n");
+                            UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome dos médicos a seguir para cadastra-los\n");
+                            UI.println("\tDigite \"0\" para interromper a leitura\n");
 
-                        // Entrada do nome do feriado
-                        UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
-                        resposta_str_1 = scanner.next();
+                            if(hospital.DoctorsListToString() != null) {
+                                UI.println(UI.WHITE + "\tMédicos cadastrados:\n");
+                                UI.println(hospital.DoctorsListToString() + "\n");
+                            }
 
-                        hospital.addDoctor(resposta_str_1);
+                            // Entrada do nome do feriado
+                            UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
+                            resposta_str_1 = scanner.next();
+                            
+                            if(!resposta_str_1.equals("0")) {
+                                hospital.addDoctor(resposta_str_1);
+                                UI.limpar_console();
+                            }
+
+                        } while (!resposta_str_1.equals("0"));
                     }
 
                     break;
