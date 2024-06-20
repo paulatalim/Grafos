@@ -6,10 +6,12 @@ import graph.representacao.lista.ListaManage;
 import graph.representacao.matriz.MatrizManage;
 
 public class Hospital {
-    ListaManage grafoLista = new ListaManage();
+    //ListaManage grafoLista = new ListaManage();
     MatrizManage grafoMatriz = new MatrizManage();
     ArrayList<String> HolidayName;
+    ArrayList<Integer> D;
     ArrayList<String> DoctorName;
+    ArrayList<Integer> S;
 
     private boolean isStringValida(String str) {
         for(char c : str.toCharArray()) {
@@ -23,26 +25,28 @@ public class Hospital {
     
     public Hospital() {
         // Criacao de grafo
-        grafoLista = new ListaManage();
+        //grafoLista = new ListaManage();
         grafoMatriz = new MatrizManage();
 
         // Configuracao para o grafo direcionado
-        grafoLista.setIsDirecionado(true);
+        //grafoLista.setIsDirecionado(true);
         grafoMatriz.setIsDirecionado(true);
 
         // Configuracao para grafo ponderado
-        grafoLista.setIsPonderado(true);
+        //grafoLista.setIsPonderado(true);
         grafoMatriz.setIsPonderado(true);
 
         // Adicao de conjuntos
-        grafoLista.inserir_vertice("S");
-        grafoLista.inserir_vertice("U");
+        // grafoLista.inserir_vertice("S");
+        // grafoLista.inserir_vertice("U");
         grafoMatriz.inserir_vertice("S");
         grafoMatriz.inserir_vertice("U");
 
         // Inicializa variaveis
         HolidayName = new ArrayList<>();
         DoctorName = new ArrayList<>();
+        D = new ArrayList<>();
+        S = new ArrayList<>();
     }
 
     public void addHoliday(String name, Integer days) {
@@ -50,12 +54,13 @@ public class Hospital {
         if(HolidayName.contains(name) || name == "" || !isStringValida(name)) return;
 
         // Adiciona o vertice
-        grafoLista.inserir_vertice("D" + HolidayName.size());
+        //grafoLista.inserir_vertice("D" + HolidayName.size());
         grafoMatriz.inserir_vertice("D" + HolidayName.size());
         
         // Adiciona a aresta
-        grafoLista.inserir_aresta("D" + HolidayName.size(),"U", days);
-        grafoMatriz.inserir_aresta("D" + HolidayName.size(),"U", days);
+        //grafoLista.inserir_aresta("D" + HolidayName.size(),"U", days);
+        grafoMatriz.inserir_aresta("D" + HolidayName.size(),"U", 0);
+        D.add(days);
 
         // Adiciona o nome a lista
         HolidayName.add(name);
@@ -66,12 +71,13 @@ public class Hospital {
         if(DoctorName.contains(name) || name == "" || !isStringValida(name)) return;
 
         // Adiciona o vertice
-        grafoLista.inserir_vertice("S" + DoctorName.size());
+        //grafoLista.inserir_vertice("S" + DoctorName.size());
         grafoMatriz.inserir_vertice("S" + DoctorName.size());
 
         // Adiciona a aresta
-        grafoLista.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
-        grafoMatriz.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
+        //grafoLista.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
+        grafoMatriz.inserir_aresta("S", "S" + DoctorName.size(), 0);
+        S.add(disponibilidade);
 
         // Adiciona o nome a lista
         DoctorName.add(name);
@@ -91,14 +97,15 @@ public class Hospital {
         // if(grafoMatriz.verifica_sucessores("S" + DoctorName.indexOf(nameDoctor)).size() >= c) return false;
 
         // Adiciona a aresta
-        grafoLista.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
-        grafoMatriz.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
+        //grafoLista.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
+        grafoMatriz.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 0);
 
         return true;        
     }
 
     public void verificarAtribuicaoMedicos() {
-        // TODO chama o algoritmo de fluxo
+        // TODO CORRIGIR O CHEQUE DE CONEXO.
+        //if(!grafoMatriz.isGrafosConexo()) return;
     }
 
     public String HolidayListToString() {
