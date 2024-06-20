@@ -105,9 +105,38 @@ public class Hospital {
         return true;        
     }
 
-    public void verificarAtribuicaoMedicos() {
-        // TODO CORRIGIR O CHEQUE DE CONEXO.
-        //if(!grafoMatriz.isGrafosConexo()) return;
+    public MatrizManage gerarRedeResidual() {
+        // Inicializando matriz da rede.
+        MatrizManage redeResidual = new MatrizManage();
+        redeResidual.setIsDirecionado(true);
+        redeResidual.setIsPonderado(true);
+
+        Integer[][] matriz = grafoMatriz.getGrafo();
+        ArrayList<String> vertices = grafoMatriz.getVertices();
+
+        // Adição do vértices.
+        for(int i = 0; i < vertices.size(); i++) {
+            redeResidual.inserir_vertice(vertices.get(i));
+        }
+
+        // Adição das capacidades máximas de cada médico.
+        for(int i = 0; i < S.size(); i++) {
+            redeResidual.inserir_aresta("S", "S" + i, S.get(i));
+        }
+
+        // Adição das durações de cada feriado.
+        for(int i = 0; i < D.size(); i++) {
+            redeResidual.inserir_aresta("D" + i, "U", D.get(i));
+        }
+
+        return redeResidual;
+    }
+
+    public void verificarAtribuicaoMedicos() throws Exception{
+        if(!grafoMatriz.isGrafosConexo()) return;
+
+        MatrizManage fluxoViavel = (MatrizManage)grafoMatriz.clone();
+        MatrizManage redeResidual = gerarRedeResidual();
     }
 
     public String HolidayListToString() {

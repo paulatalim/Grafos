@@ -538,4 +538,11 @@ class MatrizDirecionada {
     public Integer[][] getGrafo() {
         return grafo;
     }
+
+    /**
+     * @return ArrayList<String> return dos vertices
+     */
+    public ArrayList<String> getVertices() {
+        return vertices;
+    }
 }

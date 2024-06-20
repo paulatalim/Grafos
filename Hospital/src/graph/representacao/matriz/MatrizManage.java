@@ -1,12 +1,13 @@
 package graph.representacao.matriz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // import graph.AGM.ArvoreGeradoraMinima;
 // import graph.busca.DepthFirstSearch;
 // import graph.ordenacao.OrdenacaoTopologica;
 
-public class MatrizManage {
+public class MatrizManage extends Object implements Cloneable{
     private boolean direcionado;
     private boolean ponderado;
     private MatrizDirecionada md;
@@ -339,5 +340,20 @@ public class MatrizManage {
      */
     public boolean isPonderado() {
         return ponderado;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public ArrayList<String> getVertices() {
+        if(direcionado) return md.getVertices();
+        return mnd.getVertices();
+    }
+
+    public Integer[][] getGrafo() {
+        if(direcionado) return md.getGrafo();
+        return mnd.getGrafo();
     }
 }
