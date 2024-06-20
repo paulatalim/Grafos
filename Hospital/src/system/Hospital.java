@@ -2,20 +2,24 @@ package system;
 
 import java.util.ArrayList;
 
-// import graph.AGM.ArvoreGeradoraMinima;
-// import graph.busca.DepthFirstSearch;
 import graph.representacao.lista.ListaManage;
 import graph.representacao.matriz.MatrizManage;
 
 public class Hospital {
     ListaManage grafoLista = new ListaManage();
     MatrizManage grafoMatriz = new MatrizManage();
-    ArrayList<Integer> D;
     ArrayList<String> HolidayName;
-    int c;
-
-    ArrayList<Integer> S;
     ArrayList<String> DoctorName;
+
+    private boolean isStringValida(String str) {
+        for(char c : str.toCharArray()) {
+            if(!Character.isDigit(c) && !Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
     
     public Hospital() {
         // Criacao de grafo
@@ -37,36 +41,39 @@ public class Hospital {
         grafoMatriz.inserir_vertice("U");
 
         // Inicializa variaveis
-        D = new ArrayList<Integer>();
         HolidayName = new ArrayList<>();
-        S = new ArrayList<>();
         DoctorName = new ArrayList<>();
-        c = -1;
     }
 
     public void addHoliday(String name, Integer days) {
-        if(HolidayName.contains(name)) return;
+        // Validacao dao nome do feriado
+        if(HolidayName.contains(name) || name == "" || !isStringValida(name)) return;
 
-        grafoLista.inserir_vertice("D" + D.size());
-        grafoMatriz.inserir_vertice("D" + D.size());
+        // Adiciona o vertice
+        grafoLista.inserir_vertice("D" + HolidayName.size());
+        grafoMatriz.inserir_vertice("D" + HolidayName.size());
         
-        grafoLista.inserir_aresta("D" + D.size(),"U", days);
-        grafoMatriz.inserir_aresta("D" + D.size(),"U", days);
+        // Adiciona a aresta
+        grafoLista.inserir_aresta("D" + HolidayName.size(),"U", days);
+        grafoMatriz.inserir_aresta("D" + HolidayName.size(),"U", days);
 
-        D.add(days);
+        // Adiciona o nome a lista
         HolidayName.add(name);
     }
 
-    public void addDoctor(String name) {
-        if(DoctorName.contains(name) || c == -1) return;
+    public void addDoctor(String name, int disponibilidade) {
+        // Validacao do nome do medico
+        if(DoctorName.contains(name) || name == "" || !isStringValida(name)) return;
 
-        grafoLista.inserir_vertice("S" + S.size());
-        grafoMatriz.inserir_vertice("S" + S.size());
+        // Adiciona o vertice
+        grafoLista.inserir_vertice("S" + DoctorName.size());
+        grafoMatriz.inserir_vertice("S" + DoctorName.size());
 
-        grafoLista.inserir_aresta("S", "S" + S.size(), c);
-        grafoMatriz.inserir_aresta("S", "S" + S.size(), c);
+        // Adiciona a aresta
+        grafoLista.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
+        grafoMatriz.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
 
-        S.add(1);
+        // Adiciona o nome a lista
         DoctorName.add(name);
     }
 
@@ -81,7 +88,7 @@ public class Hospital {
         if(!DoctorName.contains(nameDoctor) || !HolidayName.contains(nameHoliday)) return false;
 
         // Verifica se excedeu o limite
-        if(grafoMatriz.verifica_sucessores(nameDoctor).size() >= c) return false;
+        // if(grafoMatriz.verifica_sucessores("S" + DoctorName.indexOf(nameDoctor)).size() >= c) return false;
 
         // Adiciona a aresta
         grafoLista.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
@@ -117,13 +124,4 @@ public class Hospital {
 
         return str;
     }
-
-    public int getC() {
-        return c;
-    }
-
-    public void setC(int c) {
-        this.c = c;
-    }
-
 }

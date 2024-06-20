@@ -23,7 +23,7 @@ public class App {
         int opcao;
         int resposta_int;
         String resposta_str_1;
-        // String resposta_str_2;
+        String resposta_str_2;
         
         Scanner scanner = new Scanner(System.in);
         Hospital hospital = new Hospital();
@@ -41,10 +41,10 @@ public class App {
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "O que deseja fazer" + "\n\n");
 
                 UI.println("\t" + "1 - Cadastrar feriado");
-                if(hospital.getC() == -1) UI.println("\t" + "2 - Cadastrar disponibilidade de dias dos médicos plantonistas");
-                else UI.println("\t" + "2 - Cadastrar médico");
+                // if(hospital.getC() == -1) UI.println("\t" + "2 - Cadastrar disponibilidade de dias dos médicos plantonistas");
+                UI.println("\t" + "2 - Cadastrar médico");
                 if(hospital.HolidayListToString() != null) UI.println("\t" + "3 - Exibir feriados");
-                if(hospital.DoctorsListToString() != null) UI.println("\t" + "4 - Exibir lista de médicos cadastrados");
+                if(hospital.DoctorsListToString() != null) UI.println("\t" + "4 - Exibir médicos cadastrados");
                 if(hospital.HolidayListToString() != null && hospital.DoctorsListToString() != null) {
                     UI.println("\t" + "5 - Inserir disponibilidade para plantão");
                     UI.println("\t" + "6 - Gerar Relatório de Plantão");
@@ -58,8 +58,7 @@ public class App {
                 opcao = scanner.nextInt();
                 UI.limpar_console();
 
-                if((hospital.getC() == -1 && opcao >= 5)
-                || (hospital.DoctorsListToString() == null && (opcao == 4)) 
+                if((hospital.DoctorsListToString() == null && (opcao == 4)) 
                 || (hospital.HolidayListToString() == null && (opcao == 3 || opcao >= 6))) {
                     opcao_invalida = true;
                 }
@@ -70,48 +69,65 @@ public class App {
             switch (opcao) {
                 case 1:
                     // Cadastrar feriado
-
-                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** FERIADOS ***   \n\n");
-                    UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome e a duração do feriado\n");
-
-                    // Entrada do nome do feriado
-                    UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
-                    resposta_str_1 = scanner.next();
-                    UI.println("");
-
-                    // Entrada da duracao do feriado
-                    UI.print(UI.CYAN + "\tDuração: " + UI.WHITE);
-                    resposta_int = scanner.nextInt();
-                    UI.println("");
-
-                    // Adiciona o feriado
-                    hospital.addHoliday(resposta_str_1, resposta_int);
-                    break;
-                
-                case 2:
-                    if(hospital.getC() == -1) {
-                        // Cadastrar disponibilidade de dias dos médicos plantonistas
+                    do {
                         UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** FERIADOS ***   \n\n");
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira a quantidade de dias máximos de plantão que um médico pode fazer\n");
-                        
-                        // Entrada da quantidade maxima de dias de plantao
-                        UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
-                        resposta_int = scanner.nextInt();
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome e a duração, em dias, do feriado\n");
+                        UI.println("\tDigite \"0\" para interromper a leitura\n");
+    
+                        resposta_int = 0;
 
-                        // Configura a quantidade maxima de dias de plantao
-                        hospital.setC(resposta_int);
-                    } else {
-                        // Cadastrar médico
-                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CADASTRO DE MÉDICO ***   \n\n");
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome do médico a seguir\n");
+                        // Exibe medicos cadastrados
+                        if(hospital.HolidayListToString() != null) {
+                            UI.println(UI.WHITE + "\tFeriados:\n");
+                            UI.println(hospital.HolidayListToString() + "\n");
+                        }
 
                         // Entrada do nome do feriado
                         UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
-                        resposta_str_1 = scanner.next();
+                        scanner.nextLine();
+                        resposta_str_1 = scanner.nextLine();
+                        
+                        if(!resposta_str_1.equals("0")) {
+                            // Entrada da duracao do feriado
+                            UI.print(UI.CYAN + "\tDuração: " + UI.WHITE);
+                            resposta_int = scanner.nextInt();
+                            UI.println("");
+                        
+                            // Adiciona registro de feriado
+                            hospital.addHoliday(resposta_str_1, resposta_int);
+                            UI.limpar_console();
+                        }
+                    } while (!resposta_str_1.equals("0"));
+                    break;
+                
+                case 2:
+                    // Cadastrar médico
+                    do {
+                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CADASTRO DE MÉDICOS ***   \n\n");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome dos médicos e sua disponibilidade, em dias, para plantão, a seguir\n");
+                        UI.println("\tDigite \"0\" para interromper a leitura\n");
 
-                        hospital.addDoctor(resposta_str_1);
-                    }
+                        // Exibe medicos cadastrados
+                        if(hospital.DoctorsListToString() != null) {
+                            UI.println(UI.WHITE + "\tMédicos cadastrados:\n");
+                            UI.println(hospital.DoctorsListToString() + "\n");
+                        }
 
+                        // Entrada do nome do medico
+                        UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
+                        scanner.nextLine();
+                        resposta_str_1 = scanner.nextLine();
+
+                        if(!resposta_str_1.equals("0")) {
+                            // Entrada da disponibilidade do medico
+                            UI.print(UI.CYAN + "\tDisponibilidade: " + UI.WHITE);
+                            resposta_int = scanner.nextInt();
+
+                            // Adiona o registro
+                            hospital.addDoctor(resposta_str_1, resposta_int);
+                            UI.limpar_console();
+                        }
+                    } while (!resposta_str_1.equals("0"));
                     break;
                 
                 case 3:
@@ -127,6 +143,23 @@ public class App {
                     break;
                 
                 case 5:
+                    // disponibilidade para plantão
+                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISPONIBILIDADE DE PLANTÃO ***   \n\n");
+
+                    UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o feriado e o médico que irá fazer plantão.\n");
+
+                    // Entrada do nome do feriado
+                    UI.print(UI.CYAN + "\tFeriado: " + UI.WHITE);
+                    resposta_str_1 = scanner.next();
+
+                    // Entrada do nome do medico
+                    UI.print(UI.CYAN + "\tMédico: " + UI.WHITE);
+                    resposta_str_2 = scanner.next();
+
+                    // Adicao da disponibilidade
+                    if(!(hospital.addDoctorAvailability(resposta_str_2, resposta_str_1)))
+                        UI.println(UI.RED + "Campo invalido");
+                    
                     break;
                 
                 case 6:
