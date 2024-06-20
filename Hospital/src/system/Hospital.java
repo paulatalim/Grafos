@@ -49,9 +49,9 @@ public class Hospital {
         S = new ArrayList<>();
     }
 
-    public void addHoliday(String name, Integer days) {
+    public boolean addHoliday(String name, Integer days) {
         // Validacao dao nome do feriado
-        if(HolidayName.contains(name) || name == "" || !isStringValida(name)) return;
+        if(HolidayName.contains(name) || name == "" || !isStringValida(name)) return false;
 
         // Adiciona o vertice
         //grafoLista.inserir_vertice("D" + HolidayName.size());
@@ -64,11 +64,12 @@ public class Hospital {
 
         // Adiciona o nome a lista
         HolidayName.add(name);
+        return true;
     }
 
-    public void addDoctor(String name, int disponibilidade) {
+    public boolean addDoctor(String name, int disponibilidade) {
         // Validacao do nome do medico
-        if(DoctorName.contains(name) || name == "" || !isStringValida(name)) return;
+        if(DoctorName.contains(name) || name == "" || !isStringValida(name)) return false;
 
         // Adiciona o vertice
         //grafoLista.inserir_vertice("S" + DoctorName.size());
@@ -81,6 +82,7 @@ public class Hospital {
 
         // Adiciona o nome a lista
         DoctorName.add(name);
+        return true;
     }
 
     /**

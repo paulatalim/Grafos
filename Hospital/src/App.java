@@ -94,8 +94,12 @@ public class App {
                             UI.println("");
                         
                             // Adiciona registro de feriado
-                            hospital.addHoliday(resposta_str_1, resposta_int);
-                            UI.limpar_console();
+                            if(hospital.addHoliday(resposta_str_1, resposta_int)) {
+                                UI.limpar_console();
+                            } else {   
+                                UI.println(UI.RED + "\tNome do feriado inválido. Tente novamente");
+                                UI.exibir_fim_tela();
+                            }
                         }
                     } while (!resposta_str_1.equals("0"));
                     break;
@@ -123,9 +127,13 @@ public class App {
                             UI.print(UI.CYAN + "\tDisponibilidade: " + UI.WHITE);
                             resposta_int = scanner.nextInt();
 
-                            // Adiona o registro
-                            hospital.addDoctor(resposta_str_1, resposta_int);
-                            UI.limpar_console();
+                            // Adiciona o registro
+                            if(hospital.addDoctor(resposta_str_1, resposta_int)) {
+                                UI.limpar_console();
+                            } else {   
+                                UI.println(UI.RED + "\n\tNome inválido. Tente novamente");
+                                UI.exibir_fim_tela();
+                            }
                         }
                     } while (!resposta_str_1.equals("0"));
                     break;
@@ -146,7 +154,7 @@ public class App {
                     // disponibilidade para plantão
                     UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** DISPONIBILIDADE DE PLANTÃO ***   \n\n");
 
-                    UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o feriado e o médico que irá fazer plantão.\n");
+                    UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o feriado e o médico que irá fazer plantão\n");
 
                     // Entrada do nome do feriado
                     UI.print(UI.CYAN + "\tFeriado: " + UI.WHITE);
@@ -158,7 +166,7 @@ public class App {
 
                     // Adicao da disponibilidade
                     if(!(hospital.addDoctorAvailability(resposta_str_2, resposta_str_1)))
-                        UI.println(UI.RED + "Campo invalido");
+                        UI.println(UI.RED + "\n\tCampo inválido. Tente novamente");
                     
                     break;
                 
