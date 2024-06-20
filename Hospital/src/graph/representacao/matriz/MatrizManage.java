@@ -73,12 +73,12 @@ public class MatrizManage {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    // public boolean isGrafosConexo() {
-    //     if(direcionado) {
-    //         return md.isGrafosConexo();
-    //     }
-    //     return mnd.isGrafosConexo();
-    // }
+    public boolean isGrafosConexo() {
+        if(direcionado) {
+            return md.isGrafosConexo();
+        }
+        return mnd.isGrafosConexo();
+    }
 
     /**
      * Verifica se um vertice existe

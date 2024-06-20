@@ -2,7 +2,7 @@ package system;
 
 import java.util.ArrayList;
 
-import graph.representacao.lista.ListaManage;
+// import graph.representacao.lista.ListaManage;
 import graph.representacao.matriz.MatrizManage;
 
 public class Hospital {

@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 // import graph.caminho.Dijkstra;
 // import graph.ordenacao.OrdenacaoTopologica;
-// import graph.busca.BreadthFirstSearch;
+import graph.busca.BreadthFirstSearch;
 // import graph.busca.DepthFirstSearch;
 
 class ListaDirecionada {
@@ -364,10 +364,10 @@ class ListaDirecionada {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    // public boolean isConexo() {    
-    //     BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
-    //     return bfs.getIsConexo();
-    // } 
+    public boolean isConexo() {    
+        BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
+        return bfs.getIsConexo();
+    } 
 
     /**
      * Verifica se o grafo eh bipartido

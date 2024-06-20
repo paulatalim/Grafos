@@ -260,12 +260,12 @@ public class ListaManage {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    // public boolean isConexo () {
-    //     if(direcionado) {
-    //         return ld.isConexo();
-    //     }
-    //     return lnd.isConexo();
-    // }
+    public boolean isConexo () {
+        if(direcionado) {
+            return ld.isConexo();
+        }
+        return lnd.isConexo();
+    }
 
     /**
      * Calcula o caminho minimo entre a os vertices

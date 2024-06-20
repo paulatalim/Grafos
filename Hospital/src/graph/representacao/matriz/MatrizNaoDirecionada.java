@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // import graph.AGM.ArvoreGeradoraMinima;
-// import graph.busca.BreadthFirstSearch;
+import graph.busca.BreadthFirstSearch;
 // import graph.busca.DepthFirstSearch;
 // import graph.caminho.Dijkstra;
 
@@ -386,10 +386,10 @@ class MatrizNaoDirecionada {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    // public boolean isGrafosConexo() {    
-    //     BreadthFirstSearch bfs = new BreadthFirstSearch(grafo, vertices, isPonderado);
-    //     return bfs.getIsConexo();
-    // } 
+    public boolean isGrafosConexo() {    
+        BreadthFirstSearch bfs = new BreadthFirstSearch(grafo, vertices, isPonderado);
+        return bfs.getIsConexo();
+    }
 
     /**
      * Verifica se o grafo possui aresta

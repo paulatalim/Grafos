@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 // import graph.AGM.ArvoreGeradoraMinima;
-// import graph.busca.BreadthFirstSearch;
+import graph.busca.BreadthFirstSearch;
 // // import graph.busca.DepthFirstSearch;
 // import graph.caminho.Dijkstra;
 
@@ -408,10 +408,10 @@ class ListaNaoDirecionada {
      * Confere se o grafo é conexo ou não
      * @return true, se for conexo, false, caso contrário
      */
-    // public boolean isConexo() {    
-    //     BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
-    //     return bfs.getIsConexo();
-    // } 
+    public boolean isConexo() {    
+        BreadthFirstSearch bfs = new BreadthFirstSearch(grafo);
+        return bfs.getIsConexo();
+    } 
 
     /**
      * Realiza uma busca em largura no grafo
