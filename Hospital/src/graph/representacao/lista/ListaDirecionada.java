@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-// import graph.caminho.Dijkstra;
+import graph.caminho.Dijkstra;
 // import graph.ordenacao.OrdenacaoTopologica;
 // import graph.busca.BreadthFirstSearch;
 // import graph.busca.DepthFirstSearch;
@@ -459,10 +459,10 @@ class ListaDirecionada {
      * @param b char (id do vertice a ser analisado)
      * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
      */
-    // public Integer calcularCaminhoMinimo(char a, char b) {
-    //     Dijkstra dijkstra = new Dijkstra(grafo);
-    //     return dijkstra.calcularCaminhoMinimo(a, b);
-    // }
+    public Integer calcularCaminhoMinimo(String a, String b) {
+        Dijkstra dijkstra = new Dijkstra(grafo);
+        return dijkstra.calcularCaminhoMinimo(a, b);
+    }
 
     /**
      * Realiza uma busca em largura no grafo

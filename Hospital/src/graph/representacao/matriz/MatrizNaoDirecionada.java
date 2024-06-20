@@ -6,7 +6,7 @@ import java.util.List;
 // import graph.AGM.ArvoreGeradoraMinima;
 // import graph.busca.BreadthFirstSearch;
 // import graph.busca.DepthFirstSearch;
-// import graph.caminho.Dijkstra;
+import graph.caminho.Dijkstra;
 
 class MatrizNaoDirecionada {
     private Integer[][] grafo;
@@ -410,10 +410,10 @@ class MatrizNaoDirecionada {
      * @param b char (id do vertice a ser analisado)
      * @return Integer (tamanho do caminho minimo da raiz ate a saida), ou null (caso ocorra um erro) ou Integer.MAX_VALUE (caso nao exista caminho entre os vertices)
      */
-    // public Integer calcularCaminhoMinimo(char a, char b) {
-    //     Dijkstra dijkstra = new Dijkstra(grafo, vertices, isPonderado);
-    //     return dijkstra.calcularCaminhoMinimo(a, b);
-    // }
+    public Integer calcularCaminhoMinimo(String a, String b) {
+        Dijkstra dijkstra = new Dijkstra(grafo, vertices, isPonderado);
+        return dijkstra.calcularCaminhoMinimo(a, b);
+    }
 
     /**
      * Realiza uma busca em largura no grafo
