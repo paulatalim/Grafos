@@ -41,8 +41,8 @@ public class App {
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "O que deseja fazer" + "\n\n");
 
                 UI.println("\t" + "1 - Cadastrar feriado");
-                if(hospital.getC() == -1) UI.println("\t" + "2 - Cadastrar disponibilidade de dias dos médicos plantonistas");
-                else UI.println("\t" + "2 - Cadastrar médico");
+                // if(hospital.getC() == -1) UI.println("\t" + "2 - Cadastrar disponibilidade de dias dos médicos plantonistas");
+                UI.println("\t" + "2 - Cadastrar médico");
                 if(hospital.HolidayListToString() != null) UI.println("\t" + "3 - Exibir feriados");
                 if(hospital.DoctorsListToString() != null) UI.println("\t" + "4 - Exibir lista de médicos cadastrados");
                 if(hospital.HolidayListToString() != null && hospital.DoctorsListToString() != null) {
@@ -58,8 +58,7 @@ public class App {
                 opcao = scanner.nextInt();
                 UI.limpar_console();
 
-                if((hospital.getC() == -1 && opcao >= 5)
-                || (hospital.DoctorsListToString() == null && (opcao == 4)) 
+                if((hospital.DoctorsListToString() == null && (opcao == 4)) 
                 || (hospital.HolidayListToString() == null && (opcao == 3 || opcao >= 6))) {
                     opcao_invalida = true;
                 }
@@ -70,7 +69,6 @@ public class App {
             switch (opcao) {
                 case 1:
                     // Cadastrar feriado
-
                     UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** FERIADOS ***   \n\n");
                     UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome e a duração, em dias, do feriado\n");
                     UI.println("\tDigite \"0\" para interromper a leitura\n");
@@ -83,59 +81,44 @@ public class App {
                         resposta_str_1 = scanner.next();
                         
                         if(!resposta_str_1.equals("0")) {
-
                             // Entrada da duracao do feriado
                             UI.print(UI.CYAN + "\tDuração: " + UI.WHITE);
                             resposta_int = scanner.nextInt();
                             UI.println("");
                         
-                            // Adiona registro de feriado
-                            if(resposta_int != 0) {
-                                hospital.addHoliday(resposta_str_1, resposta_int);
-                            }
+                            // Adiciona registro de feriado
+                            hospital.addHoliday(resposta_str_1, resposta_int);
                         }
-
-                    } while (!resposta_str_1.equals("0") && resposta_int != 0);
-
-                    // Adiciona o feriado
+                    } while (!resposta_str_1.equals("0"));
                     break;
                 
                 case 2:
-                    if(hospital.getC() == -1) {
-                        // Cadastrar disponibilidade de dias dos médicos plantonistas
-                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** FERIADOS ***   \n\n");
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira a quantidade de dias máximos de plantão que um médico pode fazer\n");
-                        
-                        // Entrada da quantidade maxima de dias de plantao
-                        UI.print(UI.CYAN + "\tResposta: " + UI.WHITE);
-                        resposta_int = scanner.nextInt();
+                    // Cadastrar médico
+                    do {
+                        UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CADASTRO DE MÉDICOS ***   \n\n");
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome dos médicos e sua disponibilidade, em dias, para plantão, a seguir\n");
+                        UI.println("\tDigite \"0\" para interromper a leitura\n");
 
-                        // Configura a quantidade maxima de dias de plantao
-                        hospital.setC(resposta_int);
-                    } else {
-                        // Cadastrar médico
-                        do {
-                            UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** CADASTRO DE MÉDICOS ***   \n\n");
-                            UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tInsira o nome dos médicos a seguir para cadastra-los\n");
-                            UI.println("\tDigite \"0\" para interromper a leitura\n");
+                        // Exibe medicos cadastrados
+                        if(hospital.DoctorsListToString() != null) {
+                            UI.println(UI.WHITE + "\tMédicos cadastrados:\n");
+                            UI.println(hospital.DoctorsListToString() + "\n");
+                        }
 
-                            if(hospital.DoctorsListToString() != null) {
-                                UI.println(UI.WHITE + "\tMédicos cadastrados:\n");
-                                UI.println(hospital.DoctorsListToString() + "\n");
-                            }
+                        // Entrada do nome do medico
+                        UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
+                        resposta_str_1 = scanner.next();
 
-                            // Entrada do nome do feriado
-                            UI.print(UI.CYAN + "\tNome: " + UI.WHITE);
-                            resposta_str_1 = scanner.next();
-                            
-                            if(!resposta_str_1.equals("0")) {
-                                hospital.addDoctor(resposta_str_1);
-                                UI.limpar_console();
-                            }
+                        if(!resposta_str_1.equals("0")) {
+                            // Entrada da disponibilidade do medico
+                            UI.print(UI.CYAN + "\tDisponibilidade: " + UI.WHITE);
+                            resposta_int = scanner.nextInt();
 
-                        } while (!resposta_str_1.equals("0"));
-                    }
-
+                            // Adiona o registro
+                            hospital.addDoctor(resposta_str_1, resposta_int);
+                            UI.limpar_console();
+                        }
+                    } while (!resposta_str_1.equals("0"));
                     break;
                 
                 case 3:

@@ -12,7 +12,7 @@ public class Hospital {
     MatrizManage grafoMatriz = new MatrizManage();
     // ArrayList<Integer> D;
     ArrayList<String> HolidayName;
-    int c;
+    // int c;
 
     // ArrayList<Integer> S;
     ArrayList<String> DoctorName;
@@ -41,7 +41,7 @@ public class Hospital {
         HolidayName = new ArrayList<>();
         // S = new ArrayList<>();
         DoctorName = new ArrayList<>();
-        c = -1;
+        // c = -1;
     }
 
     public void addHoliday(String name, Integer days) {
@@ -57,14 +57,14 @@ public class Hospital {
         HolidayName.add(name);
     }
 
-    public void addDoctor(String name) {
-        if(DoctorName.contains(name) || c == -1) return;
+    public void addDoctor(String name, int disponibilidade) {
+        if(DoctorName.contains(name)) return;
 
         grafoLista.inserir_vertice("S" + DoctorName.size());
         grafoMatriz.inserir_vertice("S" + DoctorName.size());
 
-        grafoLista.inserir_aresta("S", "S" + DoctorName.size(), c);
-        grafoMatriz.inserir_aresta("S", "S" + DoctorName.size(), c);
+        grafoLista.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
+        grafoMatriz.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
 
         // S.add(1);
         DoctorName.add(name);
@@ -81,7 +81,7 @@ public class Hospital {
         if(!DoctorName.contains(nameDoctor) || !HolidayName.contains(nameHoliday)) return false;
 
         // Verifica se excedeu o limite
-        if(grafoMatriz.verifica_sucessores("S" + DoctorName.indexOf(nameDoctor)).size() >= c) return false;
+        // if(grafoMatriz.verifica_sucessores("S" + DoctorName.indexOf(nameDoctor)).size() >= c) return false;
 
         // Adiciona a aresta
         grafoLista.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
@@ -118,12 +118,11 @@ public class Hospital {
         return str;
     }
 
-    public int getC() {
-        return c;
-    }
+    // public int getC() {
+    //     return c;
+    // }
 
-    public void setC(int c) {
-        this.c = c;
-    }
-
+    // public void setC(int c) {
+    //     this.c = c;
+    // }
 }
