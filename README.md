@@ -46,6 +46,10 @@ a. Abra a pasta do projeto no `command prompt`;
 b. Insira os seguintes comandos no terminal:
 
 ```
+cd *nome_do_programa
+```
+
+```
 cd src
 ```
 
