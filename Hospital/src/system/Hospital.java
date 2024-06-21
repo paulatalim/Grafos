@@ -59,7 +59,7 @@ public class Hospital {
         
         // Adiciona a aresta
         //grafoLista.inserir_aresta("D" + HolidayName.size(),"U", days);
-        grafoMatriz.inserir_aresta("D" + HolidayName.size(),"U", 0);
+        grafoMatriz.inserir_aresta("D" + HolidayName.size(),"U", days);
         D.add(days);
 
         // Adiciona o nome a lista
@@ -77,7 +77,7 @@ public class Hospital {
 
         // Adiciona a aresta
         //grafoLista.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
-        grafoMatriz.inserir_aresta("S", "S" + DoctorName.size(), 0);
+        grafoMatriz.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
         S.add(disponibilidade);
 
         // Adiciona o nome a lista
@@ -100,43 +100,39 @@ public class Hospital {
 
         // Adiciona a aresta
         //grafoLista.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
-        grafoMatriz.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 0);
+        grafoMatriz.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
 
         return true;        
     }
 
-    public MatrizManage gerarRedeResidual() {
+    public MatrizManage inicializarFluxoViavel() {
         // Inicializando matriz da rede.
-        MatrizManage redeResidual = new MatrizManage();
-        redeResidual.setIsDirecionado(true);
-        redeResidual.setIsPonderado(true);
+        MatrizManage fluxoViavel = new MatrizManage();
+        fluxoViavel.setIsDirecionado(true);
+        fluxoViavel.setIsPonderado(true);
 
-        Integer[][] matriz = grafoMatriz.getGrafo();
         ArrayList<String> vertices = grafoMatriz.getVertices();
 
         // Adição do vértices.
         for(int i = 0; i < vertices.size(); i++) {
-            redeResidual.inserir_vertice(vertices.get(i));
+            fluxoViavel.inserir_vertice(vertices.get(i));
         }
 
-        // Adição das capacidades máximas de cada médico.
-        for(int i = 0; i < S.size(); i++) {
-            redeResidual.inserir_aresta("S", "S" + i, S.get(i));
+        // Inicializando os pesos das arestas do fluxo viável.
+        for(int i = 0; i < vertices.size(); i++) {
+            for(int j = 0; j < vertices.size(); j++) {
+                fluxoViavel.inserir_aresta(vertices.get(i), vertices.get(j), 0);
+            }
         }
 
-        // Adição das durações de cada feriado.
-        for(int i = 0; i < D.size(); i++) {
-            redeResidual.inserir_aresta("D" + i, "U", D.get(i));
-        }
-
-        return redeResidual;
+        return fluxoViavel;
     }
 
-    public void verificarAtribuicaoMedicos() throws Exception{
+    public void verificarAtribuicaoMedicos() throws Exception {
         if(!grafoMatriz.isGrafosConexo()) return;
 
-        MatrizManage fluxoViavel = (MatrizManage)grafoMatriz.clone();
-        MatrizManage redeResidual = gerarRedeResidual();
+        MatrizManage redeResidual = (MatrizManage)grafoMatriz.clone();
+        MatrizManage fluxoViavel = inicializarFluxoViavel();
     }
 
     public String HolidayListToString() {
