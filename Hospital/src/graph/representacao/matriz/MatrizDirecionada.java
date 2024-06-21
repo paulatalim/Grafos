@@ -545,4 +545,17 @@ class MatrizDirecionada {
     public ArrayList<String> getVertices() {
         return vertices;
     }
+
+    /**
+     * Busca o peso de uma aresta em um grafo ponderado
+     * @param aresta é do tipo String e consiste do par de vértices que forma a aresta.
+     * @return do tipo Integer e informa o peso da aresta requisitada.
+     */
+    public Integer getPeso(String aresta) {
+        if (!isPonderado) return null;
+        String[] arestaDividida = aresta.split(",");
+        int index1 = buscar_vertice(arestaDividida[0]);
+        int index2 = buscar_vertice(arestaDividida[1]);
+        return grafo[index1][index2];
+    }
 }

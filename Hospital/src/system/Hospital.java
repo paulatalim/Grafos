@@ -128,11 +128,40 @@ public class Hospital {
         return fluxoViavel;
     }
 
+    // TODO: Preencher a função que checa se há caminho aumentante ou não.
+    public ArrayList<String> haCaminhoAumentante(MatrizManage redeResidual) {
+        return null;
+    }
+
     public void verificarAtribuicaoMedicos() throws Exception {
         if(!grafoMatriz.isGrafosConexo()) return;
 
         MatrizManage redeResidual = (MatrizManage)grafoMatriz.clone();
         MatrizManage fluxoViavel = inicializarFluxoViavel();
+        ArrayList<String> caminhoAumentante  = haCaminhoAumentante(redeResidual);
+        int atualGargalo = 0;
+
+        while(caminhoAumentante != null) {
+            for(int i = 0; i < caminhoAumentante.size(); i++) {
+                String aresta = caminhoAumentante.get(i);
+                Integer possivelGargalo = redeResidual.getPeso(aresta);
+                if(atualGargalo > possivelGargalo) atualGargalo = possivelGargalo; 
+            }
+            for(int i = 0; i < caminhoAumentante.size(); i++) {
+                String aresta = caminhoAumentante.get(i);
+                String[] arestaDividida = aresta.split(",");
+                Integer peso = redeResidual.getPeso(aresta);
+                if(peso > 0) {
+                    redeResidual.atualizarPeso(arestaDividida[0], arestaDividida[1], peso - atualGargalo);
+                    fluxoViavel.atualizarPeso(arestaDividida[0], arestaDividida[1], peso + atualGargalo);
+                }
+                else {
+                    redeResidual.remover_aresta(arestaDividida[0], arestaDividida[1]);
+                }
+            }
+            atualGargalo = 0;
+            caminhoAumentante = haCaminhoAumentante(redeResidual);
+        }
     }
 
     public String HolidayListToString() {

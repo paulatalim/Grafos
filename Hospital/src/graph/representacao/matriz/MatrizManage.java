@@ -356,4 +356,9 @@ public class MatrizManage extends Object implements Cloneable{
         if(direcionado) return md.getGrafo();
         return mnd.getGrafo();
     }
+
+    public Integer getPeso(String aresta) {
+        if(direcionado) return md.getPeso(aresta);
+        return mnd.getPeso(aresta);
+    }
 }
