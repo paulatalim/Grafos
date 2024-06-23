@@ -159,11 +159,12 @@ public class App {
 
                     // Entrada do nome do feriado
                     UI.print(UI.CYAN + "\tFeriado: " + UI.WHITE);
-                    resposta_str_1 = scanner.next();
+                    scanner.nextLine();
+                    resposta_str_1 = scanner.nextLine();
 
                     // Entrada do nome do medico
                     UI.print(UI.CYAN + "\tMédico: " + UI.WHITE);
-                    resposta_str_2 = scanner.next();
+                    resposta_str_2 = scanner.nextLine();
 
                     // Adicao da disponibilidade
                     if(!(hospital.addDoctorAvailability(resposta_str_2, resposta_str_1)))
