@@ -13,7 +13,7 @@ public class Hospital {
 
     private boolean isStringValida(String str) {
         for(char c : str.toCharArray()) {
-            if(!Character.isDigit(c) && !Character.isLetter(c)) {
+            if(!Character.isDigit(c) && !Character.isLetter(c) && c != ' ') {
                 return false;
             }
         }
@@ -90,7 +90,7 @@ public class Hospital {
         return true;        
     }
 
-    public MatrizManage inicializarFluxoViavel() {
+    private MatrizManage inicializarFluxoViavel() {
         // Inicializando matriz da rede.
         MatrizManage fluxoViavel = new MatrizManage();
         fluxoViavel.setIsDirecionado(true);
@@ -115,7 +115,7 @@ public class Hospital {
         return fluxoViavel;
     }
 
-    public ArrayList<String> haCaminhoAumentanteUtil(MatrizManage rede) {
+    private ArrayList<String> haCaminhoAumentanteUtil(MatrizManage rede) {
         ArrayList<String> vertices = rede.getVertices();
         ArrayList<String> verticesVisitados = new ArrayList<>();
         ArrayList<String> caminhoAumentante = new ArrayList<>();
@@ -123,7 +123,7 @@ public class Hospital {
     }
 
     // TODO: Preencher a função que checa se há caminho aumentante ou não.
-    public ArrayList<String> haCaminhoAumentante(MatrizManage rede, ArrayList<String> caminhoAumentante, ArrayList<String> vertices, ArrayList<String> verticesVisitados, String verticeAtual) {
+    private ArrayList<String> haCaminhoAumentante(MatrizManage rede, ArrayList<String> caminhoAumentante, ArrayList<String> vertices, ArrayList<String> verticesVisitados, String verticeAtual) {
         verticesVisitados.add(verticeAtual);
         if(verticeAtual == "U") return caminhoAumentante;
         for(int i = 0; i < vertices.size(); i++) {
