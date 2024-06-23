@@ -220,8 +220,8 @@ public class Hospital {
 
             ArrayList<String> escalonados = redeResidual.verifica_sucessores("D" + i);
 
-            for (String medico : escalonados) {
-                relatorio += "\t - " + medico + "\n";
+            for (int j = 0; j < escalonados.size(); j++) {
+                relatorio += "\t - " + DoctorName.get(Character.getNumericValue(escalonados.get(i).charAt(1))) + "\n";
             }
         }
 

@@ -46,13 +46,13 @@ public class App {
                 UI.println("\t" + "1 - Cadastrar feriado");
                 // if(hospital.getC() == -1) UI.println("\t" + "2 - Cadastrar disponibilidade de dias dos médicos plantonistas");
                 UI.println("\t" + "2 - Cadastrar médico");
-                if(hospital.HolidayListToString() != null) UI.println("\t" + "3 - Exibir feriados");
+                if(hospital.HolidayListToString() != null) UI.println("\n\t" + "3 - Exibir feriados");
                 if(hospital.DoctorsListToString() != null) UI.println("\t" + "4 - Exibir médicos cadastrados");
                 if(hospital.HolidayListToString() != null && hospital.DoctorsListToString() != null) {
-                    UI.println("\t" + "5 - Inserir disponibilidade para plantão");
+                    UI.println("\n\t" + "5 - Inserir disponibilidade para plantão");
                     UI.println("\t" + "6 - Gerar Relatório de Plantão");
                 }
-                UI.println("\t" + "0 - SAIR" + "\n");
+                UI.println("\n\t" + "0 - SAIR" + "\n");
 
                 if (opcao_invalida) {
                     UI.println(UI.RED + "\t" + "Opção inválida. Tente novavemente." + "\n");
@@ -176,15 +176,15 @@ public class App {
                     break;
                 
                 case 6:
-                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** RELATÓRIO DE PLANTÃO ***   \n\n" + UI.BLACK_BACKGROUND);
+                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** RELATÓRIO DE PLANTÃO ***   \n\n" + UI.BLACK_BACKGROUND + UI.YELLOW);
 
                     resposta_str_1 = hospital.verificarAtribuicaoMedicos();
 
                     if(resposta_str_1 != null) {
-                        UI.println("A seguir está a escalação de médicos para cada feriado");
+                        UI.println("\tA seguir está a escalação de médicos para cada feriado");
                         UI.print(resposta_str_1);
                     
-                    } else UI.println("Não é possível cobrir todos os feriados com os médicos disponíveis");
+                    } else UI.println("\tNão é possível cobrir todos os feriados com os médicos disponíveis");
 
                     // if(medicosEmAcordo != null) {
                     //     UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tA dada combinação de médicos satisfaz as restrições: " + medicosEmAcordo.toString() + "\n");
