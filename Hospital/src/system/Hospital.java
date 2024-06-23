@@ -1,6 +1,7 @@
 package system;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // import graph.representacao.lista.ListaManage;
 import graph.representacao.matriz.MatrizManage;
@@ -121,47 +122,71 @@ public class Hospital {
         // Inicializando os pesos das arestas do fluxo viável.
         for(int i = 0; i < vertices.size(); i++) {
             for(int j = 0; j < vertices.size(); j++) {
-                fluxoViavel.inserir_aresta(vertices.get(i), vertices.get(j), 0);
+                if(grafoMatriz.getPeso(vertices.get(i) + "," + vertices.get(j)) != null) {
+                    fluxoViavel.inserir_aresta(vertices.get(i), vertices.get(j), 0);
+                }
             }
         }
 
         return fluxoViavel;
     }
 
-    // TODO: Preencher a função que checa se há caminho aumentante ou não.
-    public ArrayList<String> haCaminhoAumentante(MatrizManage redeResidual) {
-        return null;
+    public ArrayList<String> haCaminhoAumentanteUtil(MatrizManage rede) {
+        ArrayList<String> vertices = rede.getVertices();
+        ArrayList<String> verticesVisitados = new ArrayList<>();
+        ArrayList<String> caminhoAumentante = new ArrayList<>();
+        return haCaminhoAumentante(rede, caminhoAumentante, vertices, verticesVisitados, "S");
     }
 
-    public void verificarAtribuicaoMedicos() throws Exception {
-        if(!grafoMatriz.isGrafosConexo()) return;
+    // TODO: Preencher a função que checa se há caminho aumentante ou não.
+    public ArrayList<String> haCaminhoAumentante(MatrizManage rede, ArrayList<String> caminhoAumentante, ArrayList<String> vertices, ArrayList<String> verticesVisitados, String verticeAtual) {
+        verticesVisitados.add(verticeAtual);
+        if(verticeAtual == "U") return caminhoAumentante;
+        for(int i = 0; i < vertices.size(); i++) {
+            if(verticesVisitados.contains("U")) break;
+            // Confere se existe aresta entre os vértices
+            if(rede.getPeso(verticeAtual + "," + vertices.get(i)) != null) {
+                // Chama recursivamente o método passando o vértice analisado como parâmetro (preenche a pilha).
+                caminhoAumentante.add(verticeAtual + "," + vertices.get(i));
+                haCaminhoAumentante(rede, caminhoAumentante, vertices, verticesVisitados, vertices.get(i)); 
+            }
+        }
+        if(!verticesVisitados.contains("U")) caminhoAumentante.clear();
+        return caminhoAumentante;
+    }
 
+    public ArrayList<String> verificarAtribuicaoMedicos() throws Exception {
+        if(!grafoMatriz.isGrafosConexo()) return null;
+        
         MatrizManage redeResidual = (MatrizManage)grafoMatriz.clone();
         MatrizManage fluxoViavel = inicializarFluxoViavel();
-        ArrayList<String> caminhoAumentante  = haCaminhoAumentante(redeResidual);
-        int atualGargalo = 0;
+        ArrayList<String> caminhoAumentante = haCaminhoAumentanteUtil(redeResidual);
+        int gargalo = 1;
 
-        while(caminhoAumentante != null) {
-            for(int i = 0; i < caminhoAumentante.size(); i++) {
-                String aresta = caminhoAumentante.get(i);
-                Integer possivelGargalo = redeResidual.getPeso(aresta);
-                if(atualGargalo > possivelGargalo) atualGargalo = possivelGargalo; 
-            }
+        while(caminhoAumentante.size() > 0) {
             for(int i = 0; i < caminhoAumentante.size(); i++) {
                 String aresta = caminhoAumentante.get(i);
                 String[] arestaDividida = aresta.split(",");
                 Integer peso = redeResidual.getPeso(aresta);
-                if(peso > 0) {
-                    redeResidual.atualizarPeso(arestaDividida[0], arestaDividida[1], peso - atualGargalo);
-                    fluxoViavel.atualizarPeso(arestaDividida[0], arestaDividida[1], peso + atualGargalo);
+
+                //TODO: Acredito que o problema esteja nessa parte aqui.
+                if(peso != null) {
+                    redeResidual.atualizarPeso(arestaDividida[0], arestaDividida[1], peso - gargalo);
+                    fluxoViavel.atualizarPeso(arestaDividida[0], arestaDividida[1], peso + gargalo);
+                    peso = redeResidual.getPeso(aresta);
                 }
-                else {
-                    redeResidual.remover_aresta(arestaDividida[0], arestaDividida[1]);
-                }
+
+                if(peso <= 0) redeResidual.remover_aresta(arestaDividida[0], arestaDividida[1]);
             }
-            atualGargalo = 0;
-            caminhoAumentante = haCaminhoAumentante(redeResidual);
+            caminhoAumentante = haCaminhoAumentanteUtil(redeResidual);
         }
+
+        boolean atribuicaoPossivel = true;
+        
+        if(fluxoViavel.grau_vertice("U")[1] != 0) atribuicaoPossivel = false;
+        
+        if(atribuicaoPossivel) return DoctorName;
+        else return null;
     }
 
     public String HolidayListToString() {

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import system.Hospital;
@@ -171,6 +172,17 @@ public class App {
                     break;
                 
                 case 6:
+                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** RELATÓRIO DE PLANTÃO ***   \n\n");
+
+                    ArrayList<String> medicosEmAcordo = hospital.verificarAtribuicaoMedicos();
+
+                    if(medicosEmAcordo != null) {
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tA dada combinação de médicos satisfaz as restrições: " + medicosEmAcordo.toString() + "\n");
+                    }
+                    else {
+                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tA dada combinação de médicos não satisfaz as restrições.\n");
+                    }
+                    
                     break;
                 
                 case 0:
