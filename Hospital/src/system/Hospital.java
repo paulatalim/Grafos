@@ -151,23 +151,29 @@ public class Hospital {
             for(int i = 0; i < caminhoAumentante.size(); i++) {
                 String aresta = caminhoAumentante.get(i);
                 String[] arestaDividida = aresta.split(",");
-                Integer peso = redeResidual.getPeso(aresta);
+                Integer pesoRede = redeResidual.getPeso(aresta);
+                Integer pesoFluxo = fluxoViavel.getPeso(aresta);
 
                 //TODO: Acredito que o problema esteja nessa parte aqui.
-                if(peso != null) {
-                    redeResidual.atualizarPeso(arestaDividida[0], arestaDividida[1], peso - gargalo);
-                    fluxoViavel.atualizarPeso(arestaDividida[0], arestaDividida[1], peso + gargalo);
-                    peso = redeResidual.getPeso(aresta);
+                if(pesoRede != null) {
+                    System.out.println("Peso Rede: " + pesoRede);
+                    System.out.println("Peso Fluxo: " + pesoFluxo);
+                    redeResidual.atualizarPeso(arestaDividida[0], arestaDividida[1], (pesoRede.intValue() - gargalo));
+                    fluxoViavel.atualizarPeso(arestaDividida[0], arestaDividida[1], (pesoFluxo.intValue() + gargalo));
+                    pesoRede = redeResidual.getPeso(aresta);
+                    pesoFluxo = fluxoViavel.getPeso(aresta);
+                    System.out.println("Peso Rede: " + pesoRede);
+                    System.out.println("Peso Fluxo: " + pesoFluxo);
                 }
 
-                if(peso <= 0) redeResidual.remover_aresta(arestaDividida[0], arestaDividida[1]);
+                if(pesoRede <= 0) redeResidual.remover_aresta(arestaDividida[0], arestaDividida[1]);
             }
             caminhoAumentante = haCaminhoAumentanteUtil(redeResidual);
         }
 
         boolean atribuicaoPossivel = true;
         
-        if(redeResidual.grau_vertice("U")[1] != 0) atribuicaoPossivel = false;
+        if(redeResidual.verifica_predecessores("U").size() != 0) atribuicaoPossivel = false;
         
         if(atribuicaoPossivel) return DoctorName;
         else return null;
