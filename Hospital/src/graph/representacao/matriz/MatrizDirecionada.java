@@ -248,8 +248,8 @@ class MatrizDirecionada implements Cloneable {
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices sucessores)
      */
-    public List<String> verifica_sucessores(String id_vertice){
-        List<String> listaSucessores = new ArrayList<>();
+    public ArrayList<String> verifica_sucessores(String id_vertice){
+        ArrayList<String> listaSucessores = new ArrayList<>();
 
         int index_vertice = buscar_vertice(id_vertice);
 
@@ -268,8 +268,8 @@ class MatrizDirecionada implements Cloneable {
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices predecessores)
      */
-    public List<String> verifica_predecessores(String id_vertice){
-        List<String> listaPredecessores = new ArrayList<>();
+    public ArrayList<String> verifica_predecessores(String id_vertice){
+        ArrayList<String> listaPredecessores = new ArrayList<>();
 
         int index_vertice = buscar_vertice(id_vertice);
 

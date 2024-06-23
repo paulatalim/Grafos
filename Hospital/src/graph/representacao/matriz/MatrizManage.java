@@ -204,7 +204,7 @@ public class MatrizManage {
      * @param vertice a ser analisado
      * @return vetor de char (vertices sucessores) ou null (caso o grafo nao ser direcionado)
      */
-    public List<String> verifica_sucessores(String id_vertice) {
+    public ArrayList<String> verifica_sucessores(String id_vertice) {
         if(direcionado){
             return md.verifica_sucessores(id_vertice);
         }
@@ -216,7 +216,7 @@ public class MatrizManage {
      * @param id_vertice a ser analisado
      * @return vetor de char (vertices predecessores) ou null (caso o grafo nao ser direcionado)
      */
-    public List<String> verifica_predecessores(String id_vertice) {
+    public ArrayList<String> verifica_predecessores(String id_vertice) {
         if(direcionado){
             return md.verifica_predecessores(id_vertice);
         }

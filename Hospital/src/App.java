@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import system.Hospital;
@@ -174,16 +176,22 @@ public class App {
                     break;
                 
                 case 6:
-                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** RELATÓRIO DE PLANTÃO ***   \n\n");
+                    UI.println(UI.GREEN_BACKGROUND + UI.BLACK + "\n\t\t\t\t\t   *** RELATÓRIO DE PLANTÃO ***   \n\n" + UI.BLACK_BACKGROUND);
 
-                    ArrayList<String> medicosEmAcordo = hospital.verificarAtribuicaoMedicos();
+                    resposta_str_1 = hospital.verificarAtribuicaoMedicos();
 
-                    if(medicosEmAcordo != null) {
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tA dada combinação de médicos satisfaz as restrições: " + medicosEmAcordo.toString() + "\n");
-                    }
-                    else {
-                        UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tA dada combinação de médicos não satisfaz as restrições.\n");
-                    }
+                    if(resposta_str_1 != null) {
+                        UI.println("A seguir está a escalação de médicos para cada feriado");
+                        UI.print(resposta_str_1);
+                    
+                    } else UI.println("Não é possível cobrir todos os feriados com os médicos disponíveis");
+
+                    // if(medicosEmAcordo != null) {
+                    //     UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tA dada combinação de médicos satisfaz as restrições: " + medicosEmAcordo.toString() + "\n");
+                    // }
+                    // else {
+                    //     UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tA dada combinação de médicos não satisfaz as restrições.\n");
+                    // }
                     
                     break;
                 

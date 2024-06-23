@@ -1,6 +1,9 @@
 package system;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import graph.representacao.matriz.MatrizManage;
 
 public class Hospital {
@@ -169,7 +172,7 @@ public class Hospital {
 
     }
 
-    public ArrayList<String> verificarAtribuicaoMedicos() {
+    public String verificarAtribuicaoMedicos() {
         if(!grafo.isGrafosConexo()) return null;
         
         MatrizManage redeResidual = criarRedeResidual();
@@ -206,8 +209,23 @@ public class Hospital {
         if(redeResidual.verifica_predecessores("U").size() != 0) atribuicaoPossivel = false;
         
         // Retorno
-        if(atribuicaoPossivel) return DoctorName;
-        return null;
+        if(!atribuicaoPossivel) return null;
+
+        // if(atribu11
+
+        String relatorio = "";
+
+        for (int i = 0; i < HolidayName.size(); i++) {
+            relatorio += "\n\t" + HolidayName.get(i) + "\n";
+
+            ArrayList<String> escalonados = redeResidual.verifica_sucessores("D" + i);
+
+            for (String medico : escalonados) {
+                relatorio += "\t - " + medico + "\n";
+            }
+        }
+
+        return relatorio;
     }
 
     public String HolidayListToString() {
