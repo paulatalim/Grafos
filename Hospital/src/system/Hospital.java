@@ -1,9 +1,6 @@
 package system;
 
 import java.util.ArrayList;
-import java.util.List;
-
-// import graph.representacao.lista.ListaManage;
 import graph.representacao.matriz.MatrizManage;
 
 public class Hospital {
@@ -26,20 +23,15 @@ public class Hospital {
     
     public Hospital() {
         // Criacao de grafo
-        //grafoLista = new ListaManage();
         grafoMatriz = new MatrizManage();
 
         // Configuracao para o grafo direcionado
-        //grafoLista.setIsDirecionado(true);
         grafoMatriz.setIsDirecionado(true);
 
         // Configuracao para grafo ponderado
-        //grafoLista.setIsPonderado(true);
         grafoMatriz.setIsPonderado(true);
 
         // Adicao de conjuntos
-        // grafoLista.inserir_vertice("S");
-        // grafoLista.inserir_vertice("U");
         grafoMatriz.inserir_vertice("S");
         grafoMatriz.inserir_vertice("U");
 
@@ -55,11 +47,9 @@ public class Hospital {
         if(HolidayName.contains(name) || name == "" || !isStringValida(name)) return false;
 
         // Adiciona o vertice
-        //grafoLista.inserir_vertice("D" + HolidayName.size());
         grafoMatriz.inserir_vertice("D" + HolidayName.size());
         
         // Adiciona a aresta
-        //grafoLista.inserir_aresta("D" + HolidayName.size(),"U", days);
         grafoMatriz.inserir_aresta("D" + HolidayName.size(),"U", days);
         D.add(days);
 
@@ -73,11 +63,9 @@ public class Hospital {
         if(DoctorName.contains(name) || name == "" || !isStringValida(name)) return false;
 
         // Adiciona o vertice
-        //grafoLista.inserir_vertice("S" + DoctorName.size());
         grafoMatriz.inserir_vertice("S" + DoctorName.size());
 
         // Adiciona a aresta
-        //grafoLista.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
         grafoMatriz.inserir_aresta("S", "S" + DoctorName.size(), disponibilidade);
         S.add(disponibilidade);
 
@@ -96,11 +84,7 @@ public class Hospital {
         // Valida os parametros
         if(!DoctorName.contains(nameDoctor) || !HolidayName.contains(nameHoliday)) return false;
 
-        // Verifica se excedeu o limite
-        // if(grafoMatriz.verifica_sucessores("S" + DoctorName.indexOf(nameDoctor)).size() >= c) return false;
-
         // Adiciona a aresta
-        //grafoLista.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
         grafoMatriz.inserir_aresta("S" + DoctorName.indexOf(nameDoctor), "D" + HolidayName.indexOf(nameHoliday), 1);
 
         return true;        
