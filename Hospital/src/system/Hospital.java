@@ -183,7 +183,7 @@ public class Hospital {
 
         boolean atribuicaoPossivel = true;
         
-        if(fluxoViavel.grau_vertice("U")[1] != 0) atribuicaoPossivel = false;
+        if(redeResidual.grau_vertice("U")[1] != 0) atribuicaoPossivel = false;
         
         if(atribuicaoPossivel) return DoctorName;
         else return null;
