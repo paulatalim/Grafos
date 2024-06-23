@@ -184,19 +184,10 @@ public class Hospital {
                 Integer pesoRede = redeResidual.getPeso(aresta);
                 Integer pesoFluxo = fluxoViavel.getPeso(aresta);
 
-                //TODO: Acredito que o problema esteja nessa parte aqui.
-                if(pesoRede != null) {
-                    // Atualiza pesos
-                    System.out.println("Peso Rede: " + pesoRede);
-                    System.out.println("Peso Fluxo: " + pesoFluxo);
-                    
+                if(pesoRede != null) {                    
                     // Atualiza peso no fluxo viavel
                     if(!fluxoViavel.atualizarPeso(arestaDividida[0], arestaDividida[1], (pesoFluxo.intValue() + gargalo)))
                         fluxoViavel.atualizarPeso(arestaDividida[1], arestaDividida[0], pesoFluxo.intValue() - gargalo);
-
-                    
-                    pesoFluxo = fluxoViavel.getPeso(aresta);
-                    System.out.println("Peso Fluxo: " + pesoFluxo);
 
                     // Atualiza aresta direta na rede residual
                     if(pesoRede.intValue() - gargalo > 0) redeResidual.atualizarPeso(arestaDividida[0], arestaDividida[1], (pesoRede.intValue() - gargalo));
@@ -205,23 +196,18 @@ public class Hospital {
                     // Atualiza aresta reversa na rede residual
                     if(!redeResidual.atualizarPeso(arestaDividida[1], arestaDividida[0], (pesoRede.intValue() + gargalo)))
                         redeResidual.inserir_aresta(arestaDividida[1], arestaDividida[0], (pesoRede.intValue() + gargalo));
-
-                    pesoRede = redeResidual.getPeso(aresta);
-                    System.out.println("Peso Rede: " + pesoRede);
-
                 }
             }
             caminhoAumentante = buscarCaminhoAumentante(redeResidual);
         }
 
-        boolean atribuicaoPossivel = true;
-        System.out.println(redeResidual.grau_vertice("U")[0]);
-        System.out.println(grafo.grau_vertice("U")[1]);
-        
+        // Verifica se os feriados estarao ocupados
+        boolean atribuicaoPossivel = true;        
         if(redeResidual.verifica_predecessores("U").size() != 0) atribuicaoPossivel = false;
         
+        // Retorno
         if(atribuicaoPossivel) return DoctorName;
-        else return null;
+        return null;
     }
 
     public String HolidayListToString() {
