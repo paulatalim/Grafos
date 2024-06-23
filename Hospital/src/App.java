@@ -60,12 +60,13 @@ public class App {
                 UI.limpar_console();
 
                 if((hospital.DoctorsListToString() == null && (opcao == 4)) 
-                || (hospital.HolidayListToString() == null && (opcao == 3 || opcao >= 6))) {
+                || (hospital.HolidayListToString() == null && (opcao == 3 || opcao >= 6))
+                || opcao < 0 || opcao > 6) {
                     opcao_invalida = true;
                 }
 
                 // Valida a resposta do usuario
-            } while (opcao < 0 || opcao > 6 || opcao_invalida);
+            } while (opcao_invalida);
 
             switch (opcao) {
                 case 1:

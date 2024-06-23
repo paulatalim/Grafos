@@ -7,7 +7,7 @@ import java.util.List;
 // import graph.busca.DepthFirstSearch;
 // import graph.ordenacao.OrdenacaoTopologica;
 
-public class MatrizManage extends Object implements Cloneable{
+public class MatrizManage {
     private boolean direcionado;
     private boolean ponderado;
     private MatrizDirecionada md;
@@ -342,11 +342,6 @@ public class MatrizManage extends Object implements Cloneable{
         return ponderado;
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
     public ArrayList<String> getVertices() {
         if(direcionado) return md.getVertices();
         return mnd.getVertices();
@@ -360,5 +355,13 @@ public class MatrizManage extends Object implements Cloneable{
     public Integer getPeso(String aresta) {
         if(direcionado) return md.getPeso(aresta);
         return mnd.getPeso(aresta);
+    }
+
+    public void setMatrizDirecionada (MatrizDirecionada newMatriz) {
+        this.md = newMatriz;
+    }
+
+    public MatrizDirecionada getMatrizDirecionada () {
+        return this.md;
     }
 }

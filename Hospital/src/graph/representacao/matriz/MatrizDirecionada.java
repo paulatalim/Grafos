@@ -8,7 +8,7 @@ import graph.busca.BreadthFirstSearch;
 import graph.caminho.Dijkstra;
 // import graph.ordenacao.OrdenacaoTopologica;
 
-class MatrizDirecionada {
+class MatrizDirecionada implements Cloneable {
     private Integer[][] grafo;
     private boolean isPonderado;
     private ArrayList<String> vertices = new ArrayList<String>();
@@ -190,8 +190,8 @@ class MatrizDirecionada {
             int j = buscar_vertice(vertice2);
             
             // Caso haver aresta
-            if(i >= 0 && j >= 0) {
-                // Adiciona uma nova aresta
+            if(i >= 0 && j >= 0 && grafo[i][j] != null) {
+                // Atualiza peso
                 grafo[i][j] = newPeso;
                 return true;
             }
@@ -557,5 +557,15 @@ class MatrizDirecionada {
         int index1 = buscar_vertice(arestaDividida[0]);
         int index2 = buscar_vertice(arestaDividida[1]);
         return grafo[index1][index2];
+    }
+
+    @Override
+    public MatrizDirecionada clone() {
+        try {
+            return (MatrizDirecionada) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println("Error: clonagem objeto");
+            return this;
+        }
     }
 }
