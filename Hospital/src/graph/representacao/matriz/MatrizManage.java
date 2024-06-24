@@ -239,54 +239,6 @@ public class MatrizManage {
     }
 
     /**
-     * Realiza uma busca em largura no grafo
-     * @param verticeInicial char (vertice que a busca em largura ira iniciar)
-     * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
-     */
-    // public char[] realizarBuscaLargura(char verticeInicial) {
-    //     if(direcionado) {
-    //         return md.realizarBuscaLargura(verticeInicial);
-    //     }
-    //     return mnd.realizarBuscaLargura(verticeInicial);
-    // }
-
-    /**
-     * Realiza uma busca em profundidade no grafo
-     * @param raiz char (vertice que a busca em profundidade irá iniciar)
-     * @return objeto da classe DepthFirstSearch
-     */
-    // public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
-    //     if(direcionado) {
-    //         return md.realizarBuscaProfundidade(raiz);
-    //     }
-    //     return mnd.realizarBuscaProfundidade(raiz);
-    // }
-
-    /**
-     * Encontra a Árvore Geradora Mínima do grafo.
-     * @return objeto da classe ArvoreGeradoraMinima no caso do grafo ser não-direcionado, senão retorna null.
-     */
-    // public ArvoreGeradoraMinima encontrarAGM() {
-    //     if(direcionado) {
-    //         return null;
-    //     }
-    //     return mnd.encontrarAGM();
-    // }
-    
-    /**
-     * Faz uma ordenacao topologica com os vertices do grafo
-     * @return objeto da ordenacao topologica
-     */
-    // public OrdenacaoTopologica ordenacaoTopologica() {
-    //     if(direcionado){
-    //         OrdenacaoTopologica ordenacao = md.ordenacaoTopologica();
-    //         return ordenacao;
-    //     }
-
-    //     return null;
-    // }
-
-    /**
      * Imprime o grafo em forma de matriz
      */
     public void exibir_matriz() {

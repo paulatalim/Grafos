@@ -1,12 +1,9 @@
 package graph.representacao.matriz;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import graph.busca.BreadthFirstSearch;
-// import graph.busca.DepthFirstSearch;
 import graph.caminho.Dijkstra;
-// import graph.ordenacao.OrdenacaoTopologica;
 
 class MatrizDirecionada implements Cloneable {
     private Integer[][] grafo;
@@ -76,29 +73,6 @@ class MatrizDirecionada implements Cloneable {
         }
         return -1;
     }
-    
-    /**
-     * Converte uma List<Character> para um vertor de char
-     * @param list - lista a ser convertida
-     * @return Array de caracteres
-     */
-    // private char[] toArrayChar(List<Character> list) {
-    //     // Verifica se a lista existe
-    //     if(list == null) {
-    //         return null;
-    //     }
-
-    //     // Cria um vetor auxiliar para armazenar os valores convertidos
-    //     char[] vetor = new char[list.size()];
-        
-    //     // Conversao dos valores da lista para vetor
-    //     for(int i = 0; i < list.size(); i++) {
-    //         vetor[i] = Character.valueOf(list.get(i));
-    //     }
-
-    //     // Retorno da lista convertida para vetor
-    //     return vetor;
-    // }
 
     /**
      * Adiciona um novo vertice ao grafo

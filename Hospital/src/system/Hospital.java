@@ -1,8 +1,6 @@
 package system;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import graph.representacao.matriz.MatrizManage;
 
@@ -128,7 +126,6 @@ public class Hospital {
         return buscarCaminhoAumentante(rede, caminhoAumentante, vertices, verticesVisitados, "S");
     }
 
-    // TODO: Preencher a função que checa se há caminho aumentante ou não.
     private ArrayList<String> buscarCaminhoAumentante(MatrizManage rede, ArrayList<String> caminhoAumentante, ArrayList<String> vertices, ArrayList<String> verticesVisitados, String verticeAtual) {
         verticesVisitados.add(verticeAtual);
         if(verticeAtual == "U") return caminhoAumentante;
