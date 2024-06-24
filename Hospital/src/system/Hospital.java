@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import graph.representacao.matriz.MatrizManage;
 
 public class Hospital {
-    //ListaManage grafoLista = new ListaManage();
     MatrizManage grafo = new MatrizManage();
     ArrayList<String> HolidayName;
     ArrayList<Integer> D;

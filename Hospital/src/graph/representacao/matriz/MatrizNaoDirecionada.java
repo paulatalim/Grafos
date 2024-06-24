@@ -50,29 +50,6 @@ class MatrizNaoDirecionada {
     }
 
     /**
-     * Converte uma List<Character> para um vertor de char
-     * @param list - lista a ser convertida
-     * @return Array de caracteres
-    //  */
-    // private char[] toArrayChar(List<Character> list) {
-    //     // Verifica se a lista existe
-    //     if(list == null) {
-    //         return null;
-    //     }
-
-    //     // Cria um vetor auxiliar para armazenar os valores convertidos
-    //     char[] vetor = new char[list.size()];
-        
-    //     // Conversao dos valores da lista para vetor
-    //     for(int i = 0; i < list.size(); i++) {
-    //         vetor[i] = Character.valueOf(list.get(i));
-    //     }
-
-    //     // Retorno da lista convertida para vetor
-    //     return vetor;
-    // }
-
-    /**
      * Adiciona um novo vertice ao grafo
      * @param id_vertice
      */
@@ -414,43 +391,6 @@ class MatrizNaoDirecionada {
         Dijkstra dijkstra = new Dijkstra(grafo, vertices, isPonderado);
         return dijkstra.calcularCaminhoMinimo(a, b);
     }
-
-    /**
-     * Realiza uma busca em largura no grafo
-     * @param verticeInicial char (vertice que a busca em largura ira iniciar)
-     * @return vetor de char (ordem de visitacao dos vertices na busca em largura)
-     */
-    // public char[] realizarBuscaLargura(char verticeInicial) {
-    //     BreadthFirstSearch BFS = new BreadthFirstSearch(grafo, vertices, isPonderado);
-    //     return toArrayChar(BFS.bfs(verticeInicial));
-    // }
-
-    /**
-     * Realiza uma busca em profundidade no grafo
-     * @param raiz char (vertice que a busca em profundidade irá iniciar)
-     * @return objeto da classe DepthFirstSearch caso o vértice raiz exista no grafo, senão retorna null.
-     */
-    // public DepthFirstSearch realizarBuscaProfundidade(char raiz) {
-    //     if(isNoExist(raiz)) {
-    //         DepthFirstSearch DFS = new DepthFirstSearch(grafo, vertices, isPonderado);
-    //         DFS.dfs(raiz);
-    //         return DFS;
-    //     }
-    //     return null;
-    // }
-
-    /**
-     * Encontra a Árvore Geradora Mínima do grafo.
-     * @return objeto da classe ArvoreGeradoraMinima no caso do grafo ser conexo e ponderado, senão retorna null.
-     */
-    // public ArvoreGeradoraMinima encontrarAGM() {
-    //     if(isGrafosConexo() && isPonderado) { 
-    //         ArvoreGeradoraMinima AGM = new ArvoreGeradoraMinima(grafo, vertices); 
-    //         AGM.encontrarAGM();
-    //         return AGM;
-    //     }
-    //     return null;
-    // }
 
     /**
      * Imprime a matriz de adjacencia no console
