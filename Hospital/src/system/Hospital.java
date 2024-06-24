@@ -237,7 +237,7 @@ public class Hospital {
         String str = "";
 
         for (int i = 0; i < HolidayName.size(); i++) {
-            str += "\t- " + HolidayName.get(i) + "\n";
+            str += "\t- " + HolidayName.get(i) + ": " + D.get(i) + " dias \n";
         }
 
         return str;
@@ -249,7 +249,7 @@ public class Hospital {
         String str = "";
 
         for (int i = 0; i < DoctorName.size(); i++) {
-            str += "\t- " + DoctorName.get(i) + "\n";
+            str += "\t- " + DoctorName.get(i) + ": " + S.get(i) + " dias \n";
         }
 
         return str;
