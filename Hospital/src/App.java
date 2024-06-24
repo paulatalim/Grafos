@@ -171,7 +171,7 @@ public class App {
 
                     // Adicao da disponibilidade
                     if(!(hospital.addDoctorAvailability(resposta_str_2, resposta_str_1)))
-                        UI.println(UI.RED + "\n\tCampo inválido. Tente novamente");
+                        UI.println(UI.RED + "\n\tCampo inválido. Tente novamente.");
                     
                     break;
                 
@@ -181,10 +181,10 @@ public class App {
                     resposta_str_1 = hospital.verificarAtribuicaoMedicos();
 
                     if(resposta_str_1 != null) {
-                        UI.println("\tA seguir está a escalação de médicos para cada feriado");
+                        UI.println("\tA seguir está a escalação de médicos para cada feriado:");
                         UI.print(resposta_str_1);
                     
-                    } else UI.println("\tNão é possível cobrir todos os feriados com os médicos disponíveis");
+                    } else UI.println("\tNão é possível cobrir todos os feriados com os médicos disponíveis.");
 
                     // if(medicosEmAcordo != null) {
                     //     UI.println(UI.BLACK_BACKGROUND + UI.YELLOW + "\tA dada combinação de médicos satisfaz as restrições: " + medicosEmAcordo.toString() + "\n");

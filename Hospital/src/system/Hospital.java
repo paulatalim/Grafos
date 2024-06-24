@@ -216,13 +216,16 @@ public class Hospital {
         String relatorio = "";
 
         for (int i = 0; i < HolidayName.size(); i++) {
-            relatorio += "\n\t" + HolidayName.get(i) + "\n";
+            relatorio += "\n\t" + HolidayName.get(i) + " - [";
 
             ArrayList<String> escalonados = redeResidual.verifica_sucessores("D" + i);
 
             for (int j = 0; j < escalonados.size(); j++) {
-                relatorio += "\t - " + DoctorName.get(Character.getNumericValue(escalonados.get(j).charAt(1))) + "\n";
+                relatorio += DoctorName.get(Character.getNumericValue(escalonados.get(j).charAt(1)));
+                if(j < escalonados.size() - 1) relatorio += ", ";
             }
+
+            relatorio += "]\n";
         }
 
         return relatorio;
