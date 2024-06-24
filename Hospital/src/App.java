@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 import system.Hospital;
@@ -22,7 +19,7 @@ import system.Hospital;
  */
 public class App {
     public static void main(String[] args) throws Exception {
-        boolean opcao_invalida;
+        boolean opcao_invalida = false;
         int opcao;
         int resposta_int;
         String resposta_str_1;
@@ -33,10 +30,6 @@ public class App {
 
         // Repete o programa
         do {
-
-            // Reinicia a variavel
-            opcao_invalida = false;
-
             // Validacao da entrada do usuario
             do {
                 // Exibe o menu das opcoes
@@ -44,7 +37,6 @@ public class App {
                 UI.print(UI.BLACK_BACKGROUND + UI.YELLOW + "\t" + "O que deseja fazer" + "\n\n");
 
                 UI.println("\t" + "1 - Cadastrar feriado");
-                // if(hospital.getC() == -1) UI.println("\t" + "2 - Cadastrar disponibilidade de dias dos médicos plantonistas");
                 UI.println("\t" + "2 - Cadastrar médico");
                 if(hospital.HolidayListToString() != null) UI.println("\n\t" + "3 - Exibir feriados");
                 if(hospital.DoctorsListToString() != null) UI.println("\t" + "4 - Exibir médicos cadastrados");
@@ -61,8 +53,10 @@ public class App {
                 opcao = scanner.nextInt();
                 UI.limpar_console();
 
+                opcao_invalida = false;
+
                 if((hospital.DoctorsListToString() == null && (opcao == 4)) 
-                || (hospital.HolidayListToString() == null && (opcao == 3 || opcao >= 6))
+                || (hospital.HolidayListToString() == null && (opcao == 3 || opcao == 6))
                 || opcao < 0 || opcao > 6) {
                     opcao_invalida = true;
                 }
